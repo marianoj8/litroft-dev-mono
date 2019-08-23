@@ -1,0 +1,35 @@
+.max-space {
+  padding: 2rem 4rem;
+}
+
+.max-space-1 {
+  padding: 0rem 8rem;
+}
+
+.top-space {
+  padding-top: 1rem;
+}
+
+input {
+  font-size: 13pt;
+  padding: 0px 6px;
+  width: 80%;
+}
+
+mat-form-field {
+  width: 52%;
+}
+
+mat-card-subtitle {
+  text-align: end;
+  margin: 2px;
+}
+
+.large-button {
+  width: 30%;
+}
+
+.space-arround {
+  padding-right: 3px;
+  margin-bottom: 5px;
+}

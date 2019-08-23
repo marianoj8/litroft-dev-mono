@@ -1,0 +1,69 @@
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  width: 240px;
+}
+
+.sidenav .mat-toolbar {
+  background: inherit;
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 8;
+}
+
+/* .container {
+  margin: 0px 0px;
+} */
+
+.span-container {
+  /* margin: 0px 40px; */
+  padding-left: 30%;
+}
+.public-span-container {
+  /* margin: 0px 40px; */
+  padding-left: 48%;
+}
+
+/* .fill-remainig-sapace{
+  flex: 1 1 auto;
+} */
+/* .spacer{
+  flex: 1 1 auto;
+} */
+/* .spacer-icon {
+  padding: 0 14px;
+} */
+
+/* .space-arround{
+  padding-right: 3px;
+  margin-bottom: 5px;
+} */
+
+/* Dashboard */
+
+/* .grid-container {
+  margin: 20px;
+} */
+
+.dashboard-card {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  bottom: 15px;
+}
+
+.more-button {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+}
+
+.dashboard-card-content {
+  text-align: center;
+}

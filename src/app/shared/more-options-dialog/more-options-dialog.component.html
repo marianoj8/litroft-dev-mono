@@ -1,0 +1,43 @@
+<h2 mat-dialog-title>
+  <mat-icon class="mat-18">settings</mat-icon>
+  Operaçãoes disponives
+</h2>
+<mat-dialog-actions>
+  <button class="btn-large" mat-raised-button matDialogClose>
+    <mat-icon>arrow_back</mat-icon>
+    Cancelar
+  </button>
+  <button
+    class="btn-large"
+    mat-raised-button
+    matDialogClose
+    mat-dialog-close="'true'"
+    color="primary"
+    (click)="onDetalheButtonCliked()"
+  >
+    <mat-icon>description</mat-icon>
+    Detalhe do registro
+  </button>
+  <button
+    class="btn-large"
+    mat-raised-button
+    matDialogClose
+    mat-dialog-close="'true'"
+    color="primary"
+    (click)="onEditButtonCliked()"
+  >
+    <mat-icon>edit</mat-icon>
+    Editar registro
+  </button>
+  <button
+    class="btn-large"
+    mat-raised-button
+    matDialogClose
+    mat-dialog-close="'true'"
+    color="warn"
+    (click)="onDeleteButtonCliked()"
+  >
+    <mat-icon>delete</mat-icon>
+    Excluir registro
+  </button>
+</mat-dialog-actions>

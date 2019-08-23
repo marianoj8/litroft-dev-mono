@@ -1,0 +1,74 @@
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <mat-form-field class="container field">
+    <input
+      matInput
+      formControlName="username"
+      type="text"
+      placeholder="Usuario"
+      class="input-style"
+    />
+    <span matPrefix>
+      <mat-icon color="primary">account_circle</mat-icon>
+    </span>
+    <mat-error
+      *ngIf="
+        loginForm.controls['username'].hasError('minlength') &&
+        !loginForm.controls['username'].hasError('required')
+      "
+    >
+      Nome deve ter no minimo <strong>8 caraters</strong>
+    </mat-error>
+
+    <mat-error *ngIf="loginForm.controls['username'].hasError('maxlength')">
+      Nome do usuario não deve ter acima de <strong>30 caraters</strong>
+    </mat-error>
+
+    <mat-error *ngIf="loginForm.controls['username'].hasError('required')">
+      Nome do usuario é <strong>obrigatorio</strong>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="container field">
+    <input
+      matInput
+      formControlName="password"
+      [type]="hide ? 'password' : 'text'"
+      placeholder="Senha"
+      class="input-style"
+    />
+    <mat-error
+      *ngIf="
+        loginForm.controls['password'].hasError('minlength') &&
+        !loginForm.controls['password'].hasError('required')
+      "
+    >
+      A senha deve ter no minimo <strong>6 caraters</strong>
+    </mat-error>
+
+    <mat-error *ngIf="loginForm.controls['password'].hasError('maxlength')">
+      A senha não deve ter acima de <strong>30 caraters</strong>
+    </mat-error>
+
+    <mat-error *ngIf="loginForm.controls['password'].hasError('required')">
+      Senha é <strong>obrigatorio</strong>
+    </mat-error>
+
+    <span matPrefix> <mat-icon color="primary">locked</mat-icon> </span>
+  </mat-form-field>
+  <div>
+    <button
+      class="btn-large"
+      [disabled]="!loginForm.valid"
+      mat-raised-button
+      color="primary"
+      type="submit"
+    >
+      Login
+      <mat-icon>send</mat-icon>
+    </button>
+  </div>
+</form>
+<div class="container">
+  <button id="btnRecovery" class="btn-large" mat-raised-button>
+    Escqueceu a senha?
+  </button>
+</div>

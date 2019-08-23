@@ -1,0 +1,22 @@
+form{
+  margin-left: 4%;
+  justify-content: center;
+  align-items: center;
+}
+
+input{
+  font-size: 12.5pt;
+}
+
+button.btn-large {
+  text-align: center;
+  max-width: 100%;
+  margin-top: 1%;
+  /* margin-bottom: 1.6%; */
+}
+button#btnRecovery.btn-large {
+  text-align: center;
+  max-width: 100%;
+  margin-top: 1%;
+  margin-left: 2%;
+}

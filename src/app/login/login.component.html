@@ -1,0 +1,69 @@
+<div class="container hide-on-large-only">
+  <div class="container">
+    <button id="btnHome"
+      mat-raised-button
+      [routerLink]="['']"
+      class="btn-large"
+      color="primary"
+    >
+      <mat-icon>home</mat-icon> Home
+    </button>
+  </div>
+</div>
+<div class="container">
+  <div class="container">
+    <mat-accordion class="headers-align mat-elevation-z8">
+      <mat-expansion-panel
+        #secondChild
+        [expanded]="firstChild.opened"
+        (afterCollapse)="firstChild.open()"
+        hideToggle
+      >
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Iniciar Sessaao
+          </mat-panel-title>
+          <mat-panel-description class="hide-on-small-and-down">
+            [Uma descrição aqui]
+            <mat-icon>account_circle</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <app-sign-in></app-sign-in>
+
+      </mat-expansion-panel>
+
+      <mat-expansion-panel
+        #firstChild
+        [expanded]="!secondChild.opened"
+        (afterCollapse)="secondChild.open()"
+        hideToggle
+      >
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Ativar conta
+          </mat-panel-title>
+          <mat-panel-description class="hide-on-small-and-down">
+              [Uma descrição aqui]
+            <mat-icon>account_circle</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <app-sign-in></app-sign-in>
+        <mat-action-row>
+          <button
+            class="btn-large"
+            mat-raised-button
+            color="primary"
+            type="submit"
+          >
+            Login
+            <mat-icon>send</mat-icon>
+          </button>
+        </mat-action-row>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+</div>
+
+<!-- <div class="container mat-elevation-z8">
+  <app-active-account></app-active-account>
+</div> -->

@@ -1,0 +1,65 @@
+<div class="container">
+  <div class="container" *ngIf="estudante$ | async as estudante; else loading">
+    <mat-accordion class="headers-align mat-elevation-z8">
+      <mat-expansion-panel #panel1 [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{ estudante?.nome }}
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-label>Nome</mat-label>: {{ estudante?.nome }}
+        <mat-divider></mat-divider>
+        <mat-label>Sobrenome</mat-label>: {{ estudante?.sobreNome }}
+        <mat-divider></mat-divider>
+        <mat-label>Sexo</mat-label>:
+        {{ estudante?.sexo === "M" ? "Masculino" : "Femenino" }}
+        <mat-divider></mat-divider>
+        <mat-label>Data/Nascimento</mat-label>:
+        {{ estudante?.dataNascimento | date }}
+        <mat-divider></mat-divider>
+        <mat-label>B.I/P</mat-label>: {{ estudante?.bi }}
+        <mat-divider></mat-divider>
+        <mat-label>Telefone</mat-label>: {{ estudante?.fone }}
+        <mat-divider></mat-divider>
+        <mat-label>Email</mat-label>: {{ estudante?.email }}
+        <mat-divider></mat-divider>
+        <mat-label>Endereco</mat-label>: {{ estudante?.endereco }}
+        <mat-action-row>
+          <button
+            class="btn-large"
+            [routerLink]="['/estudantes/edit', estudante?.id]"
+            mat-raised-button
+            color="primary"
+          >
+            <mat-icon class="mat-18">edit</mat-icon>
+            Editar
+          </button>
+        </mat-action-row>
+      </mat-expansion-panel>
+      <mat-expansion-panel #panel2>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Mais detalhe
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-label>Criado em</mat-label>: {{ estudante?.createdAt | date }}
+        <ng-template *ngIf="estudante?.lastModifiedAt">
+          <mat-divider></mat-divider>
+          <mat-label>Ultima alteração em</mat-label>:{{
+            estudante?.lastModifiedAt | date
+          }}
+        </ng-template>
+        <ng-template *ngIf="estudante?.totalModified">
+          <mat-divider></mat-divider>
+          <mat-label>Total de alterações</mat-label>:
+          {{ estudante?.totalModified }}
+        </ng-template>
+        <mat-divider></mat-divider>
+        <mat-label>Pro</mat-label>: {{ estudante?.admin.nome }}
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+</div>
+<ng-template #loading>
+  <mat-progress-bar mode="indeterminate" color="warn"></mat-progress-bar>
+</ng-template>

@@ -1,0 +1,16 @@
+.headers-align .mat-expansion-panel-header-title,
+.headers-align .mat-expansion-panel-header-description {
+  flex-basis: 0;
+}
+
+.headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
+
+button#btnHome {
+  text-align: start;
+  max-width: 100%;
+  margin-top: 1%;
+  margin-bottom: 1.6%;
+}

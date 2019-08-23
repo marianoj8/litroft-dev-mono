@@ -1,3 +1,6 @@
 export const environment = {
-  production: true
+  production: true,
+  // API: '/litroft/api/v1/rm'
+  API: '/api'
+
 };
