@@ -61,10 +61,9 @@ div.spaced > * {
   margin: 6px 20px;
 } */
 
-
- table{
-   width: 100%;
- }
+table {
+  width: 100%;
+}
 
 .hide {
   display: none;
@@ -192,6 +191,7 @@ div.spaced > * {
   color: #fff;
   background-color: indigo;
   position: relative;
+  clear: both;
 }
 
 .backColor {

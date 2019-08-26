@@ -2,6 +2,8 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material';
 
 import { EstudanteService } from './../../estudantes/modules/estudante.service';
+import { OrientadorService } from './../../orientadores/modules/OrientadorService.service';
+import { MatDailogTypeParam } from '../model/support/mat-dialog-type-param';
 
 @Component({
   selector: 'app-more-options-dialog',
@@ -11,20 +13,50 @@ import { EstudanteService } from './../../estudantes/modules/estudante.service';
 export class MoreOptionsDialogComponent implements OnInit {
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: number,
-    private estudanteService: EstudanteService) { }
+    @Inject(MAT_DIALOG_DATA) public data: MatDailogTypeParam,
+    private estudanteService: EstudanteService,
+    private orientadorService: OrientadorService) { }
 
   ngOnInit() {
   }
 
   onDetalheButtonCliked() {
-    this.estudanteService.emitOnDetalheButtonCliked.emit(this.data);
+    const id = this.data.id;
+    const entityName = this.data.entityName;
+    switch (entityName) {
+      case 'Estudante':
+        this.estudanteService.emitOnDetalheButtonCliked.emit(id);
+        break;
+      case 'Orientador':
+        this.orientadorService.emitOnDetalheButtonCliked.emit(id)
+        break;
+      default:
+    }
   }
   onEditButtonCliked() {
-    this.estudanteService.emitOnEditButtonCliked.emit(this.data);
+    const id = this.data.id;
+    const entityName = this.data.entityName;
+    switch (entityName) {
+      case 'Estudante':
+        this.estudanteService.emitOnEditButtonCliked.emit(id);
+        break;
+      case 'Orientador':
+        this.orientadorService.emitOnEditButtonCliked.emit(id)
+        break;
+      default:
+    }
   }
   onDeleteButtonCliked() {
-    this.estudanteService.emitOnDeleteButtonCliked.emit(this.data);
+    const id = this.data.id;
+    const entityName = this.data.entityName;
+    switch (entityName) {
+      case 'Estudante':
+        this.estudanteService.emitOnDeleteButtonCliked.emit(id);
+        break;
+      case 'Orientador':
+        this.orientadorService.emitOnDeleteButtonCliked.emit(id)
+        break;
+      default:
+    }
   }
-
 }

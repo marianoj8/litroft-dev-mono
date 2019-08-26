@@ -24,6 +24,8 @@
         <mat-label>Email</mat-label>: {{ estudante?.email }}
         <mat-divider></mat-divider>
         <mat-label>Endereco</mat-label>: {{ estudante?.endereco }}
+        <mat-divider></mat-divider>
+        <mat-label>Curso</mat-label>: {{ estudante?.curso?.nome }}
         <mat-action-row>
           <button
             class="btn-large"
@@ -43,17 +45,20 @@
           </mat-panel-title>
         </mat-expansion-panel-header>
         <mat-label>Criado em</mat-label>: {{ estudante?.createdAt | date }}
-        <ng-template *ngIf="estudante?.lastModifiedAt">
+        <div *ngIf="estudante?.lastModifiedAt">
           <mat-divider></mat-divider>
-          <mat-label>Ultima alteração em</mat-label>:{{
-            estudante?.lastModifiedAt | date
-          }}
-        </ng-template>
-        <ng-template *ngIf="estudante?.totalModified">
+          <mat-label>Ultima alteração em</mat-label>:
+          {{ estudante?.lastModifiedAt | date }}
+        </div>
+        <div *ngIf="estudante?.totalModified > 0">
           <mat-divider></mat-divider>
           <mat-label>Total de alterações</mat-label>:
-          {{ estudante?.totalModified }}
-        </ng-template>
+          {{
+            estudante?.totalModified < 2
+              ? estudante?.totalModified + " vez"
+              : estudante?.totalModified + " vezes"
+          }}
+        </div>
         <mat-divider></mat-divider>
         <mat-label>Pro</mat-label>: {{ estudante?.admin.nome }}
       </mat-expansion-panel>

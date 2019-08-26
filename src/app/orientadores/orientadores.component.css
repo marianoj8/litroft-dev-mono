@@ -1,8 +1,4 @@
-.left-space {
-  padding-left: 5%;
-  font-size: 14pt;
+mat-card {
+  height: 38px;
 }
 
-.space-arround {
-  margin-left: 2rem;
-}

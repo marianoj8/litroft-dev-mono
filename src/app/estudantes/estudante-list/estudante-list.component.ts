@@ -11,6 +11,7 @@ import { DeleteDialogComponent } from './../../shared/delete-dialog/delete-dialo
 import { CustomFilter } from './../../shared/model/support/custom-filter';
 import { MoreOptionsDialogComponent } from './../../shared/more-options-dialog/more-options-dialog.component';
 import { ErrorLoadingComponent } from 'src/app/shared/error-loading/error-loading.component';
+import { MatDailogTypeParam } from 'src/app/shared/model/support/mat-dialog-type-param';
 
 @Component({
   selector: 'app-estudante-list',
@@ -25,7 +26,7 @@ export class EstudanteListComponent implements OnInit {
   pageSizeOptions: number[] = [5, 10, 100];
 
   pageEvent: PageEvent;
-
+  dialogParam: MatDailogTypeParam = new MatDailogTypeParam();
   valueParam = '';
   filtro: CustomFilter = new CustomFilter();
   private subscribe: Subscription;
@@ -126,10 +127,14 @@ export class EstudanteListComponent implements OnInit {
   }
 
   openMoreOptionDialog(id: number) {
+
+    this.dialogParam.id = id;
+    this.dialogParam.entityName = 'Estudante';
+
     const dialogRef = this.dialogService.open(
       MoreOptionsDialogComponent,
       {
-        data: id,
+        data: this.dialogParam,
         height: '280px',
         width: '360px'
       });
@@ -142,7 +147,6 @@ export class EstudanteListComponent implements OnInit {
     });
   }
   openDeleteDialog(id: number) {
-
     const dialogRef = this.dialogService.open(
       DeleteDialogComponent,
       {

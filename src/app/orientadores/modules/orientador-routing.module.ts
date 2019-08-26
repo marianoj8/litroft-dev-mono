@@ -5,6 +5,7 @@ import { OrientadorListComponent } from '../orientador-list/orientador-list.comp
 import { OrientadorFormComponent } from '../orientador-form/orientador-form.component';
 import { OrientadoresComponent } from '../orientadores.component';
 import { AuthGuard } from 'src/app/shared/guard/auth.guard';
+import { OrientadorDetalheComponent } from '../orientador-detalhe/orientador-detalhe.component';
 
 const route: Routes = [
   {
@@ -18,7 +19,17 @@ const route: Routes = [
         component: OrientadorListComponent
       },
       {
-        path: 'orientador',
+        path: 'add',
+        canActivate: [AuthGuard],
+        component: OrientadorFormComponent
+      },
+      {
+        path: 'detalhe/:id',
+        canActivate: [AuthGuard],
+        component: OrientadorDetalheComponent
+      },
+      {
+        path: 'edit/:id',
         canActivate: [AuthGuard],
         component: OrientadorFormComponent
       }
