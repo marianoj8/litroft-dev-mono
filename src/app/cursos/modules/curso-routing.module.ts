@@ -4,6 +4,7 @@ import { CursoListComponent } from '../curso-list/curso-list.component';
 import { CursoFormComponent } from '../curso-form/curso-form.component';
 import { CursosComponent } from '../cursos.component';
 import { AuthGuard } from 'src/app/shared/guard/auth.guard';
+import { CursoDetalheComponent } from '../curso-detalhe/curso-detalhe.component';
 
 const route: Routes = [
 
@@ -18,7 +19,17 @@ const route: Routes = [
         component: CursoListComponent
       },
       {
-        path: 'curso',
+        path: 'detalhe/:id',
+        canActivate: [AuthGuard],
+        component: CursoDetalheComponent,
+      },
+      {
+        path: 'add',
+        canActivate: [AuthGuard],
+        component: CursoFormComponent
+      },
+      {
+        path: 'edit/:id',
         canActivate: [AuthGuard],
         component: CursoFormComponent
       }

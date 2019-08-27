@@ -4,6 +4,7 @@ import { MAT_DIALOG_DATA } from '@angular/material';
 import { EstudanteService } from './../../estudantes/modules/estudante.service';
 import { OrientadorService } from './../../orientadores/modules/OrientadorService.service';
 import { MatDailogTypeParam } from '../model/support/mat-dialog-type-param';
+import { CursoService } from 'src/app/cursos/modules/curso.service';
 
 @Component({
   selector: 'app-more-options-dialog',
@@ -15,7 +16,9 @@ export class MoreOptionsDialogComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: MatDailogTypeParam,
     private estudanteService: EstudanteService,
-    private orientadorService: OrientadorService) { }
+    private orientadorService: OrientadorService,
+    private cursoService: CursoService,
+  ) { }
 
   ngOnInit() {
   }
@@ -30,6 +33,9 @@ export class MoreOptionsDialogComponent implements OnInit {
       case 'Orientador':
         this.orientadorService.emitOnDetalheButtonCliked.emit(id)
         break;
+      case 'Curso':
+        this.cursoService.emitOnDetalheButtonCliked.emit(id)
+        break;
       default:
     }
   }
@@ -43,6 +49,9 @@ export class MoreOptionsDialogComponent implements OnInit {
       case 'Orientador':
         this.orientadorService.emitOnEditButtonCliked.emit(id)
         break;
+      case 'Curso':
+        this.cursoService.emitOnEditButtonCliked.emit(id)
+        break;
       default:
     }
   }
@@ -55,6 +64,9 @@ export class MoreOptionsDialogComponent implements OnInit {
         break;
       case 'Orientador':
         this.orientadorService.emitOnDeleteButtonCliked.emit(id)
+        break;
+      case 'Curso':
+        this.cursoService.emitOnDeleteButtonCliked.emit(id)
         break;
       default:
     }

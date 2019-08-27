@@ -44,7 +44,7 @@ import { TokenInterceptorService } from './shared/services/security/token-interc
     LoginFaildMessageComponent,
     MoreOptionsDialogComponent,
     ErrorLoadingComponent,
-    EspecialidadeComponent,
+    EspecialidadeComponent
   ],
   entryComponents: [
     SaveSuccessMessageComponent,

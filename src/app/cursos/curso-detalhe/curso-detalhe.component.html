@@ -1,0 +1,58 @@
+<div class="container">
+  <div class="container" *ngIf="curso$ | async as curso; else loading">
+    <mat-accordion class="headers-align mat-elevation-z8">
+      <mat-expansion-panel #panel1 [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Detalhe do Curso
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-label>Nome</mat-label>: {{ curso?.nome }}
+        <mat-divider></mat-divider>
+        <mat-label>Duração</mat-label>:  {{
+          curso?.duracao < 2
+            ? curso?.duracao + " Ano"
+            : curso?.duracao + " Anos"
+        }}
+        <mat-action-row>
+          <button
+            class="btn-large"
+            [routerLink]="['/cursos/edit', curso?.id]"
+            mat-raised-button
+            color="primary"
+          >
+            <mat-icon class="mat-18">edit</mat-icon>
+            Editar
+          </button>
+        </mat-action-row>
+      </mat-expansion-panel>
+      <mat-expansion-panel #panel2>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Mais detalhe
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-label>Criado em</mat-label>: {{ curso?.createdAt | date }}
+        <div *ngIf="curso?.lastModifiedAt">
+          <mat-divider></mat-divider>
+          <mat-label>Ultima alteração em</mat-label>:
+          {{ curso?.lastModifiedAt | date }}
+        </div>
+        <div *ngIf="curso?.totalModified > 0">
+          <mat-divider></mat-divider>
+          <mat-label>Total de alterações</mat-label>:
+          {{
+            curso?.totalModified < 2
+              ? curso?.totalModified + " vez"
+              : curso?.totalModified + " vezes"
+          }}
+        </div>
+        <mat-divider></mat-divider>
+        <mat-label>Pro</mat-label>: {{ curso?.admin.nome }}
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+</div>
+<ng-template #loading>
+  <mat-progress-bar mode="indeterminate" color="warn"></mat-progress-bar>
+</ng-template>

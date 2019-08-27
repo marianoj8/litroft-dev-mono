@@ -1,23 +1,26 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 
-import { CursosComponent } from '../cursos.component';
-import { CursoListComponent } from '../curso-list/curso-list.component';
-import { CursoFormComponent } from '../curso-form/curso-form.component';
 import { MaterialModule } from '../../material/material.module';
+import { CursoFormComponent } from '../curso-form/curso-form.component';
+import { CursoListComponent } from '../curso-list/curso-list.component';
+import { CursosComponent } from '../cursos.component';
 import { CursoRoutingModule } from './curso-routing.module';
+import { CursoDetalheComponent } from '../curso-detalhe/curso-detalhe.component';
 
 @NgModule({
   declarations: [
     CursosComponent,
     CursoListComponent,
-    CursoFormComponent
+    CursoFormComponent,
+    CursoDetalheComponent
   ],
   imports: [
     CommonModule,
     MaterialModule,
-    CursoRoutingModule
+    CursoRoutingModule,
+    ReactiveFormsModule
   ],
   exports: []
 })

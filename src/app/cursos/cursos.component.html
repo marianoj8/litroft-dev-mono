@@ -1,12 +1,81 @@
-<mat-card color="primary">
-  <div class="left-space">
-    <span class="space-arround">
-      <button mat-raised-button color="primary">
-        Novo
-        <mat-icon>add_circle</mat-icon>
-      </button>
-    </span> Cursos
-  </div>
-</mat-card>
+<div [hidden]="onChangeContext">
+  <mat-card color="primary">
+    <div class="space-arround">
+      <mat-form-field class="search">
+        <input
+          #key
+          matInput
+          type="text"
+          (keyup)="find($event, key.value)"
+          autocomplete="false"
+          placeholder="Procurar cursos por nome..."
+        />
+        <span matSuffix *ngIf="!(key.value.length != 0)"
+          ><mat-icon class="mat-1" color="primary">search</mat-icon>
+        </span>
+
+        <span matSuffix *ngIf="key.value.length != 0">
+          <button mat-icon-button (click)="key.value = null; cleanSearchField()">
+            <mat-icon color="primary">close</mat-icon>
+          </button>
+        </span>
+        <span matPrefix>
+          <a
+            matTooltip="Filtrar lista cursos"
+            mat-flat-button
+            class="more-button mat-20"
+            [matMenuTriggerFor]="menu"
+            aria-label="Toggle menu"
+          >
+            <mat-icon color="primary">more_vert</mat-icon>
+          </a>
+          <mat-menu #menu="matMenu" xPosition="before">
+            <button
+              mat-menu-item
+              class="more-button"
+              [matMenuTriggerFor]="menuCurso"
+              aria-label="Toggle menu"
+            >
+             Duração
+            </button>
+          </mat-menu>
+
+          <mat-menu #menuCurso xPosition="before">
+            <button mat-menu-item (click)="showAll()">
+             Todos
+            </button>
+
+            <button
+              #btnCurso
+              mat-menu-item
+              *ngFor="let ano of anos"
+              (click)="filterByDuracao(ano)"
+            >
+            {{ ano < 2 ? ano + ' ano' : ano + ' anos'}}
+            </button>
+          </mat-menu>
+        </span>
+      </mat-form-field>
+    </div>
+  </mat-card>
+</div>
+
+<div [hidden]="!onChangeContext">
+  <mat-card color="primary">
+    <div>
+      <span>
+        <button
+          class="btn-large"
+          mat-raised-button
+          color="primary"
+          [routerLink]="['/cursos']"
+        >
+          <mat-icon>arrow_back</mat-icon>
+          Listar cursos
+        </button>
+      </span>
+    </div>
+  </mat-card>
+</div>
 
 <router-outlet></router-outlet>

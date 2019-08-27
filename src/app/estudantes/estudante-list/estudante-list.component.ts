@@ -20,11 +20,6 @@ import { MatDailogTypeParam } from 'src/app/shared/model/support/mat-dialog-type
 })
 export class EstudanteListComponent implements OnInit {
 
-  // Paginator
-  length = 100;
-  pageSize = 100;
-  pageSizeOptions: number[] = [5, 10, 100];
-
   pageEvent: PageEvent;
   dialogParam: MatDailogTypeParam = new MatDailogTypeParam();
   valueParam = '';
