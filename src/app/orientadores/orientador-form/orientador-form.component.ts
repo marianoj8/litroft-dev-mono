@@ -11,7 +11,7 @@ import { MyErrorStateMatch } from 'src/app/shared/validators/field-validator';
 import { OrientadorService } from '../modules/OrientadorService.service';
 import { EventEmitter } from 'events';
 import { Especialidade } from 'src/app/shared/model/especialidade';
-import { EspecialidadeService } from 'src/app/especialidade/modules/especialidade.service';
+import { EspecialidadeService } from 'src/app/especialidades/modules/especialidade.service';
 import { ErrorLoadingComponent } from 'src/app/shared/error-loading/error-loading.component';
 import { catchError } from 'rxjs/operators';
 

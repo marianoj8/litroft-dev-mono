@@ -8,7 +8,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CustomErrorPageComponent } from './custom-error-page/custom-error-page.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { EspecialidadeComponent } from './especialidade/especialidade.component';
 import { HomeComponent } from './home/home.component';
 import { MaterialModule } from './material/material.module';
 import { DeleteDialogComponent } from './shared/delete-dialog/delete-dialog.component';
@@ -43,8 +42,7 @@ import { TokenInterceptorService } from './shared/services/security/token-interc
     DeleteDialogComponent,
     LoginFaildMessageComponent,
     MoreOptionsDialogComponent,
-    ErrorLoadingComponent,
-    EspecialidadeComponent
+    ErrorLoadingComponent
   ],
   entryComponents: [
     SaveSuccessMessageComponent,

@@ -1,0 +1,86 @@
+<mat-vertical-stepper
+  [linear]="!especialidade.id"
+  #stepper
+  class="container mat-elevation-z6"
+>
+  <mat-step [stepControl]="formGroup01">
+    <form [formGroup]="formGroup01">
+      <div class="field">
+        <ng-template matStepLabel>
+          Descrição da especialidade
+        </ng-template>
+        <mat-form-field class="field field-padding">
+          <input
+            matInput
+            autocomplete="false"
+            formControlName="descricao"
+            required
+            placeholder="Descrição"
+          />
+          <mat-error
+            *ngIf="
+              formGroup01.controls['descricao'].hasError('minlength') &&
+              !formGroup01.controls['descricao'].hasError('required')
+            "
+          >
+            Descrição deve ter no minimo <strong>3 caraters</strong>
+          </mat-error>
+
+          <mat-error *ngIf="formGroup01.controls['descricao'].hasError('maxlength')">
+            Descrição não deve ter acima de <strong>24 caraters</strong>
+          </mat-error>
+
+          <mat-error *ngIf="formGroup01.controls['descricao'].hasError('required')">
+            Descrição é <strong>obrigatorio</strong>
+          </mat-error>
+        </mat-form-field>
+        <div class="spaced">
+          <button
+            color="primary"
+            class="large"
+            mat-raised-button
+            matStepperNext
+          >
+            <mat-icon>arrow_downward</mat-icon>
+            Avançar
+          </button>
+        </div>
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel
+      >Concluir com processo de cadastro de especialidade</ng-template
+    >
+    <div class="spaced">
+      <button mat-stroked-button matStepperPrevious class="large">
+        <mat-icon>arrow_upward</mat-icon>
+        Anterior
+      </button>
+      <button
+        class="mat-elevation-z8"
+        *ngIf="!especialidade.id"
+        color="primary"
+        mat-raised-button
+        class="large"
+        (click)="onSaveButton(stepper)"
+      >
+        <mat-icon>save</mat-icon>
+        Salvar
+      </button>
+      <button
+        color="primary"
+        class="large"
+        mat-raised-button
+        (click)="onSaveButtonAndList(stepper)"
+      >
+        <mat-icon>save</mat-icon>
+        {{ !especialidade.id ? 'Salvar e listar' : 'Salvar' }}
+      </button>
+    </div>
+  </mat-step>
+</mat-vertical-stepper>
+<ng-template #loading>
+  <mat-progress-bar mode="indeterminate" color="warn"></mat-progress-bar>
+</ng-template>

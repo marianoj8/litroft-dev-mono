@@ -3,7 +3,7 @@ import { Subscription, Subject, Observable, of } from 'rxjs';
 
 import { CustomFilter } from '../shared/model/support/custom-filter';
 import { OrientadorService } from './modules/OrientadorService.service';
-import { EspecialidadeService } from './../especialidade/modules/especialidade.service';
+import { EspecialidadeService } from './../especialidades/modules/especialidade.service';
 import { Especialidade } from '../shared/model/especialidade';
 import { catchError } from 'rxjs/operators';
 

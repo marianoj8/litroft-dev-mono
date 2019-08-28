@@ -3,9 +3,9 @@ import { PageEvent, MatTableDataSource, MatSort, MatDialog } from '@angular/mate
 import { MatDailogTypeParam } from 'src/app/shared/model/support/mat-dialog-type-param';
 import { CustomFilter } from 'src/app/shared/model/support/custom-filter';
 import { Subscription, Subject, of } from 'rxjs';
-import { Curso } from 'src/app/shared/model/curso';
+import { Especialidade } from 'src/app/shared/model/especialidade';
 import { Router, ActivatedRoute } from '@angular/router';
-import { CursoService } from 'src/app/cursos/modules/curso.service';
+import { EspecialidadeService } from '../modules/especialidade.service';
 import { NotificationService } from 'src/app/shared/services/notification/notification.service';
 import { catchError } from 'rxjs/operators';
 import { ErrorLoadingComponent } from 'src/app/shared/error-loading/error-loading.component';
@@ -13,19 +13,19 @@ import { MoreOptionsDialogComponent } from 'src/app/shared/more-options-dialog/m
 import { DeleteDialogComponent } from 'src/app/shared/delete-dialog/delete-dialog.component';
 
 @Component({
-  selector: 'app-curso-list',
-  templateUrl: './curso-list.component.html',
-  styleUrls: ['./curso-list.component.css']
+  selector: 'app-especialidade-list',
+  templateUrl: './especialidade-list.component.html',
+  styleUrls: ['./especialidade-list.component.css']
 })
-export class CursoListComponent implements OnInit {
+export class EspecialidadeListComponent implements OnInit {
 
   pageEvent: PageEvent;
   dialogParam: MatDailogTypeParam = new MatDailogTypeParam();
   valueParam = '';
   filtro: CustomFilter = new CustomFilter();
   private subscribe: Subscription;
-  cursos: MatTableDataSource<Curso>;
-  cursosList: Curso[] = [];
+  especialidades: MatTableDataSource<Especialidade>;
+  especialidadesList: Especialidade[] = [];
   error$ = new Subject<boolean>();
 
 
@@ -35,7 +35,6 @@ export class CursoListComponent implements OnInit {
   displaydColumns: string[] = [
     'id',
     'nome',
-    'duracao',
     'detalhe',
     'edit',
     'delete'
@@ -44,7 +43,7 @@ export class CursoListComponent implements OnInit {
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    public service: CursoService,
+    public service: EspecialidadeService,
     private notification: NotificationService,
     private dialogService: MatDialog) { }
 
@@ -53,7 +52,7 @@ export class CursoListComponent implements OnInit {
     this.subscribe = this.service.findValueParams
       .subscribe(data => this.onRefrash(data));
     this.subscribe = this.service.findValueParam
-      .subscribe(data => this.cursos.filter = data);
+      .subscribe(data => this.especialidades.filter = data);
     this.onRefrash(this.filtro);
     this.subscribe = this.service.emitOnDetalheButtonCliked.subscribe(
       (data) => this.detalhe(data)
@@ -70,17 +69,15 @@ export class CursoListComponent implements OnInit {
   }
 
   onFilterFromServer(data: CustomFilter) {
-    this.subscribe = this.service.filterByNomeDuracao(data).subscribe(
-      data => this.cursosList = data
+    this.subscribe = this.service.filterByNome(data).subscribe(
+      data => this.especialidadesList = data
     );
   }
 
   onRefrash(data?: CustomFilter) {
-    this.subscribe = this.service.filterByDuracao(data.duracao === undefined ? 1 : data.duracao)
+    this.subscribe = this.service.filterByNome(data)
       .pipe(
         catchError(err => {
-          console.log(err);
-
           this.dialogService.open(ErrorLoadingComponent);
           this.error$.next(true);
           return of(null);
@@ -88,15 +85,15 @@ export class CursoListComponent implements OnInit {
       )
       .subscribe(
         data => {
-          const array = data.map((item: Curso) => {
+          const array = data.map((item: Especialidade) => {
             return {
               ...item
             };
 
           });
-          this.cursos = new MatTableDataSource(array);
-          this.cursos.sort = this.sort;
-          this.cursosList = this.cursos.data;
+          this.especialidades = new MatTableDataSource(array);
+          this.especialidades.sort = this.sort;
+          this.especialidadesList = this.especialidades.data;
         });
   }
 
@@ -125,7 +122,7 @@ export class CursoListComponent implements OnInit {
   openMoreOptionDialog(id: number) {
 
     this.dialogParam.id = id;
-    this.dialogParam.entityName = 'Curso';
+    this.dialogParam.entityName = 'Especialidade';
 
     const dialogRef = this.dialogService.open(
       MoreOptionsDialogComponent,
@@ -137,7 +134,7 @@ export class CursoListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result: boolean) => {
       if (result) {
-        // this.deleteCurso(curso);
+        // this.deleteEspecialidade(curso);
       }
 
     });
@@ -153,13 +150,13 @@ export class CursoListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result: boolean) => {
       if (result) {
-        this.deleteCurso(id);
+        this.deleteEspecialidade(id);
       }
 
     });
   }
 
-  deleteCurso(cursoId: number) {
+  deleteEspecialidade(cursoId: number) {
     this.service.deleteById(cursoId)
       .subscribe(
         () => {

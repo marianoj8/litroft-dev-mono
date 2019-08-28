@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="container" *ngIf="especialidade$ | async as especialidade; else loading">
+    <mat-accordion class="headers-align mat-elevation-z8">
+      <mat-expansion-panel #panel1 [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Detalhe da Especialidade
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-label>Descrição</mat-label>: {{ especialidade?.descricao }}
+        <mat-action-row>
+          <button
+            class="btn-large"
+            [routerLink]="['/especialidades/edit', especialidade?.id]"
+            mat-raised-button
+            color="primary"
+          >
+            <mat-icon class="mat-18">edit</mat-icon>
+            Editar
+          </button>
+        </mat-action-row>
+      </mat-expansion-panel>
+      <mat-expansion-panel #panel2>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Mais detalhe
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-label>Criado em</mat-label>: {{ especialidade?.createdAt | date }}
+        <div *ngIf="especialidade?.lastModifiedAt">
+          <mat-divider></mat-divider>
+          <mat-label>Ultima alteração em</mat-label>:
+          {{ especialidade?.lastModifiedAt | date }}
+        </div>
+        <div *ngIf="especialidade?.totalModified > 0">
+          <mat-divider></mat-divider>
+          <mat-label>Total de alterações</mat-label>:
+          {{
+            especialidade?.totalModified < 2
+              ? especialidade?.totalModified + " vez"
+              : especialidade?.totalModified + " vezes"
+          }}
+        </div>
+        <mat-divider></mat-divider>
+        <mat-label>Pro</mat-label>: {{ especialidade?.admin.nome }}
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+</div>
+<ng-template #loading>
+  <mat-progress-bar mode="indeterminate" color="warn"></mat-progress-bar>
+</ng-template>

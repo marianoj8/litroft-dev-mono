@@ -36,6 +36,11 @@ const routes: Routes = [
     loadChildren: 'src/app/turmas/modules/turma.module#TurmaModule'
   },
   {
+    path: 'especialidades',
+    canActivate: [AuthGuard],
+    loadChildren: 'src/app/especialidades/modules/especialidade.module#EspecialidadeModule'
+  },
+  {
     path: 'login',
     loadChildren: 'src/app/login/modules/login.module#LoginModule'
   },
