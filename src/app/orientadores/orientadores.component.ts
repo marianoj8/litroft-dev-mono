@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription, Subject, Observable, of } from 'rxjs';
+import { Location } from '@angular/common';
 
 import { CustomFilter } from '../shared/model/support/custom-filter';
-import { OrientadorService } from './modules/OrientadorService.service';
-import { EspecialidadeService } from './../especialidades/modules/especialidade.service';
 import { Especialidade } from '../shared/model/especialidade';
 import { catchError } from 'rxjs/operators';
+import { OrientadorService } from './modules/OrientadorService.service';
+import { EspecialidadeService } from '../especialidades/modules/especialidade.service';
 
 @Component({
   selector: 'app-orientadores',
@@ -21,13 +22,14 @@ export class OrientadoresComponent implements OnInit {
   especialidades$: Observable<Especialidade[]>;
 
   constructor(
-    public service: OrientadorService,
-    private especialidadeService: EspecialidadeService) {
+    public orientadorService: OrientadorService,
+    private especialidadeService: EspecialidadeService,
+    private location: Location) {
 
   }
 
   ngOnInit() {
-    this.subscription = this.service.onChangeContext.subscribe(
+    this.subscription = this.orientadorService.onChangeContext.subscribe(
       context => this.onChangeContext = context
     );
     this.especialidades$ = this.especialidadeService.list()
@@ -35,6 +37,8 @@ export class OrientadoresComponent implements OnInit {
         this.especialidadeError$.next(true);
         return of([]);
       }))
+
+    this.orientadorService.onChangeContextTitle.emit('Orientador');
   }
 
 
@@ -42,25 +46,25 @@ export class OrientadoresComponent implements OnInit {
     if (event.key === 'Enter') {
       this.findFromServer(value);
     }
-    this.service.findValueParam.emit(value.trim());
+    this.orientadorService.findValueParam.emit(value.trim());
   }
 
   findFromServer(value: string) {
     this.filtro.nome = value.trim();
     // this.filtro.descricao = ''
     // this.filtro.sexo = ''
-    this.service.findValueParamFromServer.emit(this.filtro);
+    this.orientadorService.findValueParamFromServer.emit(this.filtro);
   }
 
   filterByEspecialidade(sexo: string) {
     this.filtro.sexo = sexo;
-    this.service.findValueParams.emit(this.filtro);
+    this.orientadorService.findValueParams.emit(this.filtro);
   }
 
   showAll() {
     this.filtro.descricao = '';
     this.filtro.sexo = '';
-    this.service.findValueParams.emit(this.filtro);
+    this.orientadorService.findValueParams.emit(this.filtro);
   }
 
   cleanSearchField() {
@@ -73,6 +77,10 @@ export class OrientadoresComponent implements OnInit {
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+  }
+
+  back() {
+    this.location.back();
   }
 
 }

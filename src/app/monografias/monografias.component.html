@@ -1,0 +1,23 @@
+<div>
+  <mat-card color="primary">
+    <div>
+      <span>
+        <button
+          [ngSwitch]="view"
+          class="btn-large"
+          mat-raised-button
+          color="primary"
+          (click)="onBtnClickedToChange()"
+        >
+          <mat-icon *ngSwitchCase="0">view_list</mat-icon>
+          <mat-icon *ngSwitchCase="1"> view_module</mat-icon>
+          <mat-icon *ngSwitchCase="2">view_stream</mat-icon>
+          <mat-icon *ngSwitchDefault>view_list</mat-icon>
+          Monograifas
+        </button>
+      </span>
+    </div>
+  </mat-card>
+</div>
+
+<router-outlet></router-outlet>

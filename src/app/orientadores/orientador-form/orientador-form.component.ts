@@ -4,16 +4,17 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatVerticalStepper } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, Observable, of } from 'rxjs';
+import { Location } from '@angular/common';
+import { catchError } from 'rxjs/operators';
+
 import { Orientador } from 'src/app/shared/model/orientador';
 import { NotificationService } from 'src/app/shared/services/notification/notification.service';
 import { MyErrorStateMatch } from 'src/app/shared/validators/field-validator';
-
 import { OrientadorService } from '../modules/OrientadorService.service';
 import { EventEmitter } from 'events';
 import { Especialidade } from 'src/app/shared/model/especialidade';
 import { EspecialidadeService } from 'src/app/especialidades/modules/especialidade.service';
 import { ErrorLoadingComponent } from 'src/app/shared/error-loading/error-loading.component';
-import { catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-orientador-form',
@@ -43,7 +44,8 @@ export class OrientadorFormComponent implements OnInit {
     private orientadorService: OrientadorService,
     private especialidadeSerice: EspecialidadeService,
     private notificationService: NotificationService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private location: Location
   ) {
 
   }
@@ -145,9 +147,6 @@ export class OrientadorFormComponent implements OnInit {
 
   private save(stepper: MatVerticalStepper, state): void {
 
-    // console.log(this.orientador);
-
-
     this.orientador.nome = this.formGroup01.controls.nome.value;
     this.orientador.sobreNome = this.formGroup01.controls.sobrenome.value;
     this.orientador.sexo = this.formGroup02.controls.sexo.value;
@@ -157,22 +156,19 @@ export class OrientadorFormComponent implements OnInit {
     this.orientador.email = this.formGroup04.controls.email.value;
     this.orientador.endereco = this.formGroup04.controls.endereco.value;
 
-    // console.log(this.formGroup05.controls.especialidade.value);
-
     this.especialidade.id = this.formGroup05.controls.especialidade.value as number;
     this.orientador.especialidade = this.especialidade;
 
     this.orientadorService.save(this.orientador)
       .subscribe(
         (data: Orientador) => {
-          this.orientador = data;
           if (!!state) {
             if (this.router.url.match('/edit')) {
               this.showUpdatedMessage();
             } else {
               this.showSavedMessage();
             }
-            this.router.navigate(['/orientadores']);
+            this.back();
           } else {
             if (this.router.url.match('/edit')) {
               this.showUpdatedMessage();
@@ -219,6 +215,10 @@ export class OrientadorFormComponent implements OnInit {
     }
 
     return finalDate;
+  }
+
+  back() {
+    this.location.back();
   }
 
 }

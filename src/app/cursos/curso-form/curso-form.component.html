@@ -27,7 +27,7 @@
           </mat-error>
 
           <mat-error *ngIf="formGroup01.controls['nome'].hasError('maxlength')">
-            Nome não deve ter acima de <strong>24 caraters</strong>
+            Nome não deve ter acima de <strong>80 caraters</strong>
           </mat-error>
 
           <mat-error *ngIf="formGroup01.controls['nome'].hasError('required')">
@@ -68,7 +68,7 @@
 
   <mat-step>
     <ng-template matStepLabel
-      >Concluir com processo de cadastro de curso</ng-template
+      >Concluir com processo de  {{ !curso.id ? "cadastro" : "alteração" }} de curso</ng-template
     >
     <div class="spaced">
       <button mat-stroked-button matStepperPrevious class="large">

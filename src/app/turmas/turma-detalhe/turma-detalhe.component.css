@@ -4,3 +4,6 @@ mat-divider{
 mat-label{
   font-weight: bold;
 }
+mat-icon .mat-icon-info{
+  margin-bottom: -15px;
+}

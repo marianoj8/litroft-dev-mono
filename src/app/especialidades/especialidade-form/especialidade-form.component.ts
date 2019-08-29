@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MyErrorStateMatch } from 'src/app/shared/validators/field-validator';
-import { EventEmitter } from 'events';
-import { Especialidade } from 'src/app/shared/model/especialidade';
 import { Router, ActivatedRoute } from '@angular/router';
+import { EventEmitter } from 'events';
+import { MatVerticalStepper } from '@angular/material';
+import { Location } from '@angular/common';
+
+import { MyErrorStateMatch } from 'src/app/shared/validators/field-validator';
+import { Especialidade } from 'src/app/shared/model/especialidade';
 import { EspecialidadeService } from '../modules/especialidade.service';
 import { NotificationService } from 'src/app/shared/services/notification/notification.service';
-import { MatVerticalStepper } from '@angular/material';
 
 @Component({
   selector: 'app-especialidade-form',
@@ -26,7 +28,8 @@ export class EspecialidadeFormComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
     private especialidadeService: EspecialidadeService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private location: Location
   ) {
 
   }
@@ -58,7 +61,7 @@ export class EspecialidadeFormComponent implements OnInit {
       descricao: ['', [
         Validators.required,
         Validators.minLength(3),
-        Validators.maxLength(30)]],
+        Validators.maxLength(70)]],
     });
 
   }
@@ -74,23 +77,18 @@ export class EspecialidadeFormComponent implements OnInit {
 
 
   private save(stepper: MatVerticalStepper, state): void {
-
-    console.log(this.especialidade);
-
-
     this.especialidade.descricao = this.formGroup01.controls.descricao.value;
 
     this.especialidadeService.save(this.especialidade)
       .subscribe(
         (data: Especialidade) => {
-          this.especialidade = data;
           if (!!state) {
             if (this.router.url.match('/edit')) {
               this.showUpdatedMessage();
             } else {
               this.showSavedMessage();
             }
-            this.router.navigate(['/especialidades']);
+            this.back();
           } else {
             if (this.router.url.match('/edit')) {
               this.showUpdatedMessage();
@@ -121,6 +119,10 @@ export class EspecialidadeFormComponent implements OnInit {
     for (let index = 0; index < erros.length; index++) {
       console.log(err.error.errors[index].field);
     }
+  }
+
+  back() {
+    this.location.back();
   }
 
 }

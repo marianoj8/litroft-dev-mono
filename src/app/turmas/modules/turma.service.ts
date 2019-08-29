@@ -11,6 +11,7 @@ import { CustomRepository } from 'src/app/shared/repository/custom-repository';
 export class TurmaService implements CustomRepository<Turma, number> {
 
   findValueParam = new EventEmitter<string>();
+  onChangeContextTitle = new EventEmitter<string>();
   findValueParamFromServer = new EventEmitter<CustomFilter>();
   findValueParams = new EventEmitter<CustomFilter>();
   onChangeContext = new EventEmitter<boolean>();

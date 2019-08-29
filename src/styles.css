@@ -4,7 +4,7 @@
 html,
 body {
   height: 100%;
-  overflow: auto;
+  /* overflow: auto; */
 }
 body {
   margin: 0;
@@ -12,7 +12,8 @@ body {
 }
 
 button.btn-large {
-  text-align: start;
+  text-align-last: left;
+  text-align: left;
   width: 100%;
 }
 
@@ -191,8 +192,11 @@ table {
   padding-top: 20px;
   color: #fff;
   background-color: indigo;
-  position: relative;
-  clear: both;
+  position: sticky;
+  width: 100%;
+  clear: initial;
+  display: block;
+  /* align-self: baseline; */
 }
 
 .backColor {
@@ -274,7 +278,7 @@ table {
 }
 
 .space-arround {
-  padding: 0 8%;
+  padding-left: 8%;
 }
 
 .field {

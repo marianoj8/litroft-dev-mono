@@ -42,7 +42,8 @@ import * as material from '@angular/material';
     material.MatCardModule,
     material.MatMenuModule,
     material.MatIconModule,
-    material.MatButtonModule
+    material.MatButtonModule,
+
   ],
   exports: [
     LayoutModule,

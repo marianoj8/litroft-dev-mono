@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { CustomFilter } from '../shared/model/support/custom-filter';
 import { Subscription } from 'rxjs';
+import { Location } from '@angular/common';
+
 import { TurmaService } from './modules/turma.service';
+import { CustomFilter } from '../shared/model/support/custom-filter';
 
 @Component({
   selector: 'app-turmas',
@@ -16,7 +18,8 @@ export class TurmasComponent implements OnInit {
   filtro: CustomFilter = new CustomFilter();
 
   constructor(
-    private turmaSerice: TurmaService, ) {
+    private turmaSerice: TurmaService,
+    private location: Location) {
   }
 
   ngOnInit() {
@@ -24,6 +27,7 @@ export class TurmasComponent implements OnInit {
       context => this.onChangeContext = context
     );
 
+    this.turmaSerice.onChangeContextTitle.emit('Turma');
   }
 
 
@@ -54,6 +58,10 @@ export class TurmasComponent implements OnInit {
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+  }
+
+  back() {
+    this.location.back();
   }
 
 }

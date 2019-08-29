@@ -1,11 +1,12 @@
-import { Component, OnDestroy, OnInit, OnChanges, SimpleChanges, Input } from '@angular/core';
-import { Subscription, empty, Observable, of, Subject } from 'rxjs';
-
-import { EstudanteService } from './modules/estudante.service';
-import { CursoService } from '../cursos/modules/curso.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Observable, of, Subject, Subscription } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { Curso } from '../shared/model/curso';
+import { Location } from '@angular/common';
+
 import { CustomFilter } from 'src/app/shared/model/support/custom-filter';
+import { Curso } from '../shared/model/curso';
+import { CursoService } from '../cursos/modules/curso.service';
+import { EstudanteService } from './modules/estudante.service';
 
 @Component({
   selector: 'app-estudantes',
@@ -22,13 +23,14 @@ export class EstudantesComponent implements OnInit, OnDestroy {
   filtro: CustomFilter = new CustomFilter();
 
   constructor(
-    public service: EstudanteService,
-    private cursoSerice: CursoService, ) {
+    public estudanteService: EstudanteService,
+    private cursoSerice: CursoService,
+    private location: Location) {
 
   }
 
   ngOnInit() {
-    this.subscription = this.service.onChangeContext.subscribe(
+    this.subscription = this.estudanteService.onChangeContext.subscribe(
       context => this.onChangeContext = context
     );
 
@@ -38,6 +40,7 @@ export class EstudantesComponent implements OnInit, OnDestroy {
         return of([]);
       }));
 
+    this.estudanteService.onChangeContextTitle.emit('Estudante');
   }
 
 
@@ -45,23 +48,23 @@ export class EstudantesComponent implements OnInit, OnDestroy {
     if (event.key === 'Enter') {
       this.findFromServer(value);
     }
-    this.service.findValueParam.emit(value.trim());
+    this.estudanteService.findValueParam.emit(value.trim());
   }
 
   findFromServer(value: string) {
     this.filtro.nome = value.trim();
-    this.service.findValueParamFromServer.emit(this.filtro);
+    this.estudanteService.findValueParamFromServer.emit(this.filtro);
   }
 
   filterByCurso(sexo: string) {
     this.filtro.sexo = sexo;
-    this.service.findValueParams.emit(this.filtro);
+    this.estudanteService.findValueParams.emit(this.filtro);
   }
 
   showAll() {
     this.filtro.curso = '';
     this.filtro.sexo = '';
-    this.service.findValueParams.emit(this.filtro);
+    this.estudanteService.findValueParams.emit(this.filtro);
   }
 
   cleanSearchField() {
@@ -74,6 +77,10 @@ export class EstudantesComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+  }
+
+  back() {
+    this.location.back();
   }
 
 }

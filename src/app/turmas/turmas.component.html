@@ -15,7 +15,10 @@
         </span>
 
         <span matSuffix *ngIf="key.value.length != 0">
-          <button mat-icon-button (click)="key.value = null; cleanSearchField()">
+          <button
+            mat-icon-button
+            (click)="key.value = null; cleanSearchField()"
+          >
             <mat-icon color="primary">close</mat-icon>
           </button>
         </span>
@@ -32,7 +35,7 @@
           class="btn-large"
           mat-raised-button
           color="primary"
-          [routerLink]="['/turmas']"
+          (click)="back()"
         >
           <mat-icon>arrow_back</mat-icon>
           Listar turmas

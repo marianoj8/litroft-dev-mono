@@ -9,6 +9,7 @@ import { CustomFilter } from 'src/app/shared/model/support/custom-filter';
 export class EspecialidadeService implements CustomRepository<Especialidade, number> {
 
   findValueParam = new EventEmitter<string>();
+  onChangeContextTitle = new EventEmitter<string>();
   findValueParamFromServer = new EventEmitter<CustomFilter>();
   findValueParams = new EventEmitter<CustomFilter>();
   onChangeContext = new EventEmitter<boolean>();

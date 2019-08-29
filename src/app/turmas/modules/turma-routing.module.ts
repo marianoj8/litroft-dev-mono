@@ -24,14 +24,14 @@ const route: Routes = [
         component: TurmaFormComponent
       },
       {
-        path: 'detalhe/:id',
-        canActivate: [AuthGuard],
-        component: TurmaDetalheComponent
-      },
-      {
         path: 'edit/:id',
         canActivate: [AuthGuard],
         component: TurmaFormComponent
+      },
+      {
+        path: 'detalhe/:id',
+        canActivate: [AuthGuard],
+        component: TurmaDetalheComponent
       }
     ]
   }

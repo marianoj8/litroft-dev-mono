@@ -24,14 +24,14 @@ const route: Routes = [
         component: OrientadorFormComponent
       },
       {
-        path: 'detalhe/:id',
-        canActivate: [AuthGuard],
-        component: OrientadorDetalheComponent
-      },
-      {
         path: 'edit/:id',
         canActivate: [AuthGuard],
         component: OrientadorFormComponent
+      },
+      {
+        path: 'detalhe/:id',
+        canActivate: [AuthGuard],
+        component: OrientadorDetalheComponent
       }
     ]
   },

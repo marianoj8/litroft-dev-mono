@@ -23,14 +23,14 @@ const route: Routes = [
         component: EspecialidadeFormComponent
       },
       {
-        path: 'detalhe/:id',
-        canActivate: [AuthGuard],
-        component: EspecialidadeDetalheComponent
-      },
-      {
         path: 'edit/:id',
         canActivate: [AuthGuard],
         component: EspecialidadeFormComponent
+      },
+      {
+        path: 'detalhe/:id',
+        canActivate: [AuthGuard],
+        component: EspecialidadeDetalheComponent
       }
     ]
   },

@@ -19,11 +19,6 @@ const route: Routes = [
         component: CursoListComponent
       },
       {
-        path: 'detalhe/:id',
-        canActivate: [AuthGuard],
-        component: CursoDetalheComponent,
-      },
-      {
         path: 'add',
         canActivate: [AuthGuard],
         component: CursoFormComponent
@@ -32,7 +27,12 @@ const route: Routes = [
         path: 'edit/:id',
         canActivate: [AuthGuard],
         component: CursoFormComponent
-      }
+      },
+      {
+        path: 'detalhe/:id',
+        canActivate: [AuthGuard],
+        component: CursoDetalheComponent,
+      },
     ]
   }
 

@@ -1,1 +1,39 @@
-<p>grupo-list works!</p>
+<mat-grid-list
+  cols="4"
+  [rowHeight]="'270px'"
+  [gutterSize]="'10px'"
+  class="container"
+>
+  <mat-grid-tile
+    class="container mat-elevation-z3"
+    *ngFor="let tile of grupos$ | async"
+    [colspan]="1"
+    [rowspan]="1"
+  >
+    <mat-card align="center">
+      <mat-card-header>
+        <mat-card-title>{{ tile.curso.nome }}</mat-card-title>
+        <mat-card-subtitle>{{ tile.turma.sigla }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta eaque
+        maxime enim, ad unde culpa eos. Fuga pariatur rem ut fugiat dolore ipsam
+        impedit. Cum ex neque ea fugit inventore?
+      </mat-card-content>
+      <mat-card-actions align="center">
+        <button mat-raised-button color="primary">
+          <mat-icon>blur_linear</mat-icon>
+        </button>
+        <button mat-raised-button color="primary">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-raised-button color="primary">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-card-actions>
+      <mat-card-footer>
+        {{ tile.anoLetivo }}
+      </mat-card-footer>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>

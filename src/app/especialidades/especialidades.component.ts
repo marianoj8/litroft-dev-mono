@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { Location } from '@angular/common';
 
 import { CustomFilter } from '../shared/model/support/custom-filter';
 import { EspecialidadeService } from './modules/especialidade.service';
@@ -17,14 +18,15 @@ export class EspecialidadesComponent implements OnInit {
   filtro: CustomFilter = new CustomFilter();
 
   constructor(
-    private cursoSerice: EspecialidadeService, ) {
+    private especialidadeService: EspecialidadeService,
+    private location: Location) {
   }
 
   ngOnInit() {
-    this.subscription = this.cursoSerice.onChangeContext.subscribe(
+    this.subscription = this.especialidadeService.onChangeContext.subscribe(
       context => this.onChangeContext = context
     );
-
+    this.especialidadeService.onChangeContextTitle.emit('Especialidade');
   }
 
 
@@ -32,17 +34,17 @@ export class EspecialidadesComponent implements OnInit {
     if (event.key === 'Enter') {
       this.findFromServer(value);
     }
-    this.cursoSerice.findValueParam.emit(value.trim());
+    this.especialidadeService.findValueParam.emit(value.trim());
   }
 
   findFromServer(value: string) {
     this.filtro.nome = value.trim();
-    this.cursoSerice.findValueParamFromServer.emit(this.filtro);
+    this.especialidadeService.findValueParamFromServer.emit(this.filtro);
   }
 
   showAll() {
     this.filtro.nome = '';
-    this.cursoSerice.findValueParams.emit(this.filtro);
+    this.especialidadeService.findValueParams.emit(this.filtro);
   }
 
   cleanSearchField() {
@@ -57,4 +59,7 @@ export class EspecialidadesComponent implements OnInit {
     this.subscription.unsubscribe();
   }
 
+  back() {
+    this.location.back();
+  }
 }

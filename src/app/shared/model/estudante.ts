@@ -6,8 +6,6 @@ export class Estudante implements CustomAbstractEntity {
   createdAt: string;
   lastModifiedAt: string;
   totalModified: number;
-
-  // id: number;
   nome: string;
   sobreNome: string;
   sexo: string;
@@ -17,5 +15,6 @@ export class Estudante implements CustomAbstractEntity {
   email: string;
   endereco: string;
   curso: Curso;
+  inGruop: boolean;
 
 }

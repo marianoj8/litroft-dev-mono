@@ -7,8 +7,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CustomErrorPageComponent } from './custom-error-page/custom-error-page.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { HomeComponent } from './home/home.component';
 import { MaterialModule } from './material/material.module';
 import { DeleteDialogComponent } from './shared/delete-dialog/delete-dialog.component';
 import { ErrorLoadingComponent } from './shared/error-loading/error-loading.component';
@@ -23,13 +21,12 @@ import { DeleteSuccessMessageComponent } from './shared/services/notification/no
 import { SaveSuccessMessageComponent } from './shared/services/notification/notification-success-save.component';
 import { UpdateSuccessMessageComponent } from './shared/services/notification/notification-success-update.component';
 import { TokenInterceptorService } from './shared/services/security/token-interceptor.service';
+import { FooterComponent } from './shared/footer/footer.component';
 
-import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
     CustomErrorPageComponent,
     SaveSuccessMessageComponent,
     UpdateSuccessMessageComponent,
@@ -39,11 +36,11 @@ import { ChartsModule } from 'ng2-charts';
     DeleteFailedMessageComponent,
     LoadingFailedMessageComponent,
     LoginFailedMessageComponent,
-    DashboardComponent,
     DeleteDialogComponent,
     LoginFaildMessageComponent,
     MoreOptionsDialogComponent,
-    ErrorLoadingComponent
+    ErrorLoadingComponent,
+    FooterComponent
   ],
   entryComponents: [
     SaveSuccessMessageComponent,
@@ -57,7 +54,7 @@ import { ChartsModule } from 'ng2-charts';
     DeleteDialogComponent,
     LoginFaildMessageComponent,
     MoreOptionsDialogComponent,
-    ErrorLoadingComponent
+    ErrorLoadingComponent,
   ],
   imports: [
     BrowserModule,
@@ -65,8 +62,7 @@ import { ChartsModule } from 'ng2-charts';
     BrowserAnimationsModule,
     MaterialModule,
     HttpClientModule,
-    LayoutModule,
-    ChartsModule
+    LayoutModule
   ],
   providers: [
     {

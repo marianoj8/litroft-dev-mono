@@ -6,3 +6,7 @@
 mat-nav-list a p, h5{
   text-align: start;
 }
+mat-card{
+  height: 98%;
+  width: 98%;
+}

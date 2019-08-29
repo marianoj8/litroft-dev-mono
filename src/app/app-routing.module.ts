@@ -1,19 +1,30 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
-import { HomeComponent } from './home/home.component';
 import { CustomErrorPageComponent } from './custom-error-page/custom-error-page.component';
 import { AuthGuard } from './shared/guard/auth.guard';
-import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'home', component: HomeComponent },
-  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+  {
+    path: 'home',
+    canActivate: [AuthGuard],
+    loadChildren: 'src/app/home/modules/home.module#HomeModule'
+  },
+  {
+    path: 'monografias',
+    canActivate: [AuthGuard],
+    loadChildren: 'src/app/monografias/modules/monografia.module#MonografiaModule'
+  },
   {
     path: 'cursos',
     canActivate: [AuthGuard],
     loadChildren: 'src/app/cursos/modules/curso.module#CursoModule'
+  },
+  {
+    path: 'departamentos',
+    canActivate: [AuthGuard],
+    loadChildren: 'src/app/departamentos/modules/departamento.module#DepartamentoModule'
   },
   {
     path: 'estudantes',

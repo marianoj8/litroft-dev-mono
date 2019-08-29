@@ -1,16 +1,17 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { PageEvent, MatTableDataSource, MatSort, MatDialog } from '@angular/material';
-import { MatDailogTypeParam } from 'src/app/shared/model/support/mat-dialog-type-param';
-import { CustomFilter } from 'src/app/shared/model/support/custom-filter';
-import { Subscription, Subject, of } from 'rxjs';
-import { Curso } from 'src/app/shared/model/curso';
-import { Router, ActivatedRoute } from '@angular/router';
-import { CursoService } from 'src/app/cursos/modules/curso.service';
-import { NotificationService } from 'src/app/shared/services/notification/notification.service';
+import { MatDialog, MatSort, MatTableDataSource } from '@angular/material';
+import { ActivatedRoute, Router } from '@angular/router';
+import { of, Subject, Subscription } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { ErrorLoadingComponent } from 'src/app/shared/error-loading/error-loading.component';
-import { MoreOptionsDialogComponent } from 'src/app/shared/more-options-dialog/more-options-dialog.component';
+
+import { CursoService } from 'src/app/cursos/modules/curso.service';
 import { DeleteDialogComponent } from 'src/app/shared/delete-dialog/delete-dialog.component';
+import { ErrorLoadingComponent } from 'src/app/shared/error-loading/error-loading.component';
+import { Curso } from 'src/app/shared/model/curso';
+import { CustomFilter } from 'src/app/shared/model/support/custom-filter';
+import { MatDailogTypeParam } from 'src/app/shared/model/support/mat-dialog-type-param';
+import { MoreOptionsDialogComponent } from 'src/app/shared/more-options-dialog/more-options-dialog.component';
+import { NotificationService } from 'src/app/shared/services/notification/notification.service';
 
 @Component({
   selector: 'app-curso-list',
@@ -19,7 +20,6 @@ import { DeleteDialogComponent } from 'src/app/shared/delete-dialog/delete-dialo
 })
 export class CursoListComponent implements OnInit {
 
-  pageEvent: PageEvent;
   dialogParam: MatDailogTypeParam = new MatDailogTypeParam();
   valueParam = '';
   filtro: CustomFilter = new CustomFilter();
@@ -169,5 +169,6 @@ export class CursoListComponent implements OnInit {
         err => this.showErrorMessage()
       );
   }
+
 
 }

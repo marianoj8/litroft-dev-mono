@@ -7,6 +7,8 @@ import { MatDailogTypeParam } from '../model/support/mat-dialog-type-param';
 import { CursoService } from 'src/app/cursos/modules/curso.service';
 import { EspecialidadeService } from 'src/app/especialidades/modules/especialidade.service';
 import { TurmaService } from 'src/app/turmas/modules/turma.service';
+import { DepartamentoService } from 'src/app/departamentos/modules/departamento.service';
+import { GrupoService } from './../../grupos/modules/grupo.service';
 
 @Component({
   selector: 'app-more-options-dialog',
@@ -22,6 +24,8 @@ export class MoreOptionsDialogComponent implements OnInit {
     private cursoService: CursoService,
     private especialidadeService: EspecialidadeService,
     private turmaService: TurmaService,
+    private departamentoService: DepartamentoService,
+    private grupoService: GrupoService
   ) { }
 
   ngOnInit() {
@@ -46,6 +50,12 @@ export class MoreOptionsDialogComponent implements OnInit {
       case 'Turma':
         this.turmaService.emitOnDetalheButtonCliked.emit(id)
         break;
+      case 'Departamento':
+        this.departamentoService.emitOnDetalheButtonCliked.emit(id)
+        break;
+      case 'Grupo':
+        this.grupoService.emitOnDetalheButtonCliked.emit(id)
+        break;
       default:
     }
   }
@@ -68,6 +78,12 @@ export class MoreOptionsDialogComponent implements OnInit {
       case 'Turma':
         this.turmaService.emitOnEditButtonCliked.emit(id)
         break;
+      case 'Departamento':
+        this.departamentoService.emitOnEditButtonCliked.emit(id)
+        break;
+      case 'Grupo':
+        this.grupoService.emitOnEditButtonCliked.emit(id)
+        break;
       default:
     }
   }
@@ -89,6 +105,12 @@ export class MoreOptionsDialogComponent implements OnInit {
         break;
       case 'Turma':
         this.turmaService.emitOnDeleteButtonCliked.emit(id)
+        break;
+      case 'Departamento':
+        this.departamentoService.emitOnDeleteButtonCliked.emit(id)
+        break;
+      case 'Grupo':
+        this.grupoService.emitOnDeleteButtonCliked.emit(id)
         break;
       default:
     }

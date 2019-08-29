@@ -1,78 +1,26 @@
-<mat-card color="primary">
-  <div class="left-space">
-    <span class="space-arround">
-      <button mat-raised-button color="primary">
-        View
-        <mat-icon>add_circle</mat-icon>
-      </button>
-    </span>
-    Home
+<!-- <div [ngSwitch]="listView">
+  <div>
+    <mat-card color="primary">
+      <div>
+        <span>
+          <button
+            class="btn-large"
+            mat-raised-button
+            color="primary" disabled
+          >
+            <mat-icon>dashboard</mat-icon>
+            Dashboard
+          </button>
+        </span>
+      </div>
+    </mat-card>
   </div>
-</mat-card>
 
-<div style="display: inline-block; width: 90%">
-  <canvas
-    baseChart
-    [data]="pieChartData"
-    [labels]="pieChartLabels"
-    [chartType]="pieChartType"
-  ></canvas>
-
-  <canvas
-    baseChart
-    [datasets]="barChartData"
-    [labels]="barChartLabels"
-    [options]="barChartOptions"
-    [legend]="barChartLegend"
-    [chartType]="barChartType"
-  ></canvas>
-
-  <canvas
-    baseChart
-    [data]="doughnutChartData"
-    [labels]="doughnutChartLabels"
-    [chartType]="doughnutChartType"
-  ></canvas>
-
-  <canvas
-    baseChart
-    [datasets]="radarChartData"
-    [labels]="radarChartLabels"
-    [chartType]="radarChartType"
-  >
-  </canvas>
-</div>
-
-<!-- <div style="display: block; width: 50%">
-  <canvas baseChart
-          [data]="pieChartData"
-          [labels]="pieChartLabels"
-          [chartType]="pieChartType"></canvas>
-</div>
-
-
-<div>
-  <div style="display: block; width: 50%">
-    <canvas baseChart
-          [datasets]="barChartData"
-          [labels]="barChartLabels"
-          [options]="barChartOptions"
-          [legend]="barChartLegend"
-          [chartType]="barChartType"></canvas>
+  <div *ngSwitchCase="true">
+    <router-outlet></router-outlet>
   </div>
-</div>
-
-
-<div style="display: block; width: 50%">
-  <canvas baseChart
-          [data]="doughnutChartData"
-          [labels]="doughnutChartLabels"
-          [chartType]="doughnutChartType"></canvas>
-</div>
-
-<div style="display: block; width: 50%">
-  <canvas baseChart
-          [datasets]="radarChartData"
-          [labels]="radarChartLabels"
-          [chartType]="radarChartType"></canvas>
+  <div *ngSwitchCase="false">
+  </div>
 </div> -->
+
+<app-dashboard></app-dashboard>

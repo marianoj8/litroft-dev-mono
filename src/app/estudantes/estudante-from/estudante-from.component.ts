@@ -1,20 +1,20 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MAT_DATE_LOCALE, MatVerticalStepper, MatDialog } from '@angular/material';
+import { MAT_DATE_LOCALE, MatDialog, MatVerticalStepper } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
-import { empty, Observable, Subject, of } from 'rxjs';
+import { EventEmitter } from 'events';
+import { Observable, of, Subject } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { Location } from '@angular/common';
 
+import { ErrorLoadingComponent } from 'src/app/shared/error-loading/error-loading.component';
 import { Curso } from 'src/app/shared/model/curso';
 import { NotificationService } from 'src/app/shared/services/notification/notification.service';
 import { MyErrorStateMatch } from 'src/app/shared/validators/field-validator';
 import { EstudanteService } from '../modules/estudante.service';
 import { CursoService } from './../../cursos/modules/curso.service';
 import { Estudante } from './../../shared/model/estudante';
-import { EventEmitter } from 'events';
-import { ErrorLoadingComponent } from 'src/app/shared/error-loading/error-loading.component';
-
 
 
 @Component({
@@ -32,8 +32,8 @@ export class EstudanteFromComponent implements OnInit {
   formGroup04: FormGroup;
   formGroup05: FormGroup;
   cursos$: Observable<Curso[]>;
-  estudanteError$ = new Subject<boolean>();
   cursoError$ = new Subject<boolean>();
+  estudanteError$ = new Subject<boolean>();
 
   matcher = new MyErrorStateMatch();
   showAndHideView: EventEmitter = new EventEmitter();
@@ -48,7 +48,8 @@ export class EstudanteFromComponent implements OnInit {
     private estudanteService: EstudanteService,
     private cursoSerice: CursoService,
     private notificationService: NotificationService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private location: Location
   ) {
 
   }
@@ -169,14 +170,13 @@ export class EstudanteFromComponent implements OnInit {
     this.estudanteService.save(this.estudante)
       .subscribe(
         (data: Estudante) => {
-          this.estudante = data;
           if (!!state) {
             if (this.router.url.match('/edit')) {
               this.showUpdatedMessage();
             } else {
               this.showSavedMessage();
             }
-            this.router.navigate(['/estudantes']);
+            this.back();
           } else {
             if (this.router.url.match('/edit')) {
               this.showUpdatedMessage();
@@ -223,6 +223,10 @@ export class EstudanteFromComponent implements OnInit {
     }
 
     return finalDate;
+  }
+
+  back() {
+    this.location.back();
   }
 
 }

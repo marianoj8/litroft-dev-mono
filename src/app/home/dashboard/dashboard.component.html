@@ -1,0 +1,41 @@
+<mat-grid-list
+  cols="2"
+  [rowHeight]="'320px'"
+  [gutterSize]="'10px'"
+  class="container"
+>
+  <mat-grid-tile class="container mat-elevation-z3" [colspan]="1" [rowspan]="1">
+    <app-barchart style="height: 100%; width: 100%;"></app-barchart>
+  </mat-grid-tile>
+  <mat-grid-tile class="container mat-elevation-z3" [colspan]="1" [rowspan]="1">
+    <app-pie-chart style="height: 100%; width: 100%;"></app-pie-chart>
+  </mat-grid-tile>
+
+  <mat-grid-tile class="container mat-elevation-z3" [colspan]="2" [rowspan]="1">
+    <mat-grid-tile-header
+      >Resumo Estatistico de Estudantes</mat-grid-tile-header
+    >
+  </mat-grid-tile>
+  <!--
+  <mat-grid-tile class="container mat-elevation-z3" [colspan]="1" [rowspan]="1">
+    <mat-grid-tile-header
+      >Resumo Estatistico de Algo que ainda não sei</mat-grid-tile-header
+    >
+  </mat-grid-tile> -->
+  <!-- <mat-grid-tile class="container mat-elevation-z3" [colspan]="1" [rowspan]="1">
+    <app-pie-chart style="height: 100%; width: 100%;"></app-pie-chart>
+  </mat-grid-tile>
+  <mat-grid-tile class="container mat-elevation-z3" [colspan]="1" [rowspan]="1">
+    <app-barchart style="height: 100%; width: 100%;"></app-barchart>
+  </mat-grid-tile> -->
+  <!-- <mat-grid-tile class="container mat-elevation-z3" [colspan]="1" [rowspan]="1">
+    <mat-grid-tile-header
+      >Resumo Estatistico de Estudantes</mat-grid-tile-header
+    >
+  </mat-grid-tile>
+  <mat-grid-tile class="container mat-elevation-z3" [colspan]="1" [rowspan]="1">
+    <mat-grid-tile-header
+      >Resumo Estatistico de Estudantes</mat-grid-tile-header
+    >
+  </mat-grid-tile> -->
+</mat-grid-list>

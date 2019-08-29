@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
 import { Observable, of, Subject, Subscription } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { Location } from '@angular/common';
 
 import { Curso } from '../shared/model/curso';
 import { CustomFilter } from '../shared/model/support/custom-filter';
@@ -20,10 +21,12 @@ export class CursosComponent implements OnInit {
   cursosError$ = new Subject<boolean>();
   filtro: CustomFilter = new CustomFilter();
 
+
   anos: number[] = [1, 2, 3, 4, 5, 6];
 
   constructor(
-    private cursoSerice: CursoService, ) {
+    private cursoSerice: CursoService,
+    private location: Location) {
   }
 
   ngOnInit() {
@@ -37,6 +40,7 @@ export class CursosComponent implements OnInit {
         return of([]);
       }));
 
+    this.cursoSerice.onChangeContextTitle.emit('Curso');
   }
 
 
@@ -73,6 +77,10 @@ export class CursosComponent implements OnInit {
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+  }
+
+  back() {
+    this.location.back();
   }
 
 }

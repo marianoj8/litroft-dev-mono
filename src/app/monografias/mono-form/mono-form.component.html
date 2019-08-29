@@ -1,0 +1,168 @@
+<mat-vertical-stepper
+  [linear]="!monografia.id"
+  #stepper
+  class="container mat-elevation-z6"
+>
+  <mat-step [stepControl]="formGroup01">
+    <form [formGroup]="formGroup01">
+      <div class="field">
+        <ng-template matStepLabel>
+          Tema & duração do monografia
+        </ng-template>
+        <mat-form-field class="field field-padding">
+          <input
+            matInput
+            autocomplete="false"
+            formControlName="tema"
+            required
+            placeholder="Tema"
+          />
+          <mat-error
+            *ngIf="
+              formGroup01.controls['tema'].hasError('minlength') &&
+              !formGroup01.controls['tema'].hasError('required')
+            "
+          >
+            Tema deve ter no minimo <strong>3 caraters</strong>
+          </mat-error>
+
+          <mat-error *ngIf="formGroup01.controls['tema'].hasError('maxlength')">
+            Tema não deve ter acima de <strong>80 caraters</strong>
+          </mat-error>
+
+          <mat-error *ngIf="formGroup01.controls['tema'].hasError('required')">
+            Tema é <strong>obrigatorio</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="field field-padding">
+          <mat-select
+            matInput
+            formControlName="totalPagina"
+            required
+            placeholder="Departamento"
+          >
+            <ng-container *ngFor="let num of [30, 40, 50, 60, 70, 80]">
+              <mat-option [value]="num">
+                {{ num }}
+              </mat-option>
+            </ng-container>
+          </mat-select>
+          <mat-error
+            *ngIf="formGroup01.controls['totalPagina'].hasError('required')"
+          >
+            Depratamento é <strong>obrigatorio</strong>
+          </mat-error>
+        </mat-form-field>
+        <div class="spaced">
+          <button
+            color="primary"
+            class="large"
+            mat-raised-button
+            matStepperNext
+          >
+            <mat-icon>arrow_downward</mat-icon>
+            Avançar
+          </button>
+        </div>
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step [stepControl]="formGroup02">
+    <form [formGroup]="formGroup02">
+      <div class="field">
+        <ng-template matStepLabel>
+          Departamento
+        </ng-template>
+        <mat-form-field class="field field-padding">
+          <mat-select
+            matInput
+            formControlName="departamento"
+            required
+            placeholder="Departamento"
+          >
+            <ng-container *ngFor="let departamento of departamentos$ | async">
+              <mat-option [value]="departamento">
+                {{ departamento.nome }}
+              </mat-option>
+            </ng-container>
+          </mat-select>
+          <mat-error
+            *ngIf="formGroup02.controls['departamento'].hasError('required')"
+          >
+            Depratamento é <strong>obrigatorio</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="field field-padding">
+          <input
+            matInput
+            formControlName="file"
+            required
+            placeholder="Monografia"
+          />
+          <mat-error
+            *ngIf="formGroup02.controls['departamento'].hasError('required')"
+          >
+            Depratamento é <strong>obrigatorio</strong>
+          </mat-error>
+        </mat-form-field>
+        <div class="spaced">
+          <button
+            color="primary"
+            class="large"
+            mat-raised-button
+            (click)="open()"
+          >
+            <mat-icon>open_with</mat-icon>
+            Selecionar
+          </button>
+          <button
+            color="primary"
+            class="large"
+            mat-raised-button
+            matStepperNext
+          >
+            <mat-icon>arrow_downward</mat-icon>
+            Avançar
+          </button>
+        </div>
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel
+      >Concluir com processo de
+      {{ !monografia.id ? "cadastro" : "alteração" }} de monografia</ng-template
+    >
+    <div class="spaced">
+      <button mat-stroked-button matStepperPrevious class="large">
+        <mat-icon>arrow_upward</mat-icon>
+        Anterior
+      </button>
+      <button
+        class="mat-elevation-z8"
+        *ngIf="!monografia.id"
+        color="primary"
+        mat-raised-button
+        class="large"
+        (click)="onSaveButton(stepper)"
+      >
+        <mat-icon>save</mat-icon>
+        Salvar
+      </button>
+      <button
+        color="primary"
+        class="large"
+        mat-raised-button
+        (click)="onSaveButtonAndList(stepper)"
+      >
+        <mat-icon>save</mat-icon>
+        {{ !monografia.id ? "Salvar e listar" : "Salvar" }}
+      </button>
+    </div>
+  </mat-step>
+</mat-vertical-stepper>
+<ng-template #loading>
+  <mat-progress-bar mode="indeterminate" color="warn"></mat-progress-bar>
+</ng-template>

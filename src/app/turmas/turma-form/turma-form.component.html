@@ -26,7 +26,9 @@
             Descrição deve ter no minimo <strong>3 caraters</strong>
           </mat-error>
 
-          <mat-error *ngIf="formGroup01.controls['sigla'].hasError('maxlength')">
+          <mat-error
+            *ngIf="formGroup01.controls['sigla'].hasError('maxlength')"
+          >
             Descrição não deve ter acima de <strong>24 caraters</strong>
           </mat-error>
 
@@ -34,6 +36,27 @@
             Descrição é <strong>obrigatorio</strong>
           </mat-error>
         </mat-form-field>
+
+        <mat-form-field class="field field-padding">
+          <mat-select
+            matInput
+            formControlName="curso"
+            required
+            placeholder="Curso"
+          >
+            <mat-option *ngIf="cursoError$ | async"
+              >Ocorreu um erro ao carregar cursos...
+            </mat-option>
+            <ng-container *ngFor="let curso of cursos$ | async">
+              <mat-option *ngIf="!curso">lista vasia</mat-option>
+              <mat-option [value]="curso.id"> {{ curso.nome }} </mat-option>
+            </ng-container>
+          </mat-select>
+          <mat-error *ngIf="formGroup01.controls['curso'].hasError('required')">
+            Curso é <strong>obrigatorio</strong>
+          </mat-error>
+        </mat-form-field>
+
         <div class="spaced">
           <button
             color="primary"
@@ -51,7 +74,8 @@
 
   <mat-step>
     <ng-template matStepLabel
-      >Concluir com processo de cadastro de turma</ng-template
+      >Concluir com processo de {{ !turma.id ? "cadastro" : "alteração" }} de
+      turma</ng-template
     >
     <div class="spaced">
       <button mat-stroked-button matStepperPrevious class="large">
@@ -76,7 +100,7 @@
         (click)="onSaveButtonAndList(stepper)"
       >
         <mat-icon>save</mat-icon>
-        {{ !turma.id ? 'Salvar e listar' : 'Salvar' }}
+        {{ !turma.id ? "Salvar e listar" : "Salvar" }}
       </button>
     </div>
   </mat-step>

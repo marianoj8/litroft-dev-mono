@@ -5,9 +5,14 @@ import { Turma } from 'src/app/shared/model/turma';
 import { Router, ActivatedRoute } from '@angular/router';
 import { TurmaService } from '../modules/turma.service';
 import { NotificationService } from 'src/app/shared/services/notification/notification.service';
-import { MatVerticalStepper } from '@angular/material';
+import { MatVerticalStepper, MatDialog } from '@angular/material';
 import { HttpErrorResponse } from '@angular/common/http';
 import { EventEmitter } from 'events';
+import { Observable, Subject, of } from 'rxjs';
+import { Curso } from 'src/app/shared/model/curso';
+import { CursoService } from './../../cursos/modules/curso.service';
+import { ErrorLoadingComponent } from 'src/app/shared/error-loading/error-loading.component';
+import { catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-turma-form',
@@ -16,17 +21,22 @@ import { EventEmitter } from 'events';
 })
 export class TurmaFormComponent implements OnInit {
   formGroup01: FormGroup;
+  cursos$: Observable<Curso[]>;
+  cursoError$ = new Subject<boolean>();
   matcher = new MyErrorStateMatch();
   showAndHideView: EventEmitter = new EventEmitter();
   turma: Turma = new Turma();
   private id = 0;
+  private curso: Curso = new Curso();
 
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
     private turmaService: TurmaService,
-    private notificationService: NotificationService
+    private cursoService: CursoService,
+    private notificationService: NotificationService,
+    private dialog: MatDialog
   ) {
 
   }
@@ -34,6 +44,13 @@ export class TurmaFormComponent implements OnInit {
   ngOnInit() {
     this.turmaService.onChangeContext.emit(true);
     this.initForms();
+
+    this.cursos$ = this.cursoService.list()
+      .pipe(catchError(err => {
+        this.dialog.open(ErrorLoadingComponent);
+        this.cursoError$.next(true);
+        return of([]);
+      }));
 
     if (this.router.url.match('/edit')) {
       this.activatedRoute.params
@@ -47,6 +64,7 @@ export class TurmaFormComponent implements OnInit {
 
           this.formGroup01.patchValue({
             sigla: this.turma.sigla,
+            curso: this.turma.curso.id
           });
         });
 
@@ -59,6 +77,7 @@ export class TurmaFormComponent implements OnInit {
         Validators.required,
         Validators.minLength(3),
         Validators.maxLength(30)]],
+      curso: [null, Validators.required],
     });
 
   }
@@ -79,6 +98,8 @@ export class TurmaFormComponent implements OnInit {
 
 
     this.turma.sigla = this.formGroup01.controls.sigla.value;
+    this.curso.id = this.formGroup01.controls.curso.value;
+    this.turma.curso = this.curso;
 
     this.turmaService.save(this.turma)
       .subscribe(
@@ -89,6 +110,7 @@ export class TurmaFormComponent implements OnInit {
               this.showUpdatedMessage();
             } else {
               this.showSavedMessage();
+              this.router.navigate(['turmas/add']);
             }
             this.router.navigate(['/turmas']);
           } else {

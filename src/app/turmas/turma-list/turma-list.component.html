@@ -18,6 +18,13 @@
       </td>
     </ng-container>
 
+    <ng-container matColumnDef="curso">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Curso</th>
+      <td mat-cell *matCellDef="let turma">
+        {{ turma?.curso.nome }}
+      </td>
+    </ng-container>
+
     <ng-container matColumnDef="detalhe">
       <th mat-header-cell *matHeaderCellDef>Detalhe</th>
       <td mat-cell *matCellDef="let turma">
@@ -94,6 +101,7 @@
     >
       <mat-icon matListIcon class="mat-18">book</mat-icon>
       <h5 matLine>{{ item?.sigla }}</h5>
+      <p matLine>{{ item?.curso }}</p>
       <mat-divider></mat-divider>
     </a>
   </mat-nav-list>

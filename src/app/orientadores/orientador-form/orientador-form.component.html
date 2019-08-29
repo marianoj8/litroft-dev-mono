@@ -250,7 +250,7 @@
           Especialidade
         </ng-template>
 
-        <mat-form-field class="field field-padding">
+        <mat-form-field class="field-max field-padding">
           <mat-select
             matInput
             formControlName="especialidade"
@@ -295,7 +295,8 @@
 
   <mat-step>
     <ng-template matStepLabel
-      >Concluir com processo de cadastro de orientador</ng-template
+      >Concluir com processo de
+      {{ !orientador.id ? "cadastro" : "alteração" }} de orientador</ng-template
     >
     <div class="spaced">
       <button mat-stroked-button matStepperPrevious class="large">

@@ -35,6 +35,7 @@ export class TurmaListComponent implements OnInit {
   displaydColumns: string[] = [
     'id',
     'sigla',
+    'curso',
     'detalhe',
     'edit',
     'delete'

@@ -1,0 +1,12 @@
+mat-grid-tile-header:hover {
+  font-size: 13pt;
+  color: #606060;
+  background-color: transparent;
+  transition: 1s background-color, color;
+}
+
+mat-grid-tile-header {
+  font-size: 13pt;
+  color: white;
+  transition: 1s background-color, color;
+}

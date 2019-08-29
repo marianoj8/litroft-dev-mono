@@ -16,6 +16,7 @@ import { CustomRepository } from './../../shared/repository/custom-repository';
 export class EstudanteService implements CustomRepository<Estudante, number> {
 
   findValueParam = new EventEmitter<string>();
+  onChangeContextTitle = new EventEmitter<string>();
   findValueParamFromServer = new EventEmitter<CustomFilter>();
   findValueParams = new EventEmitter<CustomFilter>();
   onChangeContext = new EventEmitter<boolean>();

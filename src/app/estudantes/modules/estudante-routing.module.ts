@@ -24,14 +24,14 @@ const route: Routes = [
         component: EstudanteFromComponent
       },
       {
-        path: 'detalhe/:id',
-        canActivate: [AuthGuard],
-        component: EstudanteDetalheComponent
-      },
-      {
         path: 'edit/:id',
         canActivate: [AuthGuard],
         component: EstudanteFromComponent
+      },
+      {
+        path: 'detalhe/:id',
+        canActivate: [AuthGuard],
+        component: EstudanteDetalheComponent
       }
     ]
   },

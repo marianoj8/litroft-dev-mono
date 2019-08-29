@@ -27,7 +27,7 @@
           </mat-error>
 
           <mat-error *ngIf="formGroup01.controls['descricao'].hasError('maxlength')">
-            Descrição não deve ter acima de <strong>24 caraters</strong>
+            Descrição não deve ter acima de <strong>70 caraters</strong>
           </mat-error>
 
           <mat-error *ngIf="formGroup01.controls['descricao'].hasError('required')">
@@ -51,10 +51,10 @@
 
   <mat-step>
     <ng-template matStepLabel
-      >Concluir com processo de cadastro de especialidade</ng-template
+      >Concluir com processo de  {{ !especialidade.id ? "cadastro" : "alteração" }} de especialidade</ng-template
     >
     <div class="spaced">
-      <button mat-stroked-button matStepperPrevious class="large">
+      <button mat-raised-button matStepperPrevious class="large">
         <mat-icon>arrow_upward</mat-icon>
         Anterior
       </button>

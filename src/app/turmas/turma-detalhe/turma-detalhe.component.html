@@ -8,6 +8,11 @@
           </mat-panel-title>
         </mat-expansion-panel-header>
         <mat-label>Descrição</mat-label>: {{ turma?.sigla }}
+        <mat-divider></mat-divider>
+        <mat-label>Curso</mat-label>:
+        <a [routerLink]="['/cursos/detalhe', turma.curso.id]" color="primary"
+          >{{ turma?.curso.nome }} <mat-icon class="mat-icon-info">info</mat-icon>
+        </a>
         <mat-action-row>
           <button
             class="btn-large"

@@ -5,10 +5,11 @@ import { MatVerticalStepper } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EventEmitter } from 'events';
 import { Observable } from 'rxjs';
+import { Location } from '@angular/common';
+
 import { Curso } from 'src/app/shared/model/curso';
 import { NotificationService } from 'src/app/shared/services/notification/notification.service';
 import { MyErrorStateMatch } from 'src/app/shared/validators/field-validator';
-
 import { CursoService } from '../modules/curso.service';
 
 @Component({
@@ -30,7 +31,8 @@ export class CursoFormComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
     private cursoService: CursoService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private location: Location
   ) {
 
   }
@@ -63,7 +65,7 @@ export class CursoFormComponent implements OnInit {
       nome: ['', [
         Validators.required,
         Validators.minLength(3),
-        Validators.maxLength(30)]],
+        Validators.maxLength(80)]],
       duracao: [1, [
         Validators.required,
         Validators.min(1),
@@ -83,24 +85,19 @@ export class CursoFormComponent implements OnInit {
 
 
   private save(stepper: MatVerticalStepper, state): void {
-
-    console.log(this.curso);
-
-
     this.curso.nome = this.formGroup01.controls.nome.value;
     this.curso.duracao = this.formGroup01.controls.duracao.value;
 
     this.cursoService.save(this.curso)
       .subscribe(
         (data: Curso) => {
-          this.curso = data;
           if (!!state) {
             if (this.router.url.match('/edit')) {
               this.showUpdatedMessage();
             } else {
               this.showSavedMessage();
             }
-            this.router.navigate(['/cursos']);
+            this.back();
           } else {
             if (this.router.url.match('/edit')) {
               this.showUpdatedMessage();
@@ -131,6 +128,10 @@ export class CursoFormComponent implements OnInit {
     for (let index = 0; index < erros.length; index++) {
       console.log(err.error.errors[index].field);
     }
+  }
+
+  back() {
+    this.location.back();
   }
 
 }

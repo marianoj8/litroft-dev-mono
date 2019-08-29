@@ -10,6 +10,7 @@ import { CustomRepository } from 'src/app/shared/repository/custom-repository';
 export class OrientadorService implements CustomRepository<Orientador, number> {
 
   findValueParam = new EventEmitter<string>();
+  onChangeContextTitle = new EventEmitter<string>();
   findValueParamFromServer = new EventEmitter<CustomFilter>();
   findValueParams = new EventEmitter<CustomFilter>();
   onChangeContext = new EventEmitter<boolean>();

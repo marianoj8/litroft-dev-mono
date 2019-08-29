@@ -15,14 +15,13 @@ export class CursoService implements CustomRepository<Curso, number> {
 
 
   findValueParam = new EventEmitter<string>();
+  onChangeContextTitle = new EventEmitter<string>();
   findValueParamFromServer = new EventEmitter<CustomFilter>();
   findValueParams = new EventEmitter<CustomFilter>();
   onChangeContext = new EventEmitter<boolean>();
   emitOnDetalheButtonCliked = new EventEmitter<number>();
   emitOnEditButtonCliked = new EventEmitter<number>();
   emitOnDeleteButtonCliked = new EventEmitter<number>();
-
-  estudanteTable: MatTableDataSource<Estudante[]>;
 
   constructor(private service: CrudService<Curso, number>) { }
 

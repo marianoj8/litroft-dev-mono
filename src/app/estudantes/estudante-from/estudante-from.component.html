@@ -250,7 +250,7 @@
           Curso
         </ng-template>
 
-        <mat-form-field class="field field-padding">
+        <mat-form-field class="field-max field-padding">
           <mat-select
             matInput
             formControlName="curso"
@@ -291,33 +291,33 @@
 
   <mat-step>
     <ng-template matStepLabel
-      >Concluir com processo de cadastro de estudante</ng-template
+      >Concluir com processo de  {{ !estudante.id ? "cadastro" : "alteração" }} de estudante</ng-template
     >
     <div class="spaced">
-      <button mat-stroked-button matStepperPrevious class="large">
-        <mat-icon>arrow_upward</mat-icon>
-        Anterior
-      </button>
-      <button
-        class="mat-elevation-z8"
-        *ngIf="!estudante.id"
-        color="primary"
-        mat-raised-button
-        class="large"
-        (click)="onSaveButton(stepper)"
-      >
-        <mat-icon>save</mat-icon>
-        Salvar
-      </button>
-      <button
-        color="primary"
-        class="large"
-        mat-raised-button
-        (click)="onSaveButtonAndList(stepper)"
-      >
-        <mat-icon>save</mat-icon>
-        {{ !estudante.id ? "Salvar e listar" : "Salvar" }}
-      </button>
+    <button mat-stroked-button matStepperPrevious class="large">
+      <mat-icon>arrow_upward</mat-icon>
+      Anterior
+    </button>
+    <button
+      class="mat-elevation-z8 btn1"
+      *ngIf="!estudante.id"
+      color="primary"
+      mat-raised-button
+      class="large"
+      (click)="onSaveButton(stepper)"
+    >
+      <mat-icon>save</mat-icon>
+      Salvar
+    </button>
+    <button
+      color="primary"
+      class="large"
+      mat-raised-button
+      (click)="onSaveButtonAndList(stepper)"
+    >
+      <mat-icon>save</mat-icon>
+      {{ !estudante.id ? "Salvar e listar" : "Salvar" }}
+    </button>
     </div>
   </mat-step>
 </mat-vertical-stepper>

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { Location } from '@angular/common';
 
 import { Token } from '../shared/model/support/token';
 import { UsernameAndPassword } from '../shared/model/support/username-password';
-import { element } from 'protractor';
 
 @Component({
   selector: 'app-home',
@@ -14,6 +15,7 @@ export class HomeComponent implements OnInit {
 
   user: UsernameAndPassword;
   public token$: Observable<Token>;
+  listView: boolean = false;
 
   // Pie Chart
   public pieChartLabels = [
@@ -103,7 +105,7 @@ export class HomeComponent implements OnInit {
   public radarChartLabels = [];
   public radarChartType = 'radar';
 
-  constructor() {
+  constructor(private router: Router, private location: Location) {
 
     this.radarChartLabels = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
 
@@ -117,6 +119,14 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
 
+  }
+
+  switchBetweenMonoAndDash() {
+    this.listView = !this.listView;
+  }
+
+  back() {
+    this.location.back();
   }
 
 

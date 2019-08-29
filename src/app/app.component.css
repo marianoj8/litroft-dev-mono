@@ -1,9 +1,14 @@
 .sidenav-container {
   height: 100%;
+  overflow: auto;
+}
+
+mat-toolbar {
+  align-items: center;
 }
 
 .sidenav {
-  width: 240px;
+  width: 250px;
 }
 
 .sidenav .mat-toolbar {
@@ -22,7 +27,7 @@
 
 .span-container {
   /* margin: 0px 40px; */
-  padding-left: 30%;
+  padding-left: 40%;
 }
 .public-span-container {
   /* margin: 0px 40px; */
@@ -66,4 +71,8 @@
 
 .dashboard-card-content {
   text-align: center;
+}
+
+mat-nav-list a mat-icon {
+  padding-right: 5%;
 }
