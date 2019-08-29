@@ -5,6 +5,7 @@ import { TurmaListComponent } from './../turma-list/turma-list.component';
 import { TurmaFormComponent } from '../turma-form/turma-form.component';
 import { TurmasComponent } from '../turmas.component';
 import { AuthGuard } from 'src/app/shared/guard/auth.guard';
+import { TurmaDetalheComponent } from '../turma-detalhe/turma-detalhe.component';
 
 const route: Routes = [
   {
@@ -21,6 +22,11 @@ const route: Routes = [
         path: 'add',
         canActivate: [AuthGuard],
         component: TurmaFormComponent
+      },
+      {
+        path: 'detalhe/:id',
+        canActivate: [AuthGuard],
+        component: TurmaDetalheComponent
       },
       {
         path: 'edit/:id',

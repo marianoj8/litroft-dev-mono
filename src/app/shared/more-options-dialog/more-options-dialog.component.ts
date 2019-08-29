@@ -6,6 +6,7 @@ import { OrientadorService } from './../../orientadores/modules/OrientadorServic
 import { MatDailogTypeParam } from '../model/support/mat-dialog-type-param';
 import { CursoService } from 'src/app/cursos/modules/curso.service';
 import { EspecialidadeService } from 'src/app/especialidades/modules/especialidade.service';
+import { TurmaService } from 'src/app/turmas/modules/turma.service';
 
 @Component({
   selector: 'app-more-options-dialog',
@@ -20,6 +21,7 @@ export class MoreOptionsDialogComponent implements OnInit {
     private orientadorService: OrientadorService,
     private cursoService: CursoService,
     private especialidadeService: EspecialidadeService,
+    private turmaService: TurmaService,
   ) { }
 
   ngOnInit() {
@@ -41,6 +43,9 @@ export class MoreOptionsDialogComponent implements OnInit {
       case 'Especialidade':
         this.especialidadeService.emitOnDetalheButtonCliked.emit(id)
         break;
+      case 'Turma':
+        this.turmaService.emitOnDetalheButtonCliked.emit(id)
+        break;
       default:
     }
   }
@@ -60,6 +65,9 @@ export class MoreOptionsDialogComponent implements OnInit {
       case 'Especialidade':
         this.especialidadeService.emitOnEditButtonCliked.emit(id)
         break;
+      case 'Turma':
+        this.turmaService.emitOnEditButtonCliked.emit(id)
+        break;
       default:
     }
   }
@@ -78,6 +86,9 @@ export class MoreOptionsDialogComponent implements OnInit {
         break;
       case 'Especialidade':
         this.especialidadeService.emitOnDeleteButtonCliked.emit(id)
+        break;
+      case 'Turma':
+        this.turmaService.emitOnDeleteButtonCliked.emit(id)
         break;
       default:
     }

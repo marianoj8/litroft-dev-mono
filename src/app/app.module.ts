@@ -24,6 +24,7 @@ import { SaveSuccessMessageComponent } from './shared/services/notification/noti
 import { UpdateSuccessMessageComponent } from './shared/services/notification/notification-success-update.component';
 import { TokenInterceptorService } from './shared/services/security/token-interceptor.service';
 
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import { TokenInterceptorService } from './shared/services/security/token-interc
     BrowserAnimationsModule,
     MaterialModule,
     HttpClientModule,
-    LayoutModule
+    LayoutModule,
+    ChartsModule
   ],
   providers: [
     {

@@ -9,3 +9,70 @@
     Home
   </div>
 </mat-card>
+
+<div style="display: inline-block; width: 90%">
+  <canvas
+    baseChart
+    [data]="pieChartData"
+    [labels]="pieChartLabels"
+    [chartType]="pieChartType"
+  ></canvas>
+
+  <canvas
+    baseChart
+    [datasets]="barChartData"
+    [labels]="barChartLabels"
+    [options]="barChartOptions"
+    [legend]="barChartLegend"
+    [chartType]="barChartType"
+  ></canvas>
+
+  <canvas
+    baseChart
+    [data]="doughnutChartData"
+    [labels]="doughnutChartLabels"
+    [chartType]="doughnutChartType"
+  ></canvas>
+
+  <canvas
+    baseChart
+    [datasets]="radarChartData"
+    [labels]="radarChartLabels"
+    [chartType]="radarChartType"
+  >
+  </canvas>
+</div>
+
+<!-- <div style="display: block; width: 50%">
+  <canvas baseChart
+          [data]="pieChartData"
+          [labels]="pieChartLabels"
+          [chartType]="pieChartType"></canvas>
+</div>
+
+
+<div>
+  <div style="display: block; width: 50%">
+    <canvas baseChart
+          [datasets]="barChartData"
+          [labels]="barChartLabels"
+          [options]="barChartOptions"
+          [legend]="barChartLegend"
+          [chartType]="barChartType"></canvas>
+  </div>
+</div>
+
+
+<div style="display: block; width: 50%">
+  <canvas baseChart
+          [data]="doughnutChartData"
+          [labels]="doughnutChartLabels"
+          [chartType]="doughnutChartType"></canvas>
+</div>
+
+<div style="display: block; width: 50%">
+  <canvas baseChart
+          [datasets]="radarChartData"
+          [labels]="radarChartLabels"
+          [chartType]="radarChartType"></canvas>
+</div> -->
