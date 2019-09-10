@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Location } from '@angular/common';
 
@@ -10,12 +10,12 @@ import { EspecialidadeService } from './modules/especialidade.service';
   templateUrl: './especialidades.component.html',
   styleUrls: ['./especialidades.component.css']
 })
-export class EspecialidadesComponent implements OnInit {
+export class EspecialidadesComponent implements OnInit, OnDestroy {
 
   state = false;
   public onChangeContext = false;
-  private subscription: Subscription;
   filtro: CustomFilter = new CustomFilter();
+  private sub: Subscription;
 
   constructor(
     private especialidadeService: EspecialidadeService,
@@ -23,9 +23,9 @@ export class EspecialidadesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.subscription = this.especialidadeService.onChangeContext.subscribe(
-      context => this.onChangeContext = context
-    );
+    this.sub = this.especialidadeService.onChangeContext.subscribe(
+      context => this.onChangeContext = context);
+
     this.especialidadeService.onChangeContextTitle.emit('Especialidade');
   }
 
@@ -55,11 +55,11 @@ export class EspecialidadesComponent implements OnInit {
     this.filtro.nome = nome;
   }
 
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
-  }
-
   back() {
     this.location.back();
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 }

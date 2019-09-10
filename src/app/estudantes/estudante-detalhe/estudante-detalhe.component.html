@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="container" *ngIf="estudante$ | async as estudante; else loading">
+  <div *ngIf="estudante$ | async as estudante; else loading">
     <mat-accordion class="headers-align mat-elevation-z8">
       <mat-expansion-panel #panel1 [expanded]="true">
         <mat-expansion-panel-header>
@@ -25,7 +25,12 @@
         <mat-divider></mat-divider>
         <mat-label>Endereco</mat-label>: {{ estudante?.endereco }}
         <mat-divider></mat-divider>
-        <mat-label>Curso</mat-label>: {{ estudante?.curso?.nome }}
+        <mat-label>Curso</mat-label>:
+        <a
+          [routerLink]="['/cursos/detalhe', estudante.curso.id]"
+          color="primary"
+          >{{ estudante?.curso.nome }}
+        </a>
         <mat-action-row>
           <button
             class="btn-large"

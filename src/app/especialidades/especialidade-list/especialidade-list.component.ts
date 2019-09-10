@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { PageEvent, MatTableDataSource, MatSort, MatDialog } from '@angular/material';
 import { MatDailogTypeParam } from 'src/app/shared/model/support/mat-dialog-type-param';
 import { CustomFilter } from 'src/app/shared/model/support/custom-filter';
@@ -17,16 +17,16 @@ import { DeleteDialogComponent } from 'src/app/shared/delete-dialog/delete-dialo
   templateUrl: './especialidade-list.component.html',
   styleUrls: ['./especialidade-list.component.css']
 })
-export class EspecialidadeListComponent implements OnInit {
+export class EspecialidadeListComponent implements OnInit, OnDestroy {
 
   pageEvent: PageEvent;
   dialogParam: MatDailogTypeParam = new MatDailogTypeParam();
   valueParam = '';
   filtro: CustomFilter = new CustomFilter();
-  private subscribe: Subscription;
   especialidades: MatTableDataSource<Especialidade>;
   especialidadesList: Especialidade[] = [];
   error$ = new Subject<boolean>();
+  private sub: Subscription;
 
 
 
@@ -49,33 +49,34 @@ export class EspecialidadeListComponent implements OnInit {
 
   ngOnInit() {
     this.service.onChangeContext.emit(false);
-    this.subscribe = this.service.findValueParams
-      .subscribe(data => this.onRefrash(data));
-    this.subscribe = this.service.findValueParam
-      .subscribe(data => this.especialidades.filter = data);
+    this.sub = this.service.findValueParams
+      .subscribe(next => this.onRefrash(next));
+
+    this.sub = this.service.findValueParam
+      .subscribe(next => this.especialidades.filter = next);
+
     this.onRefrash(this.filtro);
-    this.subscribe = this.service.emitOnDetalheButtonCliked.subscribe(
-      (data) => this.detalhe(data)
-    );
-    this.subscribe = this.service.emitOnEditButtonCliked.subscribe(
-      (data) => this.edit(data)
-    );
-    this.subscribe = this.service.emitOnDeleteButtonCliked.subscribe(
-      (data) => this.openDeleteDialog(data)
-    );
-    this.subscribe = this.service.findValueParamFromServer.subscribe(
-      (data: CustomFilter) => this.onFilterFromServer(data)
-    );
+
+    this.sub = this.service.emitOnDetalheButtonCliked.subscribe(
+      (next) => this.detalhe(next));
+
+    this.sub = this.service.emitOnEditButtonCliked.subscribe(
+      (next) => this.edit(next));
+
+    this.sub = this.service.emitOnDeleteButtonCliked.subscribe(
+      (next) => this.openDeleteDialog(next));
+
+    this.sub = this.service.findValueParamFromServer.subscribe(
+      (next: CustomFilter) => this.onFilterFromServer(next));
   }
 
   onFilterFromServer(data: CustomFilter) {
-    this.subscribe = this.service.filterByNome(data).subscribe(
-      data => this.especialidadesList = data
-    );
+    this.sub = this.service.filterByNome(data).subscribe(
+      next => this.especialidadesList = next);
   }
 
   onRefrash(data?: CustomFilter) {
-    this.subscribe = this.service.filterByNome(data)
+    this.sub = this.service.filterByNome(data)
       .pipe(
         catchError(err => {
           this.dialogService.open(ErrorLoadingComponent);
@@ -84,8 +85,8 @@ export class EspecialidadeListComponent implements OnInit {
         })
       )
       .subscribe(
-        data => {
-          const array = data.map((item: Especialidade) => {
+        next => {
+          const array = next.map((item: Especialidade) => {
             return {
               ...item
             };
@@ -115,9 +116,6 @@ export class EspecialidadeListComponent implements OnInit {
     this.router.navigate(['edit', id], { relativeTo: this.activatedRoute });
   }
 
-  OnDestroy() {
-    this.subscribe.unsubscribe();
-  }
 
   openMoreOptionDialog(id: number) {
 
@@ -167,4 +165,7 @@ export class EspecialidadeListComponent implements OnInit {
       );
   }
 
+  ngOnDestroy() {
+    this.sub.unsubscribe();
+  }
 }

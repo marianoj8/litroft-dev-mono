@@ -70,11 +70,9 @@ export class DepartamentoFormComponent implements OnInit {
     this.save(stepper, false);
   }
 
-
   onSaveButtonAndList(stepper: MatVerticalStepper) {
     this.save(stepper, true);
   }
-
 
   private save(stepper: MatVerticalStepper, state): void {
     this.departamento.nome = this.formGroup01.controls.nome.value;
@@ -98,13 +96,15 @@ export class DepartamentoFormComponent implements OnInit {
             stepper.reset();
           }
         },
-        (err: HttpErrorResponse) => {
-
-        }
+        (err: HttpErrorResponse) => this.showFailerMessage(err)
       );
 
   }
 
+  private showFailerMessage(err: HttpErrorResponse): void {
+    this.notificationService
+      .componentErrorMessage(':: ' + err.error.message);
+  }
 
   private showSavedMessage(): void {
     this.notificationService.componentSavedSuccessfulMessage();
@@ -114,12 +114,6 @@ export class DepartamentoFormComponent implements OnInit {
     this.notificationService.componentUpdatedSuccessfulMessage();
   }
 
-  private showFailerMessage(err: HttpErrorResponse): void {
-    const erros: string[] = err.error.errors;
-    for (let index = 0; index < erros.length; index++) {
-      console.log(err.error.errors[index].field);
-    }
-  }
 
   back() {
     this.location.back();

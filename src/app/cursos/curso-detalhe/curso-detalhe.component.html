@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="container" *ngIf="curso$ | async as curso; else loading">
+  <div *ngIf="curso$ | async as curso; else loading">
     <mat-accordion class="headers-align mat-elevation-z8">
       <mat-expansion-panel #panel1 [expanded]="true">
         <mat-expansion-panel-header>

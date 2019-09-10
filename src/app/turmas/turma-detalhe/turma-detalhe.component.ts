@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { Turma } from 'src/app/shared/model/turma';
-import { TurmaService } from '../modules/turma.service';
 import { ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { catchError } from 'rxjs/operators';
+import { Location } from '@angular/common';
+
+import { TurmaService } from '../modules/turma.service';
+import { Turma } from 'src/app/shared/model/turma';
 import { ErrorLoadingComponent } from 'src/app/shared/error-loading/error-loading.component';
 
 @Component({
@@ -20,12 +22,13 @@ export class TurmaDetalheComponent implements OnInit {
   constructor(
     private service: TurmaService,
     private activatedRoute: ActivatedRoute,
-    private dialog: MatDialog) { }
+    private dialog: MatDialog,
+    private location: Location) { }
 
   ngOnInit() {
     this.service.onChangeContext.emit(true);
     this.turma$ = this.service
-      .getById(this.activatedRoute.snapshot.params['id'] as number)
+      .getById(this.activatedRoute.snapshot.params.id as number)
       .pipe(catchError(err => {
         this.dialog.open(ErrorLoadingComponent);
         return of(null);
@@ -33,7 +36,7 @@ export class TurmaDetalheComponent implements OnInit {
   }
 
   getBack() {
-
+    this.location.back();
   }
 
 }

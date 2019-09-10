@@ -1,18 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MyErrorStateMatch } from 'src/app/shared/validators/field-validator';
-import { Turma } from 'src/app/shared/model/turma';
+import { EventEmitter } from 'events';
 import { Router, ActivatedRoute } from '@angular/router';
-import { TurmaService } from '../modules/turma.service';
-import { NotificationService } from 'src/app/shared/services/notification/notification.service';
+import { catchError } from 'rxjs/operators';
 import { MatVerticalStepper, MatDialog } from '@angular/material';
 import { HttpErrorResponse } from '@angular/common/http';
-import { EventEmitter } from 'events';
 import { Observable, Subject, of } from 'rxjs';
+
+import { Turma } from 'src/app/shared/model/turma';
+import { MyErrorStateMatch } from 'src/app/shared/validators/field-validator';
+import { TurmaService } from '../modules/turma.service';
 import { Curso } from 'src/app/shared/model/curso';
 import { CursoService } from './../../cursos/modules/curso.service';
 import { ErrorLoadingComponent } from 'src/app/shared/error-loading/error-loading.component';
-import { catchError } from 'rxjs/operators';
+import { NotificationService } from 'src/app/shared/services/notification/notification.service';
 
 @Component({
   selector: 'app-turma-form',
@@ -67,7 +68,6 @@ export class TurmaFormComponent implements OnInit {
             curso: this.turma.curso.id
           });
         });
-
     }
   }
 
@@ -86,16 +86,11 @@ export class TurmaFormComponent implements OnInit {
     this.save(stepper, false);
   }
 
-
   onSaveButtonAndList(stepper: MatVerticalStepper) {
     this.save(stepper, true);
   }
 
-
   private save(stepper: MatVerticalStepper, state): void {
-
-    console.log(this.turma);
-
 
     this.turma.sigla = this.formGroup01.controls.sigla.value;
     this.curso.id = this.formGroup01.controls.curso.value;
@@ -104,7 +99,6 @@ export class TurmaFormComponent implements OnInit {
     this.turmaService.save(this.turma)
       .subscribe(
         (data: Turma) => {
-          this.turma = data;
           if (!!state) {
             if (this.router.url.match('/edit')) {
               this.showUpdatedMessage();
@@ -122,13 +116,15 @@ export class TurmaFormComponent implements OnInit {
             stepper.reset();
           }
         },
-        (err: HttpErrorResponse) => {
-
-        }
+        (err: HttpErrorResponse) => this.showFailerMessage(err)
       );
 
   }
 
+  private showFailerMessage(err: HttpErrorResponse): void {
+    this.notificationService
+      .componentErrorMessage(':: ' + err.error.message);
+  }
 
   private showSavedMessage(): void {
     this.notificationService.componentSavedSuccessfulMessage();
@@ -136,13 +132,6 @@ export class TurmaFormComponent implements OnInit {
 
   private showUpdatedMessage(): void {
     this.notificationService.componentUpdatedSuccessfulMessage();
-  }
-
-  private showFailerMessage(err: HttpErrorResponse): void {
-    const erros: string[] = err.error.errors;
-    for (let index = 0; index < erros.length; index++) {
-      console.log(err.error.errors[index].field);
-    }
   }
 
 }

@@ -178,13 +178,14 @@ export class OrientadorFormComponent implements OnInit {
             stepper.reset();
           }
         },
-        (err: HttpErrorResponse) => {
-
-        }
+        (err: HttpErrorResponse) => this.showFailerMessage(err)
       );
-
   }
 
+  private showFailerMessage(err: HttpErrorResponse): void {
+    this.notificationService
+      .componentErrorMessage(':: ' + err.error.message);
+  }
 
   private showSavedMessage(): void {
     this.notificationService.componentSavedSuccessfulMessage();
@@ -192,13 +193,6 @@ export class OrientadorFormComponent implements OnInit {
 
   private showUpdatedMessage(): void {
     this.notificationService.componentUpdatedSuccessfulMessage();
-  }
-
-  private showFailerMessage(err: HttpErrorResponse): void {
-    const erros: string[] = err.error.errors;
-    for (let index = 0; index < erros.length; index++) {
-      // console.log(err.error.errors[index].field);
-    }
   }
 
   private resolveDateFormat(): string {

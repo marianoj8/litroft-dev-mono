@@ -1,16 +1,5 @@
-<div class="container hide-on-large-only">
-  <div class="container">
-    <button id="btnHome"
-      mat-raised-button
-      [routerLink]="['']"
-      class="btn-large"
-      color="primary"
-    >
-      <mat-icon>home</mat-icon> Home
-    </button>
-  </div>
-</div>
-<div class="container">
+
+<div class="container fix-bottom">
   <div class="container">
     <mat-accordion class="headers-align mat-elevation-z8">
       <mat-expansion-panel
@@ -23,13 +12,8 @@
           <mat-panel-title>
             Iniciar Sessaao
           </mat-panel-title>
-          <mat-panel-description class="hide-on-small-and-down">
-            [Uma descrição aqui]
-            <mat-icon>account_circle</mat-icon>
-          </mat-panel-description>
         </mat-expansion-panel-header>
         <app-sign-in></app-sign-in>
-
       </mat-expansion-panel>
 
       <mat-expansion-panel
@@ -42,10 +26,6 @@
           <mat-panel-title>
             Ativar conta
           </mat-panel-title>
-          <mat-panel-description class="hide-on-small-and-down">
-              [Uma descrição aqui]
-            <mat-icon>account_circle</mat-icon>
-          </mat-panel-description>
         </mat-expansion-panel-header>
         <app-sign-in></app-sign-in>
         <mat-action-row>

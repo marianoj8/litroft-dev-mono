@@ -1,12 +1,13 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, Subject, of } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { Estudante } from 'src/app/shared/model/estudante';
 
-import { EstudanteService } from './../modules/estudante.service';
-import { catchError } from 'rxjs/operators';
-import { MatDialog } from '@angular/material';
 import { ErrorLoadingComponent } from './../../shared/error-loading/error-loading.component';
+import { EstudanteService } from './../modules/estudante.service';
 
 @Component({
   selector: 'app-estudante-detalhe',
@@ -21,12 +22,13 @@ export class EstudanteDetalheComponent implements OnInit {
   constructor(
     private service: EstudanteService,
     private activatedRoute: ActivatedRoute,
-    private dialog: MatDialog) { }
+    private dialog: MatDialog,
+    private location: Location) { }
 
   ngOnInit() {
     this.service.onChangeContext.emit(true);
     this.estudante$ = this.service
-      .getById(this.activatedRoute.snapshot.params['id'] as number)
+      .getById(this.activatedRoute.snapshot.params.id as number)
       .pipe(catchError(err => {
         this.dialog.open(ErrorLoadingComponent);
         return of(null);
@@ -34,7 +36,7 @@ export class EstudanteDetalheComponent implements OnInit {
   }
 
   getBack() {
-
+    this.location.back();
   }
 
 }

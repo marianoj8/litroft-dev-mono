@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable, of, Subject, Subscription } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
@@ -11,14 +11,14 @@ import { CursoService } from '../cursos/modules/curso.service';
   templateUrl: './cursos.component.html',
   styleUrls: ['./cursos.component.css']
 })
-export class CursosComponent implements OnInit {
+export class CursosComponent implements OnInit, OnDestroy {
 
   state = false;
   public onChangeContext = false;
-  private subscription: Subscription;
   cursos$: Observable<Curso[]>;
   cursosError$ = new Subject<boolean>();
   filtro: CustomFilter = new CustomFilter();
+  private sub: Subscription;
 
   anos: number[] = [1, 2, 3, 4, 5, 6];
 
@@ -27,15 +27,16 @@ export class CursosComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.subscription = this.cursoSerice.onChangeContext.subscribe(
-      context => this.onChangeContext = context
-    );
+    this.sub = this.cursoSerice.onChangeContext.subscribe(
+      context => this.onChangeContext = context);
 
     this.cursos$ = this.cursoSerice.list()
-      .pipe(catchError(err => {
-        this.cursosError$.next(true);
-        return of([]);
-      }));
+      .pipe(
+        catchError(err => {
+          this.cursosError$.next(true);
+          return of([]);
+        })
+      );
 
   }
 
@@ -72,7 +73,7 @@ export class CursosComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    this.sub.unsubscribe();
   }
 
 }

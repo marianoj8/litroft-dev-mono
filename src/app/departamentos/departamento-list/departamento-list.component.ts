@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { PageEvent, MatTableDataSource, MatSort, MatDialog } from '@angular/material';
 import { Subscription, Subject, of } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -18,15 +18,15 @@ import { DeleteDialogComponent } from 'src/app/shared/delete-dialog/delete-dialo
   templateUrl: './departamento-list.component.html',
   styleUrls: ['./departamento-list.component.css']
 })
-export class DepartamentoListComponent implements OnInit {
+export class DepartamentoListComponent implements OnInit, OnDestroy {
   pageEvent: PageEvent;
   dialogParam: MatDailogTypeParam = new MatDailogTypeParam();
   valueParam = '';
   filtro: CustomFilter = new CustomFilter();
-  private subscribe: Subscription;
   departamentos: MatTableDataSource<Departamento>;
   departamentosList: Departamento[] = [];
   error$ = new Subject<boolean>();
+  private sub: Subscription;
 
 
 
@@ -49,33 +49,36 @@ export class DepartamentoListComponent implements OnInit {
 
   ngOnInit() {
     this.service.onChangeContext.emit(false);
-    this.subscribe = this.service.findValueParams
-      .subscribe(data => this.onRefrash(data));
-    this.subscribe = this.service.findValueParam
-      .subscribe(data => this.departamentos.filter = data);
+
+    this.sub = this.service.findValueParams
+      .subscribe(next => this.onRefrash(next));
+
+    this.sub = this.service.findValueParam
+      .subscribe(next => this.departamentos.filter = next);
+
     this.onRefrash(this.filtro);
-    this.subscribe = this.service.emitOnDetalheButtonCliked.subscribe(
-      (data) => this.detalhe(data)
+
+    this.sub = this.service.emitOnDetalheButtonCliked.subscribe(
+      (next) => this.detalhe(next)
     );
-    this.subscribe = this.service.emitOnEditButtonCliked.subscribe(
-      (data) => this.edit(data)
-    );
-    this.subscribe = this.service.emitOnDeleteButtonCliked.subscribe(
-      (data) => this.openDeleteDialog(data)
-    );
-    this.subscribe = this.service.findValueParamFromServer.subscribe(
-      (data: CustomFilter) => this.onFilterFromServer(data)
-    );
+
+    this.sub = this.service.emitOnEditButtonCliked.subscribe(
+      (next) => this.edit(next));
+
+    this.sub = this.service.emitOnDeleteButtonCliked.subscribe(
+      (next) => this.openDeleteDialog(next));
+
+    this.sub = this.service.findValueParamFromServer.subscribe(
+      (next: CustomFilter) => this.onFilterFromServer(next));
   }
 
   onFilterFromServer(data: CustomFilter) {
-    this.subscribe = this.service.filterByNome(data).subscribe(
-      data => this.departamentosList = data
-    );
+    this.sub = this.service.filterByNome(data).subscribe(
+      next => this.departamentosList = next);
   }
 
   onRefrash(data?: CustomFilter) {
-    this.subscribe = this.service.filterByNome(data)
+    this.sub = this.service.filterByNome(data)
       .pipe(
         catchError(err => {
           this.dialogService.open(ErrorLoadingComponent);
@@ -84,8 +87,8 @@ export class DepartamentoListComponent implements OnInit {
         })
       )
       .subscribe(
-        data => {
-          const array = data.map((item: Departamento) => {
+        next => {
+          const array = next.map((item: Departamento) => {
             return {
               ...item
             };
@@ -116,7 +119,7 @@ export class DepartamentoListComponent implements OnInit {
   }
 
   OnDestroy() {
-    this.subscribe.unsubscribe();
+    this.sub.unsubscribe();
   }
 
   openMoreOptionDialog(id: number) {
@@ -134,7 +137,6 @@ export class DepartamentoListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result: boolean) => {
       if (result) {
-        // this.deleteDepartamento(curso);
       }
 
     });
@@ -157,7 +159,7 @@ export class DepartamentoListComponent implements OnInit {
   }
 
   deleteDepartamento(cursoId: number) {
-    this.service.deleteById(cursoId)
+    this.sub = this.service.deleteById(cursoId)
       .subscribe(
         () => {
           this.onRefrash(this.filtro);
@@ -165,6 +167,10 @@ export class DepartamentoListComponent implements OnInit {
         },
         err => this.showErrorMessage()
       );
+  }
+
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 
 }

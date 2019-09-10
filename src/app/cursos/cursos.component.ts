@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Component, OnInit, EventEmitter, OnDestroy } from '@angular/core';
 import { Observable, of, Subject, Subscription } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Location } from '@angular/common';
@@ -12,15 +12,14 @@ import { CursoService } from './modules/curso.service';
   templateUrl: './cursos.component.html',
   styleUrls: ['./cursos.component.css']
 })
-export class CursosComponent implements OnInit {
+export class CursosComponent implements OnInit, OnDestroy {
 
   state = false;
   public onChangeContext = false;
-  private subscription: Subscription;
   cursos$: Observable<Curso[]>;
   cursosError$ = new Subject<boolean>();
   filtro: CustomFilter = new CustomFilter();
-
+  private sub: Subscription;
 
   anos: number[] = [1, 2, 3, 4, 5, 6];
 
@@ -30,7 +29,7 @@ export class CursosComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.subscription = this.cursoSerice.onChangeContext.subscribe(
+    this.sub = this.cursoSerice.onChangeContext.subscribe(
       context => this.onChangeContext = context
     );
 
@@ -75,12 +74,12 @@ export class CursosComponent implements OnInit {
     this.filtro.nome = nome;
   }
 
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
-  }
 
   back() {
     this.location.back();
   }
 
+  ngOnDestroy() {
+    this.sub.unsubscribe();
+  }
 }

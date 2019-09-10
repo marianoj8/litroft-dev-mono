@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { CustomFilter } from '../shared/model/support/custom-filter';
@@ -10,11 +10,11 @@ import { DepartamentoService } from './modules/departamento.service';
   templateUrl: './departamentos.component.html',
   styleUrls: ['./departamentos.component.css']
 })
-export class DepartamentosComponent implements OnInit {
+export class DepartamentosComponent implements OnInit, OnDestroy {
   state = false;
   public onChangeContext = false;
-  private subscription: Subscription;
   filtro: CustomFilter = new CustomFilter();
+  private sub: Subscription;
 
   constructor(
     private departamentoSerice: DepartamentoService,
@@ -22,7 +22,7 @@ export class DepartamentosComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.subscription = this.departamentoSerice.onChangeContext.subscribe(
+    this.sub = this.departamentoSerice.onChangeContext.subscribe(
       context => this.onChangeContext = context
     );
     this.departamentoSerice.onChangeContextTitle.emit('Departamento');
@@ -54,11 +54,11 @@ export class DepartamentosComponent implements OnInit {
     this.filtro.nome = nome;
   }
 
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
-  }
-
   back() {
     this.location.back();
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 }

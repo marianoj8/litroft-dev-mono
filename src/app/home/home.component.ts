@@ -5,6 +5,7 @@ import { Location } from '@angular/common';
 
 import { Token } from '../shared/model/support/token';
 import { UsernameAndPassword } from '../shared/model/support/username-password';
+import { HomeService } from './modules/home.service';
 
 @Component({
   selector: 'app-home',
@@ -15,7 +16,7 @@ export class HomeComponent implements OnInit {
 
   user: UsernameAndPassword;
   public token$: Observable<Token>;
-  listView: boolean = false;
+  listView: boolean;
 
   // Pie Chart
   public pieChartLabels = [
@@ -49,7 +50,7 @@ export class HomeComponent implements OnInit {
   public pieChartType = 'pie';
 
 
-  //Bar Chart
+  // Bar Chart
   public barChartOptions = {
     scaleShowVerticalLines: false,
     responsive: true
@@ -105,9 +106,17 @@ export class HomeComponent implements OnInit {
   public radarChartLabels = [];
   public radarChartType = 'radar';
 
-  constructor(private router: Router, private location: Location) {
+  constructor(
+    private router: Router,
+    private homeService: HomeService,
+    private location: Location) {
 
-    this.radarChartLabels = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+    this.radarChartLabels = [
+      'Janeiro', 'Fevereiro', 'Março',
+      'Abril', 'Maio', 'Junho', 'Julho',
+      'Agosto', 'Setembro',
+      'Outubro', 'Novembro', 'Dezembro'
+    ];
 
     for (let index1 = 0; index1 < this.radarChartData.length; index1++) {
       for (let index = 0; index < this.radarChartData[0].data.length; index++) {
@@ -118,7 +127,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.homeService.onChangeContextTitle.emit('Home');
   }
 
   switchBetweenMonoAndDash() {

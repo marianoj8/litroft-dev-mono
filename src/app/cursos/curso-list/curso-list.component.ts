@@ -5,13 +5,13 @@ import { of, Subject, Subscription } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 import { CursoService } from 'src/app/cursos/modules/curso.service';
-import { DeleteDialogComponent } from 'src/app/shared/delete-dialog/delete-dialog.component';
-import { ErrorLoadingComponent } from 'src/app/shared/error-loading/error-loading.component';
 import { Curso } from 'src/app/shared/model/curso';
 import { CustomFilter } from 'src/app/shared/model/support/custom-filter';
 import { MatDailogTypeParam } from 'src/app/shared/model/support/mat-dialog-type-param';
 import { MoreOptionsDialogComponent } from 'src/app/shared/more-options-dialog/more-options-dialog.component';
 import { NotificationService } from 'src/app/shared/services/notification/notification.service';
+import { DeleteDialogComponent } from 'src/app/shared/delete-dialog/delete-dialog.component';
+import { ErrorLoadingComponent } from 'src/app/shared/error-loading/error-loading.component';
 
 @Component({
   selector: 'app-curso-list',
@@ -23,7 +23,7 @@ export class CursoListComponent implements OnInit {
   dialogParam: MatDailogTypeParam = new MatDailogTypeParam();
   valueParam = '';
   filtro: CustomFilter = new CustomFilter();
-  private subscribe: Subscription;
+  private sub: Subscription;
   cursos: MatTableDataSource<Curso>;
   cursosList: Curso[] = [];
   error$ = new Subject<boolean>();
@@ -50,33 +50,40 @@ export class CursoListComponent implements OnInit {
 
   ngOnInit() {
     this.service.onChangeContext.emit(false);
-    this.subscribe = this.service.findValueParams
-      .subscribe(data => this.onRefrash(data));
-    this.subscribe = this.service.findValueParam
-      .subscribe(data => this.cursos.filter = data);
+
+    this.sub = this.service.findValueParams
+      .subscribe(next => this.onRefrash(next));
+
+    this.sub = this.service.findValueParam
+      .subscribe(next => this.cursos.filter = next);
+
     this.onRefrash(this.filtro);
-    this.subscribe = this.service.emitOnDetalheButtonCliked.subscribe(
-      (data) => this.detalhe(data)
+
+    this.sub = this.service.emitOnDetalheButtonCliked.subscribe(
+      (next) => this.detalhe(next)
     );
-    this.subscribe = this.service.emitOnEditButtonCliked.subscribe(
-      (data) => this.edit(data)
+
+    this.sub = this.service.emitOnEditButtonCliked.subscribe(
+      (next) => this.edit(next)
     );
-    this.subscribe = this.service.emitOnDeleteButtonCliked.subscribe(
-      (data) => this.openDeleteDialog(data)
+
+    this.sub = this.service.emitOnDeleteButtonCliked.subscribe(
+      (next) => this.openDeleteDialog(next)
     );
-    this.subscribe = this.service.findValueParamFromServer.subscribe(
-      (data: CustomFilter) => this.onFilterFromServer(data)
+
+    this.sub = this.service.findValueParamFromServer.subscribe(
+      (next: CustomFilter) => this.onFilterFromServer(next)
     );
   }
 
   onFilterFromServer(data: CustomFilter) {
-    this.subscribe = this.service.filterByNomeDuracao(data).subscribe(
-      data => this.cursosList = data
+    this.sub = this.service.filterByNomeDuracao(data).subscribe(
+      (next: Curso[]) => this.cursosList = next
     );
   }
 
   onRefrash(data?: CustomFilter) {
-    this.subscribe = this.service.filterByDuracao(data.duracao === undefined ? 1 : data.duracao)
+    this.sub = this.service.filterByDuracao(data.duracao === undefined ? 1 : data.duracao)
       .pipe(
         catchError(err => {
           console.log(err);
@@ -87,8 +94,8 @@ export class CursoListComponent implements OnInit {
         })
       )
       .subscribe(
-        data => {
-          const array = data.map((item: Curso) => {
+        next => {
+          const array = next.map((item: Curso) => {
             return {
               ...item
             };
@@ -119,7 +126,7 @@ export class CursoListComponent implements OnInit {
   }
 
   OnDestroy() {
-    this.subscribe.unsubscribe();
+    this.sub.unsubscribe();
   }
 
   openMoreOptionDialog(id: number) {
@@ -137,11 +144,10 @@ export class CursoListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result: boolean) => {
       if (result) {
-        // this.deleteCurso(curso);
       }
-
     });
   }
+
   openDeleteDialog(id: number) {
     const dialogRef = this.dialogService.open(
       DeleteDialogComponent,
@@ -169,6 +175,4 @@ export class CursoListComponent implements OnInit {
         err => this.showErrorMessage()
       );
   }
-
-
 }

@@ -4,5 +4,5 @@ export class CustomFilter {
   descricao: string;
   curso: string;
   sexo: string;
-  duracao:number;
+  duracao: number;
 }

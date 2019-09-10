@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { catchError } from 'rxjs/operators';
 import { ErrorLoadingComponent } from 'src/app/shared/error-loading/error-loading.component';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-especialidade-detalhe',
@@ -20,12 +21,13 @@ export class EspecialidadeDetalheComponent implements OnInit {
   constructor(
     private service: EspecialidadeService,
     private activatedRoute: ActivatedRoute,
-    private dialog: MatDialog) { }
+    private dialog: MatDialog,
+    private location: Location) { }
 
   ngOnInit() {
     this.service.onChangeContext.emit(true);
     this.especialidade$ = this.service
-      .getById(this.activatedRoute.snapshot.params['id'] as number)
+      .getById(this.activatedRoute.snapshot.params.id as number)
       .pipe(catchError(err => {
         this.dialog.open(ErrorLoadingComponent);
         return of(null);
@@ -33,7 +35,7 @@ export class EspecialidadeDetalheComponent implements OnInit {
   }
 
   getBack() {
-
+    this.location.back();
   }
 
 }

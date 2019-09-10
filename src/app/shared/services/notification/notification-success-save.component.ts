@@ -9,9 +9,6 @@ import { Component } from '@angular/core';
             </span>
             `,
   styles: [`
-    mat-icon {
-     margin-bottom: -6px;
-    }
     .example-pizza-part{
       color: white;
       font-size: 16px !important;

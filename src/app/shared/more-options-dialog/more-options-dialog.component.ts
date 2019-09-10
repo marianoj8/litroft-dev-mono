@@ -39,22 +39,22 @@ export class MoreOptionsDialogComponent implements OnInit {
         this.estudanteService.emitOnDetalheButtonCliked.emit(id);
         break;
       case 'Orientador':
-        this.orientadorService.emitOnDetalheButtonCliked.emit(id)
+        this.orientadorService.emitOnDetalheButtonCliked.emit(id);
         break;
       case 'Curso':
-        this.cursoService.emitOnDetalheButtonCliked.emit(id)
+        this.cursoService.emitOnDetalheButtonCliked.emit(id);
         break;
       case 'Especialidade':
-        this.especialidadeService.emitOnDetalheButtonCliked.emit(id)
+        this.especialidadeService.emitOnDetalheButtonCliked.emit(id);
         break;
       case 'Turma':
-        this.turmaService.emitOnDetalheButtonCliked.emit(id)
+        this.turmaService.emitOnDetalheButtonCliked.emit(id);
         break;
       case 'Departamento':
-        this.departamentoService.emitOnDetalheButtonCliked.emit(id)
+        this.departamentoService.emitOnDetalheButtonCliked.emit(id);
         break;
       case 'Grupo':
-        this.grupoService.emitOnDetalheButtonCliked.emit(id)
+        this.grupoService.emitOnDetalheButtonCliked.emit(id);
         break;
       default:
     }
@@ -67,22 +67,22 @@ export class MoreOptionsDialogComponent implements OnInit {
         this.estudanteService.emitOnEditButtonCliked.emit(id);
         break;
       case 'Orientador':
-        this.orientadorService.emitOnEditButtonCliked.emit(id)
+        this.orientadorService.emitOnEditButtonCliked.emit(id);
         break;
       case 'Curso':
-        this.cursoService.emitOnEditButtonCliked.emit(id)
+        this.cursoService.emitOnEditButtonCliked.emit(id);
         break;
       case 'Especialidade':
-        this.especialidadeService.emitOnEditButtonCliked.emit(id)
+        this.especialidadeService.emitOnEditButtonCliked.emit(id);
         break;
       case 'Turma':
-        this.turmaService.emitOnEditButtonCliked.emit(id)
+        this.turmaService.emitOnEditButtonCliked.emit(id);
         break;
       case 'Departamento':
-        this.departamentoService.emitOnEditButtonCliked.emit(id)
+        this.departamentoService.emitOnEditButtonCliked.emit(id);
         break;
       case 'Grupo':
-        this.grupoService.emitOnEditButtonCliked.emit(id)
+        this.grupoService.emitOnEditButtonCliked.emit(id);
         break;
       default:
     }
@@ -95,22 +95,22 @@ export class MoreOptionsDialogComponent implements OnInit {
         this.estudanteService.emitOnDeleteButtonCliked.emit(id);
         break;
       case 'Orientador':
-        this.orientadorService.emitOnDeleteButtonCliked.emit(id)
+        this.orientadorService.emitOnDeleteButtonCliked.emit(id);
         break;
       case 'Curso':
-        this.cursoService.emitOnDeleteButtonCliked.emit(id)
+        this.cursoService.emitOnDeleteButtonCliked.emit(id);
         break;
       case 'Especialidade':
-        this.especialidadeService.emitOnDeleteButtonCliked.emit(id)
+        this.especialidadeService.emitOnDeleteButtonCliked.emit(id);
         break;
       case 'Turma':
-        this.turmaService.emitOnDeleteButtonCliked.emit(id)
+        this.turmaService.emitOnDeleteButtonCliked.emit(id);
         break;
       case 'Departamento':
-        this.departamentoService.emitOnDeleteButtonCliked.emit(id)
+        this.departamentoService.emitOnDeleteButtonCliked.emit(id);
         break;
       case 'Grupo':
-        this.grupoService.emitOnDeleteButtonCliked.emit(id)
+        this.grupoService.emitOnDeleteButtonCliked.emit(id);
         break;
       default:
     }

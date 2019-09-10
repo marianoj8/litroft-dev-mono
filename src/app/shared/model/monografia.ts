@@ -9,6 +9,6 @@ export class Monografia implements CustomAbstractEntity {
   totalModified: number;
   tema: string;
   totalPagina: number;
-  departamento: Departamento
+  departamento: Departamento;
 
 }

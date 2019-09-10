@@ -1,4 +1,4 @@
-import { Injectable, EventEmitter } from "@angular/core";
+import { Injectable, EventEmitter } from '@angular/core';
 import { MatTableDataSource } from '@angular/material';
 import { CrudService } from 'src/app/shared/services/crud/crud.service';
 import { Orientador } from 'src/app/shared/model/orientador';

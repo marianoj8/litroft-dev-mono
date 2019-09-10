@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HomeService } from '../modules/home.service';
 
 @Component({
   selector: 'app-barchart',
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./barchart.component.css']
 })
 export class BarchartComponent implements OnInit {
-  //Bar Chart
+  // Bar Chart
   public barChartOptions = {
     scaleShowVerticalLines: false,
     responsive: true
@@ -31,52 +32,103 @@ export class BarchartComponent implements OnInit {
     { data: [43], label: 'Dezembro' }
   ];
 
-  // Doughnut Chart
-  public doughnutChartLabels = ['Sales Q1', 'Sales Q2', 'Sales Q3', 'Sales Q4', 'Sales Q5', 'Sales Q6'];
-  public doughnutChartData = [120, 150, 180, 90, 75, 100];
-  public doughnutChartType = 'doughnut';
-
-  // Radar Chart
-
-  public radarChartData = [
-    {
-      data: [
-        120, 85, 100, 100, 100, 100,
-        180, 100, 100, 100, 100, 100],
-      label: '2016'
-    },
-    {
-      data: [
-        10, 15, 100, 100, 100, 100,
-        180, 100, 90, 100, 100, 50],
-      label: '2017'
-    },
-    {
-      data: [
-        10, 15, 152, 100, 450, 100,
-        180, 100, 190, 100, 100, 50],
-      label: '2018'
-    },
-
-  ];
-  public radarChartLegend = true;
-  public radarChartLabels = [];
-  public radarChartType = 'radar';
-
-  constructor() {
-
-    this.radarChartLabels = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
-
-    for (let index1 = 0; index1 < this.radarChartData.length; index1++) {
-      for (let index = 0; index < this.radarChartData[0].data.length; index++) {
-        const v = this.radarChartData[index1].data[index];
-        this.radarChartLabels[index].concat(v);
-      }
-    }
-  }
+  constructor(private homeSerice: HomeService) { }
 
   ngOnInit() {
+    this.homeSerice.onDataChanged.subscribe(
+      (data) => this.loadDateFrom(data)
+    );
 
+    this.loadDateFrom(0);
+  }
+
+  loadDateFrom(v: number) {
+    switch (v) {
+      case 2016:
+        this.barChartData = [
+          { data: [90], label: 'Janeiro' },
+          { data: [54], label: 'Fevereiro' },
+          { data: [110], label: 'Março' },
+          { data: [80], label: 'Abril' },
+          { data: [27], label: 'Maio' },
+          { data: [69], label: 'Junho' },
+          { data: [46], label: 'Julho' },
+          { data: [59], label: 'Agosto' },
+          { data: [79], label: 'Setembro' },
+          { data: [32], label: 'Outubro' },
+          { data: [20], label: 'Novembro' },
+          { data: [95], label: 'Dezembro' }
+        ];
+        this.barChartLabels = ['2016'];
+        break;
+      case 2017:
+        this.barChartData = [
+          { data: [95], label: 'Janeiro' },
+          { data: [20], label: 'Fevereiro' },
+          { data: [32], label: 'Março' },
+          { data: [79], label: 'Abril' },
+          { data: [59], label: 'Maio' },
+          { data: [46], label: 'Junho' },
+          { data: [69], label: 'Julho' },
+          { data: [27], label: 'Agosto' },
+          { data: [80], label: 'Setembro' },
+          { data: [110], label: 'Outubro' },
+          { data: [54], label: 'Novembro' },
+          { data: [90], label: 'Dezembro' }
+        ];
+        this.barChartLabels = ['2017'];
+        break;
+      case 2018:
+        this.barChartData = [
+          { data: [90], label: 'Janeiro' },
+          { data: [54], label: 'Fevereiro' },
+          { data: [110], label: 'Março' },
+          { data: [80], label: 'Abril' },
+          { data: [27], label: 'Maio' },
+          { data: [69], label: 'Junho' },
+          { data: [46], label: 'Julho' },
+          { data: [59], label: 'Agosto' },
+          { data: [79], label: 'Setembro' },
+          { data: [32], label: 'Outubro' },
+          { data: [20], label: 'Novembro' },
+          { data: [95], label: 'Dezembro' }
+        ];
+        this.barChartLabels = ['2018'];
+        break;
+      case 2019:
+        this.barChartData = [
+          { data: [19], label: 'Janeiro' },
+          { data: [154], label: 'Fevereiro' },
+          { data: [110], label: 'Março' },
+          { data: [180], label: 'Abril' },
+          { data: [270], label: 'Maio' },
+          { data: [169], label: 'Junho' },
+          { data: [460], label: 'Julho' },
+          { data: [159], label: 'Agosto' },
+          { data: [790], label: 'Setembro' },
+          { data: [232], label: 'Outubro' },
+          { data: [200], label: 'Novembro' },
+          { data: [295], label: 'Dezembro' }
+        ];
+        this.barChartLabels = ['2019'];
+        break;
+      default:
+        this.barChartData = [
+          { data: [19], label: 'Janeiro' },
+          { data: [154], label: 'Fevereiro' },
+          { data: [110], label: 'Março' },
+          { data: [180], label: 'Abril' },
+          { data: [270], label: 'Maio' },
+          { data: [169], label: 'Junho' },
+          { data: [460], label: 'Julho' },
+          { data: [159], label: 'Agosto' },
+          { data: [790], label: 'Setembro' },
+          { data: [232], label: 'Outubro' },
+          { data: [200], label: 'Novembro' },
+          { data: [295], label: 'Dezembro' }
+        ];
+        this.barChartLabels = ['2019'];
+
+    }
   }
 }
-

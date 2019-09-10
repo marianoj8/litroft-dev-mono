@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable, of, Subject, Subscription } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Location } from '@angular/common';
@@ -14,13 +14,13 @@ import { CursoService } from '../cursos/modules/curso.service';
   templateUrl: './grupos.component.html',
   styleUrls: ['./grupos.component.css']
 })
-export class GruposComponent implements OnInit {
+export class GruposComponent implements OnInit, OnDestroy {
   state = false;
   public onChangeContext = false;
-  private subscription: Subscription;
   cursos$: Observable<Curso[]>;
   cursosError$ = new Subject<boolean>();
   filtro: CustomFilter = new CustomFilter();
+  private sub: Subscription;
 
   constructor(
     public grupoService: GrupoService,
@@ -31,9 +31,8 @@ export class GruposComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.subscription = this.estudanteService.onChangeContext.subscribe(
-      context => this.onChangeContext = context
-    );
+    this.sub = this.estudanteService.onChangeContext.subscribe(
+      context => this.onChangeContext = context);
 
     this.cursos$ = this.cursoSerice.list()
       .pipe(catchError(err => {
@@ -75,12 +74,13 @@ export class GruposComponent implements OnInit {
     this.filtro.curso = curso;
   }
 
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
-  }
 
   back() {
     this.location.back();
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 
 }

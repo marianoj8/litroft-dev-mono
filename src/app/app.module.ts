@@ -22,6 +22,7 @@ import { SaveSuccessMessageComponent } from './shared/services/notification/noti
 import { UpdateSuccessMessageComponent } from './shared/services/notification/notification-success-update.component';
 import { TokenInterceptorService } from './shared/services/security/token-interceptor.service';
 import { FooterComponent } from './shared/footer/footer.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -62,7 +63,9 @@ import { FooterComponent } from './shared/footer/footer.component';
     BrowserAnimationsModule,
     MaterialModule,
     HttpClientModule,
-    LayoutModule
+    LayoutModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [
     {

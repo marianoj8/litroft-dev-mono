@@ -28,7 +28,7 @@ export class OrientadorDetalheComponent implements OnInit {
   ngOnInit() {
     this.service.onChangeContext.emit(true);
     this.orientador$ = this.service
-      .getById(this.activatedRoute.snapshot.params['id'] as number)
+      .getById(this.activatedRoute.snapshot.params.id as number)
       .pipe(catchError(err => {
         this.dialog.open(ErrorLoadingComponent);
         return of(null);

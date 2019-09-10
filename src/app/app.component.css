@@ -76,3 +76,52 @@ mat-toolbar {
 mat-nav-list a mat-icon {
   padding-right: 5%;
 }
+
+/* form {
+  width: 2%;
+} */
+mat-form-field {
+  text-align: center;
+  padding-right: 2%;
+}
+
+.mat-form-field-infix {
+  width: 80%;
+}
+
+span.context-title {
+  width: 86%;
+}
+
+span.ano-lectivo {
+  padding-bottom: 1.3%;
+  width: 12%;
+}
+
+mat-form-field > * {
+  text-align: left;
+  padding-right: 2px;
+}
+
+span.dateIcon {
+  padding-top: 1.5%;
+  margin-right: -1%;
+}
+span#span-back{
+  width: 100%;
+}
+
+/* span button#btn-large {
+  text-align-last: left;
+  text-align: left;
+  width: 100%;
+} */
+
+/*
+.mat-form-field-infix {
+  background-color: aliceblue;
+  border: 0rem solid transparent;
+  border-width: 0.84611rem;
+  border-style: solid;
+  border-color: transparent;
+} */

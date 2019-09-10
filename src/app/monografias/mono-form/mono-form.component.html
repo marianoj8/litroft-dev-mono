@@ -74,7 +74,7 @@
         <ng-template matStepLabel>
           Departamento
         </ng-template>
-        <mat-form-field class="field field-padding">
+        <mat-form-field class="field-max field-padding">
           <mat-select
             matInput
             formControlName="departamento"
@@ -87,19 +87,6 @@
               </mat-option>
             </ng-container>
           </mat-select>
-          <mat-error
-            *ngIf="formGroup02.controls['departamento'].hasError('required')"
-          >
-            Depratamento é <strong>obrigatorio</strong>
-          </mat-error>
-        </mat-form-field>
-        <mat-form-field class="field field-padding">
-          <input
-            matInput
-            formControlName="file"
-            required
-            placeholder="Monografia"
-          />
           <mat-error
             *ngIf="formGroup02.controls['departamento'].hasError('required')"
           >

@@ -4,3 +4,8 @@ mat-divider{
 mat-label{
   font-weight: bold;
 }
+
+div.container {
+  margin-top: 3%;
+  margin-bottom: 6%;
+}

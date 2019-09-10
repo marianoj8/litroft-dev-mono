@@ -6,6 +6,7 @@ import { take, catchError } from 'rxjs/operators';
 
 import { Token } from '../../model/support/token';
 import { UsernameAndPassword } from '../../model/support/username-password';
+import { throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -20,13 +21,8 @@ export class AuthService {
   login(user: UsernameAndPassword): Observable<Token> {
     return this.htp.post<Token>('http://localhost:8080/login', user)
       .pipe(
-        take(1),
-        catchError(this.errorHandler)
+        take(1)
       );
-  }
-
-  errorHandler(error: HttpErrorResponse) {
-    return Observable.throw(error);
   }
 
   addTokenToLocalStorage(data: Token): void {

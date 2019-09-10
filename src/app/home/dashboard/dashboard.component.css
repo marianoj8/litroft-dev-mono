@@ -10,3 +10,7 @@ mat-grid-tile-header {
   color: white;
   transition: 1s background-color, color;
 }
+
+mat-grid-list{
+  margin-top: 2.3%;
+}

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { MatDialog, MatSort, MatTableDataSource, PageEvent } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { of, Subject, Subscription } from 'rxjs';
@@ -18,16 +18,16 @@ import { MatDailogTypeParam } from 'src/app/shared/model/support/mat-dialog-type
   templateUrl: './estudante-list.component.html',
   styleUrls: ['./estudante-list.component.css']
 })
-export class EstudanteListComponent implements OnInit {
+export class EstudanteListComponent implements OnInit, OnDestroy {
 
   pageEvent: PageEvent;
   dialogParam: MatDailogTypeParam = new MatDailogTypeParam();
   valueParam = '';
   filtro: CustomFilter = new CustomFilter();
-  private subscribe: Subscription;
   estudantes: MatTableDataSource<Estudante>;
   estudantesList: Estudante[] = [];
   error$ = new Subject<boolean>();
+  private sub: Subscription;
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
@@ -51,33 +51,35 @@ export class EstudanteListComponent implements OnInit {
 
   ngOnInit() {
     this.service.onChangeContext.emit(false);
-    this.subscribe = this.service.findValueParams
+
+    this.sub = this.service.findValueParams
       .subscribe(data => this.onRefrash(data));
-    this.subscribe = this.service.findValueParam
+
+    this.sub = this.service.findValueParam
       .subscribe(data => this.estudantes.filter = data);
+
     this.onRefrash(this.filtro);
-    this.subscribe = this.service.emitOnDetalheButtonCliked.subscribe(
-      (data) => this.detalhe(data)
-    );
-    this.subscribe = this.service.emitOnEditButtonCliked.subscribe(
-      (data) => this.edit(data)
-    );
-    this.subscribe = this.service.emitOnDeleteButtonCliked.subscribe(
-      (data) => this.openDeleteDialog(data)
-    );
-    this.subscribe = this.service.findValueParamFromServer.subscribe(
-      (data: CustomFilter) => this.onFilterFromServer(data)
-    );
+
+    this.sub = this.service.emitOnDetalheButtonCliked.subscribe(
+      (next) => this.detalhe(next));
+
+    this.sub = this.service.emitOnEditButtonCliked.subscribe(
+      (next) => this.edit(next));
+
+    this.sub = this.service.emitOnDeleteButtonCliked.subscribe(
+      (next) => this.openDeleteDialog(next));
+
+    this.sub = this.service.findValueParamFromServer.subscribe(
+      (next: CustomFilter) => this.onFilterFromServer(next));
   }
 
   onFilterFromServer(data: CustomFilter) {
-    this.subscribe = this.service.filterByNomeSexoCurso(data).subscribe(
-      data => this.estudantesList = data
-    );
+    this.sub = this.service.filterByNomeSexoCurso(data).subscribe(
+      next => this.estudantesList = next);
   }
 
   onRefrash(data?: CustomFilter) {
-    this.subscribe = this.service.filterBySexoAndCurso(data.curso === undefined ? '' : data.curso, data.sexo === undefined ? '' : data.sexo)
+    this.sub = this.service.filterBySexoAndCurso(data.curso === undefined ? '' : data.curso, data.sexo === undefined ? '' : data.sexo)
       .pipe(
         catchError(err => {
           this.dialogService.open(ErrorLoadingComponent);
@@ -86,8 +88,8 @@ export class EstudanteListComponent implements OnInit {
         })
       )
       .subscribe(
-        data => {
-          const array = data.map((item: Estudante) => {
+        next => {
+          const array = next.map((item: Estudante) => {
             return {
               ...item
             };
@@ -117,9 +119,7 @@ export class EstudanteListComponent implements OnInit {
     this.router.navigate(['edit', id], { relativeTo: this.activatedRoute });
   }
 
-  OnDestroy() {
-    this.subscribe.unsubscribe();
-  }
+
 
   openMoreOptionDialog(id: number) {
 
@@ -169,4 +169,7 @@ export class EstudanteListComponent implements OnInit {
       );
   }
 
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
 }

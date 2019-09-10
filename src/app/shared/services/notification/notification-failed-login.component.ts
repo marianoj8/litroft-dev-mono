@@ -4,17 +4,16 @@ import { Component } from '@angular/core';
   selector: 'app-notification-error-login-component',
   template: `
             <span class="example-pizza-part">
-            <mat-icon>done_all</mat-icon>
-                Nome de usuario e/ou senha incorretos. por favor, verifique suas credencias e tenete novamente...
+            <mat-icon>error</mat-icon>
+                Nome de usuario e/ou senha incorretos.
+                por favor, verifique suas credencias e tenete novamente...
             </span>
             `,
   styles: [`
-    mat-icon {
-     margin-bottom: -6px;
-    }
     .example-pizza-part{
       color: white;
-      font-size: 16px !important;
+      text-align: center;
+      font-size: 15px !important;
     }
   `]
 })

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Location } from '@angular/common';
 
@@ -10,12 +10,12 @@ import { CustomFilter } from '../shared/model/support/custom-filter';
   templateUrl: './turmas.component.html',
   styleUrls: ['./turmas.component.css']
 })
-export class TurmasComponent implements OnInit {
+export class TurmasComponent implements OnInit, OnDestroy {
 
   state = false;
   public onChangeContext = false;
-  private subscription: Subscription;
   filtro: CustomFilter = new CustomFilter();
+  private sub: Subscription;
 
   constructor(
     private turmaSerice: TurmaService,
@@ -23,7 +23,7 @@ export class TurmasComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.subscription = this.turmaSerice.onChangeContext.subscribe(
+    this.sub = this.turmaSerice.onChangeContext.subscribe(
       context => this.onChangeContext = context
     );
 
@@ -56,12 +56,13 @@ export class TurmasComponent implements OnInit {
     this.filtro.sigla = sigla;
   }
 
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
-  }
 
   back() {
     this.location.back();
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 
 }

@@ -99,7 +99,6 @@ export class EstudanteFromComponent implements OnInit {
           });
 
         });
-
     }
   }
 
@@ -142,16 +141,11 @@ export class EstudanteFromComponent implements OnInit {
     this.save(stepper, false);
   }
 
-
   onSaveButtonAndList(stepper: MatVerticalStepper) {
     this.save(stepper, true);
   }
 
-
   private save(stepper: MatVerticalStepper, state): void {
-
-    console.log(this.estudante);
-
 
     this.estudante.nome = this.formGroup01.controls.nome.value;
     this.estudante.sobreNome = this.formGroup01.controls.sobrenome.value;
@@ -161,8 +155,6 @@ export class EstudanteFromComponent implements OnInit {
     this.estudante.fone = this.formGroup03.controls.fone.value;
     this.estudante.email = this.formGroup04.controls.email.value;
     this.estudante.endereco = this.formGroup04.controls.endereco.value;
-
-    // console.log(this.formGroup05.controls.curso.value);
 
     this.curso.id = this.formGroup05.controls.curso.value as number;
     this.estudante.curso = this.curso;
@@ -186,13 +178,14 @@ export class EstudanteFromComponent implements OnInit {
             stepper.reset();
           }
         },
-        (err: HttpErrorResponse) => {
-
-        }
+        (err: HttpErrorResponse) => this.showFailerMessage(err)
       );
-
   }
 
+  private showFailerMessage(err: HttpErrorResponse): void {
+    this.notificationService
+      .componentErrorMessage(':: ' + err.error.message);
+  }
 
   private showSavedMessage(): void {
     this.notificationService.componentSavedSuccessfulMessage();
@@ -200,13 +193,6 @@ export class EstudanteFromComponent implements OnInit {
 
   private showUpdatedMessage(): void {
     this.notificationService.componentUpdatedSuccessfulMessage();
-  }
-
-  private showFailerMessage(err: HttpErrorResponse): void {
-    const erros: string[] = err.error.errors;
-    for (let index = 0; index < erros.length; index++) {
-      console.log(err.error.errors[index].field);
-    }
   }
 
   private resolveDateFormat(): string {

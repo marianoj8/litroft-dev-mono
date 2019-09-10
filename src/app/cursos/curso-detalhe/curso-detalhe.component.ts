@@ -25,7 +25,7 @@ export class CursoDetalheComponent implements OnInit {
   ngOnInit() {
     this.service.onChangeContext.emit(true);
     this.curso$ = this.service
-      .getById(this.activatedRoute.snapshot.params['id'] as number)
+      .getById(this.activatedRoute.snapshot.params.id as number)
       .pipe(catchError(err => {
         this.dialog.open(ErrorLoadingComponent);
         return of(null);

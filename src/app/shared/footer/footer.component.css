@@ -1,0 +1,16 @@
+mat-toolbar {
+  padding-left: 41%;
+}
+
+@media only screen and (min-width: 993px) {
+  mat-toolbar {
+    padding-left: 41%;
+  }
+
+}
+@media only screen and (max-width: 600px) {
+  mat-toolbar {
+    padding-left: 24%;
+  }
+
+}
