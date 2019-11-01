@@ -34,12 +34,13 @@ mat-toolbar {
   padding-left: 48%;
 }
 
-/* .fill-remainig-sapace{
+.fill-remainig-sapace {
   flex: 1 1 auto;
-} */
-/* .spacer{
+}
+.spacer {
   flex: 1 1 auto;
-} */
+  padding-right: 15%;
+}
 /* .spacer-icon {
   padding: 0 14px;
 } */
@@ -74,7 +75,7 @@ mat-toolbar {
 }
 
 mat-nav-list a mat-icon {
-  padding-right: 5%;
+  padding-right: 4%;
 }
 
 /* form {
@@ -83,10 +84,14 @@ mat-nav-list a mat-icon {
 mat-form-field {
   text-align: center;
   padding-right: 2%;
+  outline: none;
 }
-
+mat-select {
+  outline: none;
+}
 .mat-form-field-infix {
   width: 80%;
+  outline: none;
 }
 
 span.context-title {
@@ -107,7 +112,7 @@ span.dateIcon {
   padding-top: 1.5%;
   margin-right: -1%;
 }
-span#span-back{
+span#span-back {
   width: 100%;
 }
 
@@ -125,3 +130,24 @@ span#span-back{
   border-style: solid;
   border-color: transparent;
 } */
+
+mat-toolbar button#btnOnFirstRow1 {
+  margin-left: 65.3%;
+}
+
+mat-toolbar button#btnOnFirstRow2 {
+  margin-left: 65.3%;
+}
+
+mat-toolbar-row#row2 {
+  padding-left: 2%;
+}
+mat-toolbar-row#row2 a {
+  margin-left: 2.3%;
+}
+mat-toolbar-row#row2 a#lastLink {
+  margin-left: 32.5%;
+}
+.field-max {
+  width: 95%;
+}

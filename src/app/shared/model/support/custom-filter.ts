@@ -4,5 +4,7 @@ export class CustomFilter {
   descricao: string;
   curso: string;
   sexo: string;
+  turma: string;
   duracao: number;
+  isGroup: boolean;
 }

@@ -107,10 +107,9 @@ export class HomeComponent implements OnInit {
   public radarChartType = 'radar';
 
   constructor(
-    private router: Router,
     private homeService: HomeService,
     private location: Location) {
-
+    this.homeService.onChangeContextTitle.emit('Home');
     this.radarChartLabels = [
       'Janeiro', 'Fevereiro', 'Março',
       'Abril', 'Maio', 'Junho', 'Julho',
@@ -127,7 +126,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.homeService.onChangeContextTitle.emit('Home');
+    // this.homeService.onChangeContextTitle.emit('Home');
   }
 
   switchBetweenMonoAndDash() {

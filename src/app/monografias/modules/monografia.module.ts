@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material';
-import { MaterialModule } from 'src/app/material/material.module';
-import { FooterComponent } from 'src/app/shared/footer/footer.component';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
+import { MaterialModule } from 'src/app/material/material.module';
 import { MonoDetalheComponent } from '../mono-detalhe/mono-detalhe.component';
 import { MonoFormComponent } from '../mono-form/mono-form.component';
 import { MonoListComponent } from '../mono-list/mono-list.component';
@@ -23,7 +23,9 @@ import { MonografiaRoutingModule } from './monografia-routing.module';
     ReactiveFormsModule,
     MaterialModule,
     MonografiaRoutingModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    PdfViewerModule,
+    FormsModule
   ],
 })
 export class MonografiaModule { }

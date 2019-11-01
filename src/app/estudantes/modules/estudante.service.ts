@@ -1,7 +1,6 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { MatTableDataSource } from '@angular/material';
 import { Observable } from 'rxjs';
-import { delay } from 'rxjs/Operators';
 
 import { Estudante } from 'src/app/shared/model/estudante';
 import { CustomFilter } from 'src/app/shared/model/support/custom-filter';
@@ -26,39 +25,51 @@ export class EstudanteService implements CustomRepository<Estudante, number> {
 
   estudanteTable: MatTableDataSource<Estudante[]>;
   constructor(private service: CrudService<Estudante, number>) {
-
   }
 
   getById(id: number): Observable<Estudante> {
-    return this.service.getById('estudante', id);
+    return this.service.getById('interno/estudante', id);
   }
 
   list(): Observable<Estudante[]> {
-    return this.service.list('estudante/l');
+    return this.service.list('interno/estudante/l');
   }
 
   filterByNomeSexoCurso(filter: CustomFilter): Observable<Estudante[]> {
-    return this.service.list(`estudante/l?nome=${!!filter.nome ? filter.nome : ''}&curso=${!!filter.curso ? filter.curso : ''}&sexo=${!!filter.sexo ? filter.sexo : ''}`)
-    ;
+    return this.service.list(`interno/estudante/l?nome=${!!filter.nome ? filter.nome : ''}&curso=${!!filter.curso ? filter.curso : ''}&sexo=${!!filter.sexo ? filter.sexo : ''}`);
   }
 
   filterBySexoAndCurso(curso: string, sexo: string): Observable<Estudante[]> {
     return this.service
-      .list(`estudante/l?curso=${!!curso ? curso : ''}&sexo=${!!sexo ? sexo : ''}`);
+      .list(`interno/estudante/l?curso=${!!curso ? curso : ''}&sexo=${!!sexo ? sexo : ''}`);
+  }
+
+  filterBySexoAndCursoAndPosition(curso: string, sexo: string, p: string): Observable<Estudante[]> {
+    return this.service
+      .list(`interno/estudante/l?curso=${!!curso ? curso : ''}&sexo=${!!sexo ? sexo : ''}&posicao=${!!p ? p : ''}`);
+  }
+
+  filterBySexoAndCursoAngGroup(curso: string, sexo: string, isGroup: boolean): Observable<Estudante[]> {
+    return this.service
+      .list(`interno/estudante/l/g?curso=${!!curso ? curso : ''}&sexo=${!!sexo ? sexo : ''}&isGroup=${!!isGroup ? isGroup : false}`);
   }
 
   save(t: Estudante): Observable<Estudante> {
 
     if (t.id) {
       console.log('Update');
-      return this.service.update('estudante', t);
+      return this.service.update('interno/estudante', t);
     }
     console.log('Saved');
-    return this.service.save('estudante', t);
+    return this.service.save('interno/estudante', t);
+  }
+
+  set(t: Estudante[]): Observable<Estudante[]> {
+    return this.service.setGruop('interno/estudante/set', t);
   }
 
   deleteById(id: number): Observable<void> {
-    return this.service.deleteById('estudante', id);
+    return this.service.deleteById('interno/estudante', id);
   }
 
 }

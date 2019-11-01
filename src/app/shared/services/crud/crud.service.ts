@@ -13,7 +13,7 @@ import { NotificationService } from './../notification/notification.service';
 })
 export class CrudService<T extends CustomAbstractEntity, ID extends number> {
 
-  url = `${environment.API}/admin/`;
+  url = `${environment.API}/`;
 
   constructor(
     private authService: AuthService,
@@ -52,9 +52,29 @@ export class CrudService<T extends CustomAbstractEntity, ID extends number> {
     }
   }
 
+  saveMany(uri: string, t: T[]): Observable<T[]> {
+    if (this.authService.isTokenEpired()) {
+      return this.http.post<T[]>(this.url + uri, t)
+        .pipe(
+          take(1),
+           catchError((err: HttpErrorResponse) => this.errorHandler(err))
+        );
+    }
+  }
+
   update(uri: string, t: T): Observable<T> {
     if (this.authService.isTokenEpired()) {
       return this.http.put<T>(this.url + uri, t)
+        .pipe(
+          take(1),
+          catchError((err: HttpErrorResponse) => this.errorHandler(err))
+        );
+    }
+  }
+
+  setGruop(uri: string, t: T[]): Observable<T[]> {
+    if (this.authService.isTokenEpired()) {
+      return this.http.put<T[]>(this.url + uri, t)
         .pipe(
           take(1),
           catchError((err: HttpErrorResponse) => this.errorHandler(err))

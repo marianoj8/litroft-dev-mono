@@ -25,6 +25,13 @@
       </td>
     </ng-container>
 
+    <ng-container matColumnDef="departamento">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Departamento</th>
+      <td mat-cell *matCellDef="let curso">
+        {{ curso?.departamento?.nome }}
+      </td>
+    </ng-container>
+
     <ng-container matColumnDef="detalhe">
       <th mat-header-cell *matHeaderCellDef>Detalhe</th>
       <td mat-cell *matCellDef="let curso">

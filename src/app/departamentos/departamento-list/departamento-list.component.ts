@@ -35,9 +35,7 @@ export class DepartamentoListComponent implements OnInit, OnDestroy {
   displaydColumns: string[] = [
     'id',
     'nome',
-    'detalhe',
-    'edit',
-    'delete'
+    'detalhe'
   ];
 
   constructor(

@@ -1,5 +1,5 @@
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-  <mat-form-field class="container field">
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()" id="loginForm">
+  <mat-form-field class="container field" id="username">
     <input
       matInput
       formControlName="username"
@@ -27,7 +27,7 @@
       Nome do usuario é <strong>obrigatorio</strong>
     </mat-error>
   </mat-form-field>
-  <mat-form-field class="container field">
+  <mat-form-field class="container field" id="password">
     <input
       matInput
       formControlName="password"
@@ -56,6 +56,7 @@
   </mat-form-field>
   <div>
     <button
+    id="btnLogin"
       class="btn-large"
       [disabled]="!loginForm.valid"
       mat-raised-button

@@ -1,12 +1,11 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/internal/Observable';
-import { take, catchError } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 
 import { Token } from '../../model/support/token';
 import { UsernameAndPassword } from '../../model/support/username-password';
-import { throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -16,9 +15,8 @@ export class AuthService {
 
   constructor(private htp: HttpClient, public router: Router) { }
 
-  // http://localhost:8080
-
   login(user: UsernameAndPassword): Observable<Token> {
+    // return this.htp.post<Token>('/login', user)
     return this.htp.post<Token>('http://localhost:8080/login', user)
       .pipe(
         take(1)
@@ -31,10 +29,10 @@ export class AuthService {
     // localStorage.setItem('username', data.user.username);
     // localStorage.setItem('fone', data.user.fone);
     // localStorage.setItem('email', data.user.email);
-    // localStorage.setItem('acessType', data.accessType)
     if (data.accountId) {
       localStorage.setItem('token', data.token);
       localStorage.setItem('expirationTime', data.expiration);
+      localStorage.setItem('acessType', data.accessType);
       this.doLogIn();
     }
   }
@@ -48,11 +46,11 @@ export class AuthService {
     // localStorage.removeItem('username');
     // localStorage.removeItem('fone');
     // localStorage.removeItem('email');
-    // localStorage.removeItem('acessType')
+    localStorage.removeItem('acessType');
     localStorage.removeItem('token');
     localStorage.removeItem('expirationTime');
 
-    this.router.navigate(['/home']);
+    this.router.navigate(['/public']);
   }
 
   loggedIn(): boolean {

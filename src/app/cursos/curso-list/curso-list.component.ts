@@ -36,6 +36,7 @@ export class CursoListComponent implements OnInit {
     'id',
     'nome',
     'duracao',
+    'departamento',
     'detalhe',
     'edit',
     'delete'

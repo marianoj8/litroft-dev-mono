@@ -43,7 +43,8 @@ import * as material from '@angular/material';
     material.MatMenuModule,
     material.MatIconModule,
     material.MatButtonModule,
-
+    material.MatCheckboxModule,
+    material.MatSlideToggleModule
   ],
   exports: [
     LayoutModule,
@@ -82,7 +83,9 @@ import * as material from '@angular/material';
     material.MatCardModule,
     material.MatMenuModule,
     material.MatIconModule,
-    material.MatButtonModule
+    material.MatButtonModule,
+    material.MatCheckboxModule,
+    material.MatSlideToggleModule
   ]
 })
 export class MaterialModule { }

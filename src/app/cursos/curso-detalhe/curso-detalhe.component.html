@@ -9,11 +9,17 @@
         </mat-expansion-panel-header>
         <mat-label>Nome</mat-label>: {{ curso?.nome }}
         <mat-divider></mat-divider>
-        <mat-label>Duração</mat-label>:  {{
+        <mat-label>Duração</mat-label>:
+        {{
           curso?.duracao < 2
             ? curso?.duracao + " Ano"
             : curso?.duracao + " Anos"
         }}
+        <mat-divider></mat-divider>
+        <mat-label>Departamento</mat-label>:
+        <a [routerLink]="['/departamentos/detalhe', curso.departamento.id]">
+          {{ curso?.departamento.nome }}
+        </a>
         <mat-action-row>
           <button
             class="btn-large"
@@ -48,7 +54,7 @@
           }}
         </div>
         <mat-divider></mat-divider>
-        <mat-label>Pro</mat-label>: {{ curso?.admin.nome }}
+        <mat-label>Pro</mat-label>: {{ curso?.adminInterno.nome }}
       </mat-expansion-panel>
     </mat-accordion>
   </div>

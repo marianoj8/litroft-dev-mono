@@ -25,6 +25,7 @@ export class OrientadoresComponent implements OnInit, OnDestroy {
     public orientadorService: OrientadorService,
     private especialidadeService: EspecialidadeService,
     private location: Location) {
+      this.orientadorService.onChangeContextTitle.emit('Orientador');
 
   }
 
@@ -40,7 +41,6 @@ export class OrientadoresComponent implements OnInit, OnDestroy {
         })
       );
 
-    this.orientadorService.onChangeContextTitle.emit('Orientador');
   }
 
 
@@ -84,4 +84,6 @@ export class OrientadoresComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.sub.unsubscribe();
   }
+
+  onFilterSearch(){}
 }

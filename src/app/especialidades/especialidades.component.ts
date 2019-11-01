@@ -20,13 +20,14 @@ export class EspecialidadesComponent implements OnInit, OnDestroy {
   constructor(
     private especialidadeService: EspecialidadeService,
     private location: Location) {
+    this.especialidadeService.onChangeContextTitle.emit('Especialidade');
   }
 
   ngOnInit() {
     this.sub = this.especialidadeService.onChangeContext.subscribe(
       context => this.onChangeContext = context);
 
-    this.especialidadeService.onChangeContextTitle.emit('Especialidade');
+
   }
 
 

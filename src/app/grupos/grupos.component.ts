@@ -27,11 +27,11 @@ export class GruposComponent implements OnInit, OnDestroy {
     public estudanteService: EstudanteService,
     private cursoSerice: CursoService,
     private location: Location) {
-
+    this.grupoService.onChangeContextTitle.emit('Grupo');
   }
 
   ngOnInit() {
-    this.sub = this.estudanteService.onChangeContext.subscribe(
+    this.sub = this.grupoService.onChangeContext.subscribe(
       context => this.onChangeContext = context);
 
     this.cursos$ = this.cursoSerice.list()
@@ -39,7 +39,7 @@ export class GruposComponent implements OnInit, OnDestroy {
         this.cursosError$.next(true);
         return of([]);
       }));
-    this.grupoService.onChangeContextTitle.emit('Grupo');
+
   }
 
 
@@ -83,4 +83,5 @@ export class GruposComponent implements OnInit, OnDestroy {
     this.sub.unsubscribe();
   }
 
+  onFilterSearch(){}
 }

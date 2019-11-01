@@ -21,25 +21,25 @@ export class DepartamentoService implements CustomRepository<Departamento, numbe
   constructor(private service: CrudService<Departamento, number>) { }
 
   getById(id: number): Observable<Departamento> {
-    return this.service.getById('departamento', id);
+    return this.service.getById('interno/departamento', id);
   }
 
   list(): Observable<Departamento[]> {
-    return this.service.list('departamento/l');
+    return this.service.list('interno/departamento/l');
   }
 
   filterByNome(filter: CustomFilter): Observable<Departamento[]> {
-    return this.service.list(`departamento/l?nome=${!!filter.nome ? filter.nome : ''}`);
+    return this.service.list(`interno/departamento/l?nome=${!!filter.nome ? filter.nome : ''}`);
   }
 
   save(t: Departamento): Observable<Departamento> {
     if (t.id) {
-      return this.service.update('departamento', t);
+      return this.service.update('interno/departamento', t);
     }
-    return this.service.save('departamento', t);
+    return this.service.save('interno/departamento', t);
   }
 
   deleteById(id: number): Observable<void> {
-    return this.service.deleteById('departamento', id);
+    return this.service.deleteById('interno/departamento', id);
   }
 }

@@ -214,5 +214,4 @@ export class EstudanteFromComponent implements OnInit {
   back() {
     this.location.back();
   }
-
 }

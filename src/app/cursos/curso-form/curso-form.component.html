@@ -47,7 +47,9 @@
               </mat-option>
             </ng-container>
           </mat-select>
-          <mat-error *ngIf="formGroup01.controls['duracao'].hasError('required')">
+          <mat-error
+            *ngIf="formGroup01.controls['duracao'].hasError('required')"
+          >
             Duração é <strong>obrigatorio</strong>
           </mat-error>
         </mat-form-field>
@@ -66,9 +68,58 @@
     </form>
   </mat-step>
 
+  <mat-step [stepControl]="formGroup02">
+    <form [formGroup]="formGroup02">
+      <div class="field">
+        <ng-template matStepLabel>
+          Departamento
+        </ng-template>
+        <mat-form-field class="field-max field-padding">
+          <mat-select
+            matInput
+            formControlName="departamento"
+            required
+            placeholder="Departamento"
+          >
+            <mat-option *ngIf="departamentoError$ | async"
+              >Ocorreu um erro ao carregar cursos...
+            </mat-option>
+            <ng-container *ngFor="let departamento of departamentos$ | async">
+              <mat-option *ngIf="!departamento">lista vasia</mat-option>
+              <mat-option [value]="departamento.id">
+                {{ departamento.nome }}
+              </mat-option>
+            </ng-container>
+          </mat-select>
+          <mat-error
+            *ngIf="formGroup02.controls['departamento'].hasError('required')"
+          >
+            Departamento é <strong>obrigatorio</strong>
+          </mat-error>
+        </mat-form-field>
+        <button mat-stroked-button matStepperPrevious class="large">
+          <mat-icon>arrow_upward</mat-icon>
+          Anterior
+        </button>
+        <div class="spaced">
+          <button
+            color="primary"
+            class="large"
+            mat-raised-button
+            matStepperNext
+          >
+            <mat-icon>arrow_downward</mat-icon>
+            Avançar
+          </button>
+        </div>
+      </div>
+    </form>
+  </mat-step>
+
   <mat-step>
     <ng-template matStepLabel
-      >Concluir com processo de  {{ !curso.id ? "cadastro" : "alteração" }} de curso</ng-template
+      >Concluir com processo de {{ !curso.id ? "cadastro" : "alteração" }} de
+      curso</ng-template
     >
     <div class="spaced">
       <button mat-stroked-button matStepperPrevious class="large">
@@ -93,7 +144,7 @@
         (click)="onSaveButtonAndList(stepper)"
       >
         <mat-icon>save</mat-icon>
-        {{ !curso.id ? 'Salvar e listar' : 'Salvar' }}
+        {{ !curso.id ? "Salvar e listar" : "Salvar" }}
       </button>
     </div>
   </mat-step>
@@ -101,3 +152,4 @@
 <ng-template #loading>
   <mat-progress-bar mode="indeterminate" color="warn"></mat-progress-bar>
 </ng-template>
+

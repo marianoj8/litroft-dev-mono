@@ -1,39 +1,135 @@
-<mat-grid-list
-  cols="4"
-  [rowHeight]="'270px'"
-  [gutterSize]="'10px'"
-  class="container"
->
-  <mat-grid-tile
-    class="container mat-elevation-z3"
-    *ngFor="let tile of grupos$ | async"
-    [colspan]="1"
-    [rowspan]="1"
+<div class="container mat-elevation-z8 table hide-on-med-and-down">
+  <button class="btn-large" mat-raised-button color="primary" (click)="add()">
+    <mat-icon>add</mat-icon>
+    Formar Novo Grupo
+  </button>
+  <table *ngIf="grupos; else loading" mat-table [dataSource]="grupos" matSort>
+    <ng-container matColumnDef="posicao">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Grupo</th>
+      <td mat-cell *matCellDef="let grupo">
+        {{ grupo?.posicao }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="descricao">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Descrição</th>
+      <td mat-cell *matCellDef="let grupo">
+        {{ grupo?.descricao.substring(0, 35).concat('...') }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="area">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Área</th>
+      <td mat-cell *matCellDef="let grupo">
+        {{ grupo?.orientador?.especialidade.descricao }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="curso">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Curso</th>
+      <td mat-cell *matCellDef="let grupo">
+        {{ grupo?.curso?.nome }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="turma">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Turma</th>
+      <td mat-cell *matCellDef="let grupo">
+        {{ grupo?.turma?.sigla }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="anoLetivo">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Ano lectivo</th>
+      <td mat-cell *matCellDef="let grupo">
+        {{ grupo?.anoLetivo }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="detalhe">
+      <th mat-header-cell *matHeaderCellDef>Detalhe</th>
+      <td mat-cell *matCellDef="let grupo">
+        <button mat-raised-button [routerLink]="['detalhe', grupo.id]">
+          <mat-icon color="primary">description</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="edit">
+      <th mat-header-cell *matHeaderCellDef>Editar</th>
+      <td mat-cell *matCellDef="let grupo">
+        <button mat-raised-button (click)="edit(grupo.id)">
+          <mat-icon color="primary">edit</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="delete">
+      <th mat-header-cell *matHeaderCellDef>Excluir</th>
+      <td mat-cell *matCellDef="let grupo">
+        <button
+          mat-raised-button
+          matTooltipShowDelay="2000"
+          matTooltipHideDelay="2000"
+          matTooltip="Uma vez excluido não tem como reverter as alterações."
+          (click)="openDeleteDialog(grupo.id)"
+        >
+          <mat-icon color="warn">delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="noData">
+      <th mat-footer-cell *matFooterCellDef>Lista vasia.</th>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displaydColumns; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: displaydColumns"></tr>
+    <tr
+      mat-footer-row
+      *matFooterRowDef="['noData']"
+      [ngClass]="{ hide: true }"
+    ></tr>
+  </table>
+
+  <ng-template #loading>
+    <div *ngIf="error$ | async as error; else showError">
+      <span>
+        Erro ao carregar grupos. Tente novamente mais tarde.
+      </span>
+    </div>
+    <ng-template #showError>
+      <mat-progress-bar mode="indeterminate" color="warn"> </mat-progress-bar>
+    </ng-template>
+  </ng-template>
+</div>
+
+<!-- Modo Mobile inicializado  -->
+
+<div class="hide-on-large-only">
+  <mat-nav-list
+    class="mat-elevation-z8 container"
+    *ngIf="grupos; else loadingOnList"
   >
-    <mat-card align="center">
-      <mat-card-header>
-        <mat-card-title>{{ tile.curso.nome }}</mat-card-title>
-        <mat-card-subtitle>{{ tile.turma.sigla }}</mat-card-subtitle>
-      </mat-card-header>
-      <mat-card-content>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta eaque
-        maxime enim, ad unde culpa eos. Fuga pariatur rem ut fugiat dolore ipsam
-        impedit. Cum ex neque ea fugit inventore?
-      </mat-card-content>
-      <mat-card-actions align="center">
-        <button mat-raised-button color="primary">
-          <mat-icon>blur_linear</mat-icon>
-        </button>
-        <button mat-raised-button color="primary">
-          <mat-icon>edit</mat-icon>
-        </button>
-        <button mat-raised-button color="primary">
-          <mat-icon>delete</mat-icon>
-        </button>
-      </mat-card-actions>
-      <mat-card-footer>
-        {{ tile.anoLetivo }}
-      </mat-card-footer>
-    </mat-card>
-  </mat-grid-tile>
-</mat-grid-list>
+    <button class="btn-large" mat-raised-button color="primary" (click)="add()">
+      <mat-icon>add</mat-icon>
+      Cadastrar Nova Grupo
+    </button>
+    <a
+      mat-list-item
+      (click)="openMoreOptionDialog(item.id)"
+      *ngFor="let item of gruposList"
+    >
+      <mat-icon matListIcon class="mat-18">book</mat-icon>
+      <h5 matLine>{{ item?.descricao }}</h5>
+      <mat-divider></mat-divider>
+    </a>
+  </mat-nav-list>
+  <ng-template #loadingOnList>
+    <mat-progress-bar
+      mode="indeterminate"
+      color="warn"
+      class="hide-on-large-only"
+    ></mat-progress-bar>
+  </ng-template>
+</div>

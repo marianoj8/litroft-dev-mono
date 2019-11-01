@@ -4,13 +4,16 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatVerticalStepper } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EventEmitter } from 'events';
-import { Observable } from 'rxjs';
+import { Observable, Subject, of } from 'rxjs';
 import { Location } from '@angular/common';
 
 import { Curso } from 'src/app/shared/model/curso';
 import { NotificationService } from 'src/app/shared/services/notification/notification.service';
 import { MyErrorStateMatch } from 'src/app/shared/validators/field-validator';
 import { CursoService } from '../modules/curso.service';
+import { Departamento } from 'src/app/shared/model/departamento';
+import { DepartamentoService } from 'src/app/departamentos/modules/departamento.service';
+import { catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-curso-form',
@@ -19,11 +22,14 @@ import { CursoService } from '../modules/curso.service';
 })
 export class CursoFormComponent implements OnInit {
   formGroup01: FormGroup;
+  formGroup02: FormGroup;
   cursos$: Observable<Curso[]>;
   duracoes: number[] = [1, 2, 3, 4, 5, 6];
   matcher = new MyErrorStateMatch();
   showAndHideView: EventEmitter = new EventEmitter();
   curso: Curso = new Curso();
+  departamentoError$ = new Subject<boolean>();
+  departamentos$: Observable<Departamento[]>;
   private id = 0;
 
   constructor(
@@ -31,6 +37,7 @@ export class CursoFormComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
     private cursoService: CursoService,
+    private departamentoService: DepartamentoService,
     private notificationService: NotificationService,
     private location: Location
   ) {
@@ -38,8 +45,15 @@ export class CursoFormComponent implements OnInit {
   }
 
   ngOnInit() {
+
     this.cursoService.onChangeContext.emit(true);
+    this.departamentos$ = this.departamentoService.list()
+      .pipe(catchError(err => {
+        this.departamentoError$.next(true);
+        return of(null);
+      }));
     this.initForms();
+
 
     if (this.router.url.match('/edit')) {
       this.activatedRoute.params
@@ -55,6 +69,11 @@ export class CursoFormComponent implements OnInit {
             nome: this.curso.nome,
             duracao: this.curso.duracao
           });
+
+          this.formGroup02.patchValue({
+            departamento: this.curso.departamento.id
+          });
+
         });
 
     }
@@ -70,6 +89,11 @@ export class CursoFormComponent implements OnInit {
         Validators.required,
         Validators.min(1),
         Validators.max(6)]],
+
+    });
+
+    this.formGroup02 = this.formBuilder.group({
+      departamento: [null, Validators.required]
     });
 
   }
@@ -87,6 +111,7 @@ export class CursoFormComponent implements OnInit {
   private save(stepper: MatVerticalStepper, state): void {
     this.curso.nome = this.formGroup01.controls.nome.value;
     this.curso.duracao = this.formGroup01.controls.duracao.value;
+    this.curso.departamento = new Departamento(this.formGroup02.controls.departamento.value);
 
     this.cursoService.save(this.curso)
       .subscribe(
@@ -128,5 +153,6 @@ export class CursoFormComponent implements OnInit {
   back() {
     this.location.back();
   }
+
 
 }

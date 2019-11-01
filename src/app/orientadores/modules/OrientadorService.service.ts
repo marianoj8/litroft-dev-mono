@@ -24,34 +24,34 @@ export class OrientadorService implements CustomRepository<Orientador, number> {
   }
 
   getById(id: number): Observable<Orientador> {
-    return this.service.getById('orientador', id);
+    return this.service.getById('interno/orientador', id);
   }
 
   list(): Observable<Orientador[]> {
-    return this.service.list('orientador/l');
+    return this.service.list('interno/orientador/l');
   }
 
   filterByNomeSexoEspecialidade(filter: CustomFilter): Observable<Orientador[]> {
-    return this.service.list(`orientador/l?nome=${!!filter.nome ? filter.nome : ''}&sexo=${!!filter.sexo ? filter.sexo : ''}&especialidade=${!!filter.descricao ? filter.descricao : ''}`);
+    return this.service.list(`interno/orientador/l?nome=${!!filter.nome ? filter.nome : ''}&sexo=${!!filter.sexo ? filter.sexo : ''}&especialidade=${!!filter.descricao ? filter.descricao : ''}`);
   }
 
   filterBySexoAndEspecialidade(sexo: string, descricao: string): Observable<Orientador[]> {
     return this.service
-      .list(`orientador/l?sexo=${!!sexo ? sexo : ''}&especialidade=${!!descricao ? descricao : ''}`);
+      .list(`interno/orientador/l?sexo=${!!sexo ? sexo : ''}&especialidade=${!!descricao ? descricao : ''}`);
   }
 
   save(t: Orientador): Observable<Orientador> {
 
     if (t.id) {
       console.log('Update');
-      return this.service.update('orientador', t);
+      return this.service.update('interno/orientador', t);
     }
     console.log('Saved');
-    return this.service.save('orientador', t);
+    return this.service.save('interno/orientador', t);
   }
 
   deleteById(id: number): Observable<void> {
-    return this.service.deleteById('orientador', id);
+    return this.service.deleteById('interno/orientador', id);
   }
 
 }

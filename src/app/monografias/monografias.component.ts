@@ -9,12 +9,12 @@ import { MonografiaService } from './modules/monografia.service';
 export class MonografiasComponent implements OnInit {
 
   view = 0;
-  constructor(
-    private monografiaService: MonografiaService
-  ) { }
+  constructor(private monografiaService: MonografiaService) {
+
+    this.monografiaService.onChangeContextTitle.emit('Monografia Internas');
+  }
 
   ngOnInit() {
-    this.monografiaService.onChangeContextTitle.emit('Monografia');
   }
 
   onBtnClickedToChange() {

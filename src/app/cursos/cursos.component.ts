@@ -1,11 +1,14 @@
-import { Component, OnInit, EventEmitter, OnDestroy } from '@angular/core';
+import { Location } from '@angular/common';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material';
 import { Observable, of, Subject, Subscription } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { Location } from '@angular/common';
 
+import { PublicService } from '../public/modules/public.service';
 import { Curso } from '../shared/model/curso';
 import { CustomFilter } from '../shared/model/support/custom-filter';
 import { CursoService } from './modules/curso.service';
+import { CursoSearchComponent } from './curso-search/curso-search.component';
 
 @Component({
   selector: 'app-cursos',
@@ -24,22 +27,26 @@ export class CursosComponent implements OnInit, OnDestroy {
   anos: number[] = [1, 2, 3, 4, 5, 6];
 
   constructor(
-    private cursoSerice: CursoService,
+    private cursoService: CursoService,
+    private publicService: PublicService,
+    private dialogService: MatDialog,
     private location: Location) {
+    this.cursoService.onChangeContextTitle.emit('Curso');
   }
 
   ngOnInit() {
-    this.sub = this.cursoSerice.onChangeContext.subscribe(
+    this.sub = this.cursoService.onChangeContext.subscribe(
       context => this.onChangeContext = context
     );
 
-    this.cursos$ = this.cursoSerice.list()
+    this.cursos$ = this.cursoService.list()
       .pipe(catchError(err => {
         this.cursosError$.next(true);
         return of([]);
       }));
 
-    this.cursoSerice.onChangeContextTitle.emit('Curso');
+
+    this.publicService.enableReadMode.emit(false);
   }
 
 
@@ -47,23 +54,23 @@ export class CursosComponent implements OnInit, OnDestroy {
     if (event.key === 'Enter') {
       this.findFromServer(value);
     }
-    this.cursoSerice.findValueParam.emit(value.trim());
+    this.cursoService.findValueParam.emit(value.trim());
   }
 
   findFromServer(value: string) {
     this.filtro.nome = value.trim();
-    this.cursoSerice.findValueParamFromServer.emit(this.filtro);
+    this.cursoService.findValueParamFromServer.emit(this.filtro);
   }
 
   filterByDuracao(duracao: number) {
     this.filtro.duracao = duracao;
-    this.cursoSerice.findValueParams.emit(this.filtro);
+    this.cursoService.findValueParams.emit(this.filtro);
   }
 
   showAll() {
     this.filtro.nome = '';
     this.filtro.duracao = 1;
-    this.cursoSerice.findValueParams.emit(this.filtro);
+    this.cursoService.findValueParams.emit(this.filtro);
   }
 
   cleanSearchField() {
@@ -74,6 +81,14 @@ export class CursosComponent implements OnInit, OnDestroy {
     this.filtro.nome = nome;
   }
 
+  onFilterSearch() {
+    const dialogRef = this.dialogService.open(
+      CursoSearchComponent,
+      {
+        height: '500px',
+        width: '380px'
+      });
+  }
 
   back() {
     this.location.back();
@@ -81,5 +96,10 @@ export class CursosComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.sub.unsubscribe();
+  }
+
+  onBtnSearch() {
+    const form = document.getElementsByTagName('mat-form-field');
+    // form[0].(" width: 3.8%"," width: 100%")
   }
 }

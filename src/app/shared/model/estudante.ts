@@ -1,4 +1,5 @@
 import { Curso } from '../../shared/model/curso';
+import { AdminInterno } from './adminInterno';
 import { CustomAbstractEntity } from './customEntity';
 
 export class Estudante implements CustomAbstractEntity {
@@ -16,5 +17,10 @@ export class Estudante implements CustomAbstractEntity {
   endereco: string;
   curso: Curso;
   inGruop: boolean;
+  adminInterno: AdminInterno;
+
+  constructor(id?: number) {
+    this.id = id ? id : null;
+  }
 
 }

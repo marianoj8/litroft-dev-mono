@@ -1,6 +1,9 @@
 <div [hidden]="onChangeContext">
   <mat-card color="primary">
     <div class="space-arround">
+      <mat-icon class="icon-settings" color="primary" (click)="onFilterSearch()"
+        >settings</mat-icon
+      >
       <mat-form-field class="search">
         <input
           #key
@@ -15,68 +18,13 @@
         </span>
 
         <span matSuffix *ngIf="key.value.length != 0">
-            <button mat-icon-button (click)="key.value = null; cleanSearchField()">
-              <mat-icon color="primary">close</mat-icon>
-            </button>
-          </span>
-          <span matPrefix>
-            <a
-              matTooltip="Filtrar lista estudantes"
-              mat-flat-button
-              class="more-button mat-20"
-              [matMenuTriggerFor]="menu"
-              aria-label="Toggle menu"
-            >
-              <mat-icon color="primary">more_vert</mat-icon>
-            </a>
-            <mat-menu #menu="matMenu" xPosition="before">
-              <button
-                mat-menu-item
-                class="more-button"
-                [matMenuTriggerFor]="menuCurso"
-                aria-label="Toggle menu"
-              >
-                Especialidade
-              </button>
-            </mat-menu>
-
-            <mat-menu #menuCurso xPosition="before">
-              <button mat-menu-item (click)="showAll()">
-                {{
-                  (especialidadeError$ | async) === false
-                    ? "Ocorreu um erro ao carregar especialidades..."
-                    : "Todas as especialidades"
-                }}
-              </button>
-
-              <button
-                #btnCurso
-                mat-menu-item
-                [matMenuTriggerFor]="menuSexo"
-                *ngFor="let especialidade of especialidades$ | async"
-                (mouseleave)="logName(especialidade.descricao)"
-                (onkeyup)="logName(especialidade.descricao)"
-              >
-                {{ especialidade.descricao }}
-              </button>
-
-              <mat-menu #menuSexo xPosition="before">
-                <button mat-menu-item (click)="filterByEspecialidade('')">
-                  <mat-icon class="mat-18">alarm_on</mat-icon>
-                  Todos
-                </button>
-                <button mat-menu-item (click)="filterByEspecialidade('M')">
-                  <mat-icon class="mat-18">alarm_on</mat-icon>
-                  Masculino
-                </button>
-                <button mat-menu-item (click)="filterByEspecialidade('F')">
-                  <mat-icon class="mat-18">alarm_on</mat-icon>
-                  Femenino
-                </button>
-              </mat-menu>
-            </mat-menu>
-          </span>
-
+          <button
+            mat-icon-button
+            (click)="key.value = null; cleanSearchField()"
+          >
+            <mat-icon color="primary">close</mat-icon>
+          </button>
+        </span>
       </mat-form-field>
     </div>
   </mat-card>

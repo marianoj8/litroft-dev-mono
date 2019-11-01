@@ -2,3 +2,7 @@ mat-card {
   height: 38px;
 }
 
+.space-arround .icon-settings{
+  margin-right: 10rem;
+  cursor: pointer;
+ }

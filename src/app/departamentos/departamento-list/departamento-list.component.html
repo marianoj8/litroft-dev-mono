@@ -1,7 +1,7 @@
 <div class="container mat-elevation-z8 table hide-on-med-and-down">
   <button class="btn-large" mat-raised-button color="primary" (click)="add()">
     <mat-icon>add</mat-icon>
-    Cadastrar Nova Especialidade
+    Cadastrar Novo Departamento
   </button>
   <table *ngIf="departamentos; else loading" mat-table [dataSource]="departamentos" matSort>
     <ng-container matColumnDef="id">
@@ -85,7 +85,7 @@
   >
     <button class="btn-large" mat-raised-button color="primary" (click)="add()">
       <mat-icon>add</mat-icon>
-      Cadastrar Nova Especialidade
+      Cadastrar Nova Departamento
     </button>
     <a
       mat-list-item

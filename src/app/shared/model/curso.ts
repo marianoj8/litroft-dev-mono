@@ -1,4 +1,6 @@
 import { CustomAbstractEntity } from 'src/app/shared/model/customEntity';
+import { AdminInterno } from './adminInterno';
+import { Departamento } from './departamento';
 
 export class Curso implements CustomAbstractEntity {
 
@@ -8,4 +10,10 @@ export class Curso implements CustomAbstractEntity {
   totalModified: number;
   nome: string;
   duracao: number;
+  departamento: Departamento;
+  adminInterno: AdminInterno;
+
+  constructor(id?: number) {
+    this.id = id ? id : null;
+  }
 }

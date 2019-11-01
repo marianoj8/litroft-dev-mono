@@ -7,4 +7,15 @@ export class Admin implements CustomAbstractEntity {
   lastModifiedAt: string;
   totalModified: number;
   nome: string;
+  sobreNome: string;
+  sexo: string;
+  dataNascimento: string;
+  bi: string;
+  fone: string;
+  email: string;
+  endereco: string;
+
+  constructor(id?: number) {
+    this.id = id ? id : null;
+  }
 }

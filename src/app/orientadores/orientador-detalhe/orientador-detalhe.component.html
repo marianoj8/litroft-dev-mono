@@ -29,7 +29,7 @@
         <mat-label>Endereco</mat-label>: {{ orientador?.endereco }}
         <mat-divider></mat-divider>
         <mat-label>Especialidade</mat-label>:
-        <a [routerLink]="['/cursos/detalhe', orientador.especialidade.id]" color="primary"
+        <a [routerLink]="['/especialidades/detalhe', orientador.especialidade.id]" color="primary"
           >{{ orientador?.especialidade?.descricao }}
         </a>
         <mat-action-row>
@@ -66,7 +66,7 @@
           }}
         </div>
         <mat-divider></mat-divider>
-        <mat-label>Pro</mat-label>: {{ orientador?.admin.nome }}
+        <mat-label>Pro</mat-label>: {{ orientador?.adminInterno.nome }}
       </mat-expansion-panel>
     </mat-accordion>
   </div>

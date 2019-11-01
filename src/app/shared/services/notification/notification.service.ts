@@ -85,7 +85,7 @@ export class NotificationService {
 
   componentErrorMessage(data: string) {
     this.configExists[`panelClass`] = [`notification`, `exists`];
-    this.snackBar.open(data, 'OK', this.configExists)
+    this.snackBar.open(data, 'OK', this.configExists);
   }
 
 }

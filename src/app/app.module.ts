@@ -1,8 +1,10 @@
 import { LayoutModule } from '@angular/cdk/layout';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -10,6 +12,7 @@ import { CustomErrorPageComponent } from './custom-error-page/custom-error-page.
 import { MaterialModule } from './material/material.module';
 import { DeleteDialogComponent } from './shared/delete-dialog/delete-dialog.component';
 import { ErrorLoadingComponent } from './shared/error-loading/error-loading.component';
+import { FooterComponent } from './shared/footer/footer.component';
 import { LoginFaildMessageComponent } from './shared/login-faild-message/login-faild-message.component';
 import { MoreOptionsDialogComponent } from './shared/more-options-dialog/more-options-dialog.component';
 import { DeleteFailedMessageComponent } from './shared/services/notification/notification-failed-delete.component';
@@ -21,8 +24,6 @@ import { DeleteSuccessMessageComponent } from './shared/services/notification/no
 import { SaveSuccessMessageComponent } from './shared/services/notification/notification-success-save.component';
 import { UpdateSuccessMessageComponent } from './shared/services/notification/notification-success-update.component';
 import { TokenInterceptorService } from './shared/services/security/token-interceptor.service';
-import { FooterComponent } from './shared/footer/footer.component';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -65,7 +66,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     HttpClientModule,
     LayoutModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    PdfViewerModule
   ],
   providers: [
     {

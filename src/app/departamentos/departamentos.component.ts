@@ -19,13 +19,14 @@ export class DepartamentosComponent implements OnInit, OnDestroy {
   constructor(
     private departamentoSerice: DepartamentoService,
     private location: Location) {
+    this.departamentoSerice.onChangeContextTitle.emit('Departamento');
   }
 
   ngOnInit() {
     this.sub = this.departamentoSerice.onChangeContext.subscribe(
       context => this.onChangeContext = context
     );
-    this.departamentoSerice.onChangeContextTitle.emit('Departamento');
+
   }
 
 
@@ -61,4 +62,6 @@ export class DepartamentosComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.sub.unsubscribe();
   }
+
+  onFilterSearch(){}
 }

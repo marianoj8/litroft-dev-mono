@@ -1,7 +1,10 @@
 <div [hidden]="onChangeContext">
   <mat-card color="primary">
-    <div class="space-arround">
-      <mat-form-field class="search">
+      <div class="space-arround">
+          <mat-icon class="icon-settings" color="primary" (click)="onFilterSearch()"
+            >settings</mat-icon
+          >
+          <mat-form-field class="search">
         <input
           #key
           matInput

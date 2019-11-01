@@ -20,25 +20,25 @@ export class EspecialidadeService implements CustomRepository<Especialidade, num
   constructor(private service: CrudService<Especialidade, number>) { }
 
   getById(id: number): Observable<Especialidade> {
-    return this.service.getById('especialidade', id);
+    return this.service.getById('interno/especialidade', id);
   }
 
   list(): Observable<Especialidade[]> {
-    return this.service.list('especialidade/l');
+    return this.service.list('interno/especialidade/l');
   }
 
   filterByNome(filter: CustomFilter): Observable<Especialidade[]> {
-    return this.service.list(`especialidade/l?descricao=${!!filter.nome ? filter.nome : ''}`);
+    return this.service.list(`interno/especialidade/l?descricao=${!!filter.nome ? filter.nome : ''}`);
   }
 
   save(t: Especialidade): Observable<Especialidade> {
     if (t.id) {
-      return this.service.update('especialidade', t);
+      return this.service.update('interno/especialidade', t);
     }
-    return this.service.save('especialidade', t);
+    return this.service.save('interno/especialidade', t);
   }
 
   deleteById(id: number): Observable<void> {
-    return this.service.deleteById('especialidade', id);
+    return this.service.deleteById('interno/especialidade', id);
   }
 }

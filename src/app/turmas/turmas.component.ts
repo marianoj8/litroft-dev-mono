@@ -20,6 +20,7 @@ export class TurmasComponent implements OnInit, OnDestroy {
   constructor(
     private turmaSerice: TurmaService,
     private location: Location) {
+    this.turmaSerice.onChangeContextTitle.emit('Turma');
   }
 
   ngOnInit() {
@@ -27,7 +28,6 @@ export class TurmasComponent implements OnInit, OnDestroy {
       context => this.onChangeContext = context
     );
 
-    this.turmaSerice.onChangeContextTitle.emit('Turma');
   }
 
 
@@ -64,5 +64,5 @@ export class TurmasComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.sub.unsubscribe();
   }
-
+  onFilterSearch(){}
 }

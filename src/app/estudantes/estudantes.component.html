@@ -1,7 +1,10 @@
 <div [hidden]="onChangeContext">
   <mat-card color="primary">
-    <div class="space-arround">
-      <mat-form-field class="search">
+      <div class="space-arround">
+          <mat-icon class="icon-settings" color="primary" (click)="onFilterSearch()"
+            >settings</mat-icon
+          >
+          <mat-form-field class="search">
         <input
           #key
           matInput
@@ -18,63 +21,6 @@
           <button mat-icon-button (click)="key.value = null; cleanSearchField()">
             <mat-icon color="primary">close</mat-icon>
           </button>
-        </span>
-        <span matPrefix>
-          <a
-            matTooltip="Filtrar lista estudantes"
-            mat-flat-button
-            class="more-button mat-20"
-            [matMenuTriggerFor]="menu"
-            aria-label="Toggle menu"
-          >
-            <mat-icon color="primary">more_vert</mat-icon>
-          </a>
-          <mat-menu #menu="matMenu" xPosition="before">
-            <button
-              mat-menu-item
-              class="more-button"
-              [matMenuTriggerFor]="menuCurso"
-              aria-label="Toggle menu"
-            >
-              Cursos
-            </button>
-          </mat-menu>
-
-          <mat-menu #menuCurso xPosition="before">
-            <button mat-menu-item (click)="showAll()">
-              {{
-                (cursosError$ | async) === false
-                  ? "Ocorreu um erro ao carregar cursos..."
-                  : "Todos os Cursos"
-              }}
-            </button>
-
-            <button
-              #btnCurso
-              mat-menu-item
-              [matMenuTriggerFor]="menuSexo"
-              *ngFor="let curso of cursos$ | async"
-              (mouseleave)="logName(curso.nome)"
-              (onkeyup)="logName(curso.nome)"
-            >
-              {{ curso.nome }}
-            </button>
-
-            <mat-menu #menuSexo xPosition="before">
-              <button mat-menu-item (click)="filterByCurso('')">
-                <mat-icon class="mat-18">alarm_on</mat-icon>
-                Todos
-              </button>
-              <button mat-menu-item (click)="filterByCurso('M')">
-                <mat-icon class="mat-18">alarm_on</mat-icon>
-                Masculino
-              </button>
-              <button mat-menu-item (click)="filterByCurso('F')">
-                <mat-icon class="mat-18">alarm_on</mat-icon>
-                Femenino
-              </button>
-            </mat-menu>
-          </mat-menu>
         </span>
       </mat-form-field>
     </div>

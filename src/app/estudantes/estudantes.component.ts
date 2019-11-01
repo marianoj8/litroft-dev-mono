@@ -7,6 +7,8 @@ import { CustomFilter } from 'src/app/shared/model/support/custom-filter';
 import { Curso } from '../shared/model/curso';
 import { CursoService } from '../cursos/modules/curso.service';
 import { EstudanteService } from './modules/estudante.service';
+import { CursoSearchComponent } from '../cursos/curso-search/curso-search.component';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-estudantes',
@@ -21,12 +23,13 @@ export class EstudantesComponent implements OnInit, OnDestroy {
   cursos$: Observable<Curso[]>;
   cursosError$ = new Subject<boolean>();
   filtro: CustomFilter = new CustomFilter();
+  dialogService: MatDialog;
 
   constructor(
     public estudanteService: EstudanteService,
     private cursoSerice: CursoService,
     private location: Location) {
-
+    this.estudanteService.onChangeContextTitle.emit('Estudante');
   }
 
   ngOnInit() {
@@ -40,7 +43,7 @@ export class EstudantesComponent implements OnInit, OnDestroy {
         return of([]);
       }));
 
-    this.estudanteService.onChangeContextTitle.emit('Estudante');
+
   }
 
 
@@ -73,6 +76,15 @@ export class EstudantesComponent implements OnInit, OnDestroy {
 
   logName(curso) {
     this.filtro.curso = curso;
+  }
+
+  onFilterSearch() {
+    const dialogRef = this.dialogService.open(
+      CursoSearchComponent,
+      {
+        height: '500px',
+        width: '380px'
+      });
   }
 
   ngOnDestroy() {

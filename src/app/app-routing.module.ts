@@ -5,7 +5,11 @@ import { CustomErrorPageComponent } from './custom-error-page/custom-error-page.
 import { AuthGuard } from './shared/guard/auth.guard';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '', redirectTo: 'public', pathMatch: 'full' },
+  {
+    path: 'public',
+    loadChildren: 'src/app/public/modules/public.module#PublicModule'
+  },
   {
     path: 'home',
     canActivate: [AuthGuard],
@@ -17,9 +21,18 @@ const routes: Routes = [
     loadChildren: 'src/app/monografias/modules/monografia.module#MonografiaModule'
   },
   {
+    path: 'institutos',
+    loadChildren: 'src/app/institutos/modules/instituto.module#InstitutoModule'
+  },
+  {
     path: 'cursos',
     canActivate: [AuthGuard],
     loadChildren: 'src/app/cursos/modules/curso.module#CursoModule'
+  },
+  {
+    path: 'projetos',
+    canActivate: [AuthGuard],
+    loadChildren: 'src/app/projetos/modules/projeto.module#ProjetoModule'
   },
   {
     path: 'departamentos',
