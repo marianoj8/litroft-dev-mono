@@ -1,0 +1,51 @@
+<div [hidden]="onChangeContext">
+  <mat-card color="primary">
+    <div class="space-arround">
+      <mat-icon class="icon-settings" color="primary" (click)="onFilterSearch()"
+        >settings</mat-icon
+      >
+      <mat-form-field class="search">
+        <input
+          #key
+          matInput
+          type="text"
+          (keyup)="find($event, key.value)"
+          autocomplete="false"
+          placeholder="Procurar"
+        />
+        <span matSuffix *ngIf="!(key.value.length != 0)"
+          ><mat-icon class="mat-1" color="primary">search</mat-icon>
+        </span>
+
+        <span matSuffix *ngIf="key.value.length != 0">
+          <button
+            mat-icon-button
+            (click)="key.value = null; cleanSearchField()"
+          >
+            <mat-icon color="primary">close</mat-icon>
+          </button>
+        </span>
+      </mat-form-field>
+    </div>
+  </mat-card>
+</div>
+
+<div [hidden]="!onChangeContext">
+  <mat-card color="primary">
+    <div>
+      <span>
+        <button
+          class="btn-large"
+          mat-raised-button
+          color="primary"
+          (click)="back()"
+        >
+          <mat-icon>arrow_back</mat-icon>
+          Voltar
+        </button>
+      </span>
+    </div>
+  </mat-card>
+</div>
+
+<router-outlet></router-outlet>

@@ -1,0 +1,107 @@
+.floating-btn-full {
+  width: 60px;
+  height: 60px;
+  background: #0300c7c9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 40px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
+  position: fixed;
+  right: 70px;
+  bottom: 50px;
+  transition: background 0.25;
+  cursor: pointer;
+}
+.floating-btn-up {
+  width: 50px;
+  height: 50px;
+  background: #0300c7c9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 40px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
+  position: fixed;
+  right: 80px;
+  bottom: 180px;
+  transition: background 0.25;
+  cursor: pointer;
+  visibility: hidden;
+}
+.floating-btn-down {
+  width: 50px;
+  height: 50px;
+  background: #0300c7c9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 40px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
+  position: fixed;
+  right: 80px;
+  bottom: 120px;
+  transition: background 0.25;
+  cursor: pointer;
+  visibility: hidden;
+  /* display: none; */
+}
+
+.readingMode {
+  transition: all 1.5s;
+  background-color: #fff;
+}
+
+.readingMode-active {
+  transition: all 1.5s;
+  background-color: rgb(82, 86, 89);
+}
+
+.floating-btn {
+  transition: all 1.5s;
+  background: #3f51b5;
+}
+
+
+.float-btn-icon-1{
+  transition: all 1.5s;
+  color: white;
+}
+.float-btn-icon-2{
+  transition: all 1.5s;
+  color: white;
+}
+.float-btn-icon-3{
+  transition: all 1.5s;
+  color: white;
+}
+
+.floating-btn-active {
+  visibility: visible;
+  background:rgb(242, 242, 242);
+}
+
+.float-btn-icon-1-active{
+  visibility: visible;
+  transition: all 1.5s;
+  color: #606060;
+}
+.float-btn-icon-2-active{
+  visibility: visible;
+  transition: all 1.5s;
+  color: #606060;
+}
+.float-btn-icon-3-active{
+  visibility: visible;
+  transition: all 1.5s;
+  color: #606060;
+}

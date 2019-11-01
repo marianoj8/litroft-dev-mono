@@ -1,0 +1,147 @@
+<div class="container">
+    <mat-grid-list
+      cols="3"
+      [rowHeight]="'30px'"
+      [gutterSize]="'10px'"
+      class="hide-on-med-and-down"
+    >
+      <mat-grid-tile
+        color="primary"
+        class="mat-elevation-z2"
+        [colspan]="1"
+        [rowspan]="10"
+        *ngFor="let grupo of grupos"
+      >
+        <div class="container-card">
+          <div class="card">
+            <div class="face face1">
+              <div class="content">
+                <img src="../../../assets/notebook.png" />
+                <h4>{{ grupo.descricao.substring(0, 55) }}...</h4>
+                <h4>
+                  {{ grupo.anoLetivo }}
+                </h4>
+              </div>
+            </div>
+            <div class="face face2">
+              <div class="content">
+                {{ grupo.descricao }}
+                <p id="pCurso"><strong>Curso:</strong> {{ grupo.curso.nome }}</p>
+                <p><strong>Turma:</strong> {{ grupo.turma.sigla }}</p>
+                <p><strong>Ano lectivo:</strong> {{ grupo.anoLetivo }}</p>
+                <a
+                  mat-raised-button
+                  color="primary"
+                  (click)="onReadMode(grupo.monografiaID)"
+                  ><mat-icon>format_align_justify</mat-icon>
+                  Ler monografia
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-grid-tile>
+    </mat-grid-list>
+
+    <mat-grid-list
+      cols="2"
+      [rowHeight]="'30px'"
+      [gutterSize]="'10px'"
+      class="hide-on-large-only hide-on-small-and-down"
+    >
+      <mat-grid-tile
+        color="primary"
+        class="mat-elevation-z2"
+        [colspan]="1"
+        [rowspan]="10"
+        *ngFor="let grupo of grupos"
+      >
+        <div class="container-card">
+          <div class="card">
+            <div class="face face1">
+              <div class="content">
+                <img src="../../../assets/notebook.png" />
+                <h4>{{ grupo.descricao.substring(0, 55) }}...</h4>
+                <h4>
+                  {{ grupo.anoLetivo }}
+                </h4>
+              </div>
+            </div>
+            <div class="face face2">
+              <div class="content">
+                {{ grupo.descricao }}
+                <p id="pCurso"><strong>Curso:</strong> {{ grupo.curso.nome }}</p>
+                <p><strong>Turma:</strong> {{ grupo.turma.sigla }}</p>
+                <p><strong>Ano lectivo:</strong> {{ grupo.anoLetivo }}</p>
+                <a
+                  mat-raised-button
+                  color="primary"
+                  (click)="onReadMode(grupo.monografiaID)"
+                  ><mat-icon>format_align_justify</mat-icon>
+                  Ler monografia
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-grid-tile>
+    </mat-grid-list>
+
+    <mat-grid-list
+      cols="1"
+      [rowHeight]="'30px'"
+      [gutterSize]="'10px'"
+      class="hide-on-med-and-up"
+    >
+      <mat-grid-tile
+        color="primary"
+        class="mat-elevation-z2"
+        [colspan]="1"
+        [rowspan]="10"
+        *ngFor="let grupo of grupos"
+      >
+        <div class="container-card">
+          <div class="card">
+            <div class="face face1">
+              <div class="content">
+                <img src="../../../assets/notebook.png" />
+                <h4>{{ grupo.descricao.substring(0, 55) }}...</h4>
+                <h4>
+                  {{ grupo.anoLetivo }}
+                </h4>
+              </div>
+            </div>
+            <div class="face face2">
+              <div class="content">
+                {{ grupo.descricao }}
+                <p id="pCurso"><strong>Curso:</strong> {{ grupo.curso.nome }}</p>
+                <p><strong>Turma:</strong> {{ grupo.turma.sigla }}</p>
+                <p><strong>Ano lectivo:</strong> {{ grupo.anoLetivo }}</p>
+                <a
+                  mat-raised-button
+                  color="primary"
+                  (click)="onReadMode(grupo.monografiaID)"
+                  ><mat-icon>format_align_justify</mat-icon>
+                  Ler monografia
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-grid-tile>
+    </mat-grid-list>
+  <div *ngIf="grupos.length === 0">
+      <div
+        style="background-color: whitesmoke; border-radius: 20px; padding: 8% 10% 16% 10%; align-items: center; justify-items: center; align-content: center; align-self: center;"
+      >
+        <div
+          style="background-color: darkgray; width: 150px; height: 150px; align-items: center; justify-items: center; align-content: center; border: 4px solid white; border-radius: 80px; left: 44%; position: relative; box-shadow: 0px 2px 0px rgba(0,0,0,0.5);"
+        >
+        <img src="../../../assets/img/empty_folder.png" height="100px" width="100px" style="position: relative; left: 20%; top: 26px;"/>
+        </div>
+        <h2 style="color:darkgray; text-align: center;">
+          Nenhuma monografia disponivel...
+        </h2>
+      </div>
+    </div>
+</div>

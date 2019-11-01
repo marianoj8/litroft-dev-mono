@@ -1,0 +1,140 @@
+<div class="container mat-elevation-z8 table hide-on-med-and-down">
+  <button class="btn-large" mat-raised-button color="primary" (click)="add()">
+    <mat-icon>add</mat-icon>
+    Cadastrar Novo Projeto
+  </button>
+  <table
+    *ngIf="projetos; else loading"
+    mat-table
+    [dataSource]="projetos"
+    matSort
+  >
+    <ng-container matColumnDef="tema">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Tema</th>
+      <td mat-cell *matCellDef="let projeto">
+        {{ projeto?.tema.substring(0, 35).concat('...') }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="grupo">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Grupo</th>
+      <td mat-cell *matCellDef="let projeto">
+        {{ projeto?.grupo.posicao }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="turma">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Turma</th>
+      <td mat-cell *matCellDef="let projeto">
+        {{ projeto?.grupo?.turma?.sigla }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="curso">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Curso</th>
+      <td mat-cell *matCellDef="let projeto">
+        {{ projeto?.grupo?.curso?.nome }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="anoLetivo">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Ano Letivo</th>
+      <td mat-cell *matCellDef="let projeto">
+        {{ projeto?.grupo?.anoLetivo }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="detalhe">
+      <th mat-header-cell *matHeaderCellDef>Detalhe</th>
+      <td mat-cell *matCellDef="let projeto">
+        <button mat-raised-button [routerLink]="['detalhe', projeto.id]">
+          <mat-icon color="primary">description</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="edit">
+      <th mat-header-cell *matHeaderCellDef>Editar</th>
+      <td mat-cell *matCellDef="let projeto">
+        <button mat-raised-button (click)="edit(projeto.id)">
+          <mat-icon color="primary">edit</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="delete">
+      <th mat-header-cell *matHeaderCellDef>Excluir</th>
+      <td mat-cell *matCellDef="let projeto">
+        <button
+          mat-raised-button
+          matTooltipShowDelay="2000"
+          matTooltipHideDelay="2000"
+          matTooltip="Uma vez excluido não tem como reverter as alterações."
+          (click)="openDeleteDialog(projeto.id)"
+        >
+          <mat-icon color="warn">delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="noData">
+      <th mat-footer-cell *matFooterCellDef>Lista vasia.</th>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displaydColumns; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: displaydColumns"></tr>
+    <tr
+      mat-footer-row
+      *matFooterRowDef="['noData']"
+      [ngClass]="{ hide: true }"
+    ></tr>
+  </table>
+
+  <ng-template #loading>
+    <div *ngIf="error$ | async as error; else showError">
+      <span>
+        Erro ao carregar projetos. Tente novamente mais tarde.
+      </span>
+    </div>
+    <ng-template #showError>
+      <mat-progress-bar mode="indeterminate" color="warn"> </mat-progress-bar>
+    </ng-template>
+  </ng-template>
+</div>
+
+<!-- Modo Mobile inicializado  -->
+
+<div class="hide-on-large-only">
+  <mat-nav-list
+    class="mat-elevation-z8 container"
+    *ngIf="projetos; else loadingOnList"
+  >
+    <button class="btn-large" mat-raised-button color="primary" (click)="add()">
+      <mat-icon>add</mat-icon>
+      Cadastrar Novo Projeto
+    </button>
+    <a
+      mat-list-item
+      (click)="openMoreOptionDialog(item.id)"
+      *ngFor="let item of projetosList"
+    >
+      <mat-icon matListIcon class="mat-18">widgets</mat-icon>
+      <h5 matLine>{{ item?.tema }}</h5>
+      <p matLine>
+        {{ item?.grupo?.curso?.nome }}
+      </p>
+      <p matLine>
+        {{ item?.grupo?.turma?.sigla }} |
+        {{ item?.grupo?.anoLetivo }}
+      </p>
+      <mat-divider></mat-divider>
+    </a>
+  </mat-nav-list>
+  <ng-template #loadingOnList>
+    <mat-progress-bar
+      mode="indeterminate"
+      color="warn"
+      class="hide-on-large-only"
+    ></mat-progress-bar>
+  </ng-template>
+</div>

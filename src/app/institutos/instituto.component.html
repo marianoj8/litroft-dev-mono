@@ -1,0 +1,39 @@
+<div
+  [hidden]="onChangeContext"
+  class="mat-elevation-z4"
+  style="background-color: #3f51b5;"
+>
+  <mat-card color="primary" style="background-color: #3f51b5;">
+    <div class="space-arround">
+      <mat-icon
+        class="icon-settings"
+        style="color: #fff;"
+        (click)="onFilterSearch()"
+        >settings</mat-icon
+      >
+      <mat-form-field class="search">
+        <input
+          #key
+          matInput
+          type="text"
+          (keyup)="find($event, key.value)"
+          autocomplete="false"
+          placeholder="Procurar curso por nome..."
+        />
+        <span matSuffix *ngIf="!(key.value.length != 0)"
+          ><mat-icon style="color: #fff;">search</mat-icon>
+        </span>
+
+        <span matSuffix *ngIf="key.value.length != 0">
+          <button
+            mat-icon-button
+            (click)="key.value = null; cleanSearchField()"
+          >
+            <mat-icon style="color: #fff;">close</mat-icon>
+          </button>
+        </span>
+      </mat-form-field>
+    </div>
+  </mat-card>
+</div>
+<router-outlet></router-outlet>

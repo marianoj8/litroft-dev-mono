@@ -1,0 +1,8 @@
+version: '2.1'
+
+services:
+  litroft-mono:
+    image: litroft-mono
+    build: .
+    ports:
+      - 8081:80

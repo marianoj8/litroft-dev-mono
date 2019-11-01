@@ -1,0 +1,12 @@
+.table {
+  height: 300px;
+  overflow: auto;
+}
+mat-dialog-actions{
+  direction: rtl;
+  padding-right: 1%;
+}
+
+mat-dialog-actions button {
+  margin-right: 1.5%;
+}

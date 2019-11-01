@@ -1,0 +1,23 @@
+<div [hidden]="!onChangeContext">
+  <mat-card color="primary">
+    <div class="space-arround">
+      <mat-icon class="icon-settings" color="primary" (click)="onFilterSearch()"
+        >settings</mat-icon
+      >
+      <mat-form-field class="search">
+        <input
+          #key
+          matInput
+          type="text"
+          (keyup)="find($event, key.value)"
+          autocomplete="false"
+          placeholder="Procurar monografias por nome..."
+        />
+        <span matSuffix *ngIf="!(key.value.length != 0)"
+          ><mat-icon class="mat-1" color="primary">search</mat-icon>
+        </span>
+      </mat-form-field>
+    </div>
+  </mat-card>
+</div>
+<router-outlet></router-outlet>

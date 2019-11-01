@@ -1,0 +1,41 @@
+
+<mat-card color="primary">
+  <div>
+    <span>
+      <button
+        class="btn-large"
+        mat-raised-button
+        color="primary"
+        (click)="back()"
+      >
+        <mat-icon>arrow_back</mat-icon>
+        Voltar
+      </button>
+    </span>
+  </div>
+</mat-card>
+
+<a class="floating-btn-up" (click)="onZooIn()">
+  <mat-icon class="float-btn-icon-1">add</mat-icon>
+</a>
+<a class="floating-btn-down" (click)="onZooOut()">
+  <mat-icon class="float-btn-icon-2">remove</mat-icon>
+</a>
+<a class="floating-btn-full" (click)="onEnableReadMode()">
+  <mat-icon class="float-btn-icon-3">{{ iconState }}</mat-icon>
+</a>
+
+<div class="readingMode">
+  <pdf-viewer
+    class="mat-elevation-z8"
+    [src]="pdfSrc"
+    [render-text]="true"
+    [stick-to-page]="true"
+    [fit-to-page]="true"
+    [autoresize]="true"
+    [show-all]="true"
+    [show-borders]="true"
+    style="display: inline;"
+  >
+  </pdf-viewer>
+</div>

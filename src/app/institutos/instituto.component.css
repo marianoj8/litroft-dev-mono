@@ -1,0 +1,19 @@
+mat-card {
+  height: 38px;
+}
+.space-arround {
+  display: inline;
+  position: relative;
+  bottom: 0px;
+  align-content: center;
+  align-items: center;
+}
+
+.space-arround .icon-settings {
+  margin-right: 10rem;
+  cursor: pointer;
+}
+
+/* input[active]{
+  color: whitesmoke;
+} */

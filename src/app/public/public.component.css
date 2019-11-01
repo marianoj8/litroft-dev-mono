@@ -1,0 +1,18 @@
+mat-card {
+  height: 38px;
+}
+
+.space-arround .icon-settings{
+  margin-right: 10rem;
+  cursor: pointer;
+ }
+
+ .onHidden{
+  transition: all 1.5s;
+  height: 0px;
+}
+
+.onHidden-active{
+  transition: all 1.5s;
+  height: 20px;
+}
