@@ -32,6 +32,7 @@ export class AppComponent implements OnInit, OnDestroy {
   title = 'Litroft Dev - Mono';
   contextMenu = '***';
   mostrarMenu = false;
+  public emitShowAddButton = false;
   onChangeContext: boolean;
   showDateSelect = false;
   formGroup01: FormGroup;
@@ -67,7 +68,9 @@ export class AppComponent implements OnInit, OnDestroy {
     private publicService: PublicService,
     public institutoService: InstitutoService,
     private formBuilder: FormBuilder,
-  ) { }
+  ) {
+
+  }
 
   ngOnInit(): void {
     this.institutos = [];
@@ -76,6 +79,9 @@ export class AppComponent implements OnInit, OnDestroy {
     }
 
     this.institutoService.list().subscribe(resp => this.institutos = resp);
+
+    this.monografiaService.emitShowAddButton
+      .subscribe(resp => this.emitShowAddButton = resp);
 
     this.sub = this.homeService.onChangeContextTitle.subscribe(
       value => {

@@ -17,7 +17,11 @@ export class MonoListComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private grupoService: GrupoService) { }
+    private monografiaService: MonografiaService,
+    private grupoService: GrupoService) {
+
+      this.monografiaService.emitShowAddButton.emit(false);
+  }
 
   ngOnInit() {
     this.grupos = [];

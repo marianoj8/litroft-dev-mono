@@ -19,6 +19,7 @@ export class MonografiaService {
   emitOnDetalheButtonCliked = new EventEmitter<number>();
   emitOnEditButtonCliked = new EventEmitter<number>();
   emitOnDeleteButtonCliked = new EventEmitter<number>();
+  emitShowAddButton = new EventEmitter<boolean>();
 
   constructor(private service: CrudService<Monografia, number>, private http: HttpClient) { }
 

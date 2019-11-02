@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Grupo } from 'src/app/shared/model/grupo';
 
 import { PublicService } from '../modules/public.service';
+import { MonografiaService } from './../../monografias/modules/monografia.service';
 
 @Component({
   selector: 'app-list-all',
@@ -20,8 +21,10 @@ export class ListAllComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private monografiaService: MonografiaService,
     private publicService: PublicService) {
     this.publicService.onChangeContext.emit(true);
+    this.monografiaService.emitShowAddButton.emit(true);
   }
 
   ngOnInit() {

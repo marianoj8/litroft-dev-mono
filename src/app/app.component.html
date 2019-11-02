@@ -18,8 +18,8 @@
     <button
       mat-flat-button
       *ngIf="authService.loggedIn()"
-      class="hide-on-med-and-down"
-      id="btnOnFirstRow1"
+      class="hide-on-med-and-down "
+      style="position: relative; left: 67%;"
       color="primary"
       (click)="logOut(drawer)"
     >
@@ -62,7 +62,7 @@
         Projecto
       </a>
       <a
-        id="lastLink"
+        style="position: relative; left: 30%;"
         routerLinkActive="active"
         (click)="switchBetweenPages()"
         mat-button
@@ -252,6 +252,19 @@
 
         <span [ngClass]="'context-title'">
           {{ contextMenu }}
+        </span>
+        <span
+          class="dateIcon hide-on-med-and-down"
+          [hidden]="emitShowAddButton"
+        >
+          <button
+            mat-button
+            [routerLink]="['monografias/add']"
+            style="position: relative; bottom: 10px; right: 50%;"
+          >
+            <mat-icon class="mat-0">cloud_upload</mat-icon>
+            Nova Monografia
+          </button>
         </span>
         <span
           class="dateIcon hide-on-med-and-down"

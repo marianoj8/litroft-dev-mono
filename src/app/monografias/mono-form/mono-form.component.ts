@@ -47,7 +47,7 @@ export class MonoFormComponent implements OnInit, OnDestroy {
     private location: Location,
     private http: HttpClient
   ) {
-
+    this.monografiaService.emitShowAddButton.emit(true);
   }
 
   ngOnInit() {
