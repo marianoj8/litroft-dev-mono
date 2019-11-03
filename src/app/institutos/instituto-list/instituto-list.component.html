@@ -87,9 +87,9 @@
             Localização
           </th>
           <td mat-cell *matCellDef="let instituto">
-            {{ instituto?.local.provincia }},
-            {{ instituto?.local.municipio }}
-            ({{ instituto?.destrito }})
+            {{instituto?.local?.provincia?.nome}},
+            {{instituto?.local?.monicipio?.nome}}
+            ({{ instituto?.local?.destrito }})
           </td>
         </ng-container>
 
