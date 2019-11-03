@@ -1,21 +1,20 @@
 import { Location } from '@angular/common';
-import { HttpErrorResponse, HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { HttpErrorResponse, HttpEventType } from '@angular/common/http';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatVerticalStepper } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EventEmitter } from 'events';
 import { Observable, Subscription } from 'rxjs';
-
 import { DepartamentoService } from 'src/app/departamentos/modules/departamento.service';
+import { ProjetoService } from 'src/app/projetos/modules/projeto.service';
+import { Projeto } from 'src/app/shared/model/projeto';
+import { NotificationService } from 'src/app/shared/services/notification/notification.service';
 import { MyErrorStateMatch } from 'src/app/shared/validators/field-validator';
+
 import { MonografiaService } from '../modules/monografia.service';
 import { Departamento } from './../../shared/model/departamento';
 import { Monografia } from './../../shared/model/monografia';
-import { NotificationService } from 'src/app/shared/services/notification/notification.service';
-import { ProjetoService } from 'src/app/projetos/modules/projeto.service';
-import { Projeto } from 'src/app/shared/model/projeto';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-mono-form',
@@ -45,7 +44,6 @@ export class MonoFormComponent implements OnInit, OnDestroy {
     private projetoSerice: ProjetoService,
     private notificationService: NotificationService,
     private location: Location,
-    private http: HttpClient
   ) {
     this.monografiaService.emitShowAddButton.emit(true);
   }
@@ -106,40 +104,41 @@ export class MonoFormComponent implements OnInit, OnDestroy {
     this.monografia.paginas = this.formGroup01.controls.pagina.value;
     this.monografia.projeto = this.projeto;
     this.monografia.departamento = this.projeto.grupo.curso.departamento;
+    this.monografia.file = this.selectedFile;
+
+    // const formData = new FormData();
+
+    // formData.append('file', this.selectedFile);
 
 
 
-    const formData = new FormData();
-    formData.append('file', this.selectedFile);
-    const request = new HttpRequest('POST', `${environment.API}/interno/mono/uploadFile?departamentoId=${this.monografia.departamento.id}&grupoId=${this.monografia.projeto.grupo.id}&paginas=${this.monografia.paginas}&projetoId=${this.monografia.projeto.id}`, formData);
-    this.http.request<any>(request)
-      .subscribe(res => console.log(res));
+    this.monografiaService.save(this.monografia)
+      .subscribe(
+        (event) => {
+          if (event.type === HttpEventType.UploadProgress) {
+            console.log(event);
+            console.log('loaded: ' + Math.round(event.loaded / event.total * 100) + '%');
+          } else if (event) {
+            if (!!state) {
+              if (this.router.url.match('/edit')) {
+                this.showUpdatedMessage();
+              } else {
+                this.showSavedMessage();
+              }
+              this.back();
+            } else {
+              if (this.router.url.match('/edit')) {
+                this.showUpdatedMessage();
+              } else {
+                this.showSavedMessage();
+              }
+              stepper.reset();
+            }
 
-    // this.http.post(`${environment.API}/admin/mono/uploadFile1`, fd)
-    //   .subscribe(res => console.log(res));
-
-
-    // this.monografiaService.save(this.monografia);
-    // .subscribe(
-    //   (data: Monografia) => {
-    //     if (!!state) {
-    //       if (this.router.url.match('/edit')) {
-    //         this.showUpdatedMessage();
-    //       } else {
-    //         this.showSavedMessage();
-    //       }
-    //       this.back();
-    //     } else {
-    //       if (this.router.url.match('/edit')) {
-    //         this.showUpdatedMessage();
-    //       } else {
-    //         this.showSavedMessage();
-    //       }
-    //       stepper.reset();
-    //     }
-    //   },
-    //   (err: HttpErrorResponse) => this.showFailerMessage(err)
-    // );
+          }
+        },
+        (err: HttpErrorResponse) => this.showFailerMessage(err)
+      );
 
   }
 

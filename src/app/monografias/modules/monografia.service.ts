@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
+import { HttpClient, HttpEventType } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Monografia } from 'src/app/shared/model/monografia';
@@ -42,29 +42,14 @@ export class MonografiaService {
   }
 
 
-  save(t: Monografia) {
+  save(t: Monografia): Observable<any> {
     const formData: FormData = new FormData();
     formData.append('file', t.file);
 
-    console.log(formData);
-    console.log(t.file);
-
-    const header = new HttpHeaders({
-      'Content-type': 'application/pdf'
-      // Authorization: currentUser
+    return this.http.post<any>(`${environment.API}/interno/mono/uploadFile?departamentoId=${t.departamento.id}&grupoId=${t.projeto.grupo.id}&paginas=${t.paginas}&projetoId=${t.projeto.id}`, formData,{
+      reportProgress:true,
+      observe: 'events'
     });
-
-    const request = new HttpRequest('POST', `${environment.API}/interno/mono/uploadFile1`, formData).clone({
-      headers: new HttpHeaders({
-        'Content-type': 'application/json, text/plain, */*',
-        'X-Content-Type-Options': 'nosniff',
-        'X-XSS-Protection': '1; mode=block',
-        Authorization: localStorage.getItem('token')
-      })
-    });
-
-    return this.http.request(request)
-      .subscribe(res => console.log(res));
   }
 
   deleteById(id: number): Observable<void> {
