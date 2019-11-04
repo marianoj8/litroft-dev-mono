@@ -1,3 +1,4 @@
+
 .container-card {
   height: 100%;
   width: 100%;
@@ -42,12 +43,12 @@
 .container-card .card .face.face1 .content img {
   max-width: 100px;
   color: #fff;
-  margin-left: 41%;
+  margin-left: 35.8%;
 }
 
 .container-card .card .face.face1 .content h4 {
-  /* margin: 10px 0 0; */
   padding: 0;
+  text-justify: auto;
   color: #fff;
   text-align: center;
   font-size: 1em;

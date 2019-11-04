@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MonografiaService } from 'src/app/monografias/modules/monografia.service';
 
 @Component({
   selector: 'app-instituto-form',

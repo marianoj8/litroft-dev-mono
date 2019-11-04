@@ -6,7 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { EventEmitter } from 'events';
 import { Observable, of, Subject, Subscription } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { MatDialog, MatSort, MatTableDataSource, MatVerticalStepper } from '@angular/material';
+import { MatDialog, MatSort, MatTableDataSource, MatVerticalStepper, MatTab } from '@angular/material';
 
 import { CursoService } from 'src/app/cursos/modules/curso.service';
 import { ElementoService } from 'src/app/elementos/modules/elementos.service';
@@ -57,9 +57,9 @@ export class GrupoFormComponent implements OnInit {
   cursoError$ = new Subject<boolean>();
   turmaError$ = new Subject<boolean>();
   error$ = new Subject<boolean>();
+  indexCounter = 0;
+  indexElements: number[];
   private sub: Subscription;
-
-  selectedFile: File = null;
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
@@ -88,6 +88,7 @@ export class GrupoFormComponent implements OnInit {
     private monografiaService: MonografiaService) {
     this.monografiaService.emitShowAddButton.emit(true);
     this.position = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII'];
+    this.indexElements = [];
   }
 
   ngOnInit() {
@@ -169,17 +170,7 @@ export class GrupoFormComponent implements OnInit {
         // })
       )
       .subscribe(
-        next => {
-          const array = next.map((item: Elemento) => {
-            return {
-              ...item.estudante
-            };
-
-          });
-          this.estudantes = new MatTableDataSource(array);
-          this.estudantes.sort = this.sort;
-          this.estudantesList = this.estudantes.data;
-        });
+        next => next => this.relist(next));
   }
 
   initForms() {
@@ -296,12 +287,45 @@ export class GrupoFormComponent implements OnInit {
     this.location.back();
   }
 
-  onFileSelected(event) {
-    this.selectedFile = event.target.files[0] as File;
-    console.log(this.selectedFile);
+  removeElementAt(estudante: Estudante) {
+
+    this.estudantesList.map((element, i: number) => {
+      if (estudante.id == element.id) {
+        console.log('Index: ' + i);
+        console.log('Elemento: ' + element.nome);
+        this.estudantesList.splice(i, --i);
+      }
+    });
+
+    console.log(this.estudantesList);
+
+
+
+    // this.estudantesList.forEach(e => {
+    //   this.indexElement++;
+    //   if (this.estudantesList.includes(estudante)) {
+    //     this.estudantesList.splice(this.indexElement);
+    //     this.estudantes.data = this.estudantesList;
+    //     // if (this.indexElement == 0) {
+    //     //   this.estudantesList = [];
+    //     //   this.estudantes.data = [];
+    //     // }
+    //   }
+    // });
+    // this.grupoService.emitSelectedElements.emit(this.estudantesList);
+    // this.grupoService.emitSelectedElements
+    //   .subscribe(
+    //     next => this.relist(next));
   }
 
-  onUpload() {
-
+  relist(elements) {
+    const array = elements.map((item: Elemento) => {
+      return {
+        ...item.estudante
+      };
+    });
+    this.estudantes = new MatTableDataSource(array);
+    this.estudantes.sort = this.sort;
+    this.estudantesList = this.estudantes.data;
   }
 }
