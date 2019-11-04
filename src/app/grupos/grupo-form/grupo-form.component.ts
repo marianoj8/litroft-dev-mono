@@ -26,6 +26,7 @@ import { Orientador } from 'src/app/shared/model/orientador';
 import { Grupo } from 'src/app/shared/model/grupo';
 import { EstudanteService } from 'src/app/estudantes/modules/estudante.service';
 import { OrientadorService } from 'src/app/orientadores/modules/OrientadorService.service';
+import { MonografiaService } from 'src/app/monografias/modules/monografia.service';
 
 @Component({
   selector: 'app-grupo-form',
@@ -83,8 +84,9 @@ export class GrupoFormComponent implements OnInit {
     private turmaService: TurmaService,
     private notificationService: NotificationService,
     private location: Location,
-    private dialog: MatDialog
-  ) {
+    private dialog: MatDialog,
+    private monografiaService: MonografiaService) {
+    this.monografiaService.emitShowAddButton.emit(true);
     this.position = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII'];
   }
 

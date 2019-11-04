@@ -57,7 +57,7 @@
   position: relative;
   background: #fff;
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
   padding: 20px;
   box-sizing: border-box;
@@ -78,4 +78,6 @@
 }
 .container-card .card .face.face2 .content a {
   margin: 15px 0 0;
+  text-align: left;
+  width: 195%;
 }

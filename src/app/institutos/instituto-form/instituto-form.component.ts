@@ -7,7 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InstitutoFormComponent implements OnInit {
 
-  constructor() { }
+  constructor(private monografiaService: MonografiaService) {
+    this.monografiaService.emitShowAddButton.emit(true);
+  }
 
   ngOnInit() {
   }

@@ -24,6 +24,7 @@ import { DeleteSuccessMessageComponent } from './shared/services/notification/no
 import { SaveSuccessMessageComponent } from './shared/services/notification/notification-success-save.component';
 import { UpdateSuccessMessageComponent } from './shared/services/notification/notification-success-update.component';
 import { TokenInterceptorService } from './shared/services/security/token-interceptor.service';
+import { LoadingUploadComponent } from './shared/loading-upload/loading-upload.component';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { TokenInterceptorService } from './shared/services/security/token-interc
     LoginFaildMessageComponent,
     MoreOptionsDialogComponent,
     ErrorLoadingComponent,
-    FooterComponent
+    FooterComponent,
+    LoadingUploadComponent
   ],
   entryComponents: [
     SaveSuccessMessageComponent,
@@ -57,6 +59,7 @@ import { TokenInterceptorService } from './shared/services/security/token-interc
     LoginFaildMessageComponent,
     MoreOptionsDialogComponent,
     ErrorLoadingComponent,
+    LoadingUploadComponent
   ],
   imports: [
     BrowserModule,

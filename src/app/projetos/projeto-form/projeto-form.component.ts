@@ -9,16 +9,16 @@ import { Observable, of, Subject } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { DepartamentoService } from 'src/app/departamentos/modules/departamento.service';
 import { GrupoService } from 'src/app/grupos/modules/grupo.service';
+import { MonografiaService } from 'src/app/monografias/modules/monografia.service';
 import { Departamento } from 'src/app/shared/model/departamento';
 import { Grupo } from 'src/app/shared/model/grupo';
 import { Projeto } from 'src/app/shared/model/projeto';
+import { Turma } from 'src/app/shared/model/turma';
 import { NotificationService } from 'src/app/shared/services/notification/notification.service';
 import { MyErrorStateMatch } from 'src/app/shared/validators/field-validator';
+import { TurmaService } from 'src/app/turmas/modules/turma.service';
 
 import { ProjetoService } from '../modules/projeto.service';
-import { Turma } from 'src/app/shared/model/turma';
-import { TurmaService } from 'src/app/turmas/modules/turma.service';
-import { Curso } from './../../shared/model/curso';
 
 @Component({
   selector: 'app-projeto-form',
@@ -48,9 +48,9 @@ export class ProjetoFormComponent implements OnInit {
     private turmaService: TurmaService,
     private departamentoService: DepartamentoService,
     private notificationService: NotificationService,
-    private location: Location
-  ) {
-
+    private location: Location,
+    private monografiaService: MonografiaService) {
+    this.monografiaService.emitShowAddButton.emit(true);
   }
 
   ngOnInit() {

@@ -7,6 +7,7 @@ import { Observable, of } from 'rxjs';
 import { Departamento } from 'src/app/shared/model/departamento';
 import { DepartamentoService } from '../modules/departamento.service';
 import { ErrorLoadingComponent } from 'src/app/shared/error-loading/error-loading.component';
+import { MonografiaService } from 'src/app/monografias/modules/monografia.service';
 
 @Component({
   selector: 'app-departamento-detalhe',
@@ -22,7 +23,10 @@ export class DepartamentoDetalheComponent implements OnInit {
   constructor(
     private service: DepartamentoService,
     private activatedRoute: ActivatedRoute,
-    private dialog: MatDialog) { }
+    private monografiaService: MonografiaService,
+    private dialog: MatDialog) {
+    this.monografiaService.emitShowAddButton.emit(true);
+  }
 
   ngOnInit() {
     this.service.onChangeContext.emit(true);

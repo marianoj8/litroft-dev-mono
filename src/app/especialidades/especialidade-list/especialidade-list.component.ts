@@ -11,6 +11,7 @@ import { catchError } from 'rxjs/operators';
 import { ErrorLoadingComponent } from 'src/app/shared/error-loading/error-loading.component';
 import { MoreOptionsDialogComponent } from 'src/app/shared/more-options-dialog/more-options-dialog.component';
 import { DeleteDialogComponent } from 'src/app/shared/delete-dialog/delete-dialog.component';
+import { MonografiaService } from 'src/app/monografias/modules/monografia.service';
 
 @Component({
   selector: 'app-especialidade-list',
@@ -45,7 +46,10 @@ export class EspecialidadeListComponent implements OnInit, OnDestroy {
     private activatedRoute: ActivatedRoute,
     public service: EspecialidadeService,
     private notification: NotificationService,
-    private dialogService: MatDialog) { }
+    private dialogService: MatDialog,
+    public monografiaService: MonografiaService) {
+    this.monografiaService.emitShowAddButton.emit(true);
+  }
 
   ngOnInit() {
     this.service.onChangeContext.emit(false);

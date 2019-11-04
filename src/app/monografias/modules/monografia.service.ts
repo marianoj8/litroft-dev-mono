@@ -5,6 +5,7 @@ import { Monografia } from 'src/app/shared/model/monografia';
 import { CustomFilter } from 'src/app/shared/model/support/custom-filter';
 import { CrudService } from 'src/app/shared/services/crud/crud.service';
 import { environment } from 'src/environments/environment';
+import { delay } from 'rxjs/internal/operators/delay';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +21,7 @@ export class MonografiaService {
   emitOnEditButtonCliked = new EventEmitter<number>();
   emitOnDeleteButtonCliked = new EventEmitter<number>();
   emitShowAddButton = new EventEmitter<boolean>();
+  emitStatusUploader = new EventEmitter<any>();
 
   constructor(private service: CrudService<Monografia, number>, private http: HttpClient) { }
 
@@ -46,10 +48,12 @@ export class MonografiaService {
     const formData: FormData = new FormData();
     formData.append('file', t.file);
 
-    return this.http.post<any>(`${environment.API}/interno/mono/uploadFile?departamentoId=${t.departamento.id}&grupoId=${t.projeto.grupo.id}&paginas=${t.paginas}&projetoId=${t.projeto.id}`, formData,{
-      reportProgress:true,
+    return this.http.post<any>(`${environment.API}/interno/mono/uploadFile?departamentoId=${t.departamento.id}&grupoId=${t.projeto.grupo.id}&paginas=${t.paginas}&projetoId=${t.projeto.id}`, formData, {
+      reportProgress: true,
       observe: 'events'
-    });
+    }).pipe(
+      delay(2000),
+    );
   }
 
   deleteById(id: number): Observable<void> {

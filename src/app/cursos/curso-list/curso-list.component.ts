@@ -12,6 +12,7 @@ import { MoreOptionsDialogComponent } from 'src/app/shared/more-options-dialog/m
 import { NotificationService } from 'src/app/shared/services/notification/notification.service';
 import { DeleteDialogComponent } from 'src/app/shared/delete-dialog/delete-dialog.component';
 import { ErrorLoadingComponent } from 'src/app/shared/error-loading/error-loading.component';
+import { MonografiaService } from 'src/app/monografias/modules/monografia.service';
 
 @Component({
   selector: 'app-curso-list',
@@ -46,8 +47,11 @@ export class CursoListComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     public service: CursoService,
+    public monografiaService: MonografiaService,
     private notification: NotificationService,
-    private dialogService: MatDialog) { }
+    private dialogService: MatDialog) {
+    this.monografiaService.emitShowAddButton.emit(true);
+  }
 
   ngOnInit() {
     this.service.onChangeContext.emit(false);

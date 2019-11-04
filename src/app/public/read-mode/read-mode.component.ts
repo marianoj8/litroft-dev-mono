@@ -4,6 +4,7 @@ import { Location } from '@angular/common';
 import { environment } from 'src/environments/environment';
 
 import { PublicService } from '../modules/public.service';
+import { MonografiaService } from 'src/app/monografias/modules/monografia.service';
 
 @Component({
   selector: 'app-read-mode',
@@ -19,10 +20,11 @@ export class ReadModeComponent implements OnInit {
   public onChangeContext = false;
   constructor(
     private publicService: PublicService,
+    private monografiaService: MonografiaService,
     private activetedRoute: ActivatedRoute,
     private location: Location) {
-
-      publicService.onChangeContext.emit(false);
+    this.monografiaService.emitShowAddButton.emit(true);
+    publicService.onChangeContext.emit(false);
   }
 
 
@@ -34,16 +36,17 @@ export class ReadModeComponent implements OnInit {
   onEnableReadMode() {
 
     document.querySelector('.readingMode').classList.toggle('readingMode-active');
-    document.querySelector('.float-btn-icon-1')
-      .classList.toggle('float-btn-icon-1-active');
     document.querySelector('.float-btn-icon-2')
       .classList.toggle('float-btn-icon-2-active');
     document.querySelector('.float-btn-icon-3')
       .classList.toggle('float-btn-icon-3-active');
 
-    document.querySelector('.floating-btn-up').classList.toggle('floating-btn-active');
-    document.querySelector('.floating-btn-down').classList.toggle('floating-btn-active');
-    document.querySelector('.floating-btn-full').classList.toggle('floating-btn-active');
+    // document.querySelector('.floating-btn-up').classList.toggle('floating-btn-active');
+    document.querySelector('.floating-btn-down')
+      .classList.toggle('floating-btn-active');
+
+    document.querySelector('.floating-btn-full')
+      .classList.toggle('floating-btn-active');
 
     if (this.state === 0) {
       this.state++;

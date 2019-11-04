@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MonografiaService } from 'src/app/monografias/modules/monografia.service';
 
 @Component({
   selector: 'app-projeto-detalhe',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProjetoDetalheComponent implements OnInit {
 
-  constructor() { }
+  constructor(private monografiaService: MonografiaService) {
+    this.monografiaService.emitShowAddButton.emit(true);
+  }
 
   ngOnInit() {
   }

@@ -8,6 +8,7 @@ import { Estudante } from 'src/app/shared/model/estudante';
 
 import { ErrorLoadingComponent } from './../../shared/error-loading/error-loading.component';
 import { EstudanteService } from './../modules/estudante.service';
+import { MonografiaService } from 'src/app/monografias/modules/monografia.service';
 
 @Component({
   selector: 'app-estudante-detalhe',
@@ -23,7 +24,10 @@ export class EstudanteDetalheComponent implements OnInit {
     private service: EstudanteService,
     private activatedRoute: ActivatedRoute,
     private dialog: MatDialog,
-    private location: Location) { }
+    private location: Location,
+    public monografiaService: MonografiaService) {
+    this.monografiaService.emitShowAddButton.emit(true);
+  }
 
   ngOnInit() {
     this.service.onChangeContext.emit(true);

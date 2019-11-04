@@ -12,6 +12,7 @@ import { CustomFilter } from './../../shared/model/support/custom-filter';
 import { MoreOptionsDialogComponent } from './../../shared/more-options-dialog/more-options-dialog.component';
 import { ErrorLoadingComponent } from 'src/app/shared/error-loading/error-loading.component';
 import { MatDailogTypeParam } from 'src/app/shared/model/support/mat-dialog-type-param';
+import { MonografiaService } from 'src/app/monografias/modules/monografia.service';
 
 @Component({
   selector: 'app-estudante-list',
@@ -47,7 +48,10 @@ export class EstudanteListComponent implements OnInit, OnDestroy {
     private activatedRoute: ActivatedRoute,
     public service: EstudanteService,
     private notification: NotificationService,
-    private dialogService: MatDialog) { }
+    private dialogService: MatDialog,
+    public monografiaService: MonografiaService) {
+    this.monografiaService.emitShowAddButton.emit(true);
+  }
 
   ngOnInit() {
     this.service.onChangeContext.emit(false);

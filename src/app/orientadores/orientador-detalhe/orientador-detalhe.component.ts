@@ -8,6 +8,7 @@ import { Location } from '@angular/common';
 import { Orientador } from 'src/app/shared/model/orientador';
 import { ErrorLoadingComponent } from 'src/app/shared/error-loading/error-loading.component';
 import { OrientadorService } from '../modules/OrientadorService.service';
+import { MonografiaService } from 'src/app/monografias/modules/monografia.service';
 
 @Component({
   selector: 'app-orientador-detalhe',
@@ -23,7 +24,10 @@ export class OrientadorDetalheComponent implements OnInit {
     private service: OrientadorService,
     private activatedRoute: ActivatedRoute,
     private dialog: MatDialog,
-    private location: Location) { }
+    private location: Location,
+    private monografiaService: MonografiaService) {
+    this.monografiaService.emitShowAddButton.emit(true);
+  }
 
   ngOnInit() {
     this.service.onChangeContext.emit(true);

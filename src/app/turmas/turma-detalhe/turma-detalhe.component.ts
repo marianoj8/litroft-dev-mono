@@ -8,6 +8,7 @@ import { Location } from '@angular/common';
 import { TurmaService } from '../modules/turma.service';
 import { Turma } from 'src/app/shared/model/turma';
 import { ErrorLoadingComponent } from 'src/app/shared/error-loading/error-loading.component';
+import { MonografiaService } from 'src/app/monografias/modules/monografia.service';
 
 @Component({
   selector: 'app-turma-detalhe',
@@ -23,7 +24,10 @@ export class TurmaDetalheComponent implements OnInit {
     private service: TurmaService,
     private activatedRoute: ActivatedRoute,
     private dialog: MatDialog,
-    private location: Location) { }
+    private location: Location,
+    private monografiaService: MonografiaService) {
+    this.monografiaService.emitShowAddButton.emit(true);
+  }
 
   ngOnInit() {
     this.service.onChangeContext.emit(true);

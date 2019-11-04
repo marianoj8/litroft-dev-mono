@@ -10,6 +10,7 @@ import { MyErrorStateMatch } from 'src/app/shared/validators/field-validator';
 import { Departamento } from 'src/app/shared/model/departamento';
 import { DepartamentoService } from '../modules/departamento.service';
 import { NotificationService } from 'src/app/shared/services/notification/notification.service';
+import { MonografiaService } from 'src/app/monografias/modules/monografia.service';
 
 @Component({
   selector: 'app-departamento-form',
@@ -28,10 +29,11 @@ export class DepartamentoFormComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
     private departamentoService: DepartamentoService,
+    private monografiaService: MonografiaService,
     private notificationService: NotificationService,
     private location: Location
   ) {
-
+    this.monografiaService.emitShowAddButton.emit(true);
   }
 
   ngOnInit() {

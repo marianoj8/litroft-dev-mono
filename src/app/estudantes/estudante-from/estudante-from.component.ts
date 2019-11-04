@@ -15,6 +15,7 @@ import { MyErrorStateMatch } from 'src/app/shared/validators/field-validator';
 import { EstudanteService } from '../modules/estudante.service';
 import { CursoService } from './../../cursos/modules/curso.service';
 import { Estudante } from './../../shared/model/estudante';
+import { MonografiaService } from 'src/app/monografias/modules/monografia.service';
 
 
 @Component({
@@ -49,9 +50,9 @@ export class EstudanteFromComponent implements OnInit {
     private cursoSerice: CursoService,
     private notificationService: NotificationService,
     private dialog: MatDialog,
-    private location: Location
-  ) {
-
+    private location: Location,
+    public monografiaService: MonografiaService) {
+    this.monografiaService.emitShowAddButton.emit(true);
   }
 
   ngOnInit() {

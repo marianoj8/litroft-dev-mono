@@ -10,6 +10,7 @@ import { Instituto } from 'src/app/shared/model/instituto';
 import { CustomFilter } from 'src/app/shared/model/support/custom-filter';
 
 import { InstitutoService } from './../modules/instituto.service';
+import { MonografiaService } from 'src/app/monografias/modules/monografia.service';
 
 @Component({
   selector: 'app-instituto-list',
@@ -43,7 +44,9 @@ export class InstitutoListComponent implements OnInit {
   constructor(
     private breakpointObserver: BreakpointObserver,
     private service: InstitutoService,
-  ) { }
+    private monografiaService: MonografiaService) {
+    this.monografiaService.emitShowAddButton.emit(true);
+  }
 
   ngOnInit() {
     this.onRefrash();

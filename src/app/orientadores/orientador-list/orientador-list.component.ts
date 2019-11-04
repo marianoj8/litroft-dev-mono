@@ -12,6 +12,7 @@ import { NotificationService } from 'src/app/shared/services/notification/notifi
 import { ErrorLoadingComponent } from 'src/app/shared/error-loading/error-loading.component';
 import { MoreOptionsDialogComponent } from 'src/app/shared/more-options-dialog/more-options-dialog.component';
 import { DeleteDialogComponent } from 'src/app/shared/delete-dialog/delete-dialog.component';
+import { MonografiaService } from 'src/app/monografias/modules/monografia.service';
 
 @Component({
   selector: 'app-orientador-list',
@@ -47,7 +48,10 @@ export class OrientadorListComponent implements OnInit, OnDestroy {
     private activatedRoute: ActivatedRoute,
     public service: OrientadorService,
     private notification: NotificationService,
-    private dialogService: MatDialog) { }
+    private dialogService: MatDialog,
+    private monografiaService: MonografiaService) {
+    this.monografiaService.emitShowAddButton.emit(true);
+  }
 
   ngOnInit() {
     this.service.onChangeContext.emit(false);

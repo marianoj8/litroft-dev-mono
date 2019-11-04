@@ -1,10 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Observable } from 'rxjs/internal/Observable';
-import { Projeto } from '../shared/model/projeto';
-import { Subject, Subscription, of } from 'rxjs';
-import { catchError } from 'rxjs/operators';
 import { Location } from '@angular/common';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { of, Subject, Subscription } from 'rxjs';
+import { Observable } from 'rxjs/internal/Observable';
+import { catchError } from 'rxjs/operators';
 
+import { MonografiaService } from '../monografias/modules/monografia.service';
+import { Projeto } from '../shared/model/projeto';
 import { CustomFilter } from '../shared/model/support/custom-filter';
 import { ProjetoService } from './modules/projeto.service';
 
@@ -26,7 +27,9 @@ export class ProjetosComponent implements OnInit, OnDestroy {
 
   constructor(
     private projetoSerice: ProjetoService,
-    private location: Location) {
+    private location: Location,
+    private monografiaService: MonografiaService) {
+    this.monografiaService.emitShowAddButton.emit(true);
 
     this.projetoSerice.onChangeContextTitle.emit('Projeto');
   }

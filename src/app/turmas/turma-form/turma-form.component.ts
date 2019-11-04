@@ -1,19 +1,20 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { EventEmitter } from 'events';
-import { Router, ActivatedRoute } from '@angular/router';
-import { catchError } from 'rxjs/operators';
-import { MatVerticalStepper, MatDialog } from '@angular/material';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Observable, Subject, of } from 'rxjs';
-
-import { Turma } from 'src/app/shared/model/turma';
-import { MyErrorStateMatch } from 'src/app/shared/validators/field-validator';
-import { TurmaService } from '../modules/turma.service';
-import { Curso } from 'src/app/shared/model/curso';
-import { CursoService } from './../../cursos/modules/curso.service';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog, MatVerticalStepper } from '@angular/material';
+import { ActivatedRoute, Router } from '@angular/router';
+import { EventEmitter } from 'events';
+import { Observable, of, Subject } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { MonografiaService } from 'src/app/monografias/modules/monografia.service';
 import { ErrorLoadingComponent } from 'src/app/shared/error-loading/error-loading.component';
+import { Curso } from 'src/app/shared/model/curso';
+import { Turma } from 'src/app/shared/model/turma';
 import { NotificationService } from 'src/app/shared/services/notification/notification.service';
+import { MyErrorStateMatch } from 'src/app/shared/validators/field-validator';
+
+import { TurmaService } from '../modules/turma.service';
+import { CursoService } from './../../cursos/modules/curso.service';
 
 @Component({
   selector: 'app-turma-form',
@@ -37,9 +38,9 @@ export class TurmaFormComponent implements OnInit {
     private turmaService: TurmaService,
     private cursoService: CursoService,
     private notificationService: NotificationService,
-    private dialog: MatDialog
-  ) {
-
+    private dialog: MatDialog,
+    private monografiaService: MonografiaService) {
+    this.monografiaService.emitShowAddButton.emit(true);
   }
 
   ngOnInit() {

@@ -1,20 +1,21 @@
+import { Location } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatVerticalStepper } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subject, Observable, of } from 'rxjs';
-import { Location } from '@angular/common';
+import { EventEmitter } from 'events';
+import { Observable, of, Subject } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-
+import { EspecialidadeService } from 'src/app/especialidades/modules/especialidade.service';
+import { MonografiaService } from 'src/app/monografias/modules/monografia.service';
+import { ErrorLoadingComponent } from 'src/app/shared/error-loading/error-loading.component';
+import { Especialidade } from 'src/app/shared/model/especialidade';
 import { Orientador } from 'src/app/shared/model/orientador';
 import { NotificationService } from 'src/app/shared/services/notification/notification.service';
 import { MyErrorStateMatch } from 'src/app/shared/validators/field-validator';
+
 import { OrientadorService } from '../modules/OrientadorService.service';
-import { EventEmitter } from 'events';
-import { Especialidade } from 'src/app/shared/model/especialidade';
-import { EspecialidadeService } from 'src/app/especialidades/modules/especialidade.service';
-import { ErrorLoadingComponent } from 'src/app/shared/error-loading/error-loading.component';
 
 @Component({
   selector: 'app-orientador-form',
@@ -45,9 +46,9 @@ export class OrientadorFormComponent implements OnInit {
     private especialidadeSerice: EspecialidadeService,
     private notificationService: NotificationService,
     private dialog: MatDialog,
-    private location: Location
-  ) {
-
+    private location: Location,
+    private monografiaService: MonografiaService) {
+    this.monografiaService.emitShowAddButton.emit(true);
   }
 
   ngOnInit() {

@@ -14,6 +14,7 @@ import { CursoService } from '../modules/curso.service';
 import { Departamento } from 'src/app/shared/model/departamento';
 import { DepartamentoService } from 'src/app/departamentos/modules/departamento.service';
 import { catchError } from 'rxjs/operators';
+import { MonografiaService } from 'src/app/monografias/modules/monografia.service';
 
 @Component({
   selector: 'app-curso-form',
@@ -37,11 +38,12 @@ export class CursoFormComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
     private cursoService: CursoService,
+    private monografiaService: MonografiaService,
     private departamentoService: DepartamentoService,
     private notificationService: NotificationService,
     private location: Location
   ) {
-
+    this.monografiaService.emitShowAddButton.emit(true);
   }
 
   ngOnInit() {

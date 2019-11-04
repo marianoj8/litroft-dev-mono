@@ -2,7 +2,7 @@ import { Location } from '@angular/common';
 import { HttpErrorResponse, HttpEventType } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatVerticalStepper } from '@angular/material';
+import { MatVerticalStepper, MatDialog } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EventEmitter } from 'events';
 import { Observable, Subscription } from 'rxjs';
@@ -15,6 +15,7 @@ import { MyErrorStateMatch } from 'src/app/shared/validators/field-validator';
 import { MonografiaService } from '../modules/monografia.service';
 import { Departamento } from './../../shared/model/departamento';
 import { Monografia } from './../../shared/model/monografia';
+import { LoadingUploadComponent } from './../../shared/loading-upload/loading-upload.component';
 
 @Component({
   selector: 'app-mono-form',
@@ -31,6 +32,7 @@ export class MonoFormComponent implements OnInit, OnDestroy {
   monografia: Monografia = new Monografia();
   projeto: Projeto = new Projeto();
   pdfSrc = '';
+  dialogRef;
   private id = 0;
   private sub: Subscription;
   private selectedFile: File = null;
@@ -44,6 +46,7 @@ export class MonoFormComponent implements OnInit, OnDestroy {
     private projetoSerice: ProjetoService,
     private notificationService: NotificationService,
     private location: Location,
+    private dialogService: MatDialog
   ) {
     this.monografiaService.emitShowAddButton.emit(true);
   }
@@ -106,20 +109,16 @@ export class MonoFormComponent implements OnInit, OnDestroy {
     this.monografia.departamento = this.projeto.grupo.curso.departamento;
     this.monografia.file = this.selectedFile;
 
-    // const formData = new FormData();
-
-    // formData.append('file', this.selectedFile);
-
-
+    this.openLoadingUpload();
 
     this.monografiaService.save(this.monografia)
       .subscribe(
         (event) => {
           if (event.type === HttpEventType.UploadProgress) {
-            console.log(event);
-            console.log('loaded: ' + Math.round(event.loaded / event.total * 100) + '%');
+            this.monografiaService.emitStatusUploader.emit(event);
           } else if (event) {
-            if (!!state) {
+            this.dialogRef.close();
+              if(!!state) {
               if (this.router.url.match('/edit')) {
                 this.showUpdatedMessage();
               } else {
@@ -181,6 +180,22 @@ export class MonoFormComponent implements OnInit, OnDestroy {
 
   onUpload(event) {
     this.selectedFile = event.target.files[0] as File;
+  }
+
+  openLoadingUpload() {
+    this.dialogRef = this.dialogService.open(
+      LoadingUploadComponent,
+      {
+        height: '165px',
+        width: '380px'
+      });
+
+    this.dialogRef.afterClosed().subscribe((result: boolean) => {
+      if (result) {
+      }
+    });
+
+
   }
 
 

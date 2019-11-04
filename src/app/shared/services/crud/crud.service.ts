@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
-import { catchError, take } from 'rxjs/operators';
+import { catchError, take, delay } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
 import { CustomAbstractEntity } from '../../model/customEntity';
@@ -25,6 +25,7 @@ export class CrudService<T extends CustomAbstractEntity, ID extends number> {
       return this.http.get<T>(this.url + uri + '/' + id)
         .pipe(
           take(1),
+
            catchError((err: HttpErrorResponse) => this.errorHandler(err))
         );
     }

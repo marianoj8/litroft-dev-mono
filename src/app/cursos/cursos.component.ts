@@ -9,6 +9,7 @@ import { Curso } from '../shared/model/curso';
 import { CustomFilter } from '../shared/model/support/custom-filter';
 import { CursoService } from './modules/curso.service';
 import { CursoSearchComponent } from './curso-search/curso-search.component';
+import { MonografiaService } from '../monografias/modules/monografia.service';
 
 @Component({
   selector: 'app-cursos',
@@ -29,9 +30,11 @@ export class CursosComponent implements OnInit, OnDestroy {
   constructor(
     private cursoService: CursoService,
     private publicService: PublicService,
+    private monografiaService: MonografiaService,
     private dialogService: MatDialog,
     private location: Location) {
     this.cursoService.onChangeContextTitle.emit('Curso');
+    this.monografiaService.emitShowAddButton.emit(true);
   }
 
   ngOnInit() {

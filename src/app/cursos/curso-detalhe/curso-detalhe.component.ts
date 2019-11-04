@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { catchError } from 'rxjs/operators';
 import { ErrorLoadingComponent } from 'src/app/shared/error-loading/error-loading.component';
+import { MonografiaService } from 'src/app/monografias/modules/monografia.service';
 
 @Component({
   selector: 'app-curso-detalhe',
@@ -20,7 +21,10 @@ export class CursoDetalheComponent implements OnInit {
   constructor(
     private service: CursoService,
     private activatedRoute: ActivatedRoute,
-    private dialog: MatDialog) { }
+    private monografiaService: MonografiaService,
+    private dialog: MatDialog) {
+    this.monografiaService.emitShowAddButton.emit(true);
+  }
 
   ngOnInit() {
     this.service.onChangeContext.emit(true);

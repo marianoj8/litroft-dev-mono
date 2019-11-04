@@ -6,6 +6,7 @@ import { Location } from '@angular/common';
 import { Token } from '../shared/model/support/token';
 import { UsernameAndPassword } from '../shared/model/support/username-password';
 import { HomeService } from './modules/home.service';
+import { MonografiaService } from '../monografias/modules/monografia.service';
 
 @Component({
   selector: 'app-home',
@@ -108,7 +109,10 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private homeService: HomeService,
-    private location: Location) {
+    private location: Location,
+    private monografiaService: MonografiaService) {
+    this.monografiaService.emitShowAddButton.emit(true);
+
     this.homeService.onChangeContextTitle.emit('Home');
     this.radarChartLabels = [
       'Janeiro', 'Fevereiro', 'Março',
