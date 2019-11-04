@@ -117,8 +117,9 @@ export class MonoFormComponent implements OnInit, OnDestroy {
           if (event.type === HttpEventType.UploadProgress) {
             this.monografiaService.emitStatusUploader.emit(event);
           } else if (event) {
+            console.log(this.dialogRef);
             this.dialogRef.close();
-              if(!!state) {
+            if (!!state) {
               if (this.router.url.match('/edit')) {
                 this.showUpdatedMessage();
               } else {
@@ -142,8 +143,14 @@ export class MonoFormComponent implements OnInit, OnDestroy {
   }
 
   private showFailerMessage(err: HttpErrorResponse): void {
-    this.notificationService
-      .componentErrorMessage(':: ' + err.error.message);
+    this.dialogRef.close();
+    if (err.error.message === "Required request part 'file' is not present") {
+      this.notificationService
+        .componentErrorMessage(':: Nenhum arqivo PDF foi selecionado para carregar...');
+    } else {
+      this.notificationService
+        .componentErrorMessage(':: ' + err.error.message);
+    }
   }
 
 
@@ -156,7 +163,7 @@ export class MonoFormComponent implements OnInit, OnDestroy {
   }
 
   back() {
-    this.location.back();
+    this.router.navigate(['/monografias']);
   }
 
   ngOnDestroy(): void {

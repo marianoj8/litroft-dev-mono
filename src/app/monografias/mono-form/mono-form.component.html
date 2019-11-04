@@ -139,19 +139,10 @@
         color="primary"
         mat-raised-button
         class="large"
-        (click)="onSaveButton(stepper)"
-      >
-        <mat-icon>save</mat-icon>
-        Salvar
-      </button>
-      <button
-        color="primary"
-        class="large"
-        mat-raised-button
         (click)="onSaveButtonAndList(stepper)"
       >
         <mat-icon>save</mat-icon>
-        {{ !monografia.fileid ? "Salvar e listar" : "Salvar" }}
+        Salvar
       </button>
     </div>
   </mat-step>

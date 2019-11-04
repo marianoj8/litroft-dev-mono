@@ -17,7 +17,7 @@
           <div class="face face1">
             <div class="content">
               <img src="../../../assets/notebook.png" />
-              <h4>{{ grupo.descricao.substring(0, 55) }}...</h4>
+              <h4>{{ grupo.descricao }}</h4>
               <h4>
                 {{ grupo.anoLetivo }}
               </h4>
@@ -28,6 +28,7 @@
               {{ grupo.descricao }}
               <p id="pCurso"><strong>Curso:</strong> {{ grupo.curso.nome }}</p>
               <p><strong>Turma:</strong> {{ grupo.turma.sigla }}</p>
+              <p><strong>Instituto:</strong> {{ grupo.adminInterno.instituto.nome }}</p>
               <p><strong>Ano lectivo:</strong> {{ grupo.anoLetivo }}</p>
               <a
                 mat-raised-button
@@ -61,7 +62,7 @@
           <div class="face face1">
             <div class="content">
               <img src="../../../assets/notebook.png" />
-              <h4>{{ grupo.descricao.substring(0, 55) }}...</h4>
+              <h4>{{ grupo.descricao }}</h4>
               <h4>
                 {{ grupo.anoLetivo }}
               </h4>
@@ -105,7 +106,7 @@
           <div class="face face1">
             <div class="content">
               <img src="../../../assets/notebook.png" />
-              <h4>{{ grupo.descricao.substring(0, 55) }}...</h4>
+              <h4>{{ grupo.descricao }}</h4>
               <h4>
                 {{ grupo.anoLetivo }}
               </h4>
