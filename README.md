@@ -1,6 +1,6 @@
-# Título do projeto
+# Litroft Mono
 
-Um parágrafo da descrição do projeto está aqui
+Um projeto Front-End para o consumo de uma API que gerencia Monografias, grupos, e outros por cada instituição no sistema.
 
 ## Começando
 
@@ -72,7 +72,7 @@ Usamos [SemVer] (http://semver.org/) para versionar. Para as versões disponíve
 
 ## Autores
 
-* ** Billie Thompson ** - * Trabalho inicial * - [PurpleBooth] (https://github.com/PurpleBooth)
+* ** Litroft Dev ** - * Trabalho inicial * - [PurpleBooth] (https://github.com/PurpleBooth)
 
 Veja também a lista de [colaboradores] (https://github.com/your/project/contributors) que participaram deste projeto.
 
