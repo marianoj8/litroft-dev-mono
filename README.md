@@ -1,3 +1,5 @@
+[![GitHub stars](https://img.shields.io/github/stars/Flutterando/slidy?color=yellow)](https://github.com/Flutterando/slidy/stargazers)
+
 # Litroft Mono
 
 Um projeto Front-End para o consumo de uma API que gerencia Monografias, grupos, e outros por cada instituição no sistema.
