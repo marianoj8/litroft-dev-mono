@@ -1,4 +1,4 @@
-[![GitHub stars](https://github.com/marianoj8/litroft-dev-mono/stargazers)](https://github.com/marianoj8/litroft-dev-mono/stargazers)
+[![GitHub stars]](https://github.com/marianoj8/litroft-dev-mono/stargazers)
 
 # Litroft Mono
 
