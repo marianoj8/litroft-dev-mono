@@ -1,4 +1,4 @@
-[![GitHub stars](https://img.shields.io/github/stars/Flutterando/slidy?color=yellow)](https://github.com/Flutterando/slidy/stargazers)
+[![GitHub stars](https://github.com/marianoj8/litroft-dev-mono/stargazers)](https://github.com/marianoj8/litroft-dev-mono/stargazers)
 
 # Litroft Mono
 
