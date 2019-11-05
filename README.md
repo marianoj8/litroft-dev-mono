@@ -1,27 +1,87 @@
-# ImismLitroft
+# Litroft Mono
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.1.2.
+Um parágrafo da descrição do projeto está aqui
 
-## Development server
+## Começando
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Essas instruções fornecerão uma cópia do projeto em execução na sua máquina local para fins de desenvolvimento e teste. Consulte implantação para obter notas sobre como implantar o projeto em um sistema ativo.
 
-## Code scaffolding
+### Pré-requisitos
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+O que você precisa para instalar o software e como instalá-lo
 
-## Build
+`` ``
+Dar exemplos
+`` ``
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+### Instalando
 
-## Running unit tests
+Uma série de exemplos passo a passo que mostram como obter um ambiente de desenvolvimento em execução
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Diga qual será o passo
 
-## Running end-to-end tests
+`` ``
+Dê o exemplo
+`` ``
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+E repita
 
-## Further help
+`` ``
+até terminar
+`` ``
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Termine com um exemplo de como retirar alguns dados do sistema ou usá-los para uma pequena demonstração
+
+## Executando os testes
+
+Explique como executar os testes automatizados para este sistema
+
+### Divida em testes de ponta a ponta
+
+Explique o que esses testes testam e por que
+
+`` ``
+Dê um exemplo
+`` ``
+
+### E testes de estilo de codificação
+
+Explique o que esses testes testam e por que
+
+`` ``
+Dê um exemplo
+`` ``
+
+## Desdobramento, desenvolvimento
+
+Adicione notas adicionais sobre como implantar isso em um sistema ativo
+
+## Construído com
+
+* [Dropwizard] (http://www.dropwizard.io/1.0.2/docs/) - A estrutura da web usada
+* [Maven] (https://maven.apache.org/) - Gerenciamento de dependências
+* [ROMA] (https://rometools.github.io/rome/) - Usado para gerar feeds RSS
+
+## Contribuindo
+
+Leia [CONTRIBUTING.md] (https://gist.github.com/PurpleBooth/b24679402957c63ec426) para obter detalhes sobre nosso código de conduta e o processo para enviar solicitações pull para nós.
+
+## Controle de versão
+
+Usamos [SemVer] (http://semver.org/) para versionar. Para as versões disponíveis, consulte as [tags neste repositório] (https://github.com/your/project/tags).
+
+## Autores
+
+* ** Billie Thompson ** - * Trabalho inicial * - [PurpleBooth] (https://github.com/PurpleBooth)
+
+Veja também a lista de [colaboradores] (https://github.com/your/project/contributors) que participaram deste projeto.
+
+## Licença
+
+Este projeto está licenciado sob a licença MIT - consulte o arquivo [LICENSE.md] (LICENSE.md) para obter detalhes
+
+## Agradecimentos
+
+* Gorjeta para qualquer pessoa cujo código foi usado
+* Inspiração
+* etc
