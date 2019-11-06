@@ -1,0 +1,10 @@
+ul .item {
+  padding: 10px 0px;
+}
+
+.actions {
+  top: 40px;;
+  clear: both;
+  position: relative;
+  width: 100%;
+}

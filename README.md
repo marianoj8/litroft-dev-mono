@@ -60,9 +60,7 @@ Adicione notas adicionais sobre como implantar isso em um sistema ativo
 
 ## Construído com
 
-* [Dropwizard] (http://www.dropwizard.io/1.0.2/docs/) - A estrutura da web usada
-* [Maven] (https://maven.apache.org/) - Gerenciamento de dependências
-* [ROMA] (https://rometools.github.io/rome/) - Usado para gerar feeds RSS
+* [Angular] (http://www.dropwizard.io/1.0.2/docs/)
 
 ## Contribuindo
 

@@ -1,14 +1,14 @@
+import { Location } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material';
 import { Observable, of, Subject, Subscription } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { Location } from '@angular/common';
-
 import { CustomFilter } from 'src/app/shared/model/support/custom-filter';
-import { Curso } from '../shared/model/curso';
+
 import { CursoService } from '../cursos/modules/curso.service';
+import { Curso } from '../shared/model/curso';
+import { EstudanteFilterComponent } from './estudante-filter/estudante-filter.component';
 import { EstudanteService } from './modules/estudante.service';
-import { CursoSearchComponent } from '../cursos/curso-search/curso-search.component';
-import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-estudantes',
@@ -23,12 +23,12 @@ export class EstudantesComponent implements OnInit, OnDestroy {
   cursos$: Observable<Curso[]>;
   cursosError$ = new Subject<boolean>();
   filtro: CustomFilter = new CustomFilter();
-  dialogService: MatDialog;
 
   constructor(
     public estudanteService: EstudanteService,
     private cursoSerice: CursoService,
-    private location: Location) {
+    private location: Location,
+    private dialogService: MatDialog) {
     this.estudanteService.onChangeContextTitle.emit('Estudante');
   }
 
@@ -78,9 +78,17 @@ export class EstudantesComponent implements OnInit, OnDestroy {
     this.filtro.curso = curso;
   }
 
-  onFilterSearch() {
+  openLargeFilterView() {
     const dialogRef = this.dialogService.open(
-      CursoSearchComponent,
+      EstudanteFilterComponent,
+      {
+        height: '550px',
+        width: '600px'
+      });
+  }
+  openSamllFilterView() {
+    const dialogRef = this.dialogService.open(
+      EstudanteFilterComponent,
       {
         height: '500px',
         width: '380px'

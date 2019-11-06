@@ -1,0 +1,91 @@
+<h2 mat-dialog-title>
+  <mat-icon class="mat-18">search</mat-icon>
+  Opções de filtro
+</h2>
+<mat-accordion>
+  <mat-expansion-panel
+    [expanded]="true"
+    #panel01
+    (afterCollapse)="panel02.open()"
+  >
+    <mat-expansion-panel-header>
+      <mat-panel-title>Curso e Ano Letivo</mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Curso</mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-select placeholder="Selecionar curso">
+          <mat-option
+            *ngFor="
+              let choice of ['Informatica', 'Automação', 'Telecomunicação']
+            "
+            [value]="choice"
+          >
+            {{ choice }}
+          </mat-option>
+        </mat-select>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Ano Letivo</mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-select placeholder="Selecionar Ano">
+          <mat-option
+            *ngFor="let choice of [2016, 2017, 2018, 2019]"
+            [value]="choice"
+          >
+            {{ choice }}
+          </mat-option>
+        </mat-select>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </mat-expansion-panel>
+  <mat-expansion-panel #panel02 (afterCollapse)="panel01.open()">
+    <mat-expansion-panel-header>
+      <mat-panel-title>Sexo e Idade</mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Sexo</mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-select placeholder="Selecionar sexo">
+          <mat-option
+            *ngFor="let choice of ['Masculino', 'Femenino', 'Todos']"
+            [value]="choice"
+          >
+            {{ choice }}
+          </mat-option>
+        </mat-select>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Idade</mat-panel-title>
+        </mat-expansion-panel-header>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </mat-expansion-panel>
+</mat-accordion>
+
+<div class="actions">
+  <button class="btn-large" mat-raised-button matDialogClose>
+    <mat-icon>arrow_back</mat-icon>
+    Cancelar
+  </button>
+  <button
+    class="btn-large"
+    mat-raised-button
+    matDialogClose="true"
+    color="primary"
+  >
+    <mat-icon>done_all</mat-icon>
+    Aplicar
+  </button>
+  <!-- </mat-dialog-actions> -->
+</div>
