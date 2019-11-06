@@ -7,13 +7,18 @@
     [expanded]="true"
     #panel01
     (afterCollapse)="panel02.open()"
+    (afterExpand)="panelCurso.open()"
   >
     <mat-expansion-panel-header>
       <mat-panel-title>Curso e Ano Letivo</mat-panel-title>
     </mat-expansion-panel-header>
 
     <mat-accordion>
-      <mat-expansion-panel>
+      <mat-expansion-panel
+        #panelCurso
+        [expanded]="true"
+        (afterCollapse)="panelAnoLetivo.open()"
+      >
         <mat-expansion-panel-header>
           <mat-panel-title>Curso</mat-panel-title>
         </mat-expansion-panel-header>
@@ -29,7 +34,7 @@
         </mat-select>
       </mat-expansion-panel>
 
-      <mat-expansion-panel>
+      <mat-expansion-panel #panelAnoLetivo (afterCollapse)="panelCurso.open()">
         <mat-expansion-panel-header>
           <mat-panel-title>Ano Letivo</mat-panel-title>
         </mat-expansion-panel-header>
@@ -44,13 +49,21 @@
       </mat-expansion-panel>
     </mat-accordion>
   </mat-expansion-panel>
-  <mat-expansion-panel #panel02 (afterCollapse)="panel01.open()">
+  <mat-expansion-panel
+    #panel02
+    (afterCollapse)="panel01.open()"
+    (afterExpand)="panelSexo.open()"
+  >
     <mat-expansion-panel-header>
       <mat-panel-title>Sexo e Idade</mat-panel-title>
     </mat-expansion-panel-header>
 
     <mat-accordion>
-      <mat-expansion-panel>
+      <mat-expansion-panel
+        #panelSexo
+        [expanded]="true"
+        (afterCollapse)="panelIdade.open()"
+      >
         <mat-expansion-panel-header>
           <mat-panel-title>Sexo</mat-panel-title>
         </mat-expansion-panel-header>
@@ -64,7 +77,7 @@
         </mat-select>
       </mat-expansion-panel>
 
-      <mat-expansion-panel>
+      <mat-expansion-panel #panelIdade (afterCollapse)="panelSexo.open()">
         <mat-expansion-panel-header>
           <mat-panel-title>Idade</mat-panel-title>
         </mat-expansion-panel-header>
