@@ -23,14 +23,11 @@
           <mat-panel-title>Curso</mat-panel-title>
         </mat-expansion-panel-header>
         <mat-select placeholder="Selecionar curso">
-          <mat-option
-            *ngFor="
-              let choice of ['Informatica', 'Automação', 'Telecomunicação']
-            "
-            [value]="choice"
-          >
-            {{ choice }}
-          </mat-option>
+          <ng-container *ngFor="let curso of cursos$ | async">
+            <mat-option [value]="curso.id">
+              {{ curso.nome }}
+            </mat-option>
+          </ng-container>
         </mat-select>
       </mat-expansion-panel>
 
@@ -69,10 +66,11 @@
         </mat-expansion-panel-header>
         <mat-select placeholder="Selecionar sexo">
           <mat-option
-            *ngFor="let choice of ['Masculino', 'Femenino', 'Todos']"
-            [value]="choice"
+            *ngFor="let sexo of ['Masculino', 'Femenino', 'Todos']"
+            [value]="sexo"
+            (onSelectionChange)="onSelectedSexo(sexo)"
           >
-            {{ choice }}
+            {{ sexo }}
           </mat-option>
         </mat-select>
       </mat-expansion-panel>
@@ -96,9 +94,10 @@
     mat-raised-button
     matDialogClose="true"
     color="primary"
+    (click)="onApplyFilter()"
   >
     <mat-icon>done_all</mat-icon>
-    Aplicar
+    Aplicar filtro
   </button>
   <!-- </mat-dialog-actions> -->
 </div>

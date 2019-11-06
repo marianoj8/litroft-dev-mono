@@ -71,7 +71,7 @@ export class EstudantesComponent implements OnInit, OnDestroy {
   }
 
   cleanSearchField() {
-    this.findFromServer('');
+    this.showAll();
   }
 
   logName(curso) {
