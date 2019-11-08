@@ -24,7 +24,10 @@
         </mat-expansion-panel-header>
         <mat-select placeholder="Selecionar curso">
           <ng-container *ngFor="let curso of cursos$ | async">
-            <mat-option [value]="curso.id">
+            <mat-option
+              [value]="curso.id"
+              (onSelectionChange)="onSelectedCurso(curso)"
+            >
               {{ curso.nome }}
             </mat-option>
           </ng-container>
