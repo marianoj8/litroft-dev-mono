@@ -2,31 +2,31 @@ import { Location } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog, MatSort, MatTableDataSource, MatVerticalStepper } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EventEmitter } from 'events';
+import { element } from 'protractor';
 import { Observable, of, Subject, Subscription } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { MatDialog, MatSort, MatTableDataSource, MatVerticalStepper, MatTab } from '@angular/material';
-
 import { CursoService } from 'src/app/cursos/modules/curso.service';
 import { ElementoService } from 'src/app/elementos/modules/elementos.service';
+import { EstudanteService } from 'src/app/estudantes/modules/estudante.service';
+import { MonografiaService } from 'src/app/monografias/modules/monografia.service';
+import { OrientadorService } from 'src/app/orientadores/modules/OrientadorService.service';
 import { Curso } from 'src/app/shared/model/curso';
 import { Elemento } from 'src/app/shared/model/elemento';
 import { Estudante } from 'src/app/shared/model/estudante';
+import { Grupo } from 'src/app/shared/model/grupo';
+import { Orientador } from 'src/app/shared/model/orientador';
 import { CustomFilter } from 'src/app/shared/model/support/custom-filter';
 import { MatDailogTypeParam } from 'src/app/shared/model/support/mat-dialog-type-param';
 import { Turma } from 'src/app/shared/model/turma';
 import { NotificationService } from 'src/app/shared/services/notification/notification.service';
 import { MyErrorStateMatch } from 'src/app/shared/validators/field-validator';
 import { TurmaService } from 'src/app/turmas/modules/turma.service';
+
 import { GrupoService } from '../modules/grupo.service';
 import { SelectElementComponent } from './../select-element/select-element.component';
-import { element } from 'protractor';
-import { Orientador } from 'src/app/shared/model/orientador';
-import { Grupo } from 'src/app/shared/model/grupo';
-import { EstudanteService } from 'src/app/estudantes/modules/estudante.service';
-import { OrientadorService } from 'src/app/orientadores/modules/OrientadorService.service';
-import { MonografiaService } from 'src/app/monografias/modules/monografia.service';
 
 @Component({
   selector: 'app-grupo-form',
@@ -211,7 +211,6 @@ export class GrupoFormComponent implements OnInit {
     this.grupo.descricao = this.formGroup01.controls.descricao.value;
     this.grupo.curso = new Curso(this.formGroup01.controls.curso.value);
     this.grupo.turma = new Turma(this.formGroup02.controls.turma.value);
-    // this.grupo.anoLetivo = new Date().toISOString().slice();
     this.grupo.posicao = this.formGroup02.controls.posicao.value;
     this.grupo.orientador = new Orientador(this.formGroup03.controls.orientador.value);
 
@@ -288,34 +287,11 @@ export class GrupoFormComponent implements OnInit {
   }
 
   removeElementAt(estudante: Estudante) {
-
     this.estudantesList.map((element, i: number) => {
       if (estudante.id == element.id) {
-        console.log('Index: ' + i);
-        console.log('Elemento: ' + element.nome);
-        this.estudantesList.splice(i, --i);
+        this.estudantesList.splice(i, 1);
       }
     });
-
-    console.log(this.estudantesList);
-
-
-
-    // this.estudantesList.forEach(e => {
-    //   this.indexElement++;
-    //   if (this.estudantesList.includes(estudante)) {
-    //     this.estudantesList.splice(this.indexElement);
-    //     this.estudantes.data = this.estudantesList;
-    //     // if (this.indexElement == 0) {
-    //     //   this.estudantesList = [];
-    //     //   this.estudantes.data = [];
-    //     // }
-    //   }
-    // });
-    // this.grupoService.emitSelectedElements.emit(this.estudantesList);
-    // this.grupoService.emitSelectedElements
-    //   .subscribe(
-    //     next => this.relist(next));
   }
 
   relist(elements) {
