@@ -19,6 +19,7 @@ import { MyErrorStateMatch } from 'src/app/shared/validators/field-validator';
 import { TurmaService } from 'src/app/turmas/modules/turma.service';
 
 import { ProjetoService } from '../modules/projeto.service';
+import { CustomFilter } from 'src/app/shared/model/support/custom-filter';
 
 @Component({
   selector: 'app-projeto-form',
@@ -38,6 +39,8 @@ export class ProjetoFormComponent implements OnInit {
   departamentoError$ = new Subject<boolean>();
   departamentos$: Observable<Departamento[]>;
   private id = 0;
+  filter: CustomFilter = new CustomFilter();
+  grupos: Grupo[] = [];
 
   constructor(
     private router: Router,
@@ -62,8 +65,27 @@ export class ProjetoFormComponent implements OnInit {
       }));
     this.initForms();
 
-    this.grupos$ = this.grupoService.list();
+
+    this.grupoService.list().subscribe(resp => this.grupos = resp);
     this.turmas$ = this.turmaService.list();
+
+    this.formGroup01.controls.turma.valueChanges
+      .subscribe(
+        resp => {
+          this.grupos.forEach((e: Grupo) => {
+            if (e.turma.id === resp) {
+              this.grupoService.getById(e.id)
+                .subscribe((resp: Grupo) => {
+                  this.filter.turma = resp.turma.sigla;
+                  this.filter.curso = '';
+                  this.filter.descricao = '';
+                  this.grupos$ = this.grupoService.filterByDescricaoAndTow(this.filter);
+                });
+            }
+          });
+
+        }
+      );
 
     this.formGroup02.controls.grupo.valueChanges
       .subscribe(

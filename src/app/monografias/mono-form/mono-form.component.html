@@ -90,7 +90,7 @@
             matInput
             formControlName="projeto"
             required
-            placeholder="Departamento"
+            placeholder="Grupo"
           >
             <ng-container *ngFor="let projeto of projetos$ | async">
               <mat-option [value]="projeto.id">
@@ -104,7 +104,7 @@
           <mat-error
             *ngIf="formGroup01.controls['projeto'].hasError('required')"
           >
-            Depratamento é <strong>obrigatorio</strong>
+            Grupo é <strong>obrigatorio</strong>
           </mat-error>
         </mat-form-field>
         <div class="spaced">
