@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { CustomErrorPageComponent } from './custom-error-page/custom-error-page.component';
 import { AuthGuard } from './shared/guard/auth.guard';
+import { AdminComponent } from './admin/admin.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'public', pathMatch: 'full' },
@@ -68,6 +69,7 @@ const routes: Routes = [
     path: 'login',
     loadChildren: 'src/app/login/modules/login.module#LoginModule'
   },
+  { path: 'admin', loadChildren: 'src/app/admin/modules/admin.module#AdminModule' },
   { path: '**', component: CustomErrorPageComponent },
 ];
 
