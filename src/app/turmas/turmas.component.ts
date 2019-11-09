@@ -64,5 +64,5 @@ export class TurmasComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.sub.unsubscribe();
   }
-  onFilterSearch(){}
+  onFilterSearch() {}
 }

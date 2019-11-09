@@ -17,7 +17,7 @@ export class LoadingUploadComponent implements OnInit {
   ngOnInit() {
     this.monografiaSerice.emitStatusUploader
       .subscribe((event) => {
-        if (event == HttpEventType.UploadProgress) {
+        if (event === HttpEventType.UploadProgress) {
           console.log(event);
           this.statusCounter = (Math.round(event.loaded / event.total * 100));
         }

@@ -85,5 +85,5 @@ export class OrientadoresComponent implements OnInit, OnDestroy {
     this.sub.unsubscribe();
   }
 
-  onFilterSearch(){}
+  onFilterSearch() {}
 }

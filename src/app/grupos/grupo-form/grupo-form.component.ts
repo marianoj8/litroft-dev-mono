@@ -287,8 +287,8 @@ export class GrupoFormComponent implements OnInit {
   }
 
   removeElementAt(estudante: Estudante) {
-    this.estudantesList.map((element, i: number) => {
-      if (estudante.id == element.id) {
+    this.estudantesList.map((item, i: number) => {
+      if (estudante.id === item.id) {
         this.estudantesList.splice(i, 1);
       }
     });

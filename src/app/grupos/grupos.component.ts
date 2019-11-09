@@ -83,5 +83,5 @@ export class GruposComponent implements OnInit, OnDestroy {
     this.sub.unsubscribe();
   }
 
-  onFilterSearch(){}
+  onFilterSearch() {}
 }

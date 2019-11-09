@@ -144,7 +144,7 @@ export class MonoFormComponent implements OnInit, OnDestroy {
 
   private showFailerMessage(err: HttpErrorResponse): void {
     this.dialogRef.close();
-    if (err.error.message === "Required request part 'file' is not present") {
+    if (err.error.message === 'Required request part \'file\' is not present') {
       this.notificationService
         .componentErrorMessage(':: Nenhum arqivo PDF foi selecionado para carregar...');
     } else {
@@ -176,7 +176,7 @@ export class MonoFormComponent implements OnInit, OnDestroy {
     this.onUpload(event);
 
     if (typeof (FileReader) !== 'undefined') {
-      let reader: FileReader = new FileReader();
+      const reader: FileReader = new FileReader();
       reader.onload = (e: any) => {
         this.pdfSrc = e.target.result;
       };
