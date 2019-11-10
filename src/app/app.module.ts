@@ -8,7 +8,6 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CustomErrorPageComponent } from './custom-error-page/custom-error-page.component';
 import { MaterialModule } from './material/material.module';
 import { DeleteDialogComponent } from './shared/delete-dialog/delete-dialog.component';
 import { ErrorLoadingComponent } from './shared/error-loading/error-loading.component';
@@ -25,12 +24,13 @@ import { DeleteSuccessMessageComponent } from './shared/services/notification/no
 import { SaveSuccessMessageComponent } from './shared/services/notification/notification-success-save.component';
 import { UpdateSuccessMessageComponent } from './shared/services/notification/notification-success-update.component';
 import { TokenInterceptorService } from './shared/services/security/token-interceptor.service';
+import { CustomErrorPageComponent } from './custom-error-page/custom-error-page.component';
+import { AcessDinaidComponent } from './shared/acess-dinaid/acess-dinaid.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    CustomErrorPageComponent,
     SaveSuccessMessageComponent,
     UpdateSuccessMessageComponent,
     DeleteSuccessMessageComponent,
@@ -45,6 +45,8 @@ import { TokenInterceptorService } from './shared/services/security/token-interc
     ErrorLoadingComponent,
     FooterComponent,
     LoadingUploadComponent,
+    CustomErrorPageComponent,
+    AcessDinaidComponent
   ],
   entryComponents: [
     SaveSuccessMessageComponent,
