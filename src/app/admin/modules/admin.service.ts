@@ -15,15 +15,15 @@ import { Router } from '@angular/router';
 export class AdminService implements CustomRepository<Admin, number> {
 
 
-  url = `${environment.API}/admin/info`;
+  url = `${environment.API}/interno/info`;
   constructor(
     private service: CrudService<Admin, number>,
     private http: HttpClient,
     public router: Router) { }
 
 
-  getUserInfo(): Observable<Admin> {
-    return this.http.get<Admin>(this.url)
+  getUserInfo(): Observable<boolean> {
+    return this.http.get<boolean>(this.url)
       .pipe(
         take(1),
         //  catchError((err: HttpErrorResponse) => this.errorHandler(err))

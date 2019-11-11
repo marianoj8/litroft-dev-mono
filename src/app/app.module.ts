@@ -25,7 +25,7 @@ import { SaveSuccessMessageComponent } from './shared/services/notification/noti
 import { UpdateSuccessMessageComponent } from './shared/services/notification/notification-success-update.component';
 import { TokenInterceptorService } from './shared/services/security/token-interceptor.service';
 import { CustomErrorPageComponent } from './custom-error-page/custom-error-page.component';
-import { AcessDinaidComponent } from './shared/acess-dinaid/acess-dinaid.component';
+import { AcessDenaidComponent } from './shared/acess-denaid/acess-denaid.component';
 
 
 @NgModule({
@@ -46,7 +46,7 @@ import { AcessDinaidComponent } from './shared/acess-dinaid/acess-dinaid.compone
     FooterComponent,
     LoadingUploadComponent,
     CustomErrorPageComponent,
-    AcessDinaidComponent
+    AcessDenaidComponent
   ],
   entryComponents: [
     SaveSuccessMessageComponent,

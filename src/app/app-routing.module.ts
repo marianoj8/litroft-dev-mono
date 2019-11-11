@@ -4,7 +4,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { AdminCanActiveGuard } from './admin/guard/AdminCanActiveGuard.guard';
 import { AuthGuard } from './shared/guard/auth.guard';
 import { CustomErrorPageComponent } from './custom-error-page/custom-error-page.component';
-import { AcessDinaidComponent } from './shared/acess-dinaid/acess-dinaid.component';
+import { AcessDenaidComponent } from './shared/acess-denaid/acess-denaid.component';
+import { AdminResolverGuard } from './admin/guard/AdminResolverGuard.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'public', pathMatch: 'full' },
@@ -72,13 +73,13 @@ const routes: Routes = [
   },
   {
     path: 'adminstration',
-    canActivate: [AdminCanActiveGuard],
-    canActivateChild: [AuthGuard],
+    canActivate: [AuthGuard],
+    // resolve: [AdminResolverGuard],
     loadChildren: 'src/app/admin/modules/admin.module#AdminModule',
   },
   {
-    path: 'dinaid',
-    component: AcessDinaidComponent,
+    path: 'denaid',
+    component: AcessDenaidComponent,
   },
   {
     path: '**',

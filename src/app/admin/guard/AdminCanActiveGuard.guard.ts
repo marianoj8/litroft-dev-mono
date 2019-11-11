@@ -1,26 +1,23 @@
 import { Injectable } from '@angular/core';
+import { CanLoad } from '@angular/router';
 import { Observable } from 'rxjs';
-import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot } from '@angular/router';
 
 import { AdminService } from '../modules/admin.service';
-import { Admin } from 'src/app/shared/model/admin';
+import { AdminResolverGuard } from './AdminResolverGuard.guard';
 
 @Injectable({ providedIn: 'root' })
-export class AdminCanActiveGuard implements CanActivate {
-  private admin: Admin;
-  constructor(private adminService: AdminService) { }
+export class AdminCanActiveGuard implements CanLoad {
 
-  canActivate(
+  constructor(private adminService: AdminService) {
+  }
 
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-
-    this.adminService.getUserInfo().subscribe((resp: Admin) => this.admin = resp);
-    if (this.admin !== undefined) {
+  canLoad(): boolean {
+    if (AdminResolverGuard.statusUser) {
       return true;
+    } else {
+      this.adminService.router.navigate(['/denaid']);
+      return false;
     }
-    this.adminService.router.navigate(['/dinaid']);
-    return false;
   }
 
 }

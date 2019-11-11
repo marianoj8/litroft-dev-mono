@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AcessDinaidComponent } from './acess-dinaid.component';
+import { AcessDinaidComponent } from './acess-denaid.component';
 
 describe('AcessDinaidComponent', () => {
   let component: AcessDinaidComponent;
