@@ -23,7 +23,8 @@
       color="primary"
       (click)="logOut(drawer)"
     >
-      <img src="./assets/logouts.png" />
+      <!-- <img src="./assets/logouts.png" /> -->
+      <mat-icon>power_settings_new</mat-icon>
       Terminar Sessão
     </button>
     <button
@@ -198,8 +199,9 @@
           ><mat-icon color="primary">info</mat-icon>
           Sobre
         </a>
+
         <a mat-list-item (click)="logOut(drawer)"
-          ><img src="./assets/logout_1.png" />
+          ><mat-icon color="primary">power_settings_new</mat-icon>
           Terminar Sessão
         </a>
       </div>
