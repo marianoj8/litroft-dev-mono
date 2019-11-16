@@ -105,6 +105,18 @@
           </td>
         </ng-container>
 
+ <ng-container matColumnDef="info">
+          <th mat-header-cell *matHeaderCellDef>Informção completa</th>
+          <td mat-cell *matCellDef="let instituto">
+            <button
+              mat-raised-button
+              (click)="onSelectedInstituto(instituto)"
+            >
+              <mat-icon color="primary">info</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
         <ng-container matColumnDef="noData">
           <th mat-footer-cell *matFooterCellDef>Lista vasia.</th>
         </ng-container>

@@ -31,7 +31,8 @@ export class InstitutoListComponent implements OnInit {
     'formacao',
     'cursos',
     'localizacao',
-    'detalhe'
+    'detalhe',
+    'info'
   ];
 
 
