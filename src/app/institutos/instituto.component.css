@@ -14,6 +14,6 @@ mat-card {
   cursor: pointer;
 }
 
-/* input[active]{
-  color: whitesmoke;
+/* input#searchField{
+  border-color: white;
 } */
