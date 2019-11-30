@@ -19,6 +19,7 @@ import { MonografiaService } from 'src/app/monografias/modules/monografia.servic
 })
 export class InstitutoListComponent implements OnInit {
   selectedInst = '***Instituição***';
+  selectedInstLogo = '';
   institutos: MatTableDataSource<Instituto>;
   institutosList: Instituto[] = [];
   cursosList: Curso[] = [];
@@ -82,8 +83,12 @@ export class InstitutoListComponent implements OnInit {
   }
   onSelectedInstituto(item: Instituto) {
     this.selectedInst = item.nome;
+    this.selectedInstLogo = `http://localhost:8080/litroft/api/v1/rm/mono/downloadLogo/${item.logoId}`;
+
     this.service.listCursoByInstituto(item.id).subscribe(
-      (resp) => this.cursosList = resp
+      (resp) => {
+        this.cursosList = resp;
+      }
     );
   }
 }
