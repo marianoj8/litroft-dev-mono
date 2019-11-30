@@ -9,11 +9,9 @@
     [opened]="isHandset$ | async"
   >
     <mat-divider> </mat-divider>
-    <div
-      style="width: 100%; height: 110px; background-color: #3f51b5; padding: 8px 0px 0px 90px;"
-    >
+    <div style="width: 100%; height: 160px; padding: 8px 0px 0px 90px;">
       <div
-        style="width: 50%; height: 80%; background-color: #fff; border: 2px solid whitesmoke; border-radius: 50%;"
+        style="width: 80%; height: 100%; background-color: #fff; border-radius: 50%; margin-left: -60px;"
       >
         <!-- <mat-icon
           color="primary"
@@ -22,18 +20,19 @@
         </mat-icon> -->
 
         <img
-
           src="http://localhost:8080/litroft/api/v1/rm/mono/downloadLogo/0485a27c-59a6-4b05-ac56-078dfc537dc1"
-          style="position: relative; top: 6px; left: 4.5px; height: 80%; width: 80%;"
+          style="position: relative; top: 6px; left: 10%; height: 80%; width: 80%;"
         />
       </div>
+
       <a
-        (click)="drawer.close()"
-        style="color: #fff; position: relative; top: -95px; left: 150px; font-size: 20pt; width: 5px; border-radius: 80%;"
         mat-icon-button
+        (click)="drawer.close()"
+        color="primary"
+        style="position: relative; top: -100%; right: 28%; font-size: 15pt;"
       >
-        <mat-icon>arrow_back </mat-icon></a
-      >
+        <mat-icon color="primary">arrow_back</mat-icon>
+      </a>
     </div>
     <mat-divider> </mat-divider>
     <mat-toolbar>
