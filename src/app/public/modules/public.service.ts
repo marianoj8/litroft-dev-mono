@@ -18,6 +18,14 @@ export class PublicService {
   public emitSelectedSchool = new EventEmitter<Instituto>();
   constructor(private http: HttpClient) { }
 
+  listByInstitutoId(id: number): Observable<Grupo[]> {
+    return this.http.get<Grupo[]>(`${environment.API}/grupo/l/public/instituto/${id}`)
+      .pipe(
+        take(1),
+        //  catchError((err: HttpErrorResponse) => this.errorHandler(err))
+      );
+  }
+
   list(): Observable<Grupo[]> {
     return this.http.get<Grupo[]>(`${environment.API}/grupo/l/public`)
       .pipe(
