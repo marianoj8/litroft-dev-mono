@@ -27,6 +27,7 @@ export class InstitutoListComponent implements OnInit {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   displaydColumns: string[] = [
+    'sigla',
     'nome',
     'formacao',
     'cursos',
