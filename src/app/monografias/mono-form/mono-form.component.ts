@@ -109,37 +109,44 @@ export class MonoFormComponent implements OnInit, OnDestroy {
     this.monografia.departamento = this.projeto.grupo.curso.departamento;
     this.monografia.file = this.selectedFile;
 
-    this.openLoadingUpload();
 
-    this.monografiaService.save(this.monografia)
-      .subscribe(
-        (event) => {
-          if (event.type === HttpEventType.UploadProgress) {
-            this.monografiaService.emitStatusUploader.emit(event);
-          } else if (event) {
-            console.log(this.dialogRef);
-            this.dialogRef.close();
-            if (!!state) {
-              if (this.router.url.match('/edit')) {
-                this.showUpdatedMessage();
+    if (this.selectedFile == null) {
+      this.notificationService
+        .componentErrorMessage(':: Nenhum arqivo PDF foi selecionado para   carregar...');
+
+    } else {
+      this.openLoadingUpload();
+
+      this.monografiaService.save(this.monografia)
+        .subscribe(
+          (event) => {
+
+            if (event.type === HttpEventType.UploadProgress) {
+              this.monografiaService.emitStatusUploader.emit(event);
+            } else if (event) {
+              console.log(this.dialogRef);
+              this.dialogRef.close();
+              if (!!state) {
+                if (this.router.url.match('/edit')) {
+                  this.showUpdatedMessage();
+                } else {
+                  this.showSavedMessage();
+                }
+                this.back();
               } else {
-                this.showSavedMessage();
+                if (this.router.url.match('/edit')) {
+                  this.showUpdatedMessage();
+                } else {
+                  this.showSavedMessage();
+                }
+                stepper.reset();
               }
-              this.back();
-            } else {
-              if (this.router.url.match('/edit')) {
-                this.showUpdatedMessage();
-              } else {
-                this.showSavedMessage();
-              }
-              stepper.reset();
+
             }
-
-          }
-        },
-        (err: HttpErrorResponse) => this.showFailerMessage(err)
-      );
-
+          },
+          (err: HttpErrorResponse) => this.showFailerMessage(err)
+        );
+    }
   }
 
   private showFailerMessage(err: HttpErrorResponse): void {
