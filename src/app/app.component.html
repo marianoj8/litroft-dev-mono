@@ -221,6 +221,16 @@
             <span matSuffix><mat-icon color="primary">search</mat-icon></span>
           </mat-form-field>
         </div>
+
+        <button
+          mat-button
+          (click)="clearSelectedSchool()"
+          style="width: 100%; margin-top: -20px; margin-bottom: 20px; text-align: center;"
+        >
+          <mat-icon color="primary">refresh</mat-icon>
+          Todas monografias
+        </button>
+
         <a
           *ngFor="let item of institutos"
           mat-list-item

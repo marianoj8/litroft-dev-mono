@@ -1,5 +1,5 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, AfterContentChecked, AfterViewChecked, AfterViewInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDrawer } from '@angular/material';
 import { Router } from '@angular/router';
@@ -21,13 +21,14 @@ import { PublicService } from './public/modules/public.service';
 import { Instituto } from './shared/model/instituto';
 import { AuthService } from './shared/services/security/auth.service';
 import { TurmaService } from './turmas/modules/turma.service';
+import { AdminService } from './admin/modules/admin.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
 
   title = 'Litroft Dev - Mono';
   contextMenu = '***';
@@ -51,6 +52,7 @@ export class AppComponent implements OnInit, OnDestroy {
     );
 
   constructor(
+    public adminService: AdminService,
     public authService: AuthService,
     private router: Router,
     private breakpointObserver: BreakpointObserver,
@@ -73,6 +75,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+
     this.institutos = [];
     for (let i = 2016; i <= new Date().getFullYear(); i++) {
       this.years.push(i);
@@ -192,7 +195,9 @@ export class AppComponent implements OnInit, OnDestroy {
       );
 
     this.publicService.emitSelectedSchool.subscribe((resp: Instituto) => {
-      this.contextMenu = 'Monografias do Instituto ' + resp.nome;
+
+      this.contextMenu = (resp.id !== null) ? `Monografias do Instituto ${resp.nome}` : 'Monografias Externas';
+
     });
   }
 
@@ -223,6 +228,26 @@ export class AppComponent implements OnInit, OnDestroy {
   schoolClicked(instituto: Instituto) {
     this.router.navigate(['/public']);
     this.publicService.emitSelectedSchool.emit(instituto);
+  }
+
+  clearSelectedSchool() {
+    this.router.navigate(['/public']);
+    this.publicService.emitSelectedSchool.emit(new Instituto());
+  }
+
+  ngAfterViewInit() {
+    console.log(localStorage.getItem('token'));
+
+    if (localStorage.getItem('token') !== undefined) {
+
+      this.adminService.getUserInfo().subscribe(resp => {
+        if (!resp) {
+          console.log(resp);
+          this.adminService.router.navigate(['/denaid']);
+        }
+      });
+
+    }
   }
 
   ngOnDestroy(): void {
