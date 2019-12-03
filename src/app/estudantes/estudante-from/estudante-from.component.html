@@ -247,10 +247,33 @@
     <form [formGroup]="formGroup05">
       <div class="field">
         <ng-template matStepLabel>
-          Curso
+          Numero de proesso & Curso
         </ng-template>
 
-        <mat-form-field class="field-max field-padding">
+      <mat-form-field class="field field-padding">
+          <input
+            matInput
+            formControlName="numeroProcesso"
+            [errorStateMatcher]="matcher"
+            autocomplete="false"
+            required
+            placeholder="Numero de processo"
+          />
+           <mat-error
+            *ngIf="
+              formGroup05.controls['numeroProcesso'].hasError('minlenght') ||
+                !formGroup05.controls['numeroProcesso'].hasError('required')
+            "
+          >
+            Formato de data <strong>invalido</strong>
+          </mat-error>
+
+          <mat-error *ngIf="formGroup05.controls['numeroProcesso'].hasError('required')">
+            Numero de processo é <strong>obrigatorio</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="field field-padding">
           <mat-select
             matInput
             formControlName="curso"

@@ -15,6 +15,7 @@ export class Estudante implements CustomAbstractEntity {
   fone: string;
   email: string;
   endereco: string;
+  numeroProcesso: string;
   curso: Curso;
   inGruop: boolean;
   adminInterno: AdminInterno;

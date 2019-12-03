@@ -96,6 +96,7 @@ export class EstudanteFromComponent implements OnInit {
           });
 
           this.formGroup05.patchValue({
+            numeroProcesso: this.estudante.numeroProcesso,
             curso: this.estudante.curso.id
           });
 
@@ -134,6 +135,9 @@ export class EstudanteFromComponent implements OnInit {
     });
 
     this.formGroup05 = this.formBuilder.group({
+      numeroProcesso: ['', [
+        Validators.required,
+        Validators.minLength(6)]],
       curso: [null, Validators.required],
     });
   }
