@@ -4,12 +4,6 @@
     Cadastrar Nova Especialidade
   </button>
   <table *ngIf="especialidades; else loading" mat-table [dataSource]="especialidades" matSort>
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
-      <td mat-cell *matCellDef="let especialidade">
-        {{ especialidade?.id }}
-      </td>
-    </ng-container>
 
     <ng-container matColumnDef="nome">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Nome</th>

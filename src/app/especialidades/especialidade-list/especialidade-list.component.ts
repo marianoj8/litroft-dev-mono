@@ -34,7 +34,6 @@ export class EspecialidadeListComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   displaydColumns: string[] = [
-    'id',
     'nome',
     'detalhe',
     'edit',
