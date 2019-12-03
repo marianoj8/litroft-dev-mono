@@ -13,4 +13,7 @@ export class InstitutoComponent implements OnInit {
   ngOnInit() {
   }
 
+  cleanSearchField() { }
+  onFilterSearch() { }
+  find($event, param: string) { }
 }

@@ -9,10 +9,10 @@
     [dataSource]="estudantes"
     matSort
   >
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+    <ng-container matColumnDef="processo">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>N/Processo</th>
       <td mat-cell *matCellDef="let estudante">
-        {{ estudante?.id }}
+        {{ estudante?.numeroProcesso }}
       </td>
     </ng-container>
 

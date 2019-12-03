@@ -47,7 +47,9 @@
           </mat-menu>
 
           <mat-menu #menuCurso xPosition="before">
-            <button mat-menu-item (click)="showAll()">
+            <button mat-menu-item
+            (click)="showAll()"
+            >
               {{
                 (cursosError$ | async) === false
                   ? "Ocorreu um erro ao carregar cursos..."

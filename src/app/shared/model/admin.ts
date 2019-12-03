@@ -14,7 +14,7 @@ export class Admin implements CustomAbstractEntity {
   fone: string;
   email: string;
   endereco: string;
-  numeroSerie:string;
+  numeroSerie: string;
 
   constructor(id?: number) {
     this.id = id ? id : null;

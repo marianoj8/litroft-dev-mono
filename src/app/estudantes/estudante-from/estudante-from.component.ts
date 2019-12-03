@@ -137,7 +137,7 @@ export class EstudanteFromComponent implements OnInit {
     this.formGroup05 = this.formBuilder.group({
       numeroProcesso: ['', [
         Validators.required,
-        Validators.minLength(6)]],
+        Validators.minLength(5)]],
       curso: [null, Validators.required],
     });
   }
@@ -160,6 +160,7 @@ export class EstudanteFromComponent implements OnInit {
     this.estudante.fone = this.formGroup03.controls.fone.value;
     this.estudante.email = this.formGroup04.controls.email.value;
     this.estudante.endereco = this.formGroup04.controls.endereco.value;
+    this.estudante.numeroProcesso = this.formGroup05.controls.numeroProcesso.value;
 
     this.curso.id = this.formGroup05.controls.curso.value as number;
     this.estudante.curso = this.curso;

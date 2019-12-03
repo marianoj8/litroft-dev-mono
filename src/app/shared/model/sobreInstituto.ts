@@ -1,4 +1,4 @@
-import { CustomAbstractEntity } from "./customEntity";
+import { CustomAbstractEntity } from './customEntity';
 
 class SobreInstituto implements CustomAbstractEntity {
 

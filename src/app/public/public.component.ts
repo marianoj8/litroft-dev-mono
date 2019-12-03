@@ -24,4 +24,8 @@ export class PublicComponent implements OnInit {
 
   }
 
+  onFilterSearch() { }
+
+  find($event, nome: string) { }
+
 }
