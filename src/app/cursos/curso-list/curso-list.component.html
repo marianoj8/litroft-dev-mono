@@ -4,13 +4,6 @@
     Cadastrar Novo Curso
   </button>
   <table *ngIf="cursos; else loading" mat-table [dataSource]="cursos" matSort>
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
-      <td mat-cell *matCellDef="let curso">
-        {{ curso?.id }}
-      </td>
-    </ng-container>
-
     <ng-container matColumnDef="nome">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Nome</th>
       <td mat-cell *matCellDef="let curso">

@@ -34,7 +34,6 @@ export class CursoListComponent implements OnInit {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   displaydColumns: string[] = [
-    'id',
     'nome',
     'duracao',
     'departamento',
