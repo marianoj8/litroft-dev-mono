@@ -34,9 +34,10 @@ export class DepartamentoListComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   displaydColumns: string[] = [
-    'id',
     'nome',
-    'detalhe'
+    'detalhe',
+    'edit',
+    'delete'
   ];
 
   constructor(

@@ -4,12 +4,6 @@
     Cadastrar Novo Departamento
   </button>
   <table *ngIf="departamentos; else loading" mat-table [dataSource]="departamentos" matSort>
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
-      <td mat-cell *matCellDef="let departamento">
-        {{ departamento?.id }}
-      </td>
-    </ng-container>
 
     <ng-container matColumnDef="nome">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Nome</th>
