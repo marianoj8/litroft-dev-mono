@@ -4,12 +4,6 @@
     Cadastrar Nova Turma
   </button>
   <table *ngIf="turmas; else loading" mat-table [dataSource]="turmas" matSort>
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
-      <td mat-cell *matCellDef="let turma">
-        {{ turma?.id }}
-      </td>
-    </ng-container>
 
     <ng-container matColumnDef="sigla">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Sigla</th>

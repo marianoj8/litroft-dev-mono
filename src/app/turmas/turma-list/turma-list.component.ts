@@ -34,7 +34,6 @@ export class TurmaListComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   displaydColumns: string[] = [
-    'id',
     'sigla',
     'curso',
     'detalhe',
