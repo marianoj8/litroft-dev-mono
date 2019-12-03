@@ -8,9 +8,19 @@ import { Instituto } from './../../shared/model/instituto';
 import { environment } from './../../../environments/environment.prod';
 import { Curso } from 'src/app/shared/model/curso';
 import { EventEmitter } from '@angular/core';
+import { CustomFilter } from 'src/app/shared/model/support/custom-filter';
 
 @Injectable({ providedIn: 'root' })
 export class InstitutoService implements CustomRepository<Instituto, number> {
+
+  findValueParam = new EventEmitter<string>();
+  onChangeContextTitle = new EventEmitter<string>();
+  findValueParamFromServer = new EventEmitter<CustomFilter>();
+  findValueParams = new EventEmitter<CustomFilter>();
+  onChangeContext = new EventEmitter<boolean>();
+  emitOnDetalheButtonCliked = new EventEmitter<number>();
+  emitOnEditButtonCliked = new EventEmitter<number>();
+  emitOnDeleteButtonCliked = new EventEmitter<number>();
 
   emitSelectedInstituto = new EventEmitter<Instituto>();
   constructor(private http: HttpClient, private service: CrudService<Instituto, number>) {

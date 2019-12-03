@@ -7,13 +7,15 @@ import { MaterialModule } from 'src/app/material/material.module';
 import { InstitutoComponent } from '../instituto.component';
 import { InstiutoRoutingModule } from './instituto-routing.module';
 import { InstitutoDetalheComponent } from '../instituto-detalhe/instituto-detalhe.component';
+import { InstitutoPriveteListComponent } from '../instituto-privete-list/instituto-privete-list.component';
 
 @NgModule({
   declarations: [
     InstitutoComponent,
     InstitutoListComponent,
     InstitutoFormComponent,
-    InstitutoDetalheComponent
+    InstitutoDetalheComponent,
+    InstitutoPriveteListComponent
   ],
   imports: [
     CommonModule,

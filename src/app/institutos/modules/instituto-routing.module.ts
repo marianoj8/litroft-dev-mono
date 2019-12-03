@@ -5,6 +5,7 @@ import { InstitutoComponent } from '../instituto.component';
 import { InstitutoListComponent } from '../instituto-list/instituto-list.component';
 import { InstitutoFormComponent } from '../instituto-form/instituto-form.component';
 import { AuthGuard } from 'src/app/shared/guard/auth.guard';
+import { InstitutoPriveteListComponent } from '../instituto-privete-list/instituto-privete-list.component';
 
 const routes: Routes = [
   {
@@ -14,6 +15,10 @@ const routes: Routes = [
       {
         path: '',
         component: InstitutoListComponent
+      },
+      {
+        path: 'private-list',
+        component: InstitutoPriveteListComponent
       },
       {
         path: 'add',

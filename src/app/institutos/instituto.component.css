@@ -9,11 +9,7 @@ mat-card {
   align-items: center;
 }
 
-.space-arround .icon-settings {
-  margin-right: 10rem;
-  cursor: pointer;
+.space-arround .icon-settings{
+ margin-right: 10rem;
+ cursor: pointer;
 }
-
-/* input#searchField{
-  border-color: white;
-} */
