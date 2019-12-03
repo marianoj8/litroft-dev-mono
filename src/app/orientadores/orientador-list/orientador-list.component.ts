@@ -33,7 +33,6 @@ export class OrientadorListComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   displaydColumns: string[] = [
-    'id',
     'nome',
     'sobrenome',
     'sexo',

@@ -9,12 +9,6 @@
     [dataSource]="orientadores"
     matSort
   >
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
-      <td mat-cell *matCellDef="let orientador">
-        {{ orientador?.id }}
-      </td>
-    </ng-container>
 
     <ng-container matColumnDef="nome">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Nome</th>
