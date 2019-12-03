@@ -65,7 +65,8 @@
           }}
         </div>
         <mat-divider></mat-divider>
-        <mat-label>Pro</mat-label>: {{ estudante?.adminInterno.nome }}
+        <mat-label>Pro</mat-label>: {{ estudante?.adminInterno.instituto.nome }}
+        ({{estudante?.adminInterno.instituto.sigla}})
       </mat-expansion-panel>
     </mat-accordion>
   </div>
