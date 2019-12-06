@@ -28,7 +28,7 @@ import { AdminService } from './admin/modules/admin.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
+export class AppComponent implements OnInit, OnDestroy {
 
   title = 'Litroft Dev - Mono';
   contextMenu = '***';
@@ -233,21 +233,6 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   clearSelectedSchool() {
     this.router.navigate(['/public']);
     this.publicService.emitSelectedSchool.emit(new Instituto());
-  }
-
-  ngAfterViewInit() {
-    console.log(localStorage.getItem('token'));
-
-    if (localStorage.getItem('token') !== undefined) {
-
-      this.adminService.getUserInfo().subscribe(resp => {
-        if (!resp) {
-          console.log(resp);
-          this.adminService.router.navigate(['/denaid']);
-        }
-      });
-
-    }
   }
 
   ngOnDestroy(): void {
