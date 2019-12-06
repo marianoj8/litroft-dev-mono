@@ -6,8 +6,13 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Instituto } from 'src/app/shared/model/instituto';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
-import { NotificationService } from 'src/app/shared/services/notification/notification.service';
+import { catchError } from 'rxjs/internal/operators/catchError';
+
 import { MatVerticalStepper } from '@angular/material/stepper';
+import { AreaFormacaoService } from 'src/app/area-formacao/modules/area-formacao.service';
+import { Observable, Subject, of } from 'rxjs';
+import { AreaFormacao } from './../../shared/model/AreaFormacao';
+import { NotificationService } from 'src/app/shared/services/notification/notification.service';
 
 @Component({
   selector: 'app-instituto-form',
@@ -20,6 +25,8 @@ export class InstitutoFormComponent implements OnInit {
   formGroup02: FormGroup;
   formGroup03: FormGroup;
   formGroup04: FormGroup;
+  areaFormacao$: Observable<AreaFormacao>;
+  areaFormacaoErrorError$ = new Subject<boolean>();;
   instituto = new Instituto();
   salas = [1, 2, 3, 4, 6, 7, 8];
   laboratorios = [1, 2, 3, 4, 5, 6];
@@ -31,6 +38,7 @@ export class InstitutoFormComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private monografiaService: MonografiaService,
     private institutoService: InstitutoService,
+    private areaFormacaoService: AreaFormacaoService,
     private notificationService: NotificationService,
     private formBuilder: FormBuilder,
     private location: Location) {
@@ -39,6 +47,13 @@ export class InstitutoFormComponent implements OnInit {
 
   ngOnInit() {
     this.institutoService.onChangeContext.emit(true);
+
+    // this.areaFormacao$ = this.areaFormacaoService.list()
+    //   .pipe(catchError(err => {
+    //     this.areaFormacaoErrorError$.next(true);
+    //     return of(null);
+    //   }));
+
     this.initForms();
 
 
