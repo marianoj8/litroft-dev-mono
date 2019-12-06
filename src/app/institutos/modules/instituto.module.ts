@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { InstitutoListComponent } from '../instituto-list/instituto-list.component';
 import { InstitutoFormComponent } from '../instituto-form/instituto-form.component';
@@ -20,7 +21,9 @@ import { InstitutoPriveteListComponent } from '../instituto-privete-list/institu
   imports: [
     CommonModule,
     MaterialModule,
-    InstiutoRoutingModule
+    InstiutoRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: []
 })
