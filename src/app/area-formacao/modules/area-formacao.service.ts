@@ -26,7 +26,7 @@ export class AreaFormacaoService implements CustomRepository<AreaFormacao, numbe
   }
 
   list(): Observable<AreaFormacao[]> {
-    return this.service.list('areaformacao/l?duracao=1');
+    return this.service.list('areaformacao');
   }
 
   filterByNomeDuracao(filter: CustomFilter): Observable<AreaFormacao[]> {

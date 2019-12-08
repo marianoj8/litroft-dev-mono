@@ -48,11 +48,11 @@ export class InstitutoFormComponent implements OnInit {
   ngOnInit() {
     this.institutoService.onChangeContext.emit(true);
 
-    // this.areaFormacao$ = this.areaFormacaoService.list()
-    //   .pipe(catchError(err => {
-    //     this.areaFormacaoErrorError$.next(true);
-    //     return of(null);
-    //   }));
+    this.areaFormacao$ = this.areaFormacaoService.list()
+      .pipe(catchError(err => {
+        this.areaFormacaoErrorError$.next(true);
+        return of(null);
+      }));
 
     this.initForms();
 
