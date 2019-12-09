@@ -1,23 +1,20 @@
-<<<<<<< HEAD
 import { NgModule } from '@angular/core';
+import { AreaFormacaoComponent } from '../area-formacao.component';
+import { CommonModule } from '@angular/common';
+import { MaterialModule } from '../../material/material.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [],
-  imports: [],
+  declarations: [
+    AreaFormacaoComponent
+  ],
+  imports: [
+    CommonModule,
+    MaterialModule,
+    ReactiveFormsModule
+  ],
   exports: []
 })
 export class AreaFormacaoModule {
 
 }
-=======
-import { NgModule } from '@angular/core';
-
-@NgModule({
-  declarations: [],
-  imports: [],
-  exports: []
-})
-export class AreaFormacaoModule {
-
-}
->>>>>>> master
