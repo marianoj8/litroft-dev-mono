@@ -94,8 +94,8 @@ export class InstitutoFormComponent implements OnInit {
         Validators.required,
         Validators.minLength(3),
         Validators.maxLength(10)]],
-        
-        numero: ['', [
+
+      numero: ['', [
         Validators.required,
         Validators.minLength(3),
         Validators.maxLength(11)]],
