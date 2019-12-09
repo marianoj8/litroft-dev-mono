@@ -265,13 +265,12 @@ table {
   border-radius: 50px;
   -moz-outline-radius: 50px;
 }
-.search {
-  /* margin: 0 10%; */
-  /* margin-left: 10%; */
+/* .search {
+  
   width: 20%;
   max-width: 75%;
   min-width: 75%;
-}
+} */
 
 /* .space-arround {
   padding-left: 8%;

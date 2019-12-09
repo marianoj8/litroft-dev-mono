@@ -10,6 +10,46 @@ mat-card {
 }
 
 .space-arround .icon-settings{
- margin-right: 10rem;
- cursor: pointer;
+  margin-right: 7.5rem;
+  cursor: pointer;
+ }
+
+.search {
+  width: 80%;
 }
+
+@media only screen and (min-width: 993px) {
+  .space-arround .icon-settings{
+    margin-right: 7.5rem;
+    cursor: pointer;
+   }
+  
+  .search {
+    width: 80%;
+  }
+}
+
+@media only screen and (min-width: 600px) and (max-width: 992px) {
+  .space-arround .icon-settings{
+    margin-right: 4rem;
+    cursor: pointer;
+   }
+  
+  .search {
+    width: 80%;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  
+  .space-arround .icon-settings{
+    margin-right: 1rem;
+    cursor: pointer;
+   }
+  
+  .search {
+    width: 80%;
+  }
+  
+}
+

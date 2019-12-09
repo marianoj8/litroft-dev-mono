@@ -6,10 +6,10 @@
 }
 
 .field-min-1 {
-  width: 20%;
+  width: 22%;
 }
 .field-min-2 {
-  width: 15%;
+  width: 16%;
 }
 
 mat-vertical-stepper {
@@ -21,6 +21,15 @@ mat-vertical-stepper {
   mat-vertical-stepper {
     margin-top: 3%;
     margin-bottom: 6.6%;
+  }
+}
+
+@media only screen and (min-width: 600px) and (max-width: 992px) {
+  .field-min-1 {
+    width: 45%;
+  }
+  .field-min-2 {
+    width: 35%;
   }
 }
 

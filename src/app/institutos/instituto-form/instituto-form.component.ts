@@ -25,7 +25,9 @@ export class InstitutoFormComponent implements OnInit {
   formGroup03: FormGroup;
   formGroup04: FormGroup;
   areaFormacao$: Observable<AreaFormacao>;
+  local$: Observable<AreaFormacao>;
   areaFormacaoErrorError$ = new Subject<boolean>();;
+  localErrorError$ = new Subject<boolean>();;
   instituto = new Instituto();
   salasCount = [1, 2, 3, 4, 6, 7, 8];
   laboratoriosCount = [1, 2, 3, 4, 5, 6];
@@ -47,11 +49,11 @@ export class InstitutoFormComponent implements OnInit {
   ngOnInit() {
     this.institutoService.onChangeContext.emit(true);
 
-    // this.areaFormacao$ = this.areaFormacaoService.list()
-    //   .pipe(catchError(err => {
-    //     this.areaFormacaoErrorError$.next(true);
-    //     return of(null);
-    //   }));
+    this.areaFormacao$ = this.areaFormacaoService.list()
+      .pipe(catchError(err => {
+        this.areaFormacaoErrorError$.next(true);
+        return of(null);
+      }));
 
     this.initForms();
 

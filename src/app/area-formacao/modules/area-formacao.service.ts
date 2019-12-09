@@ -22,32 +22,32 @@ export class AreaFormacaoService implements CustomRepository<AreaFormacao, numbe
   constructor(private service: CrudService<AreaFormacao, number>) { }
 
   getById(id: number): Observable<AreaFormacao> {
-    return this.service.getById('interno/areaformacao', id);
+    return this.service.getById('areaformacao', id);
   }
 
   list(): Observable<AreaFormacao[]> {
-    return this.service.list('interno/areaformacao/l?duracao=1');
+    return this.service.list('areaformacao');
   }
 
   filterByNomeDuracao(filter: CustomFilter): Observable<AreaFormacao[]> {
-    return this.service.list(`interno/areaformacao/l?nome=${!!filter.nome ? filter.nome : ''}&duracao=${!!filter.duracao ? filter.duracao : 1}`)
+    return this.service.list(`areaformacao/l?nome=${!!filter.nome ? filter.nome : ''}&duracao=${!!filter.duracao ? filter.duracao : 1}`)
       ;
   }
 
   filterByDuracao(duracao: number): Observable<AreaFormacao[]> {
     return this.service
-      .list(`interno/areaformacao/l?duracao=${!!duracao ? duracao : 1}`);
+      .list(`areaformacao/l?duracao=${!!duracao ? duracao : 1}`);
   }
 
 
   save(t: AreaFormacao): Observable<AreaFormacao> {
     if (t.id) {
-      return this.service.update('interno/areaformacao', t);
+      return this.service.update('admin/areaformacao', t);
     }
-    return this.service.save('interno/areaformacao', t);
+    return this.service.save('admin/areaformacao', t);
   }
 
   deleteById(id: number): Observable<void> {
-    return this.service.deleteById('interno/areaformacao', id);
+    return this.service.deleteById('admin/areaformacao', id);
   }
 }

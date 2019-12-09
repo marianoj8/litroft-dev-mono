@@ -7,7 +7,7 @@
     <form [formGroup]="formGroup01">
       <div class="field">
         <ng-template matStepLabel>
-          Nome & Sigla do instituto
+          Nome, sigla & numero do instituto
         </ng-template>
         <mat-form-field class="field field-padding">
           <input
@@ -207,14 +207,14 @@
           </mat-select>
           <mat-error
             *ngIf="
-              formGroup02.controls['salas'].hasError('min') &&
-              !formGroup02.controls['salas'].hasError('required')
+              formGroup03.controls['areaFormacao'].hasError('min') &&
+              !formGroup03.controls['areaFormacao'].hasError('required')
             "
           >
             Dever ter no minino <strong>8 salas</strong>
           </mat-error>
           <mat-error
-            *ngIf="formGroup02.controls['salas'].hasError('required')"
+            *ngIf="formGroup03.controls['areaFormacao'].hasError('required')"
           >
             Numero de salas é <strong>obrigatorio</strong>
           </mat-error>
@@ -222,24 +222,24 @@
         <mat-form-field class="field field-padding">
           <mat-select
             matInput
-            formControlName="laboratorios"
+            formControlName="local"
             required
-            placeholder="Laboratorios"
+            placeholder="Local"
           >
             <!-- <mat-option *ngIf="departamentoError$ | async"
               >Ocorreu um erro ao carregar institutos...
             </mat-option>
              -->
-            <ng-container *ngFor="let laboratorio of laboratorios">
-              <mat-option [value]="laboratorio">
-                {{ laboratorio }}
+            <ng-container *ngFor="let local of locals$">
+              <mat-option [value]="local">
+                {{ local }}
               </mat-option>
             </ng-container>
           </mat-select>
           <mat-error
-            *ngIf="formGroup02.controls['laboratorios'].hasError('required')"
+            *ngIf="formGroup03.controls['local'].hasError('required')"
           >
-            Numero de laboratorios é <strong>obrigatorio</strong>
+            Local é <strong>obrigatorio</strong>
           </mat-error>
         </mat-form-field>
         <button mat-stroked-button matStepperPrevious class="large">
