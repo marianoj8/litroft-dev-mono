@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LocalsComponent } from '../locals.component';
+import { LocalListComponent } from '../local-list/local-list.component';
+import { LocalFormComponent } from '../local-form/local-form.component';
+import { AuthGuard } from 'src/app/shared/guard/auth.guard';
 
 const routes: Routes = [
     {
@@ -9,12 +12,18 @@ const routes: Routes = [
         children: [
             {
                 path: '',
+                canActivate: [AuthGuard],
+                component: LocalListComponent,
             },
             {
-                path: '',
+                path: 'add',
+                canActivate: [AuthGuard],
+                component: LocalFormComponent
             },
             {
-                path: '',
+                path: 'edit/:id',
+                canActivate: [AuthGuard],
+                component: LocalFormComponent
             }
         ]
     }
