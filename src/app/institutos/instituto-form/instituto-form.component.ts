@@ -27,8 +27,8 @@ export class InstitutoFormComponent implements OnInit {
   areaFormacao$: Observable<AreaFormacao>;
   areaFormacaoErrorError$ = new Subject<boolean>();;
   instituto = new Instituto();
-  salas = [1, 2, 3, 4, 6, 7, 8];
-  laboratorios = [1, 2, 3, 4, 5, 6];
+  salasCount = [1, 2, 3, 4, 6, 7, 8];
+  laboratoriosCount = [1, 2, 3, 4, 5, 6];
 
   private id = 0;
 
@@ -90,13 +90,13 @@ export class InstitutoFormComponent implements OnInit {
 
       sigla: ['', [
         Validators.required,
-        Validators.min(3),
-        Validators.max(10)]],
+        Validators.minLength(3),
+        Validators.maxLength(10)]],
         
         numero: ['', [
         Validators.required,
-        Validators.min(3),
-        Validators.max(11)]],
+        Validators.minLength(3),
+        Validators.maxLength(11)]],
 
     });
 
