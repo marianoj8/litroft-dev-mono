@@ -3,10 +3,14 @@ import { AreaFormacaoComponent } from '../area-formacao.component';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from '../../material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AreaFormacaoListComponent } from '../area-formacao-list/area-formacao-list.component';
+import { AreaFormacaoFormComponent } from '../area-formacao-form/area-formacao-form.component';
 
 @NgModule({
   declarations: [
-    AreaFormacaoComponent
+    AreaFormacaoComponent,
+    AreaFormacaoListComponent,
+    AreaFormacaoFormComponent
   ],
   imports: [
     CommonModule,
