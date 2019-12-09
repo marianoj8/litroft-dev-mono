@@ -154,7 +154,86 @@
       </div>
     </form>
   </mat-step>
-  <!--
+  
+  <mat-step [stepControl]="formGroup03">
+    <form [formGroup]="formGroup03">
+      <div class="field">
+        <ng-template matStepLabel>
+          Área de formação & Localização
+        </ng-template>
+        <mat-form-field class="field field-padding">
+          <mat-select
+            matInput
+            formControlName="areaFormacao"
+            required
+            placeholder="Área de formação"
+          >
+            <!-- <mat-option *ngIf="departamentoError$ | async"
+              >Ocorreu um erro ao carregar institutos...
+            </mat-option>
+             -->
+            <ng-container *ngFor="let item of areaFormacao$ | async">
+              <mat-option [value]="item.id">
+                {{ item.descricao }}
+              </mat-option>
+            </ng-container>
+          </mat-select>
+          <mat-error
+            *ngIf="
+              formGroup02.controls['salas'].hasError('min') &&
+              !formGroup02.controls['salas'].hasError('required')
+            "
+          >
+            Dever ter no minino <strong>8 salas</strong>
+          </mat-error>
+          <mat-error
+            *ngIf="formGroup02.controls['salas'].hasError('required')"
+          >
+            Numero de salas é <strong>obrigatorio</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="field field-padding">
+          <mat-select
+            matInput
+            formControlName="laboratorios"
+            required
+            placeholder="Laboratorios"
+          >
+            <!-- <mat-option *ngIf="departamentoError$ | async"
+              >Ocorreu um erro ao carregar institutos...
+            </mat-option>
+             -->
+            <ng-container *ngFor="let laboratorio of laboratorios">
+              <mat-option [value]="laboratorio">
+                {{ laboratorio }}
+              </mat-option>
+            </ng-container>
+          </mat-select>
+          <mat-error
+            *ngIf="formGroup02.controls['laboratorios'].hasError('required')"
+          >
+            Numero de laboratorios é <strong>obrigatorio</strong>
+          </mat-error>
+        </mat-form-field>
+        <button mat-stroked-button matStepperPrevious class="large">
+          <mat-icon>arrow_upward</mat-icon>
+          Anterior
+        </button>
+        <div class="spaced">
+          <button
+            color="primary"
+            class="large"
+            mat-raised-button
+            matStepperNext
+          >
+            <mat-icon>arrow_downward</mat-icon>
+            Avançar
+          </button>
+        </div>
+      </div>
+    </form>
+  </mat-step>
+  
 
   <mat-step>
     <ng-template matStepLabel
@@ -188,7 +267,7 @@
       </button>
     </div>
   </mat-step>
-   -->
+  
 </mat-vertical-stepper>
 <ng-template #loading>
   <mat-progress-bar mode="indeterminate" color="warn"></mat-progress-bar>

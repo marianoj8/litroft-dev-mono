@@ -124,7 +124,7 @@ export class InstitutoPriveteListComponent implements OnInit {
   }
 
   add() {
-    this.router.navigate(['add'], { relativeTo: this.activatedRoute });
+    this.router.navigate(['institutos/add']);
   }
 
   detalhe(id: Instituto) {
