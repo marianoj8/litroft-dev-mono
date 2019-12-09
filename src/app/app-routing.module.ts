@@ -68,6 +68,11 @@ const routes: Routes = [
     loadChildren: 'src/app/especialidades/modules/especialidade.module#EspecialidadeModule'
   },
   {
+    path: 'locals',
+    canActivate: [AuthGuard],
+    loadChildren: 'src/app/locals/modules/local.module#LocalModule'
+  },
+  {
     path: 'login',
     loadChildren: 'src/app/login/modules/login.module#LoginModule'
   },
