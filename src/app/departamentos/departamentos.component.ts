@@ -1,8 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Location } from '@angular/common';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { CustomFilter } from '../shared/model/support/custom-filter';
-import { Location } from '@angular/common';
 import { DepartamentoService } from './modules/departamento.service';
 
 @Component({

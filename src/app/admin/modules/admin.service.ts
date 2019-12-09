@@ -1,13 +1,14 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { CustomRepository } from 'src/app/shared/repository/custom-repository';
-import { Admin } from 'src/app/shared/model/admin';
-import { CrudService } from 'src/app/shared/services/crud/crud.service';
-import { Observable } from 'rxjs';
-import { CustomFilter } from 'src/app/shared/model/support/custom-filter';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
-import { take, catchError, filter } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
+
+import { Admin } from 'src/app/shared/model/admin';
+import { CustomFilter } from 'src/app/shared/model/support/custom-filter';
+import { CustomRepository } from 'src/app/shared/repository/custom-repository';
+import { CrudService } from 'src/app/shared/services/crud/crud.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'

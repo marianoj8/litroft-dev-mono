@@ -1,9 +1,10 @@
-import { Injectable, EventEmitter } from '@angular/core';
-import { AreaFormacao } from './../../shared/model/AreaFormacao';
-import { CustomRepository } from 'src/app/shared/repository/custom-repository';
-import { CustomFilter } from 'src/app/shared/model/support/custom-filter';
-import { CrudService } from 'src/app/shared/services/crud/crud.service';
+import { EventEmitter, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+
+import { CustomFilter } from 'src/app/shared/model/support/custom-filter';
+import { CustomRepository } from 'src/app/shared/repository/custom-repository';
+import { CrudService } from 'src/app/shared/services/crud/crud.service';
+import { AreaFormacao } from './../../shared/model/AreaFormacao';
 
 @Injectable({
   providedIn: 'root'

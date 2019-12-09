@@ -1,18 +1,18 @@
-import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatSort, MatTableDataSource, PageEvent } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { of, Subject, Subscription } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { Estudante } from 'src/app/shared/model/estudante';
-import { NotificationService } from 'src/app/shared/services/notification/notification.service';
 
+import { MonografiaService } from 'src/app/monografias/modules/monografia.service';
+import { ErrorLoadingComponent } from 'src/app/shared/error-loading/error-loading.component';
+import { Estudante } from 'src/app/shared/model/estudante';
+import { MatDailogTypeParam } from 'src/app/shared/model/support/mat-dialog-type-param';
+import { NotificationService } from 'src/app/shared/services/notification/notification.service';
 import { EstudanteService } from '../modules/estudante.service';
 import { DeleteDialogComponent } from './../../shared/delete-dialog/delete-dialog.component';
 import { CustomFilter } from './../../shared/model/support/custom-filter';
 import { MoreOptionsDialogComponent } from './../../shared/more-options-dialog/more-options-dialog.component';
-import { ErrorLoadingComponent } from 'src/app/shared/error-loading/error-loading.component';
-import { MatDailogTypeParam } from 'src/app/shared/model/support/mat-dialog-type-param';
-import { MonografiaService } from 'src/app/monografias/modules/monografia.service';
 
 @Component({
   selector: 'app-estudante-list',

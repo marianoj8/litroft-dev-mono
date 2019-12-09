@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+
 import { Curso } from 'src/app/shared/model/curso';
 import { CursoService } from 'src/app/cursos/modules/curso.service';
 import { CustomFilter } from 'src/app/shared/model/support/custom-filter';

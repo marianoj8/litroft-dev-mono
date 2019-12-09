@@ -6,6 +6,8 @@ import { Subscription } from 'rxjs/internal/Subscription';
 import { Local } from '../shared/model/local';
 import { CustomFilter } from '../shared/model/support/custom-filter';
 
+
+
 @Component({
   selector: 'app-locals',
   templateUrl: './locals.component.html',

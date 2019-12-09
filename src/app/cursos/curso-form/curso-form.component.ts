@@ -1,20 +1,20 @@
+import { Location } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatVerticalStepper } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EventEmitter } from 'events';
-import { Observable, Subject, of } from 'rxjs';
-import { Location } from '@angular/common';
+import { Observable, of, Subject } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
+import { DepartamentoService } from 'src/app/departamentos/modules/departamento.service';
+import { MonografiaService } from 'src/app/monografias/modules/monografia.service';
 import { Curso } from 'src/app/shared/model/curso';
+import { Departamento } from 'src/app/shared/model/departamento';
 import { NotificationService } from 'src/app/shared/services/notification/notification.service';
 import { MyErrorStateMatch } from 'src/app/shared/validators/field-validator';
 import { CursoService } from '../modules/curso.service';
-import { Departamento } from 'src/app/shared/model/departamento';
-import { DepartamentoService } from 'src/app/departamentos/modules/departamento.service';
-import { catchError } from 'rxjs/operators';
-import { MonografiaService } from 'src/app/monografias/modules/monografia.service';
 
 @Component({
   selector: 'app-curso-form',

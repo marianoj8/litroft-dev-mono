@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material';
-import { catchError } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
 import { Observable, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
+import { MonografiaService } from 'src/app/monografias/modules/monografia.service';
+import { ErrorLoadingComponent } from 'src/app/shared/error-loading/error-loading.component';
 import { Departamento } from 'src/app/shared/model/departamento';
 import { DepartamentoService } from '../modules/departamento.service';
-import { ErrorLoadingComponent } from 'src/app/shared/error-loading/error-loading.component';
-import { MonografiaService } from 'src/app/monografias/modules/monografia.service';
 
 @Component({
   selector: 'app-departamento-detalhe',

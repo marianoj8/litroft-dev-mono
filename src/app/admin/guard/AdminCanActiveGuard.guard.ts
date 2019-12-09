@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { CanLoad } from '@angular/router';
-import { Observable } from 'rxjs';
 
 import { AdminService } from '../modules/admin.service';
 import { AdminResolverGuard } from './AdminResolverGuard.guard';

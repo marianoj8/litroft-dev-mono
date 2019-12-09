@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -6,8 +7,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { EventEmitter } from 'events';
 import { Observable, of, Subject } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { Location } from '@angular/common';
 
+import { MonografiaService } from 'src/app/monografias/modules/monografia.service';
 import { ErrorLoadingComponent } from 'src/app/shared/error-loading/error-loading.component';
 import { Curso } from 'src/app/shared/model/curso';
 import { NotificationService } from 'src/app/shared/services/notification/notification.service';
@@ -15,8 +16,6 @@ import { MyErrorStateMatch } from 'src/app/shared/validators/field-validator';
 import { EstudanteService } from '../modules/estudante.service';
 import { CursoService } from './../../cursos/modules/curso.service';
 import { Estudante } from './../../shared/model/estudante';
-import { MonografiaService } from 'src/app/monografias/modules/monografia.service';
-
 
 @Component({
   selector: 'app-estudante-from',

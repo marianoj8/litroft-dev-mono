@@ -4,11 +4,11 @@ import { MatDialog } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { Estudante } from 'src/app/shared/model/estudante';
 
+import { MonografiaService } from 'src/app/monografias/modules/monografia.service';
+import { Estudante } from 'src/app/shared/model/estudante';
 import { ErrorLoadingComponent } from './../../shared/error-loading/error-loading.component';
 import { EstudanteService } from './../modules/estudante.service';
-import { MonografiaService } from 'src/app/monografias/modules/monografia.service';
 
 @Component({
   selector: 'app-estudante-detalhe',

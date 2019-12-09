@@ -4,12 +4,12 @@ import { MatDialog } from '@angular/material';
 import { Observable, of, Subject, Subscription } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
+import { MonografiaService } from '../monografias/modules/monografia.service';
 import { PublicService } from '../public/modules/public.service';
 import { Curso } from '../shared/model/curso';
 import { CustomFilter } from '../shared/model/support/custom-filter';
-import { CursoService } from './modules/curso.service';
 import { CursoSearchComponent } from './curso-search/curso-search.component';
-import { MonografiaService } from '../monografias/modules/monografia.service';
+import { CursoService } from './modules/curso.service';
 
 @Component({
   selector: 'app-cursos',

@@ -1,18 +1,18 @@
-import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
-import { PageEvent, MatTableDataSource, MatSort, MatDialog } from '@angular/material';
-import { Subscription, Subject, of } from 'rxjs';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { MatDialog, MatSort, MatTableDataSource, PageEvent } from '@angular/material';
+import { ActivatedRoute, Router } from '@angular/router';
+import { of, Subject, Subscription } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-import { MatDailogTypeParam } from 'src/app/shared/model/support/mat-dialog-type-param';
+import { MonografiaService } from 'src/app/monografias/modules/monografia.service';
+import { DeleteDialogComponent } from 'src/app/shared/delete-dialog/delete-dialog.component';
+import { ErrorLoadingComponent } from 'src/app/shared/error-loading/error-loading.component';
 import { Departamento } from 'src/app/shared/model/departamento';
 import { CustomFilter } from 'src/app/shared/model/support/custom-filter';
-import { DepartamentoService } from '../modules/departamento.service';
+import { MatDailogTypeParam } from 'src/app/shared/model/support/mat-dialog-type-param';
 import { MoreOptionsDialogComponent } from 'src/app/shared/more-options-dialog/more-options-dialog.component';
 import { NotificationService } from 'src/app/shared/services/notification/notification.service';
-import { ErrorLoadingComponent } from 'src/app/shared/error-loading/error-loading.component';
-import { DeleteDialogComponent } from 'src/app/shared/delete-dialog/delete-dialog.component';
-import { MonografiaService } from 'src/app/monografias/modules/monografia.service';
+import { DepartamentoService } from '../modules/departamento.service';
 
 @Component({
   selector: 'app-departamento-list',

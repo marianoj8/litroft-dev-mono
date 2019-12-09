@@ -1,10 +1,11 @@
-import { NgModule } from '@angular/core';
-import { AreaFormacaoComponent } from '../area-formacao.component';
 import { CommonModule } from '@angular/common';
-import { MaterialModule } from '../../material/material.module';
+import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { AreaFormacaoListComponent } from '../area-formacao-list/area-formacao-list.component';
+
+import { MaterialModule } from '../../material/material.module';
 import { AreaFormacaoFormComponent } from '../area-formacao-form/area-formacao-form.component';
+import { AreaFormacaoListComponent } from '../area-formacao-list/area-formacao-list.component';
+import { AreaFormacaoComponent } from '../area-formacao.component';
 
 @NgModule({
   declarations: [

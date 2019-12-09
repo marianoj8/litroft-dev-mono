@@ -7,8 +7,6 @@ import { CustomFilter } from 'src/app/shared/model/support/custom-filter';
 import { CrudService } from 'src/app/shared/services/crud/crud.service';
 import { CustomRepository } from './../../shared/repository/custom-repository';
 
-
-
 @Injectable({
   providedIn: 'root'
 })

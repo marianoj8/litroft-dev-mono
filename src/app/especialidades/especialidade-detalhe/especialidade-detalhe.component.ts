@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { Especialidade } from 'src/app/shared/model/especialidade';
-import { EspecialidadeService } from '../modules/especialidade.service';
-import { ActivatedRoute } from '@angular/router';
-import { MatDialog } from '@angular/material';
-import { catchError } from 'rxjs/operators';
-import { ErrorLoadingComponent } from 'src/app/shared/error-loading/error-loading.component';
 import { Location } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material';
+import { ActivatedRoute } from '@angular/router';
+import { Observable, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+
+import { Especialidade } from 'src/app/shared/model/especialidade';
+import { ErrorLoadingComponent } from 'src/app/shared/error-loading/error-loading.component';
+import { EspecialidadeService } from '../modules/especialidade.service';
 
 @Component({
   selector: 'app-especialidade-detalhe',

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { AdminService } from '../modules/admin.service';
 import { Resolve } from '@angular/router';
+
+import { AdminService } from '../modules/admin.service';
 
 @Injectable({ providedIn: 'root' })
 export class AdminResolverGuard implements Resolve<boolean> {

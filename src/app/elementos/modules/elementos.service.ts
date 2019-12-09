@@ -1,10 +1,10 @@
-import { Injectable, EventEmitter } from '@angular/core';
-import { CustomRepository } from 'src/app/shared/repository/custom-repository';
+import { EventEmitter, Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+
 import { Elemento } from 'src/app/shared/model/elemento';
 import { CustomFilter } from 'src/app/shared/model/support/custom-filter';
+import { CustomRepository } from 'src/app/shared/repository/custom-repository';
 import { CrudService } from 'src/app/shared/services/crud/crud.service';
-import { Observable } from 'rxjs';
-import { Estudante } from 'src/app/shared/model/estudante';
 
 @Injectable({ providedIn: 'root' })
 export class ElementoService implements CustomRepository<Elemento, number> {

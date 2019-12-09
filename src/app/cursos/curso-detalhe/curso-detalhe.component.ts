@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material';
+import { ActivatedRoute } from '@angular/router';
 import { Observable, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+
+import { MonografiaService } from 'src/app/monografias/modules/monografia.service';
+import { ErrorLoadingComponent } from 'src/app/shared/error-loading/error-loading.component';
 import { Curso } from 'src/app/shared/model/curso';
 import { CursoService } from '../modules/curso.service';
-import { ActivatedRoute } from '@angular/router';
-import { MatDialog } from '@angular/material';
-import { catchError } from 'rxjs/operators';
-import { ErrorLoadingComponent } from 'src/app/shared/error-loading/error-loading.component';
-import { MonografiaService } from 'src/app/monografias/modules/monografia.service';
 
 @Component({
   selector: 'app-curso-detalhe',

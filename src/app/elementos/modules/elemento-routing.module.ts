@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-
 import { AuthGuard } from 'src/app/shared/guard/auth.guard';
-import { ElementosComponent } from '../elementos.component';
-import { ElementoListComponent } from '../elemento-list/elemento-list.component';
-import { ElementoFormComponent } from '../elemento-form/elemento-form.component';
+
 import { ElementoDetalheComponent } from '../elemento-detalhe/elemento-detalhe.component';
+import { ElementoFormComponent } from '../elemento-form/elemento-form.component';
+import { ElementoListComponent } from '../elemento-list/elemento-list.component';
+import { ElementosComponent } from '../elementos.component';
 
 
 const route: Routes = [

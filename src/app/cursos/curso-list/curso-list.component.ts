@@ -5,14 +5,14 @@ import { of, Subject, Subscription } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 import { CursoService } from 'src/app/cursos/modules/curso.service';
+import { MonografiaService } from 'src/app/monografias/modules/monografia.service';
+import { DeleteDialogComponent } from 'src/app/shared/delete-dialog/delete-dialog.component';
+import { ErrorLoadingComponent } from 'src/app/shared/error-loading/error-loading.component';
 import { Curso } from 'src/app/shared/model/curso';
 import { CustomFilter } from 'src/app/shared/model/support/custom-filter';
 import { MatDailogTypeParam } from 'src/app/shared/model/support/mat-dialog-type-param';
 import { MoreOptionsDialogComponent } from 'src/app/shared/more-options-dialog/more-options-dialog.component';
 import { NotificationService } from 'src/app/shared/services/notification/notification.service';
-import { DeleteDialogComponent } from 'src/app/shared/delete-dialog/delete-dialog.component';
-import { ErrorLoadingComponent } from 'src/app/shared/error-loading/error-loading.component';
-import { MonografiaService } from 'src/app/monografias/modules/monografia.service';
 
 @Component({
   selector: 'app-curso-list',

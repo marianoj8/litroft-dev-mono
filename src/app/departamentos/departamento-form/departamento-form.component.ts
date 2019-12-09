@@ -1,16 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
-import { MatVerticalStepper } from '@angular/material';
-import { HttpErrorResponse } from '@angular/common/http';
-import { EventEmitter } from 'events';
 import { Location } from '@angular/common';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatVerticalStepper } from '@angular/material';
+import { ActivatedRoute, Router } from '@angular/router';
+import { EventEmitter } from 'events';
 
-import { MyErrorStateMatch } from 'src/app/shared/validators/field-validator';
-import { Departamento } from 'src/app/shared/model/departamento';
-import { DepartamentoService } from '../modules/departamento.service';
-import { NotificationService } from 'src/app/shared/services/notification/notification.service';
 import { MonografiaService } from 'src/app/monografias/modules/monografia.service';
+import { Departamento } from 'src/app/shared/model/departamento';
+import { NotificationService } from 'src/app/shared/services/notification/notification.service';
+import { MyErrorStateMatch } from 'src/app/shared/validators/field-validator';
+import { DepartamentoService } from '../modules/departamento.service';
 
 @Component({
   selector: 'app-departamento-form',
