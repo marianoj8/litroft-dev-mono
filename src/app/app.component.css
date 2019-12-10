@@ -152,3 +152,14 @@ mat-toolbar-row#row2 a#lastLink {
 .field-max {
   width: 95%;
 }
+
+/*Mat-acordion & Mat-expation-panel*/
+.example-headers-align .mat-expansion-panel-header-title,
+.example-headers-align .mat-expansion-panel-header-description {
+  flex-basis: 0;
+}
+
+.example-headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}

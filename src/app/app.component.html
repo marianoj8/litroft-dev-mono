@@ -65,7 +65,7 @@
   <mat-sidenav #drawer class="sidenav" fixedInViewport="false" backgroundColor="primary"
     [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'"
     [opened]="((isHandset$ | async) && authService.loggedIn()) === true">
-    <div style="width: 73%; height: 126px; background-color: #3f51b5; padding: 8px 0px 0px 70px;">
+    <div style="width: 72%; height: 126px; background-color: #3f51b5; padding: 8px 0px 0px 70px;">
       <div
         style="width: 90px; height: 90px; background-color: #fff; border: 2px solid whitesmoke; border-radius: 50px;">
         <mat-icon *ngIf="authService.loggedIn()" color="primary"
@@ -91,15 +91,20 @@
 
     <mat-nav-list>
       <div *ngIf="authService.loggedIn()">
-        <mat-accordion>
-        <a mat-list-item routerLinkActive="active" [routerLink]="['home']">
-          <mat-icon color="primary">home</mat-icon>
-          Home
-        </a>
-        <mat-divider></mat-divider>
+        <mat-accordion class="example-headers-align">
+          <a mat-list-item routerLinkActive="active" [routerLink]="['home']">
+            <mat-icon color="primary">home</mat-icon>
+            Home
+          </a>
+          <mat-divider></mat-divider>
           <mat-expansion-panel>
             <mat-expansion-panel-header>
-              Estudante
+              <mat-panel-title>
+                <mat-icon color="primary">person_pin</mat-icon>
+              </mat-panel-title>
+              <mat-panel-description>
+                Estudante
+              </mat-panel-description>
             </mat-expansion-panel-header>
             <a mat-list-item routerLinkActive="active" [routerLink]="['estudantes']">
               <mat-icon color="primary">person_pin</mat-icon>
@@ -117,7 +122,12 @@
           <!-- <mat-divider></mat-divider> -->
           <mat-expansion-panel>
             <mat-expansion-panel-header>
-              Orientador
+              <mat-panel-title>
+                <mat-icon color="primary">recent_actors</mat-icon>
+              </mat-panel-title>
+              <mat-panel-description>
+                Orientador
+              </mat-panel-description>
             </mat-expansion-panel-header>
             <a mat-list-item routerLinkActive="active" [routerLink]="['orientadores']">
               <mat-icon color="primary">recent_actors</mat-icon>
@@ -131,7 +141,12 @@
           <!-- <mat-divider></mat-divider> -->
           <mat-expansion-panel>
             <mat-expansion-panel-header>
-              Monografia
+              <mat-panel-title>
+                <mat-icon color="primary">collections_bookmark</mat-icon>
+              </mat-panel-title>
+              <mat-panel-description>
+                Monografia
+              </mat-panel-description>
             </mat-expansion-panel-header>
             <a mat-list-item routerLinkActive="active" [routerLink]="['grupos']">
               <mat-icon color="primary">group</mat-icon>
@@ -149,7 +164,12 @@
           <!-- <mat-divider></mat-divider> -->
           <mat-expansion-panel>
             <mat-expansion-panel-header>
-              Instituto
+              <mat-panel-title>
+                <mat-icon color="primary">domain</mat-icon>
+              </mat-panel-title>
+              <mat-panel-description>
+                Instituto
+              </mat-panel-description>
             </mat-expansion-panel-header>
             <a mat-list-item routerLinkActive="active" [routerLink]="['departamentos']">
               <mat-icon color="primary">domain</mat-icon>
@@ -160,7 +180,7 @@
               <mat-icon color="primary">domain</mat-icon>
               Instituto
             </a>
-            <a mat-list-item [routerLink]="['locals']" routerLinkActive="router-link-active">
+            <a mat-list-item [routerLink]="['locais']" routerLinkActive="router-link-active">
               <mat-icon color="primary">location</mat-icon>
               Local
             </a>
@@ -168,7 +188,12 @@
           <!-- <mat-divider></mat-divider> -->
           <mat-expansion-panel>
             <mat-expansion-panel-header>
-              Configurações
+              <mat-panel-title>
+                <mat-icon color="primary">settings</mat-icon>
+              </mat-panel-title>
+              <mat-panel-description>
+                Configurações
+              </mat-panel-description>
             </mat-expansion-panel-header>
             <a mat-list-item routerLinkActive="active" [routerLink]="['sobre']">
               <mat-icon color="primary">info</mat-icon>
