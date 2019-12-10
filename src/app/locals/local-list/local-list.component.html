@@ -1,1 +1,97 @@
-<p>local-list works!</p>
+<div class="container mat-elevation-z8 table hide-on-med-and-down">
+  <button class="btn-large" mat-raised-button color="primary" (click)="add()">
+    <mat-icon>add</mat-icon>
+    Cadastrar Novo Local
+  </button>
+  <table *ngIf="locais; else loading" mat-table [dataSource]="locais" matSort>
+    <ng-container matColumnDef="destrito">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Destrito</th>
+      <td mat-cell *matCellDef="let local">
+        {{ local?.destrito }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="duracao">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Municipio</th>
+      <td mat-cell *matCellDef="let local">
+        {{ local?.monicipio.nome }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="departamento">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Provincia</th>
+      <td mat-cell *matCellDef="let local">
+        {{ local?.provincia?.nome }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="detalhe">
+      <th mat-header-cell *matHeaderCellDef>Detalhe</th>
+      <td mat-cell *matCellDef="let local">
+        <button mat-raised-button [routerLink]="['detalhe', local.id]">
+          <mat-icon color="primary">description</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="edit">
+      <th mat-header-cell *matHeaderCellDef>Editar</th>
+      <td mat-cell *matCellDef="let local">
+        <button mat-raised-button (click)="edit(local.id)">
+          <mat-icon color="primary">edit</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="delete">
+      <th mat-header-cell *matHeaderCellDef>Excluir</th>
+      <td mat-cell *matCellDef="let local">
+        <button mat-raised-button matTooltipShowDelay="2000" matTooltipHideDelay="2000"
+          matTooltip="Uma vez excluido não tem como reverter as alterações." (click)="openDeleteDialog(local.id)">
+          <mat-icon color="warn">delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="noData">
+      <th mat-footer-cell *matFooterCellDef>Lista vasia.</th>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displaydColumns; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: displaydColumns"></tr>
+    <tr mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{ hide: true }"></tr>
+  </table>
+
+  <ng-template #loading>
+    <div *ngIf="error$ | async as error; else showError">
+      <span>
+        Erro ao carregar locais. Tente novamente mais tarde.
+      </span>
+    </div>
+    <ng-template #showError>
+      <mat-progress-bar mode="indeterminate" color="warn"> </mat-progress-bar>
+    </ng-template>
+  </ng-template>
+</div>
+
+<!-- Modo Mobile inicializado  -->
+
+<div class="hide-on-large-only">
+  <mat-nav-list class="mat-elevation-z8 container" *ngIf="locais; else loadingOnList">
+    <button class="btn-large" mat-raised-button color="primary" (click)="add()">
+      <mat-icon>add</mat-icon>
+      Cadastrar Novo Local
+    </button>
+    <a mat-list-item (click)="openMoreOptionDialog(item.id)" *ngFor="let item of locaisList">
+      <mat-icon matListIcon class="mat-18">book</mat-icon>
+      <h5 matLine>{{ item?.destrito }}</h5>
+      <p matLine>
+        {{ item?.duracao < 2 ? item?.duracao + ' Ano' : item?.duracao + ' Anos' }}
+      </p>
+      <mat-divider></mat-divider>
+    </a>
+  </mat-nav-list>
+  <ng-template #loadingOnList>
+    <mat-progress-bar mode="indeterminate" color="warn" class="hide-on-large-only"></mat-progress-bar>
+  </ng-template>
+</div>
