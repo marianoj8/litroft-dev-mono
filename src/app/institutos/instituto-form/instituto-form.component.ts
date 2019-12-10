@@ -1,17 +1,19 @@
 import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { MonografiaService } from 'src/app/monografias/modules/monografia.service';
-import { InstitutoService } from '../modules/instituto.service';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { Instituto } from 'src/app/shared/model/instituto';
-import { Router, ActivatedRoute } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
-import { NotificationService } from 'src/app/shared/services/notification/notification.service';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatVerticalStepper } from '@angular/material/stepper';
-import { AreaFormacaoService } from 'src/app/area-formacao/modules/area-formacao.service';
-import { Observable, Subject, of } from 'rxjs';
-import { AreaFormacao } from './../../shared/model/AreaFormacao';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Observable, of, Subject } from 'rxjs';
 import { catchError } from 'rxjs/internal/operators/catchError';
+import { AreaFormacaoService } from 'src/app/area-formacao/modules/area-formacao.service';
+import { LocalService } from 'src/app/locals/modules/local.service';
+import { MonografiaService } from 'src/app/monografias/modules/monografia.service';
+import { Instituto } from 'src/app/shared/model/instituto';
+import { NotificationService } from 'src/app/shared/services/notification/notification.service';
+
+import { InstitutoService } from '../modules/instituto.service';
+import { AreaFormacao } from './../../shared/model/AreaFormacao';
 
 @Component({
   selector: 'app-instituto-form',
@@ -25,7 +27,7 @@ export class InstitutoFormComponent implements OnInit {
   formGroup03: FormGroup;
   formGroup04: FormGroup;
   areaFormacao$: Observable<AreaFormacao>;
-  local$: Observable<AreaFormacao>;
+  locais$: Observable<AreaFormacao>;
   areaFormacaoErrorError$ = new Subject<boolean>();;
   localErrorError$ = new Subject<boolean>();;
   instituto = new Instituto();
@@ -40,6 +42,7 @@ export class InstitutoFormComponent implements OnInit {
     private monografiaService: MonografiaService,
     private institutoService: InstitutoService,
     private areaFormacaoService: AreaFormacaoService,
+    private localService: LocalService,
     private notificationService: NotificationService,
     private formBuilder: FormBuilder,
     private location: Location) {
@@ -52,6 +55,13 @@ export class InstitutoFormComponent implements OnInit {
     this.areaFormacao$ = this.areaFormacaoService.list()
       .pipe(catchError(err => {
         this.areaFormacaoErrorError$.next(true);
+        return of(null);
+
+      }));
+
+    this.locais$ = this.localService.list()
+      .pipe(catchError(err => {
+        this.localErrorError$.next(true);
         return of(null);
       }));
 

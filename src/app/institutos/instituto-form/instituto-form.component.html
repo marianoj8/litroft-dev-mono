@@ -181,7 +181,7 @@
       </div>
     </form>
   </mat-step>
-  
+
   <mat-step [stepControl]="formGroup03">
     <form [formGroup]="formGroup03">
       <div class="field">
@@ -230,9 +230,11 @@
               >Ocorreu um erro ao carregar institutos...
             </mat-option>
              -->
-            <ng-container *ngFor="let local of locals$">
-              <mat-option [value]="local">
-                {{ local }}
+            <ng-container *ngFor="let local of locais$ | async">
+              <mat-option [value]="local.id">
+                {{ local.destrito }},
+                {{ local.monicipio.nome }},
+                {{ local.provincia.nome }}
               </mat-option>
             </ng-container>
           </mat-select>
@@ -260,7 +262,7 @@
       </div>
     </form>
   </mat-step>
-  
+
 
   <mat-step>
     <ng-template matStepLabel
@@ -294,7 +296,7 @@
       </button>
     </div>
   </mat-step>
-  
+
 </mat-vertical-stepper>
 <ng-template #loading>
   <mat-progress-bar mode="indeterminate" color="warn"></mat-progress-bar>
