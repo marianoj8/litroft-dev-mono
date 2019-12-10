@@ -14,12 +14,11 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        canActivate: [AuthGuard],
         component: InstitutoListComponent
       },
       {
         path: 'private-list',
-        canActivate: [AuthGuard],
+        // canActivate: [AuthGuard],
         component: InstitutoPriveteListComponent
       },
       {
