@@ -18,7 +18,7 @@ const routes: Routes = [
       },
       {
         path: 'private-list',
-        // canActivate: [AuthGuard],
+        canActivate: [AuthGuard],
         component: InstitutoPriveteListComponent
       },
       {

@@ -85,9 +85,15 @@ export class InstitutoFormComponent implements OnInit {
             numero: this.instituto.numero
           });
 
-          // this.formGroup02.patchValue({
-          //   departamento: this.instituto.departamento.id
-          // });
+          this.formGroup02.patchValue({
+            salas: this.instituto.salas,
+            laboratorios: this.instituto.laboratorios
+          });
+
+          this.formGroup03.patchValue({
+            areaFormacao: this.instituto.areaFormacao.id,
+            local: this.instituto.local.id
+          });
 
         });
 
