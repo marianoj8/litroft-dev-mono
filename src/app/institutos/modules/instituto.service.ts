@@ -42,6 +42,10 @@ export class InstitutoService implements CustomRepository<Instituto, number> {
     return this.http.get<Curso[]>(`${environment.API}/curso/l/${id}`);
   }
 
+  listFiltered(v1: string, v: string) {
+    return null;
+  }
+
   save(t: Instituto): Observable<Instituto> {
     if (t.id) {
       return this.service.update('interno/local', t);
