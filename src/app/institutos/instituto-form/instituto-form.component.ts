@@ -14,6 +14,7 @@ import { NotificationService } from 'src/app/shared/services/notification/notifi
 
 import { InstitutoService } from '../modules/instituto.service';
 import { AreaFormacao } from './../../shared/model/AreaFormacao';
+import { Local } from 'src/app/shared/model/local';
 
 @Component({
   selector: 'app-instituto-form',
@@ -80,7 +81,8 @@ export class InstitutoFormComponent implements OnInit {
 
           this.formGroup01.patchValue({
             nome: this.instituto.nome,
-            sigla: this.instituto.sigla
+            sigla: this.instituto.sigla,
+            numero: this.instituto.numero
           });
 
           // this.formGroup02.patchValue({
@@ -139,8 +141,12 @@ export class InstitutoFormComponent implements OnInit {
 
   private save(stepper: MatVerticalStepper, state): void {
     this.instituto.nome = this.formGroup01.controls.nome.value;
-    this.instituto.sigla = this.formGroup01.controls.duracao.value;
-    // this.instituto.departamento = new Departamento(this.formGroup02.controls.departamento.value);
+    this.instituto.sigla = this.formGroup01.controls.sigla.value;
+    this.instituto.numero = this.formGroup01.controls.numero.value;
+    this.instituto.salas = this.formGroup02.controls.salas.value;
+    this.instituto.laboratorios = this.formGroup02.controls.laboratorios.value;
+    this.instituto.areaFormacao = new AreaFormacao(this.formGroup03.controls.areaFormacao.value);
+    this.instituto.local = new Local(this.formGroup03.controls.local.value);
 
     this.institutoService.save(this.instituto)
       .subscribe(

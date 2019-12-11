@@ -11,7 +11,7 @@ export class Instituto implements CustomAbstractEntity {
   totalModified: number;
   nome: string;
   sigla: string;
-  numero: String;
+  numero: string;
   logoId: string;
   laboratorios: number;
   salas: number;
