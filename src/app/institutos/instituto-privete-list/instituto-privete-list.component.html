@@ -62,7 +62,7 @@
     <ng-container matColumnDef="detalhe">
       <th mat-header-cell *matHeaderCellDef>detalhe</th>
       <td mat-cell *matCellDef="let instituto">
-        <button mat-raised-button>
+        <button mat-raised-button (click)="detalhe(instituto)">
           <mat-icon color="primary">description</mat-icon>
         </button>
       </td>
