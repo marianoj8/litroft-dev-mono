@@ -35,10 +35,6 @@ export class InstitutoService implements CustomRepository<Instituto, number> {
   }
 
   list(): Observable<Instituto[]> {
-    return this.service.list('instituto');
-  }
-
-  publicList(): Observable<Instituto[]> {
     return this.http.get<Instituto[]>(`${environment.API}/instituto`);
   }
 
