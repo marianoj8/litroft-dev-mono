@@ -38,12 +38,16 @@ export class InstitutoService implements CustomRepository<Instituto, number> {
     return this.service.list('instituto');
   }
 
+  publicList(): Observable<Instituto[]> {
+    return this.http.get<Instituto[]>(`${environment.API}/instituto`);
+  }
+
   listCursoByInstituto(id: number): Observable<Curso[]> {
     return this.http.get<Curso[]>(`${environment.API}/curso/l/${id}`);
   }
 
-  listFiltered(v1: string, v: string) {
-    return null;
+  listFiltered(nome: string, sigla: string): Observable<Instituto[]> {
+    return this.http.get<Instituto[]>(`${environment.API}/instituto?nome=${nome}&sigla=${sigla}`);
   }
 
   save(t: Instituto): Observable<Instituto> {
