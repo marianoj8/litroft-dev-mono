@@ -73,17 +73,7 @@
           Salas, laboratorios & oficinas
         </ng-template>
         <mat-form-field class="field-min-1 field-padding">
-          <mat-select matInput formControlName="salas" required placeholder="Salas de aulas">
-            <!-- <mat-option *ngIf="departamentoError$ | async"
-              >Ocorreu um erro ao carregar institutos...
-            </mat-option>
-             -->
-            <ng-container *ngFor="let sala of salasCount">
-              <mat-option [value]="sala">
-                {{ sala }}
-              </mat-option>
-            </ng-container>
-          </mat-select>
+          <input matInput formControlName="salas" type="number" required placeholder="Salas de aulas" />
           <mat-error *ngIf="
               formGroup02.controls['salas'].hasError('min') &&
               !formGroup02.controls['salas'].hasError('required')
@@ -95,33 +85,13 @@
           </mat-error>
         </mat-form-field>
         <mat-form-field class="field-min-1 field-padding">
-          <mat-select matInput formControlName="laboratorios" required placeholder="Laboratorios">
-            <!-- <mat-option *ngIf="departamentoError$ | async"
-              >Ocorreu um erro ao carregar institutos...
-            </mat-option>
-             -->
-            <ng-container *ngFor="let laboratorio of laboratoriosCount">
-              <mat-option [value]="laboratorio">
-                {{ laboratorio }}
-              </mat-option>
-            </ng-container>
-          </mat-select>
+          <input matInput formControlName="laboratorios" type="number" required placeholder="Laboratorios" />
           <mat-error *ngIf="formGroup02.controls['laboratorios'].hasError('required')">
             Numero de laboratorios é <strong>obrigatorio</strong>
           </mat-error>
         </mat-form-field>
         <mat-form-field class="field-min-1 field-padding">
-          <mat-select matInput formControlName="oficinas" required placeholder="Oficinas">
-            <!-- <mat-option *ngIf="departamentoError$ | async"
-              >Ocorreu um erro ao carregar institutos...
-            </mat-option>
-             -->
-            <ng-container *ngFor="let oficina of oficinasCount">
-              <mat-option [value]="oficina">
-                {{ oficina }}
-              </mat-option>
-            </ng-container>
-          </mat-select>
+          <input matInput formControlName="oficinas" type="number" required placeholder="Oficinas" />
           <mat-error *ngIf="formGroup02.controls['oficinas'].hasError('required')">
             Numero de oficinas é <strong>obrigatorio</strong>
           </mat-error>
