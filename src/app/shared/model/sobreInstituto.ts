@@ -1,6 +1,6 @@
 import { CustomAbstractEntity } from './customEntity';
 
-class SobreInstituto implements CustomAbstractEntity {
+export class SobreInstituto implements CustomAbstractEntity {
 
   id: number;
   createdAt: string;

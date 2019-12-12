@@ -10,11 +10,11 @@ import { AreaFormacaoService } from 'src/app/area-formacao/modules/area-formacao
 import { LocalService } from 'src/app/locals/modules/local.service';
 import { MonografiaService } from 'src/app/monografias/modules/monografia.service';
 import { Instituto } from 'src/app/shared/model/instituto';
+import { Local } from 'src/app/shared/model/local';
 import { NotificationService } from 'src/app/shared/services/notification/notification.service';
 
 import { InstitutoService } from '../modules/instituto.service';
 import { AreaFormacao } from './../../shared/model/AreaFormacao';
-import { Local } from 'src/app/shared/model/local';
 
 @Component({
   selector: 'app-instituto-form',
@@ -29,10 +29,11 @@ export class InstitutoFormComponent implements OnInit {
   formGroup04: FormGroup;
   areaFormacao$: Observable<AreaFormacao>;
   locais$: Observable<AreaFormacao>;
-  areaFormacaoErrorError$ = new Subject<boolean>();;
-  localErrorError$ = new Subject<boolean>();;
+  areaFormacaoErrorError$ = new Subject<boolean>();
+  localErrorError$ = new Subject<boolean>();
   instituto = new Instituto();
-  salasCount = [1, 2, 3, 4, 6, 7, 8];
+  salasCount = [1, 2, 3, 4, 5, 6, 7, 8];
+  oficinasCount = [1, 2, 3, 4, 5, 6, 7, 8];
   laboratoriosCount = [1, 2, 3, 4, 5, 6];
 
   private id = 0;
@@ -87,12 +88,17 @@ export class InstitutoFormComponent implements OnInit {
 
           this.formGroup02.patchValue({
             salas: this.instituto.salas,
-            laboratorios: this.instituto.laboratorios
+            laboratorios: this.instituto.laboratorios,
+            oficinas: this.instituto.oficinas
           });
 
           this.formGroup03.patchValue({
             areaFormacao: this.instituto.areaFormacao.id,
             local: this.instituto.local.id
+          });
+
+          this.formGroup04.patchValue({
+            sobre: this.instituto.sobreInstituto
           });
 
         });
@@ -126,6 +132,7 @@ export class InstitutoFormComponent implements OnInit {
         Validators.required
       ]],
       laboratorios: [4, [Validators.required]],
+      oficinas: [0, [Validators.min(0), Validators.required]]
     });
 
     this.formGroup03 = this.formBuilder.group({
@@ -133,6 +140,11 @@ export class InstitutoFormComponent implements OnInit {
       local: [null, Validators.required]
     });
 
+    this.formGroup04 = this.formBuilder.group({
+      sobre: [` A instituição conta com ${this.formGroup02.controls.salas.value}
+      salas de aulas, com capacidade de albergar anualmente 6 mil estudantes, 302 docentes,
+      ${this.formGroup02.controls.laboratorios.value} laboratórios e ${this.formGroup02.controls.oficinas.value} oficinas.`]
+    });
   }
 
   onSaveButton(stepper: MatVerticalStepper) {
@@ -151,6 +163,7 @@ export class InstitutoFormComponent implements OnInit {
     this.instituto.numero = this.formGroup01.controls.numero.value;
     this.instituto.salas = this.formGroup02.controls.salas.value;
     this.instituto.laboratorios = this.formGroup02.controls.laboratorios.value;
+    this.instituto.oficinas = this.formGroup02.controls.oficinas.value;
     this.instituto.areaFormacao = new AreaFormacao(this.formGroup03.controls.areaFormacao.value);
     this.instituto.local = new Local(this.formGroup03.controls.local.value);
 

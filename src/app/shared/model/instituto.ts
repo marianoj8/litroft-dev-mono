@@ -1,7 +1,9 @@
 import { CustomAbstractEntity } from 'src/app/shared/model/customEntity';
+
 import { Admin } from './admin';
-import { Local } from './local';
 import { AreaFormacao } from './AreaFormacao';
+import { Local } from './local';
+import { SobreInstituto } from './sobreInstituto';
 
 export class Instituto implements CustomAbstractEntity {
 
@@ -14,11 +16,13 @@ export class Instituto implements CustomAbstractEntity {
   numero: string;
   logoId: string;
   laboratorios: number;
+  oficinas: number;
   salas: number;
   cursos: number;
   local: Local;
   areaFormacao: AreaFormacao;
   admin: Admin;
+  sobreInstituto: SobreInstituto;
 
   constructor(id?: number) {
     this.id = id ? id : null;
