@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from 'src/app/shared/guard/auth.guard';
 
 import { AdminComponent } from './../admin.component';
+import { AdminListComponent } from '../admin-list/admin-list.component';
 
 const route: Routes = [
 
@@ -12,6 +13,10 @@ const route: Routes = [
     // resolve: [AdminResolverGuard],
     canActivate: [AuthGuard],
     children: [
+      {
+        path: '',
+        component: AdminListComponent
+      }
     ]
   }
 
