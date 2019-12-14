@@ -26,6 +26,7 @@ import { UpdateSuccessMessageComponent } from './shared/services/notification/no
 import { TokenInterceptorService } from './shared/services/security/token-interceptor.service';
 import { CustomErrorPageComponent } from './custom-error-page/custom-error-page.component';
 import { AcessDenaidComponent } from './shared/acess-denaid/acess-denaid.component';
+import { AdminInternoComponent } from './admin-interno/admin-interno.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { AcessDenaidComponent } from './shared/acess-denaid/acess-denaid.compone
     LoadingUploadComponent,
     CustomErrorPageComponent,
     AcessDenaidComponent,
+    AdminInternoComponent,
   ],
   entryComponents: [
     SaveSuccessMessageComponent,

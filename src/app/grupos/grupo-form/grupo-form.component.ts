@@ -140,6 +140,7 @@ export class GrupoFormComponent implements OnInit {
       this.grupoService.getById(this.id)
         .subscribe(data => {
           this.curso = data.curso;
+          this.grupo = data;
 
           this.formGroup01.patchValue({
             descricao: data.descricao,

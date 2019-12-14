@@ -36,7 +36,7 @@ export class GrupoService implements CustomRepository<Grupo, number> {
   }
 
   filterByDescricaoAndTow(filter: CustomFilter): Observable<Grupo[]> {
-    return this.service.list(`interno/grupo/l?descricao=${filter.descricao === undefined ? '' : filter.descricao}&curso=${filter.curso === undefined ? '' : filter.curso}&turma=${filter.turma  === undefined ? '' : filter.turma}`);
+    return this.service.list(`interno/grupo/l?descricao=${filter.descricao === undefined ? '' : filter.descricao}&curso=${filter.curso === undefined ? '' : filter.curso}&turma=${filter.turma === undefined ? '' : filter.turma}`);
   }
 
   filterByDuracao(duracao: number): Observable<Grupo[]> {
@@ -47,6 +47,7 @@ export class GrupoService implements CustomRepository<Grupo, number> {
 
   save(t: Grupo): Observable<Grupo> {
     if (t.id) {
+      console.log('Updating');
       return this.service.update('interno/grupo', t);
     }
     return this.service.save('interno/grupo', t);
