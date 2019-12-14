@@ -1,8 +1,4 @@
-<mat-vertical-stepper
-  [linear]="!grupo.id"
-  #stepper
-  class="container mat-elevation-z6"
->
+<mat-vertical-stepper [linear]="!grupo.id" #stepper class="container mat-elevation-z6">
   <mat-step [stepControl]="formGroup01">
     <form [formGroup]="formGroup01">
       <div class="field">
@@ -10,41 +6,24 @@
           Descrição & curso
         </ng-template>
         <mat-form-field class="field field-padding">
-          <input
-            matInput
-            autocomplete="false"
-            formControlName="descricao"
-            required
-            placeholder="Descrição"
-          />
-          <mat-error
-            *ngIf="
+          <input matInput autocomplete="false" formControlName="descricao" required placeholder="Descrição" />
+          <mat-error *ngIf="
               formGroup01.controls['descricao'].hasError('minlength') &&
               !formGroup01.controls['descricao'].hasError('required')
-            "
-          >
+            ">
             Descrição deve ter no minimo <strong>3 caraters</strong>
           </mat-error>
 
-          <mat-error
-            *ngIf="formGroup01.controls['descricao'].hasError('maxlength')"
-          >
+          <mat-error *ngIf="formGroup01.controls['descricao'].hasError('maxlength')">
             Nome não deve ter acima de <strong>80 caraters</strong>
           </mat-error>
 
-          <mat-error
-            *ngIf="formGroup01.controls['descricao'].hasError('required')"
-          >
+          <mat-error *ngIf="formGroup01.controls['descricao'].hasError('required')">
             Nome é <strong>obrigatorio</strong>
           </mat-error>
         </mat-form-field>
-        <mat-form-field class="field field-padding">
-          <mat-select
-            matInput
-            formControlName="curso"
-            required
-            placeholder="Curso"
-          >
+        <mat-form-field class="field-min-1 field-padding">
+          <mat-select matInput formControlName="curso" required placeholder="Curso">
             <ng-container *ngFor="let curso of cursos$ | async">
               <mat-option [value]="curso.id">
                 {{ curso?.nome }}
@@ -55,13 +34,20 @@
             Curso é <strong>obrigatorio</strong>
           </mat-error>
         </mat-form-field>
+        <mat-form-field class="field-min-2 field-padding">
+          <mat-select matInput formControlName="ano" required placeholder="Ano lectivo">
+            <ng-container *ngFor="let ano of anos">
+              <mat-option [value]="ano">
+                {{ ano }}
+              </mat-option>
+            </ng-container>
+          </mat-select>
+          <mat-error *ngIf="formGroup01.controls['ano'].hasError('required')">
+            Ano Lectivo é <strong>obrigatorio</strong>
+          </mat-error>
+        </mat-form-field>
         <div class="spaced">
-          <button
-            color="primary"
-            class="large"
-            mat-raised-button
-            matStepperNext
-          >
+          <button color="primary" class="large" mat-raised-button matStepperNext>
             <mat-icon>arrow_downward</mat-icon>
             Avançar
           </button>
@@ -77,31 +63,19 @@
           Turma & duração do curso
         </ng-template>
         <mat-form-field class="field field-padding">
-          <mat-select
-            matInput
-            formControlName="posicao"
-            required
-            placeholder="Grupo numero"
-          >
+          <mat-select matInput formControlName="posicao" required placeholder="Grupo numero">
             <ng-container *ngFor="let index of position">
               <mat-option [value]="index">
                 {{ index }}
               </mat-option>
             </ng-container>
           </mat-select>
-          <mat-error
-            *ngIf="formGroup02.controls['posicao'].hasError('required')"
-          >
+          <mat-error *ngIf="formGroup02.controls['posicao'].hasError('required')">
             N. do Grupo é <strong>obrigatorio</strong>
           </mat-error>
         </mat-form-field>
         <mat-form-field class="field field-padding">
-          <mat-select
-            matInput
-            formControlName="turma"
-            required
-            placeholder="Turma"
-          >
+          <mat-select matInput formControlName="turma" required placeholder="Turma">
             <ng-container *ngFor="let turma of turmas$ | async">
               <mat-option [value]="turma.id">
                 {{ turma?.sigla }}
@@ -116,23 +90,11 @@
     </form>
     <ng-template matStepLabel>Elementos do grupo</ng-template>
     <div class="container mat-elevation-z8 table hide-on-med-and-down">
-      <button
-        id="addElemente"
-        class="btn-large"
-        mat-raised-button
-        color="primary"
-        (click)="showElementSelector()"
-      >
+      <button id="addElemente" class="btn-large" mat-raised-button color="primary" (click)="showElementSelector()">
         <mat-icon>add</mat-icon>
         Adicionar elemento
       </button>
-      <table
-        #table
-        *ngIf="estudantes; else loading"
-        mat-table
-        [dataSource]="estudantes"
-        matSort
-      >
+      <table #table *ngIf="estudantes; else loading" mat-table [dataSource]="estudantes" matSort>
         <ng-container matColumnDef="nome">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Nome</th>
           <td mat-cell *matCellDef="let estudante">
@@ -157,10 +119,7 @@
         <ng-container matColumnDef="detalhe">
           <th mat-header-cell *matHeaderCellDef>Detalhe</th>
           <td mat-cell *matCellDef="let estudante">
-            <button
-              mat-icon-button
-              [routerLink]="['/estudantes/detalhe', estudante.id]"
-            >
+            <button mat-icon-button [routerLink]="['/estudantes/detalhe', estudante.id]">
               <mat-icon color="primary">description</mat-icon>
             </button>
           </td>
@@ -169,10 +128,7 @@
         <ng-container matColumnDef="remove">
           <th mat-header-cell *matHeaderCellDef>Remover</th>
           <td mat-cell *matCellDef="let estudante">
-            <button
-              mat-icon-button
-              (click)="removeElementAt(estudante); table.renderRows()"
-            >
+            <button mat-icon-button (click)="removeElementAt(estudante); table.renderRows()">
               <mat-icon color="warn">remove_circle</mat-icon>
             </button>
           </td>
@@ -197,16 +153,9 @@
           <th mat-footer-cell *matFooterCellDef>Lista vasia.</th>
         </ng-container>
 
-        <tr
-          mat-header-row
-          *matHeaderRowDef="displaydColumns; sticky: true"
-        ></tr>
+        <tr mat-header-row *matHeaderRowDef="displaydColumns; sticky: true"></tr>
         <tr mat-row *matRowDef="let row; columns: displaydColumns"></tr>
-        <tr
-          mat-footer-row
-          *matFooterRowDef="['noData']"
-          [ngClass]="{ hide: true }"
-        ></tr>
+        <tr mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{ hide: true }"></tr>
       </table>
 
       <ng-template #loading>
@@ -313,13 +262,7 @@
           Orientador
         </ng-template>
         <mat-form-field class="field-max field-padding">
-          <mat-select
-            matInput
-            autocomplete="false"
-            formControlName="orientador"
-            required
-            placeholder="Orientador"
-          >
+          <mat-select matInput autocomplete="false" formControlName="orientador" required placeholder="Orientador">
             <ng-container *ngFor="let orientador of orientadores$ | async">
               <mat-option [value]="orientador.id">
                 {{ orientador?.nome }}
@@ -329,19 +272,12 @@
             </ng-container>
           </mat-select>
 
-          <mat-error
-            *ngIf="formGroup03.controls['orientador'].hasError('required')"
-          >
+          <mat-error *ngIf="formGroup03.controls['orientador'].hasError('required')">
             Orientador é <strong>obrigatorio</strong>
           </mat-error>
         </mat-form-field>
         <div class="spaced">
-          <button
-            color="primary"
-            class="large"
-            mat-raised-button
-            matStepperNext
-          >
+          <button color="primary" class="large" mat-raised-button matStepperNext>
             <mat-icon>arrow_downward</mat-icon>
             Avançar
           </button>
@@ -351,32 +287,19 @@
   </mat-step>
 
   <mat-step>
-    <ng-template matStepLabel
-      >Concluir com processo de {{ !curso.id ? "cadastro" : "alteração" }} de
-      curso</ng-template
-    >
+    <ng-template matStepLabel>Concluir com processo de {{ !curso.id ? "cadastro" : "alteração" }} de
+      curso</ng-template>
     <div class="spaced">
       <button mat-stroked-button matStepperPrevious class="large">
         <mat-icon>arrow_upward</mat-icon>
         Anterior
       </button>
-      <button
-        class="mat-elevation-z8"
-        *ngIf="!curso.id"
-        color="primary"
-        mat-raised-button
-        class="large"
-        (click)="onSaveButton(stepper)"
-      >
+      <button class="mat-elevation-z8" *ngIf="!curso.id" color="primary" mat-raised-button class="large"
+        (click)="onSaveButton(stepper)">
         <mat-icon>save</mat-icon>
         Salvar
       </button>
-      <button
-        color="primary"
-        class="large"
-        mat-raised-button
-        (click)="onSaveButtonAndList(stepper)"
-      >
+      <button color="primary" class="large" mat-raised-button (click)="onSaveButtonAndList(stepper)">
         <mat-icon>save</mat-icon>
         {{ !curso.id ? "Salvar e listar" : "Salvar" }}
       </button>

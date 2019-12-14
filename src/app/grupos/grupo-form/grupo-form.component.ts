@@ -2,7 +2,7 @@ import { Location } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialog, MatSort, MatTableDataSource, MatVerticalStepper } from '@angular/material';
+import { MatDialog, MatSort, MatTableDataSource, MatVerticalStepper, PageEvent } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EventEmitter } from 'events';
 import { element } from 'protractor';
@@ -51,6 +51,7 @@ export class GrupoFormComponent implements OnInit {
   estudantesList: Estudante[] = [];
   elementosList: Elemento[] = [];
   cursos$: Observable<Curso[]>;
+  anos: number[];
   orientadores$: Observable<Orientador[]>;
   position: string[];
   turmas$: Observable<Turma[]>;
@@ -91,10 +92,19 @@ export class GrupoFormComponent implements OnInit {
     this.indexElements = [];
   }
 
+  creatYears() {
+    this.anos = [];
+    for (let year = 2010; year <= new Date().getFullYear(); year++) {
+      this.anos.push(year);
+    }
+  }
+
   ngOnInit() {
     // this.backgroundAnimation();
     this.grupoService.onChangeContext.emit(true);
     this.initForms();
+
+    this.creatYears();
 
     this.cursos$ = this.cursoService.list();
     this.orientadores$ = this.orientadorService.list();
@@ -144,7 +154,8 @@ export class GrupoFormComponent implements OnInit {
 
           this.formGroup01.patchValue({
             descricao: data.descricao,
-            curso: data.curso.id
+            curso: data.curso.id,
+            ano: data.anoLetivo
           });
 
           this.formGroup02.patchValue({
@@ -182,6 +193,7 @@ export class GrupoFormComponent implements OnInit {
         Validators.maxLength(80)]],
       curso: [null, [
         Validators.required]],
+      ano: [new Date().getFullYear(), [Validators.required]]
     });
 
     this.formGroup02 = this.formBuilder.group({
@@ -211,9 +223,12 @@ export class GrupoFormComponent implements OnInit {
   private save(stepper: MatVerticalStepper, state): void {
     this.grupo.descricao = this.formGroup01.controls.descricao.value;
     this.grupo.curso = new Curso(this.formGroup01.controls.curso.value);
+
     this.grupo.turma = new Turma(this.formGroup02.controls.turma.value);
     this.grupo.posicao = this.formGroup02.controls.posicao.value;
     this.grupo.orientador = new Orientador(this.formGroup03.controls.orientador.value);
+
+    this.grupo.anoLetivo = this.formGroup01.controls.ano.value;
 
     this.grupoService.save(this.grupo)
       .subscribe(
