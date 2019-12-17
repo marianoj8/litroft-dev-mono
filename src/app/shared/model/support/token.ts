@@ -6,6 +6,7 @@ export class Token {
     public token: string,
     public expiration: string,
     public accessType: string,
+    public entity: string,
     public user: User) {
 
   }

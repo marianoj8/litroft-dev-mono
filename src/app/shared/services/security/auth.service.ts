@@ -6,6 +6,7 @@ import { take } from 'rxjs/operators';
 
 import { Token } from '../../model/support/token';
 import { UsernameAndPassword } from '../../model/support/username-password';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -16,8 +17,7 @@ export class AuthService {
   constructor(private htp: HttpClient, public router: Router) { }
 
   login(user: UsernameAndPassword): Observable<Token> {
-    // return this.htp.post<Token>('/login', user)
-    return this.htp.post<Token>('http://localhost:8080/login', user)
+    return this.htp.post<Token>(`${environment.BaseUrl}/login`, user)
       .pipe(
         take(1)
       );
@@ -33,6 +33,7 @@ export class AuthService {
       localStorage.setItem('token', data.token);
       localStorage.setItem('expirationTime', data.expiration);
       localStorage.setItem('acessType', data.accessType);
+      localStorage.setItem('entity', data.user.entity);
       this.doLogIn();
     }
   }
@@ -43,7 +44,8 @@ export class AuthService {
 
   doLogOut() {
     // localStorage.removeItem('id');
-    // localStorage.removeItem('username');
+    localStorage.removeItem('username');
+    localStorage.removeItem('entity');
     // localStorage.removeItem('fone');
     // localStorage.removeItem('email');
     localStorage.removeItem('acessType');

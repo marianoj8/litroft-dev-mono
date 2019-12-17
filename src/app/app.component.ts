@@ -28,7 +28,8 @@ import { AdminService } from './admin/modules/admin.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class AppComponent implements OnInit, AfterContentChecked, OnDestroy {
+
 
   title = 'Litroft Dev - Mono';
   contextMenu = '***';
@@ -43,6 +44,8 @@ export class AppComponent implements OnInit, OnDestroy {
   btnMonografiaText = 'Monografias Internas';
   private sub: Subscription;
   institutoFilter = '';
+  acessType = '';
+
 
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
@@ -81,6 +84,8 @@ export class AppComponent implements OnInit, OnDestroy {
       this.years.push(i);
     }
 
+
+
     this.institutoService.list().subscribe(resp => this.institutos = resp);
 
     this.monografiaService.emitShowAddButton
@@ -98,7 +103,10 @@ export class AppComponent implements OnInit, OnDestroy {
       value => this.contextMenu = value
     );
     this.sub = this.loginService.onChangeContext.subscribe(
-      value => this.onChangeContext = value
+      value => {
+        this.onChangeContext = value;
+
+      }
     );
     this.sub = this.cursoService.onChangeContextTitle.subscribe(
       value => {
@@ -233,6 +241,10 @@ export class AppComponent implements OnInit, OnDestroy {
   clearSelectedSchool() {
     this.router.navigate(['/public']);
     this.publicService.emitSelectedSchool.emit(new Instituto());
+  }
+
+  ngAfterContentChecked(): void {
+    this.acessType = localStorage.getItem('entity');
   }
 
   ngOnDestroy(): void {
