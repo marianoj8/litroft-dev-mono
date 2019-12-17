@@ -33,7 +33,7 @@ export class AuthService {
       localStorage.setItem('token', data.token);
       localStorage.setItem('expirationTime', data.expiration);
       localStorage.setItem('acessType', data.accessType);
-      localStorage.setItem('entity', data.user.entity);
+      localStorage.setItem('entity', data.entity);
       this.doLogIn();
     }
   }
