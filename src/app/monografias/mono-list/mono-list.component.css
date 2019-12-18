@@ -1,4 +1,5 @@
 
+
 .container-card {
   height: 100%;
   width: 100%;
@@ -44,6 +45,7 @@
   max-width: 100px;
   color: #fff;
   margin-left: 35.8%;
+
 }
 
 .container-card .card .face.face1 .content h4 {
@@ -80,9 +82,8 @@
 .container-card .card .face.face2 .content a {
   margin: 15px 0 0;
   text-align: left;
-  width: 156%;
+  width: 300px;
 }
-
 /*
 .container-card .card .face.face2 .content a:hover {
   background: #3f51b5;

@@ -28,7 +28,7 @@ export class CursoService implements CustomRepository<Curso, number> {
   }
 
   list(): Observable<Curso[]> {
-    return this.service.list('interno/curso/l?duracao=1');
+    return this.service.list('interno/curso/l');
   }
 
   filterByNomeDuracao(filter: CustomFilter): Observable<Curso[]> {
