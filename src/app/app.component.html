@@ -25,23 +25,27 @@
         <mat-icon left>home</mat-icon>
         Home
       </a>
-      <a routerLinkActive="active" [routerLink]="['estudantes']" mat-button>
+      <a routerLinkActive="active" [routerLink]="['estudantes']" mat-button *ngIf="showOrHideMenu">
         <mat-icon left>person_pin</mat-icon>
         Estudante
       </a>
-      <a routerLinkActive="active" [routerLink]="['cursos']" mat-button>
+      <a routerLinkActive="active" [routerLink]="['institutos/private-list']" mat-button *ngIf="!showOrHideMenu">
+        <mat-icon left>school</mat-icon>
+        Instituto
+      </a>
+      <a routerLinkActive="active" [routerLink]="['cursos']" mat-button *ngIf="showOrHideMenu">
         <mat-icon>school</mat-icon>
         Curso
       </a>
-      <a routerLinkActive="active" [routerLink]="['grupos']" mat-button>
+      <a routerLinkActive="active" [routerLink]="['grupos']" mat-button *ngIf="showOrHideMenu">
         <mat-icon right>group</mat-icon>
         Grupo
       </a>
-      <a routerLinkActive="active" [routerLink]="['projetos']" mat-button>
+      <a routerLinkActive="active" [routerLink]="['projetos']" mat-button *ngIf="showOrHideMenu">
         <mat-icon right>widgets</mat-icon>
         Projecto
       </a>
-      <a style="position: relative; left: 30%;" routerLinkActive="active" (click)="switchBetweenPages()" mat-button>
+      <a style="position: relative; left: 30%;" routerLinkActive="active" (click)="switchBetweenPages()" mat-button *ngIf="showOrHideMenu">
         <mat-icon right>collections_bookmark</mat-icon>
         {{ btnMonografiaText }}
       </a>
@@ -98,7 +102,7 @@
           </a>
           <mat-divider></mat-divider>
           <mat-expansion-panel>
-            <mat-expansion-panel-header>
+            <mat-expansion-panel-header *ngIf="showOrHideMenu">
               <mat-panel-title>
                 <mat-icon color="primary">person_pin</mat-icon>
               </mat-panel-title>
@@ -121,7 +125,7 @@
           </mat-expansion-panel>
           <!-- <mat-divider></mat-divider> -->
           <mat-expansion-panel>
-            <mat-expansion-panel-header>
+            <mat-expansion-panel-header *ngIf="showOrHideMenu">
               <mat-panel-title>
                 <mat-icon color="primary">recent_actors</mat-icon>
               </mat-panel-title>
@@ -162,27 +166,40 @@
             </a>
           </mat-expansion-panel>
           <!-- <mat-divider></mat-divider> -->
-          <mat-expansion-panel>
+          <mat-expansion-panel *ngIf="!showOrHideMenu">
             <mat-expansion-panel-header>
               <mat-panel-title>
-                <mat-icon color="primary">domain</mat-icon>
+                <mat-icon color="primary">school</mat-icon>
               </mat-panel-title>
               <mat-panel-description>
                 Instituto
               </mat-panel-description>
             </mat-expansion-panel-header>
+            <a mat-list-item routerLinkActive="active" [routerLink]="['institutos/private-list']">
+              <mat-icon color="primary">school</mat-icon>
+              Instituto
+            </a>
             <a mat-list-item routerLinkActive="active" [routerLink]="['departamentos']">
               <mat-icon color="primary">domain</mat-icon>
               Departamento
             </a>
-
-            <a mat-list-item routerLinkActive="active" [routerLink]="['institutos/private-list']">
-              <mat-icon color="primary">domain</mat-icon>
-              Instituto
-            </a>
             <a mat-list-item [routerLink]="['locais']" routerLinkActive="router-link-active">
               <mat-icon color="primary">location</mat-icon>
               Local
+            </a>
+          </mat-expansion-panel>
+          <mat-expansion-panel *ngIf="showOrHideMenu">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <mat-icon color="primary">domain</mat-icon>
+              </mat-panel-title>
+              <mat-panel-description>
+                Departamento
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <a mat-list-item routerLinkActive="active" [routerLink]="['departamentos']">
+              <mat-icon color="primary">domain</mat-icon>
+              Departamento
             </a>
           </mat-expansion-panel>
           <!-- <mat-divider></mat-divider> -->

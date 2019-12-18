@@ -6,4 +6,5 @@ export class User {
   fone: string;
   email: string;
   endereco: string;
+  entity: string;
 }

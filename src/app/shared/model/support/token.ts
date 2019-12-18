@@ -2,12 +2,11 @@ import { User } from '../User';
 
 export class Token {
   constructor(
-    public accountId: number,
-    public token: string,
-    public expiration: string,
-    public accessType: string,
-    public entity: string,
-    public user: User) {
+    public readonly accountId: number,
+    public readonly token: string,
+    public readonly expiration: string,
+    public readonly accessType: string,
+    public readonly user: User) {
 
   }
 

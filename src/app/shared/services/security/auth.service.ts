@@ -33,13 +33,17 @@ export class AuthService {
       localStorage.setItem('token', data.token);
       localStorage.setItem('expirationTime', data.expiration);
       localStorage.setItem('acessType', data.accessType);
-      localStorage.setItem('entity', data.entity);
-      this.doLogIn();
+      localStorage.setItem('entity', data.user.entity);
+      this.doLogIn(data.user.entity);
     }
   }
 
-  private doLogIn() {
-    this.router.navigate(['']);
+  private doLogIn(to: string) {
+    if (to === 'Administrador') {
+      this.router.navigate(['/home']);
+    } else {
+      this.router.navigate(['']);
+    }
   }
 
   doLogOut() {

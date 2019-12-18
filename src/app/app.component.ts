@@ -45,6 +45,7 @@ export class AppComponent implements OnInit, AfterContentChecked, OnDestroy {
   private sub: Subscription;
   institutoFilter = '';
   acessType = '';
+  showOrHideMenu = false;
 
 
 
@@ -245,6 +246,11 @@ export class AppComponent implements OnInit, AfterContentChecked, OnDestroy {
 
   ngAfterContentChecked(): void {
     this.acessType = localStorage.getItem('entity');
+    if (this.acessType !== 'Administrador') {
+      this.showOrHideMenu = true;
+    } else {
+      this.showOrHideMenu = false;
+    }
   }
 
   ngOnDestroy(): void {
