@@ -6,7 +6,8 @@
           <div class="face face1">
             <div class="content">
               <img src="../../../assets/notebook.png" />
-              <h4>{{ grupo.descricao.substring(0, 30) }}</h4>
+              <h4 *ngIf="grupo.descricao.length > 30">{{ grupo.descricao.substring(0, 28) }}...</h4>
+              <h4 *ngIf="grupo.descricao.length < 30">{{ grupo.descricao }}</h4>
               <h4>
                 ({{grupo.adminInterno.instituto.sigla}}) | {{ grupo.anoLetivo }}
               </h4>
@@ -48,7 +49,8 @@
           <div class="face face1">
             <div class="content">
               <img src="../../../assets/notebook.png" />
-              <h4>{{ grupo.descricao }}</h4>
+              <h4 *ngIf="grupo.descricao.length > 30">{{ grupo.descricao.substring(0, 28) }}...</h4>
+              <h4 *ngIf="grupo.descricao.length < 30">{{ grupo.descricao }}</h4>
               <h4>
                 {{ grupo.anoLetivo }}
               </h4>
@@ -92,7 +94,8 @@
           <div class="face face1">
             <div class="content">
               <img src="../../../assets/notebook.png" />
-              <h4>{{ grupo.descricao }}</h4>
+              <h4 *ngIf="grupo.descricao.length > 30">{{ grupo.descricao.substring(0, 28) }}...</h4>
+              <h4 *ngIf="grupo.descricao.length < 30">{{ grupo.descricao }}</h4>
               <h4>
                 {{ grupo.anoLetivo }}
               </h4>
