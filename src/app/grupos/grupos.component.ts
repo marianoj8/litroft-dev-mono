@@ -27,7 +27,7 @@ export class GruposComponent implements OnInit, OnDestroy {
     public estudanteService: EstudanteService,
     private cursoSerice: CursoService,
     private location: Location) {
-    this.grupoService.onChangeContextTitle.emit('Grupo');
+    this.grupoService.onChangeContextTitle.emit('Grupos');
   }
 
   ngOnInit() {

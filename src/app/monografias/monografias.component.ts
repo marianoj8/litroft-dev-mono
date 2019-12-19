@@ -16,7 +16,7 @@ export class MonografiasComponent implements OnInit {
   cursos$: Observable<Curso[]>;
   view = 0;
   constructor(private monografiaService: MonografiaService, private location: Location) {
-    this.monografiaService.onChangeContextTitle.emit('Monografia Internas');
+    this.monografiaService.onChangeContextTitle.emit('Monografias Internas');
 
   }
 

@@ -33,7 +33,7 @@ export class CursosComponent implements OnInit, OnDestroy {
     private monografiaService: MonografiaService,
     private dialogService: MatDialog,
     private location: Location) {
-    this.cursoService.onChangeContextTitle.emit('Curso');
+    this.cursoService.onChangeContextTitle.emit('Cursos');
     this.monografiaService.emitShowAddButton.emit(true);
   }
 

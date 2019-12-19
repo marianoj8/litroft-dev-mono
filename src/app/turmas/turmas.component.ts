@@ -20,7 +20,7 @@ export class TurmasComponent implements OnInit, OnDestroy {
   constructor(
     private turmaSerice: TurmaService,
     private location: Location) {
-    this.turmaSerice.onChangeContextTitle.emit('Turma');
+    this.turmaSerice.onChangeContextTitle.emit('Turmas');
   }
 
   ngOnInit() {

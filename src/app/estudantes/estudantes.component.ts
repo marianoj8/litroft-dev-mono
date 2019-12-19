@@ -29,7 +29,7 @@ export class EstudantesComponent implements OnInit, OnDestroy {
     private cursoSerice: CursoService,
     private location: Location,
     private dialogService: MatDialog) {
-    this.estudanteService.onChangeContextTitle.emit('Estudante');
+    this.estudanteService.onChangeContextTitle.emit('Estudantes');
   }
 
   ngOnInit() {

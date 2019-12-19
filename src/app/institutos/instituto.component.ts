@@ -19,7 +19,7 @@ export class InstitutoComponent implements OnInit, OnDestroy {
     private cursoService: CursoService,
     private monografiaService: MonografiaService,
     private location: Location) {
-    this.cursoService.onChangeContextTitle.emit('Instituto');
+    this.cursoService.onChangeContextTitle.emit('Institutos');
     this.monografiaService.emitShowAddButton.emit(true);
   }
 

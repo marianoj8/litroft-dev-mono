@@ -19,7 +19,7 @@ export class DepartamentosComponent implements OnInit, OnDestroy {
   constructor(
     private departamentoSerice: DepartamentoService,
     private location: Location) {
-    this.departamentoSerice.onChangeContextTitle.emit('Departamento');
+    this.departamentoSerice.onChangeContextTitle.emit('Departamentos');
   }
 
   ngOnInit() {

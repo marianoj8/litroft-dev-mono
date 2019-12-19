@@ -31,7 +31,7 @@ export class ProjetosComponent implements OnInit, OnDestroy {
     private monografiaService: MonografiaService) {
     this.monografiaService.emitShowAddButton.emit(true);
 
-    this.projetoSerice.onChangeContextTitle.emit('Projeto');
+    this.projetoSerice.onChangeContextTitle.emit('Projetos');
   }
 
   ngOnInit() {

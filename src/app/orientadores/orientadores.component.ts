@@ -25,7 +25,7 @@ export class OrientadoresComponent implements OnInit, OnDestroy {
     public orientadorService: OrientadorService,
     private especialidadeService: EspecialidadeService,
     private location: Location) {
-      this.orientadorService.onChangeContextTitle.emit('Orientador');
+      this.orientadorService.onChangeContextTitle.emit('Orientadores');
 
   }
 
