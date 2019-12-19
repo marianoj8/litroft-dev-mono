@@ -70,16 +70,28 @@
   <mat-sidenav #drawer class="sidenav" fixedInViewport="false" backgroundColor="primary"
     [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'"
     [opened]="((isHandset$ | async) && authService.loggedIn()) === true">
-    <div style="width: 100%; height: 160px; padding: 8px 0px 0px 90px;">
-      <div style="width: 80%; height: 95%; background-color: #fff; border-radius: 50%; margin-left: -60px;">
+    <div style="width: 62%; height: 160px; padding: 8px 0px 0px 90px;">
+      <div style="width: 101%; height: 80%; background-color: #fff; border-radius: 50%; margin-left: -60px;">
 
-        <ng-container *ngIf="authService.loggedIn()">
-          <img src={{selectedInstLogo}} style="position: relative; top: 6px; left: 10%; height: 98%; width: 75%;" />
+        <ng-container *ngIf="showOrHideMenu">
+          <ng-container *ngIf="authService.loggedIn()">
+            <img src={{selectedInstLogo}} style="position: relative; top: 2px; left: 20%; height: 98%; width: 78%;" />
+
+          </ng-container>
+        </ng-container>
+        <ng-container *ngIf="!showOrHideMenu">
+          <ng-container *ngIf="authService.loggedIn()">
+            <img src="../assets/notebook.png"
+              style="position: relative; top: 6px; left: 10%; height: 98%; width: 75%;" />
+
+          </ng-container>
+        </ng-container>
+
+        <ng-container *ngIf="!authService.loggedIn()">
+          <img src="../assets/notebook.png" style="position: relative; top: 6px; left: 10%; height: 98%; width: 75%;" />
 
         </ng-container>
 
-        <mat-icon *ngIf="!authService.loggedIn()" color="primary"
-          style="position: relative; top: 6px; left: 5px; font-size: 60pt;">domain</mat-icon>
       </div>
     </div>
     <mat-divider></mat-divider>
