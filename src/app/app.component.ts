@@ -81,7 +81,7 @@ export class AppComponent implements OnInit, AfterContentChecked, OnDestroy {
   ngOnInit(): void {
 
     this.institutos = [];
-    for (let i = 2016; i <= new Date().getFullYear(); i++) {
+    for (let i = 2008; i <= new Date().getFullYear(); i++) {
       this.years.push(i);
     }
 
@@ -182,6 +182,14 @@ export class AppComponent implements OnInit, AfterContentChecked, OnDestroy {
       }
     );
 
+    this.sub = this.institutoService.onChangeContextTitle.subscribe(
+      value => {
+        this.contextMenu = value;
+        this.showDateSelect = false;
+        this.onChangeContext = true;
+      }
+    );
+
     this.sub = this.publicService.enableReadMode.subscribe(
       value => {
         this.enableReadMode = value;
@@ -189,7 +197,7 @@ export class AppComponent implements OnInit, AfterContentChecked, OnDestroy {
 
 
     this.formGroup01 = this.formBuilder.group({
-      ano: [2019]
+      ano: [new Date().getFullYear()]
     });
 
     this.formGroup01.patchValue({

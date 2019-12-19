@@ -51,7 +51,7 @@ export class InstitutoPriveteListComponent implements OnInit {
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private service: InstitutoService,
+    private institutoService: InstitutoService,
     private monografiaService: MonografiaService,
     private notification: NotificationService,
     private dialogService: MatDialog) {
@@ -59,9 +59,9 @@ export class InstitutoPriveteListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.service.onChangeContext.emit(false);
+    this.institutoService.onChangeContext.emit(false);
 
-    this.sub = this.service.findValueParams
+    this.sub = this.institutoService.findValueParams
       .subscribe(next => this.onRefrash(next));
 
     // this.sub = this.service.findValueParam
@@ -69,15 +69,15 @@ export class InstitutoPriveteListComponent implements OnInit {
 
     this.onRefrash(this.filtro);
 
-    this.sub = this.service.emitOnDetalheButtonCliked.subscribe(
+    this.sub = this.institutoService.emitOnDetalheButtonCliked.subscribe(
       (next) => this.detalhe(next)
     );
 
-    this.sub = this.service.emitOnEditButtonCliked.subscribe(
+    this.sub = this.institutoService.emitOnEditButtonCliked.subscribe(
       (next) => this.edit(next)
     );
 
-    this.sub = this.service.emitOnDeleteButtonCliked.subscribe(
+    this.sub = this.institutoService.emitOnDeleteButtonCliked.subscribe(
       (next) => this.openDeleteDialog(next)
     );
 
@@ -93,7 +93,7 @@ export class InstitutoPriveteListComponent implements OnInit {
   // }
 
   onRefrash(data?: CustomFilter) {
-    this.sub = this.service.list()
+    this.sub = this.institutoService.list()
       .pipe(
         catchError(err => {
           // this.dialogService.open(ErrorLoadingComponent);
@@ -176,7 +176,7 @@ export class InstitutoPriveteListComponent implements OnInit {
   }
 
   deleteCurso(cursoId: number) {
-    this.service.deleteById(cursoId)
+    this.institutoService.deleteById(cursoId)
       .subscribe(
         () => {
           this.onRefrash(this.filtro);

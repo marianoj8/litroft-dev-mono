@@ -46,17 +46,18 @@ export class InstitutoListComponent implements OnInit {
 
   constructor(
     private breakpointObserver: BreakpointObserver,
-    private service: InstitutoService,
+    private institutoService: InstitutoService,
     private monografiaService: MonografiaService) {
     this.monografiaService.emitShowAddButton.emit(true);
   }
 
   ngOnInit() {
+    this.institutoService.onChangeContext.emit(false);
     this.onRefrash();
   }
 
   onRefrash(data?: CustomFilter) {
-    this.sub = this.service.list()
+    this.sub = this.institutoService.list()
       .pipe(
         catchError(err => {
           // this.dialogService.open(ErrorLoadingComponent);
@@ -85,7 +86,7 @@ export class InstitutoListComponent implements OnInit {
     this.selectedInst = item.nome;
     this.selectedInstLogo = `http://localhost:8080/litroft/api/v1/rm/mono/downloadLogo/${item.logoId}`;
 
-    this.service.listCursoByInstituto(item.id).subscribe(
+    this.institutoService.listCursoByInstituto(item.id).subscribe(
       (resp) => {
         this.cursosList = resp;
       }

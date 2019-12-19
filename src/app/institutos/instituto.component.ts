@@ -2,6 +2,8 @@ import { Location } from '@angular/common';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { InstitutoService } from './modules/instituto.service';
 import { Subscription } from 'rxjs';
+import { CursoService } from 'src/app/cursos/modules/curso.service';
+import { MonografiaService } from 'src/app/monografias/modules/monografia.service';
 
 @Component({
   selector: 'app-instituto',
@@ -14,7 +16,12 @@ export class InstitutoComponent implements OnInit, OnDestroy {
   private sub: Subscription;
   constructor(
     private institutoService: InstitutoService,
-    private location: Location) { }
+    private cursoService: CursoService,
+    private monografiaService: MonografiaService,
+    private location: Location) {
+    this.cursoService.onChangeContextTitle.emit('Instituto');
+    this.monografiaService.emitShowAddButton.emit(true);
+  }
 
   ngOnInit() {
     this.sub = this.institutoService.onChangeContext.subscribe(

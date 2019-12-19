@@ -45,7 +45,7 @@ export class CursoListComponent implements OnInit {
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    public service: CursoService,
+    public cursoService: CursoService,
     public monografiaService: MonografiaService,
     private notification: NotificationService,
     private dialogService: MatDialog) {
@@ -53,41 +53,41 @@ export class CursoListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.service.onChangeContext.emit(false);
+    this.cursoService.onChangeContext.emit(false);
 
-    this.sub = this.service.findValueParams
+    this.sub = this.cursoService.findValueParams
       .subscribe(next => this.onRefrash(next));
 
-    this.sub = this.service.findValueParam
+    this.sub = this.cursoService.findValueParam
       .subscribe(next => this.cursos.filter = next);
 
     this.onRefrash(this.filtro);
 
-    this.sub = this.service.emitOnDetalheButtonCliked.subscribe(
+    this.sub = this.cursoService.emitOnDetalheButtonCliked.subscribe(
       (next) => this.detalhe(next)
     );
 
-    this.sub = this.service.emitOnEditButtonCliked.subscribe(
+    this.sub = this.cursoService.emitOnEditButtonCliked.subscribe(
       (next) => this.edit(next)
     );
 
-    this.sub = this.service.emitOnDeleteButtonCliked.subscribe(
+    this.sub = this.cursoService.emitOnDeleteButtonCliked.subscribe(
       (next) => this.openDeleteDialog(next)
     );
 
-    this.sub = this.service.findValueParamFromServer.subscribe(
+    this.sub = this.cursoService.findValueParamFromServer.subscribe(
       (next: CustomFilter) => this.onFilterFromServer(next)
     );
   }
 
   onFilterFromServer(data: CustomFilter) {
-    this.sub = this.service.filterByNomeDuracao(data).subscribe(
+    this.sub = this.cursoService.filterByNomeDuracao(data).subscribe(
       (next: Curso[]) => this.cursosList = next
     );
   }
 
   onRefrash(data?: CustomFilter) {
-    this.sub = this.service.filterByDuracao(data.duracao === undefined ? 1 : data.duracao)
+    this.sub = this.cursoService.filterByDuracao(data.duracao === undefined ? 1 : data.duracao)
       .pipe(
         catchError(err => {
           console.log(err);
@@ -170,7 +170,7 @@ export class CursoListComponent implements OnInit {
   }
 
   deleteCurso(cursoId: number) {
-    this.service.deleteById(cursoId)
+    this.cursoService.deleteById(cursoId)
       .subscribe(
         () => {
           this.onRefrash(this.filtro);
