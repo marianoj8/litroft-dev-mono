@@ -24,7 +24,7 @@ export class AuthService {
   }
 
   addTokenToLocalStorage(data: Token): void {
-
+    console.log(data);
     // localStorage.setItem('id', data.user.userId.toString());
     // localStorage.setItem('username', data.user.username);
     // localStorage.setItem('fone', data.user.fone);
@@ -34,6 +34,7 @@ export class AuthService {
       localStorage.setItem('expirationTime', data.expiration);
       localStorage.setItem('acessType', data.accessType);
       localStorage.setItem('entity', data.user.entity);
+      localStorage.setItem('entityLogoUri', data.user.entityLogoUri);
       this.doLogIn(data.user.entity);
     }
   }
@@ -50,6 +51,7 @@ export class AuthService {
     // localStorage.removeItem('id');
     localStorage.removeItem('username');
     localStorage.removeItem('entity');
+    localStorage.removeItem('entityLogoUri');
     // localStorage.removeItem('fone');
     // localStorage.removeItem('email');
     localStorage.removeItem('acessType');
