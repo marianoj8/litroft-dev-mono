@@ -45,7 +45,8 @@
         <mat-icon right>widgets</mat-icon>
         Projectos
       </a>
-      <a style="position: relative; left: 30%;" routerLinkActive="active" (click)="switchBetweenPages()" mat-button *ngIf="showOrHideMenu">
+      <a style="position: relative; left: 30%;" routerLinkActive="active" (click)="switchBetweenPages()" mat-button
+        *ngIf="showOrHideMenu">
         <mat-icon right>collections_bookmark</mat-icon>
         {{ btnMonografiaText }}
       </a>
@@ -72,8 +73,17 @@
     <div style="width: 72%; height: 126px; background-color: #3f51b5; padding: 8px 0px 0px 70px;">
       <div
         style="width: 90px; height: 90px; background-color: #fff; border: 2px solid whitesmoke; border-radius: 50px;">
-        <mat-icon *ngIf="authService.loggedIn()" color="primary"
-          style="position: relative; top: 6px; left: 5px; font-size: 60pt;">dashboard</mat-icon>
+
+        <ng-container *ngIf="authService.loggedIn()" >
+          <!-- <mat-icon *ngIf="authService.loggedIn()" color="primary"
+            style="position: relative; top: 6px; left: 5px; font-size: 60pt;">dashboard</mat-icon> -->
+
+            <img
+            src={{selectedInstLogo}}
+            style="position: relative; top: 6px; left: 10%; height: 98%; width: 75%;"
+          />
+
+          </ng-container>
 
         <mat-icon *ngIf="!authService.loggedIn()" color="primary"
           style="position: relative; top: 6px; left: 5px; font-size: 60pt;">domain</mat-icon>

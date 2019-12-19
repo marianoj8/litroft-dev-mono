@@ -7,4 +7,5 @@ export class User {
   email: string;
   endereco: string;
   entity: string;
+  entityLogoUri: string;
 }
