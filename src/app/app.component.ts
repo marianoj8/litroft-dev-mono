@@ -22,6 +22,7 @@ import { Instituto } from './shared/model/instituto';
 import { AuthService } from './shared/services/security/auth.service';
 import { TurmaService } from './turmas/modules/turma.service';
 import { AdminService } from './admin/modules/admin.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -256,7 +257,7 @@ export class AppComponent implements OnInit, AfterContentChecked, OnDestroy {
   ngAfterContentChecked(): void {
     this.acessType = localStorage.getItem('entity');
     if (this.acessType !== 'Administrador') {
-      this.selectedInstLogo = `http://localhost:8080/litroft/api/v1/rm/mono/downloadLogo/${localStorage.getItem('entityLogoUri')}`;
+      this.selectedInstLogo = `${environment.API}/mono/downloadLogo/${localStorage.getItem('entityLogoUri')}`;
       this.showOrHideMenu = true;
     } else {
       this.showOrHideMenu = false;

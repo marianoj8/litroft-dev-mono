@@ -11,6 +11,7 @@ import { CustomFilter } from 'src/app/shared/model/support/custom-filter';
 
 import { InstitutoService } from './../modules/instituto.service';
 import { MonografiaService } from 'src/app/monografias/modules/monografia.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-instituto-list',
@@ -84,7 +85,7 @@ export class InstitutoListComponent implements OnInit {
   }
   onSelectedInstituto(item: Instituto) {
     this.selectedInst = item.nome;
-    this.selectedInstLogo = `http://localhost:8080/litroft/api/v1/rm/mono/downloadLogo/${item.logoId}`;
+    this.selectedInstLogo = `${environment.API}/mono/downloadLogo/${item.logoId}`;
 
     this.institutoService.listCursoByInstituto(item.id).subscribe(
       (resp) => {
