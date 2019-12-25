@@ -56,6 +56,7 @@ export class InstitutoListComponent implements OnInit {
   ngOnInit() {
     this.institutoService.onChangeContext.emit(false);
     this.filter.nome = '';
+    this.filter.sigla = '';
     this.onRefrash(this.filter);
 
     this.sub = this.institutoService.findValueParams
@@ -63,7 +64,7 @@ export class InstitutoListComponent implements OnInit {
   }
 
   onRefrash(data?: CustomFilter) {
-    this.sub = this.institutoService.list()
+    this.sub = this.institutoService.listFiltered(data.nome, data.sigla)
       .pipe(
         catchError(err => {
           // this.dialogService.open(ErrorLoadingComponent);

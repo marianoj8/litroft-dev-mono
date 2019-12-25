@@ -81,9 +81,9 @@ export class InstitutoPriveteListComponent implements OnInit {
       (next) => this.openDeleteDialog(next)
     );
 
-    // this.sub = this.service.findValueParamFromServer.subscribe(
-    //   (next: CustomFilter) => this.onFilterFromServer(next)
-    // );
+    this.sub = this.institutoService.findValueParams.subscribe(
+      (value: CustomFilter) => this.onRefrash(value)
+    );
   }
 
   // onFilterFromServer(data: CustomFilter) {
@@ -93,7 +93,7 @@ export class InstitutoPriveteListComponent implements OnInit {
   // }
 
   onRefrash(data?: CustomFilter) {
-    this.sub = this.institutoService.list()
+    this.sub = this.institutoService.listFiltered(data.nome === undefined ? '' : data.nome, data.sigla === undefined ? '' : data.sigla)
       .pipe(
         catchError(err => {
           // this.dialogService.open(ErrorLoadingComponent);

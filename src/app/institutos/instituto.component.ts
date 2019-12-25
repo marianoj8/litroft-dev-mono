@@ -33,11 +33,12 @@ export class InstitutoComponent implements OnInit, OnDestroy {
   }
 
   cleanSearchField() {
-
+    this.onFilterSearch('');
   }
 
   onFilterSearch(nome?: string) {
     this.filter.nome = nome === undefined ? '' : nome;
+    this.filter.sigla = '';
     this.institutoService.findValueParams.emit(this.filter);
   }
 
