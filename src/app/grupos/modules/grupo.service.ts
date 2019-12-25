@@ -31,6 +31,10 @@ export class GrupoService implements CustomRepository<Grupo, number> {
     return this.service.list('interno/grupo/l');
   }
 
+  listByDescricao(descricao: string): Observable<Grupo[]> {
+    return this.service.list(`interno/grupo/l?descricao=${descricao}`);
+  }
+
   listPublic(): Observable<Grupo[]> {
     return this.service.list('grupo/l/public');
   }

@@ -4,6 +4,7 @@ import { Location } from '@angular/common';
 import { Subject } from 'rxjs/internal/Subject';
 import { Curso } from '../shared/model/curso';
 import { Observable } from 'rxjs/internal/Observable';
+import { CustomFilter } from '../shared/model/support/custom-filter';
 
 @Component({
   selector: 'app-monografias',
@@ -15,6 +16,8 @@ export class MonografiasComponent implements OnInit {
   public onChangeContext = false;
   cursos$: Observable<Curso[]>;
   view = 0;
+  filter = new CustomFilter();
+
   constructor(private monografiaService: MonografiaService, private location: Location) {
     this.monografiaService.onChangeContextTitle.emit('Monografias Internas');
 
@@ -27,16 +30,16 @@ export class MonografiasComponent implements OnInit {
 
   }
 
-  cleanSearchField() { }
-
-  showAll() { }
-  find($event, param: string) { }
-  onFilterSearch() { }
-  logName(nome: string) { }
-
-  filterByCurso(param: string) {
-
+  cleanSearchField() {
+    this.onFilterSearch('');
   }
+
+  onFilterSearch(descricao?: string) {
+    descricao = descricao === undefined ? '' : descricao;
+    this.filter.descricao = descricao;
+    this.monografiaService.findValueParams.emit(this.filter);
+  }
+
 
   back() {
     this.location.back();
