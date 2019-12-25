@@ -4,6 +4,7 @@ import { InstitutoService } from './modules/instituto.service';
 import { Subscription } from 'rxjs';
 import { CursoService } from 'src/app/cursos/modules/curso.service';
 import { MonografiaService } from 'src/app/monografias/modules/monografia.service';
+import { CustomFilter } from '../shared/model/support/custom-filter';
 
 @Component({
   selector: 'app-instituto',
@@ -13,7 +14,9 @@ import { MonografiaService } from 'src/app/monografias/modules/monografia.servic
 export class InstitutoComponent implements OnInit, OnDestroy {
 
   public onChangeContext = false;
+  filter = new CustomFilter();
   private sub: Subscription;
+
   constructor(
     private institutoService: InstitutoService,
     private cursoService: CursoService,
@@ -29,8 +32,15 @@ export class InstitutoComponent implements OnInit, OnDestroy {
     );
   }
 
-  cleanSearchField() { }
-  onFilterSearch() { }
+  cleanSearchField() {
+
+  }
+
+  onFilterSearch(nome?: string) {
+    this.filter.nome = nome === undefined ? '' : nome;
+    this.institutoService.findValueParams.emit(this.filter);
+  }
+
   find($event, param: string) { }
 
   back() {

@@ -24,6 +24,7 @@ export class InstitutoListComponent implements OnInit {
   institutos: MatTableDataSource<Instituto>;
   institutosList: Instituto[] = [];
   cursosList: Curso[] = [];
+  filter = new CustomFilter();
   error$ = new Subject<boolean>();
   private sub: Subscription;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
@@ -54,7 +55,11 @@ export class InstitutoListComponent implements OnInit {
 
   ngOnInit() {
     this.institutoService.onChangeContext.emit(false);
-    this.onRefrash();
+    this.filter.nome = '';
+    this.onRefrash(this.filter);
+
+    this.sub = this.institutoService.findValueParams
+      .subscribe((value: CustomFilter) => this.onRefrash(value));
   }
 
   onRefrash(data?: CustomFilter) {
