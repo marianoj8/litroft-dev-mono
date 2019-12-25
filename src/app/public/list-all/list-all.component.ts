@@ -5,6 +5,7 @@ import { Grupo } from 'src/app/shared/model/grupo';
 import { PublicService } from '../modules/public.service';
 import { MonografiaService } from './../../monografias/modules/monografia.service';
 import { Instituto } from 'src/app/shared/model/instituto';
+import { CustomFilter } from '../../shared/model/support/custom-filter';
 
 @Component({
   selector: 'app-list-all',
@@ -31,7 +32,7 @@ export class ListAllComponent implements OnInit {
 
   ngOnInit() {
     this.grupos = [];
-    this.fetchAllMonografiaByGrups();
+    this.fetchAllMonografiaByGrups('');
 
     this.publicService.emitSelectedSchool.subscribe((resp: Instituto) => {
 
@@ -48,15 +49,20 @@ export class ListAllComponent implements OnInit {
           });
 
       } else {
-        this.fetchAllMonografiaByGrups();
+        this.fetchAllMonografiaByGrups('');
       }
 
     });
 
+    this.publicService.inFilterMonografias
+      .subscribe((value: CustomFilter) => {
+        this.fetchAllMonografiaByGrups(value.descricao);
+      });
+
   }
 
-  private fetchAllMonografiaByGrups(): void {
-    this.publicService.list()
+  private fetchAllMonografiaByGrups(descricao: string): void {
+    this.publicService.list(descricao)
       .subscribe((values) => {
         this.grupos = [];
         values.forEach((v: Grupo) => {

@@ -6,6 +6,7 @@ import { Grupo } from 'src/app/shared/model/grupo';
 import { environment } from 'src/environments/environment';
 
 import { Instituto } from './../../shared/model/instituto';
+import { CustomFilter } from '../../shared/model/support/custom-filter';
 
 @Injectable({ providedIn: 'root' })
 export class PublicService {
@@ -15,8 +16,10 @@ export class PublicService {
   emitMonoLink = new EventEmitter<string>();
   enableReadMode = new EventEmitter<boolean>();
   emitInstitutoList = new EventEmitter<Instituto[]>();
+  inFilterMonografias = new EventEmitter<CustomFilter>();
   public emitSelectedSchool = new EventEmitter<Instituto>();
   constructor(private http: HttpClient) { }
+
 
   listByInstitutoId(id: number): Observable<Grupo[]> {
     return this.http.get<Grupo[]>(`${environment.API}/grupo/l/public/instituto/${id}`)
@@ -26,8 +29,9 @@ export class PublicService {
       );
   }
 
-  list(): Observable<Grupo[]> {
-    return this.http.get<Grupo[]>(`${environment.API}/grupo/l/public`)
+  list(descricao: string): Observable<Grupo[]> {
+    descricao = descricao === undefined ? '' : descricao;
+    return this.http.get<Grupo[]>(`${environment.API}/grupo/l/public?descricao=${descricao}`)
       .pipe(
         take(1),
         //  catchError((err: HttpErrorResponse) => this.errorHandler(err))
