@@ -32,6 +32,7 @@ export class GrupoService implements CustomRepository<Grupo, number> {
   }
 
   listByDescricao(descricao: string): Observable<Grupo[]> {
+    descricao = descricao === undefined ? '' : descricao;
     return this.service.list(`interno/grupo/l?descricao=${descricao}`);
   }
 
@@ -40,7 +41,8 @@ export class GrupoService implements CustomRepository<Grupo, number> {
   }
 
   filterByDescricaoAndTow(filter: CustomFilter): Observable<Grupo[]> {
-    return this.service.list(`interno/grupo/l?descricao=${filter.descricao === undefined ? '' : filter.descricao}&curso=${filter.curso === undefined ? '' : filter.curso}&turma=${filter.turma === undefined ? '' : filter.turma}`);
+    filter = this.filterResolve(filter);
+    return this.service.list(`interno/grupo/l?descricao=${filter.descricao}&curso=${filter.curso}&turma=${filter.turma}`);
   }
 
   filterByDuracao(duracao: number): Observable<Grupo[]> {
@@ -59,5 +61,12 @@ export class GrupoService implements CustomRepository<Grupo, number> {
 
   deleteById(id: number): Observable<void> {
     return this.service.deleteById('interno/grupo', id);
+  }
+
+  private filterResolve(filter: CustomFilter): CustomFilter {
+    filter.descricao = filter.descricao === undefined ? '' : filter.descricao;
+    filter.curso = filter.curso === undefined ? '' : filter.curso;
+    filter.turma = filter.turma === undefined ? '' : filter.turma;
+    return filter;
   }
 }

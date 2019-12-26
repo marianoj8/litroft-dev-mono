@@ -59,7 +59,7 @@ export class GrupoListComponent implements OnInit, OnDestroy {
     this.service.onChangeContext.emit(false);
 
     this.sub = this.service.findValueParams
-      .subscribe(next => this.onRefrash(next));
+      .subscribe((value: CustomFilter) => this.onRefrash(value));
 
     this.sub = this.service.findValueParam
       .subscribe(next => this.grupos.filter = next);
@@ -86,7 +86,7 @@ export class GrupoListComponent implements OnInit, OnDestroy {
   }
 
   onRefrash(data?: CustomFilter) {
-    this.sub = this.service.filterByDescricaoAndTow(data)
+    this.sub = this.service.listByDescricao(data.descricao)
       .pipe(
         catchError(err => {
           this.dialogService.open(ErrorLoadingComponent);

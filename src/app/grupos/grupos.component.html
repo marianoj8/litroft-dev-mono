@@ -9,7 +9,7 @@
           #key
           matInput
           type="text"
-          (keyup)="find($event, key.value)"
+          (keyup)="onFilterSearch(key.value)"
           autocomplete="false"
           placeholder="Procurar estudantes por nome..."
         />

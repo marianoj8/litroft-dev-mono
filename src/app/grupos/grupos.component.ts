@@ -19,7 +19,7 @@ export class GruposComponent implements OnInit, OnDestroy {
   public onChangeContext = false;
   cursos$: Observable<Curso[]>;
   cursosError$ = new Subject<boolean>();
-  filtro: CustomFilter = new CustomFilter();
+  filter = new CustomFilter();
   private sub: Subscription;
 
   constructor(
@@ -42,38 +42,14 @@ export class GruposComponent implements OnInit, OnDestroy {
 
   }
 
-
-  find(event: KeyboardEvent, value: string) {
-    if (event.key === 'Enter') {
-      this.findFromServer(value);
-    }
-    this.estudanteService.findValueParam.emit(value.trim());
-  }
-
-  findFromServer(value: string) {
-    this.filtro.nome = value.trim();
-    this.estudanteService.findValueParamFromServer.emit(this.filtro);
-  }
-
-  filterByCurso(sexo: string) {
-    this.filtro.sexo = sexo;
-    this.estudanteService.findValueParams.emit(this.filtro);
-  }
-
-  showAll() {
-    this.filtro.curso = '';
-    this.filtro.sexo = '';
-    this.estudanteService.findValueParams.emit(this.filtro);
-  }
-
   cleanSearchField() {
-    this.findFromServer('');
+    this.onFilterSearch('');
   }
 
-  logName(curso) {
-    this.filtro.curso = curso;
+  onFilterSearch(descricao: string) {
+    this.filter.descricao = descricao === undefined ? '' : descricao;
+    this.grupoService.findValueParams.emit(this.filter);
   }
-
 
   back() {
     this.location.back();
@@ -83,5 +59,4 @@ export class GruposComponent implements OnInit, OnDestroy {
     this.sub.unsubscribe();
   }
 
-  onFilterSearch() {}
 }
