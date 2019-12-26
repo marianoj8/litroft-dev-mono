@@ -9,6 +9,7 @@ export class Departamento implements CustomAbstractEntity {
   lastModifiedAt: string;
   totalModified: number;
   nome: string;
+  totalCurso: number;
   adminInterno: AdminInterno;
 
 
