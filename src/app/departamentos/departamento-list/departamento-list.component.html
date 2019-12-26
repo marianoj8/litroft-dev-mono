@@ -12,6 +12,13 @@
       </td>
     </ng-container>
 
+    <ng-container matColumnDef="totalCurso">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Cursos</th>
+      <td mat-cell *matCellDef="let departamento">
+        {{ departamento?.totalCurso }}
+      </td>
+    </ng-container>
+
     <ng-container matColumnDef="detalhe">
       <th mat-header-cell *matHeaderCellDef>Detalhe</th>
       <td mat-cell *matCellDef="let departamento">
