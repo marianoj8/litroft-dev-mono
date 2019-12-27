@@ -12,6 +12,9 @@ import { Local } from 'src/app/shared/model/local';
 import { Provincia } from 'src/app/shared/model/provincia';
 import { NotificationService } from 'src/app/shared/services/notification/notification.service';
 import { MyErrorStateMatch } from 'src/app/shared/validators/field-validator';
+import { ProvinciaService } from 'src/app/provincia/modules/provincia.service';
+import { catchError } from 'rxjs/operators';
+import { of } from 'rxjs/internal/observable/of';
 
 @Component({
   selector: 'app-local-form',
@@ -34,7 +37,7 @@ export class LocalFormComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
     private localService: LocalService,
-    // private provinciaService: ProvinciaService,
+    private provinciaService: ProvinciaService,
     private notificationService: NotificationService,
     private location: Location
   ) {
@@ -44,13 +47,14 @@ export class LocalFormComponent implements OnInit {
   ngOnInit() {
 
     this.localService.onChangeContext.emit(true);
-    // this.provincias$ = this.provinciaService.list()
-    //   .pipe(catchError(err => {
-    //     this.provinciaError$.next(true);
-    //     return of(null);
-    //   }));
-    this.initForms();
 
+    this.provincias$ = this.provinciaService.list()
+      .pipe(catchError(err => {
+        this.provinciaError$.next(true);
+        return of(null);
+      }));
+
+    this.initForms();
 
     if (this.router.url.match('/edit')) {
       this.activatedRoute.params
