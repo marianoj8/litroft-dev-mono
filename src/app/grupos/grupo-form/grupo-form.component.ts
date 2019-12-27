@@ -172,8 +172,8 @@ export class GrupoFormComponent implements OnInit {
     }
   }
 
-  onRefrash(p?: string, c?: number, g?: number) {
-    this.sub = this.elementoService.listByParams(p, c, g)
+  onRefrash(position?: string, curso?: number, grupo?: number) {
+    this.sub = this.elementoService.listByParams(position, curso, grupo)
       .pipe(
         // catchError(err => {
         //   this.dialogService.open(ErrorLoadingComponent);
@@ -182,7 +182,7 @@ export class GrupoFormComponent implements OnInit {
         // })
       )
       .subscribe(
-        next => next => this.relist(next));
+        (value: Elemento[]) => this.relist(value));
   }
 
   initForms() {
