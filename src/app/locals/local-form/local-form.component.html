@@ -13,24 +13,24 @@
           <input
             matInput
             autocomplete="false"
-            formControlName="destrito"
+            formControlName="distrito"
             required
             placeholder="Destrito"
           />
           <mat-error
             *ngIf="
-              formGroup01.controls['destrito'].hasError('minlength') &&
-              !formGroup01.controls['destrito'].hasError('required')
+              formGroup01.controls['distrito'].hasError('minlength') &&
+              !formGroup01.controls['distrito'].hasError('required')
             "
           >
             Destrito deve ter no minimo <strong>3 caraters</strong>
           </mat-error>
 
-          <mat-error *ngIf="formGroup01.controls['destrito'].hasError('maxlength')">
+          <mat-error *ngIf="formGroup01.controls['distrito'].hasError('maxlength')">
             Destrito não deve ter acima de <strong>80 caraters</strong>
           </mat-error>
 
-          <mat-error *ngIf="formGroup01.controls['destrito'].hasError('required')">
+          <mat-error *ngIf="formGroup01.controls['distrito'].hasError('required')">
             Destrito é <strong>obrigatorio</strong>
           </mat-error>
         </mat-form-field>
@@ -87,7 +87,7 @@
             <ng-container *ngFor="let provincia of provincias$ | async">
               <mat-option *ngIf="!provincia">lista vasia</mat-option>
               <mat-option [value]="provincia.id">
-                {{ provincia.destrito }}
+                {{ provincia.distrito }}
               </mat-option>
             </ng-container>
           </mat-select>
