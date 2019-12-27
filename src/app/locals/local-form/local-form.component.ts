@@ -22,7 +22,6 @@ export class LocalFormComponent implements OnInit {
   formGroup01: FormGroup;
   formGroup02: FormGroup;
   locals$: Observable<Local[]>;
-  duracoes: number[] = [1, 2, 3, 4, 5, 6];
   matcher = new MyErrorStateMatch();
   showAndHideView: EventEmitter = new EventEmitter();
   local: Local = new Local();
@@ -35,7 +34,6 @@ export class LocalFormComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
     private localService: LocalService,
-    // private monografiaService: MonografiaService,
     // private provinciaService: ProvinciaService,
     private notificationService: NotificationService,
     private location: Location
