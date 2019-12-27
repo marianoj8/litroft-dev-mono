@@ -35,7 +35,6 @@ export class SelectElementComponent implements OnInit {
     'numeroProcesso',
     'nome',
     'sexo',
-    'fone',
     'endereco',
   ];
 
