@@ -49,9 +49,10 @@ export class EstudanteService implements CustomRepository<Estudante, number> {
       .list(`interno/estudante/l?curso=${!!curso ? curso : ''}&sexo=${!!sexo ? sexo : ''}&posicao=${!!p ? p : ''}`);
   }
 
-  filterBySexoAndCursoAngGroup(curso: string, sexo: string, isGroup: boolean): Observable<Estudante[]> {
+  filterBySexoAndCursoAngGroup(filterParam: CustomFilter): Observable<Estudante[]> {
+    filterParam = this.filterResolve(filterParam);
     return this.service
-      .list(`interno/estudante/l/g?curso=${!!curso ? curso : ''}&sexo=${!!sexo ? sexo : ''}&isGroup=${!!isGroup ? isGroup : false}`);
+      .list(`interno/estudante/l/g?curso=${filterParam.curso}&sexo=${filterParam.sexo}&isGroup=${filterParam.isGroup}`);
   }
 
   save(t: Estudante): Observable<Estudante> {
@@ -76,6 +77,7 @@ export class EstudanteService implements CustomRepository<Estudante, number> {
     filterParam.nome = filterParam.nome === undefined ? '' : filterParam.nome;
     filterParam.curso = filterParam.curso === undefined ? '' : filterParam.curso;
     filterParam.sexo = filterParam.sexo === undefined ? '' : filterParam.sexo;
+    filterParam.isGroup = filterParam.isGroup === undefined ? false : filterParam.isGroup;
     return filterParam;
   }
 
