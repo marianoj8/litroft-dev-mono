@@ -35,9 +35,10 @@ export class OrientadorService implements CustomRepository<Orientador, number> {
     return this.service.list(`interno/orientador/l?nome=${!!filter.nome ? filter.nome : ''}&sexo=${!!filter.sexo ? filter.sexo : ''}&especialidade=${!!filter.descricao ? filter.descricao : ''}`);
   }
 
-  filterBySexoAndEspecialidade(sexo: string, descricao: string): Observable<Orientador[]> {
+  filterBySexoAndEspecialidade(filterParam: CustomFilter): Observable<Orientador[]> {
+    filterParam = this.filterResolve(filterParam);
     return this.service
-      .list(`interno/orientador/l?sexo=${!!sexo ? sexo : ''}&especialidade=${!!descricao ? descricao : ''}`);
+      .list(`interno/orientador/l?sexo=${filterParam.sexo}&especialidade=${filterParam.descricao}`);
   }
 
   save(t: Orientador): Observable<Orientador> {
@@ -52,6 +53,12 @@ export class OrientadorService implements CustomRepository<Orientador, number> {
 
   deleteById(id: number): Observable<void> {
     return this.service.deleteById('interno/orientador', id);
+  }
+
+  filterResolve(filterParam: CustomFilter): CustomFilter {
+    filterParam.sexo = filterParam.sexo === undefined ? '' : filterParam.sexo;
+    filterParam.descricao = filterParam.descricao === undefined ? '' : filterParam.descricao;
+    return filterParam;
   }
 
 }

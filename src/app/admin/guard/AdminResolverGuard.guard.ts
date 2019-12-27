@@ -6,11 +6,12 @@ import { AdminService } from '../modules/admin.service';
 @Injectable({ providedIn: 'root' })
 export class AdminResolverGuard implements Resolve<boolean> {
   private status: boolean;
-  public static statusUser: boolean;
+  public statusUser: boolean;
+
   constructor(private adminService: AdminService) {
     adminService.getUserInfo().subscribe(resp => {
       this.status = resp;
-      AdminResolverGuard.statusUser = resp;
+      this.statusUser = resp;
     });
   }
 
