@@ -24,6 +24,12 @@ export class MonografiaService {
   emitShowAddButton = new EventEmitter<boolean>();
   emitStatusUploader = new EventEmitter<any>();
 
+  departamentoId: number;
+  grupoId: number;
+  projeto: number;
+  pagina: number;
+  url = environment.API;
+
   constructor(private service: CrudService<Monografia, number>, private http: HttpClient) { }
 
   getById(id: number): Observable<Monografia> {
@@ -49,8 +55,12 @@ export class MonografiaService {
   save(t: Monografia): Observable<any> {
     const formData: FormData = new FormData();
     formData.append('file', t.file);
-
-    return this.http.post<any>(`${environment.API}/interno/mono/uploadFile?departamentoId=${t.departamento.id}&grupoId=${t.projeto.grupo.id}&paginas=${t.paginas}&projetoId=${t.projeto.id}`, formData, {
+    this.departamentoId = t.departamento.id;
+    this.grupoId = t.projeto.grupo.id;
+    this.pagina = t.paginas;
+    this.projeto = t.projeto.id;
+    // tslint:disable-next-line: max-line-length
+    return this.http.post<any>(`${this.url}/interno/mono/uploadFile?departamentoId=${this.departamentoId}&grupoId=${this.grupoId}&paginas=${this.pagina}&projetoId=${this.projeto}`, formData, {
       reportProgress: true,
       observe: 'events'
     }).pipe(
