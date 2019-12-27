@@ -83,7 +83,7 @@ export class OrientadorListComponent implements OnInit, OnDestroy {
   }
 
   onRefrash(data?: CustomFilter) {
-    this.sub = this.service.filterBySexoAndEspecialidade(data.sexo === undefined ? '' : data.sexo, data.descricao === undefined ? '' : data.descricao)
+    this.sub = this.service.filterBySexoAndEspecialidade(data)
       .pipe(
         catchError(err => {
           this.dialogService.open(ErrorLoadingComponent);
