@@ -31,6 +31,13 @@
       </td>
     </ng-container>
 
+    <ng-container matColumnDef="numeroProcesso">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>N/Processo</th>
+      <td mat-cell *matCellDef="let estudante">
+        {{ estudante?.numeroProcesso }}
+      </td>
+    </ng-container>
+
     <ng-container matColumnDef="nome">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Nome</th>
       <td mat-cell *matCellDef="let estudante">
@@ -45,12 +52,6 @@
       </td>
     </ng-container>
 
-    <ng-container matColumnDef="bi">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>B.I/P</th>
-      <td mat-cell *matCellDef="let estudante">
-        {{ estudante?.bi }}
-      </td>
-    </ng-container>
     <ng-container matColumnDef="fone">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Fone</th>
       <td mat-cell *matCellDef="let estudante">
