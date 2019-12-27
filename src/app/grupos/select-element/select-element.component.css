@@ -1,5 +1,6 @@
 .table {
   height: 300px;
+  width: 100%;
   overflow: auto;
 }
 mat-dialog-actions{
