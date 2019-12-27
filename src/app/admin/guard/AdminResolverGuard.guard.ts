@@ -5,15 +5,16 @@ import { AdminService } from '../modules/admin.service';
 
 @Injectable({ providedIn: 'root' })
 export class AdminResolverGuard implements Resolve<boolean> {
-  private status: boolean;
-  public statusUser: boolean;
 
   constructor(private adminService: AdminService) {
     adminService.getUserInfo().subscribe(resp => {
       this.status = resp;
-      this.statusUser = resp;
+      AdminResolverGuard.statusUser = resp;
     });
   }
+
+  public static statusUser: boolean;
+  private status: boolean;
 
   resolve(): boolean {
 
