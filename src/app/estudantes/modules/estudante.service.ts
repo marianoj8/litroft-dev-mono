@@ -33,8 +33,10 @@ export class EstudanteService implements CustomRepository<Estudante, number> {
     return this.service.list('interno/estudante/l');
   }
 
-  filterByNomeSexoCurso(filter: CustomFilter): Observable<Estudante[]> {
-    return this.service.list(`interno/estudante/l?nome=${!!filter.nome ? filter.nome : ''}&curso=${!!filter.curso ? filter.curso : ''}&sexo=${!!filter.sexo ? filter.sexo : ''}`);
+  filterByNomeSexoCurso(filterParam: CustomFilter): Observable<Estudante[]> {
+    filterParam = this.filterResolve(filterParam);
+    return this.service
+      .list(`interno/estudante/l?nome=${filterParam.nome}&curso=${filterParam.curso}&sexo=${filterParam.sexo}`);
   }
 
   filterBySexoAndCurso(curso: string, sexo: string): Observable<Estudante[]> {
@@ -68,6 +70,13 @@ export class EstudanteService implements CustomRepository<Estudante, number> {
 
   deleteById(id: number): Observable<void> {
     return this.service.deleteById('interno/estudante', id);
+  }
+
+  private filterResolve(filterParam: CustomFilter): CustomFilter {
+    filterParam.nome = filterParam.nome === undefined ? '' : filterParam.nome;
+    filterParam.curso = filterParam.curso === undefined ? '' : filterParam.curso;
+    filterParam.sexo = filterParam.sexo === undefined ? '' : filterParam.sexo;
+    return filterParam;
   }
 
 }
