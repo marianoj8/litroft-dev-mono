@@ -6,6 +6,7 @@ import { CustomFilter } from 'src/app/shared/model/support/custom-filter';
 import { CrudService } from 'src/app/shared/services/crud/crud.service';
 import { environment } from 'src/environments/environment';
 import { delay } from 'rxjs/internal/operators/delay';
+import { filter } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -33,9 +34,10 @@ export class MonografiaService {
     return this.service.list('interno/monografia/l?duracao=1');
   }
 
-  filterByNomeDuracao(filter: CustomFilter): Observable<Monografia[]> {
-    return this.service.list(`interno/monografia/l?nome=${!!filter.nome ? filter.nome : ''}&duracao=${!!filter.duracao ? filter.duracao : 1}`)
-      ;
+  filterByNomeDuracao(filterParam: CustomFilter): Observable<Monografia[]> {
+    filterParam = this.filterResolve(filterParam);
+    return this.service
+      .list(`interno/monografia/l?nome=${filterParam.nome}&duracao=${filterParam.duracao}`);
   }
 
   filterByDuracao(duracao: number): Observable<Monografia[]> {
@@ -58,6 +60,12 @@ export class MonografiaService {
 
   deleteById(id: number): Observable<void> {
     return this.service.deleteById('monografia', id);
+  }
+
+  private filterResolve(filterParam: CustomFilter): CustomFilter {
+    filterParam.nome = filterParam.nome === undefined ? '' : filterParam.nome;
+    filterParam.duracao = filterParam.duracao === undefined ? 1 : filterParam.duracao;
+    return filterParam;
   }
 
 }

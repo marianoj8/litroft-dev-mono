@@ -75,8 +75,8 @@ export class ProjetoFormComponent implements OnInit {
           this.grupos.forEach((e: Grupo) => {
             if (e.turma.id === resp) {
               this.grupoService.getById(e.id)
-                .subscribe((resp: Grupo) => {
-                  this.filter.turma = resp.turma.sigla;
+                .subscribe((value: Grupo) => {
+                  this.filter.turma = value.turma.sigla;
                   this.filter.curso = '';
                   this.filter.descricao = '';
                   this.grupos$ = this.grupoService.filterByDescricaoAndTow(this.filter);
