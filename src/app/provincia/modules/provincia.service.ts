@@ -24,11 +24,11 @@ export class ProvinciaService implements CustomRepository<Provincia, number> {
   }
 
   list(): Observable<Provincia[]> {
-    return this.service.list('interno/provincia/l');
+    return this.service.list('interno/provincia');
   }
 
   filterByNome(filter: CustomFilter): Observable<Provincia[]> {
-    return this.service.list(`interno/provincia/l?nome=${!!filter.nome ? filter.nome : ''}`);
+    return this.service.list(`interno/provincia/?nome=${!!filter.nome ? filter.nome : ''}`);
   }
 
   save(t: Provincia): Observable<Provincia> {
