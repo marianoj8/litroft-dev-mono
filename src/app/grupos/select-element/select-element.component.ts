@@ -89,7 +89,7 @@ export class SelectElementComponent implements OnInit {
   }
 
   onRefrash(data?: CustomFilter) {
-    this.sub = this.service.filterBySexoAndCursoAngGroup(data.curso === undefined ? '' : data.curso, data.sexo === undefined ? '' : data.sexo, data.isGroup === undefined ? false : data.isGroup)
+    this.sub = this.service.filterBySexoAndCursoAngGroup(data)
       .pipe(
         catchError(err => {
           // this.dialogService.open(ErrorLoadingComponent);
