@@ -2,7 +2,8 @@
 
 # Litroft Mono
 
-Um projeto Front-End para o consumo de uma API que gerencia Monografias, grupos, e outros por cada instituição no sistema.
+Um projeto Front-End para o consumo de uma API que gerencia Monografias, Estudantes, Projetos, Grupos, Institutos e outros...
+Tudo isso feito de um modo destinto para cada instituto cadastrado na plataforma.
 
 ## Começando
 
@@ -60,7 +61,8 @@ Adicione notas adicionais sobre como implantar isso em um sistema ativo
 
 ## Construído com
 
-* [Angular] (http://www.dropwizard.io/1.0.2/docs/)
+* [Angular] (http://www.angular.io/docs/)
+* [AngularMaterial] ((http://www.angular.material/docs/))
 
 ## Contribuindo
 
@@ -72,7 +74,7 @@ Usamos [SemVer] (http://semver.org/) para versionar. Para as versões disponíve
 
 ## Autores
 
-* ** Litroft Dev ** - * Trabalho inicial * - [PurpleBooth] (https://github.com/PurpleBooth)
+* ** José Mariano Gonçalves ** - * Trabalho inicial * - [PurpleBooth] (https://github.com/PurpleBooth)
 
 Veja também a lista de [colaboradores] (https://github.com/your/project/contributors) que participaram deste projeto.
 
