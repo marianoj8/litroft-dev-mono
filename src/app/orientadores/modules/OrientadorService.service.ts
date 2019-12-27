@@ -31,8 +31,10 @@ export class OrientadorService implements CustomRepository<Orientador, number> {
     return this.service.list('interno/orientador/l');
   }
 
-  filterByNomeSexoEspecialidade(filter: CustomFilter): Observable<Orientador[]> {
-    return this.service.list(`interno/orientador/l?nome=${!!filter.nome ? filter.nome : ''}&sexo=${!!filter.sexo ? filter.sexo : ''}&especialidade=${!!filter.descricao ? filter.descricao : ''}`);
+  filterByNomeSexoEspecialidade(filterParam: CustomFilter): Observable<Orientador[]> {
+    filterParam = this.filterResolve(filterParam);
+    return this.service
+      .list(`interno/orientador/l?nome=${filterParam.nome}&sexo=${filterParam.sexo}&especialidade=${filterParam.descricao}`);
   }
 
   filterBySexoAndEspecialidade(filterParam: CustomFilter): Observable<Orientador[]> {
