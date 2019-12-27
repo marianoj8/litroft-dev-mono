@@ -1,6 +1,6 @@
 import { CustomAbstractEntity } from 'src/app/shared/model/customEntity';
 import { Admin } from './admin';
-import { Monicipio } from './monicipio';
+import { Municipio } from './monicipio';
 import { Provincia } from './provincia';
 
 export class Local implements CustomAbstractEntity {
@@ -10,7 +10,7 @@ export class Local implements CustomAbstractEntity {
   lastModifiedAt: string;
   totalModified: number;
   distrito: string;
-  municipio: Monicipio;
+  municipio: Municipio;
   provincia: Provincia;
   admin: Admin;
 
