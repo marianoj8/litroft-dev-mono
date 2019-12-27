@@ -32,9 +32,9 @@ export class SelectElementComponent implements OnInit {
 
   displaydColumns: string[] = [
     'select',
+    'numeroProcesso',
     'nome',
     'sexo',
-    'bi',
     'fone',
     'endereco',
   ];
