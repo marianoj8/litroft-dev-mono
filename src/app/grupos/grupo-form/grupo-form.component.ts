@@ -234,11 +234,11 @@ export class GrupoFormComponent implements OnInit {
       .subscribe(
         (data: Grupo) => {
           console.log('ADDING ELEMENTS ' + this.estudantes);
-          this.estudantesList.forEach(element => {
-            console.log(element);
+          this.estudantesList.forEach(item => {
+            console.log(item);
             this.elementosList.push(
               new Elemento(null,
-                element,
+                item,
                 data.orientador,
                 data,
                 data.curso,
