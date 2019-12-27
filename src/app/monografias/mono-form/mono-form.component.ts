@@ -179,7 +179,7 @@ export class MonoFormComponent implements OnInit, OnDestroy {
 
 
   onFileSelected(event) {
-    let doc: any = document.querySelector('#file');
+    const doc: any = document.querySelector('#file');
     this.onUpload(event);
 
     if (typeof (FileReader) !== 'undefined') {
