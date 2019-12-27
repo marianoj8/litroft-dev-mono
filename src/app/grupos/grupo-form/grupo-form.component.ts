@@ -275,8 +275,8 @@ export class GrupoFormComponent implements OnInit {
     const dialogRef = this.dialog.open(SelectElementComponent,
       {
         data: this.curso.nome ? this.curso.nome : '*',
-        height: '500px',
-        width: '860px',
+        height: '510px',
+        width: '960px',
         disableClose: true
       });
 
