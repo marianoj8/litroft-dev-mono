@@ -1,7 +1,7 @@
 import { CustomAbstractEntity } from 'src/app/shared/model/customEntity';
 import { Admin } from './admin';
 
-export class Monicipio implements CustomAbstractEntity {
+export class Municipio implements CustomAbstractEntity {
 
   id: number;
   createdAt: string;
