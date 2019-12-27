@@ -87,7 +87,7 @@
             <ng-container *ngFor="let provincia of provincias$ | async">
               <mat-option *ngIf="!provincia">lista vasia</mat-option>
               <mat-option [value]="provincia.id">
-                {{ provincia.distrito }}
+                {{ provincia.nome }}
               </mat-option>
             </ng-container>
           </mat-select>
