@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { ProvinciaComponent } from '../provincia.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: null,
+    component: ProvinciaComponent,
     children: [
       {
         path: '',
