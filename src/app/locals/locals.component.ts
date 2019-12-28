@@ -1,13 +1,12 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Subject } from 'rxjs/internal/Subject';
 import { Subscription } from 'rxjs/internal/Subscription';
 
+import { Local } from '../shared/model/local';
 import { CustomFilter } from '../shared/model/support/custom-filter';
 import { LocalService } from './modules/local.service';
-import { Local } from '../shared/model/local';
-import { Location } from '@angular/common';
-
 
 
 @Component({
