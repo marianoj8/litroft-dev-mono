@@ -26,11 +26,11 @@ export class MunicipioService implements CustomRepository<Municipio, number> {
   }
 
   list(): Observable<Municipio[]> {
-    return this.service.list('municipio');
+    return this.service.list('interno/municipio');
   }
 
   filterByNome(filter: CustomFilter): Observable<Municipio[]> {
-    return this.service.list(`municipio?destrito=${!!filter.nome ? filter.nome : ''}`)
+    return this.service.list(`interno/municipio?destrito=${!!filter.nome ? filter.nome : ''}`)
       ;
   }
 
@@ -42,12 +42,12 @@ export class MunicipioService implements CustomRepository<Municipio, number> {
 
   save(t: Municipio): Observable<Municipio> {
     if (t.id) {
-      return this.service.update('interno/municipio', t);
+      return this.service.update('admin/municipio', t);
     }
-    return this.service.save('interno/municipio', t);
+    return this.service.save('admin/municipio', t);
   }
 
   deleteById(id: number): Observable<void> {
-    return this.service.deleteById('interno/municipio', id);
+    return this.service.deleteById('admin/municipio', id);
   }
 }
