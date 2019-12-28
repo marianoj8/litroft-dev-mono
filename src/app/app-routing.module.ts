@@ -78,6 +78,11 @@ const routes: Routes = [
     loadChildren: 'src/app/provincia/modules/provincia.module#ProvinciaModule'
   },
   {
+    path: 'area-formacao',
+    canActivate: [AuthGuard],
+    loadChildren: 'src/app/area-formacao/modules/area-formacao.module#AreaFormacaoModule'
+  },
+  {
     path: 'login',
     loadChildren: 'src/app/login/modules/login.module#LoginModule'
   },
