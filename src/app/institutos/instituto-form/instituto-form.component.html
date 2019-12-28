@@ -146,8 +146,8 @@
              -->
             <ng-container *ngFor="let local of locais$ | async">
               <mat-option [value]="local.id">
-                {{ local.destrito }},
-                {{ local.monicipio.nome }},
+                {{ local.distrito }},
+                {{ local.municipio.nome }},
                 {{ local.provincia.nome }}
               </mat-option>
             </ng-container>
