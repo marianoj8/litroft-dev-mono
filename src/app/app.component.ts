@@ -24,6 +24,7 @@ import { TurmaService } from './turmas/modules/turma.service';
 import { AdminService } from './admin/modules/admin.service';
 import { environment } from 'src/environments/environment';
 import { LocalService } from './locals/modules/local.service';
+import { AreaFormacaoService } from './area-formacao/modules/area-formacao.service';
 
 @Component({
   selector: 'app-root',
@@ -73,6 +74,7 @@ export class AppComponent implements OnInit, AfterContentChecked, OnDestroy {
     private orientadorService: OrientadorService,
     private turmaService: TurmaService,
     private grupoService: GrupoService,
+    private areaFormacaoService: AreaFormacaoService,
     private projetoService: ProjetoService,
     private localService: LocalService,
     private publicService: PublicService,
@@ -179,6 +181,14 @@ export class AppComponent implements OnInit, AfterContentChecked, OnDestroy {
     );
 
     this.sub = this.localService.onChangeContextTitle.subscribe(
+      value => {
+        this.contextMenu = value;
+        this.showDateSelect = false;
+        this.onChangeContext = true;
+      }
+    );
+
+    this.sub = this.areaFormacaoService.onChangeContextTitle.subscribe(
       value => {
         this.contextMenu = value;
         this.showDateSelect = false;
