@@ -3,9 +3,10 @@ import { Observable } from 'rxjs';
 import { Subject } from 'rxjs/internal/Subject';
 import { Subscription } from 'rxjs/internal/Subscription';
 
-import { Local } from '../shared/model/local';
 import { CustomFilter } from '../shared/model/support/custom-filter';
 import { LocalService } from './modules/local.service';
+import { Local } from '../shared/model/local';
+import { Location } from '@angular/common';
 
 
 
@@ -23,7 +24,9 @@ export class LocalsComponent implements OnInit {
   filter: CustomFilter = new CustomFilter();
   private sub: Subscription;
 
-  constructor(private localService: LocalService) { }
+  constructor(
+    private localService: LocalService,
+    private location: Location) { }
 
   ngOnInit() {
   }
@@ -35,6 +38,11 @@ export class LocalsComponent implements OnInit {
 
   cleanSearchField() {
     this.onFilterSearch('');
+  }
+
+
+  back() {
+    this.location.back();
   }
 
 }
