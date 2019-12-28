@@ -93,7 +93,7 @@ export class LocalFormComponent implements OnInit {
         Validators.minLength(3),
         Validators.maxLength(80)]],
 
-      municipio: [1, [
+      municipio: [null, [
         Validators.required]],
 
       provincia: [null, Validators.required]
@@ -112,7 +112,7 @@ export class LocalFormComponent implements OnInit {
 
   private save(stepper: MatVerticalStepper, state): void {
     this.local.distrito = this.formGroup01.controls.distrito.value;
-    this.local.municipio = this.formGroup01.controls.municipio.value;
+    this.local.municipio = new Municipio(this.formGroup01.controls.municipio.value);
     this.local.provincia = new Provincia(this.formGroup01.controls.provincia.value);
 
     this.localService.save(this.local)
