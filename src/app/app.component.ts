@@ -178,6 +178,14 @@ export class AppComponent implements OnInit, AfterContentChecked, OnDestroy {
       }
     );
 
+    this.sub = this.localService.onChangeContextTitle.subscribe(
+      value => {
+        this.contextMenu = value;
+        this.showDateSelect = false;
+        this.onChangeContext = true;
+      }
+    );
+
     this.sub = this.publicService.onChangeContextTitle.subscribe(
       value => {
         this.contextMenu = value;
