@@ -7,6 +7,8 @@ import { Subscription } from 'rxjs/internal/Subscription';
 import { Local } from '../shared/model/local';
 import { CustomFilter } from '../shared/model/support/custom-filter';
 import { LocalService } from './modules/local.service';
+import { MonografiaService } from '../monografias/modules/monografia.service';
+import { PublicService } from '../public/modules/public.service';
 
 
 @Component({
@@ -18,16 +20,24 @@ export class LocalsComponent implements OnInit {
 
   state = false;
   public onChangeContext = false;
-  cursos$: Observable<Local[]>;
-  cursosError$ = new Subject<boolean>();
   filter: CustomFilter = new CustomFilter();
   private sub: Subscription;
 
   constructor(
     private localService: LocalService,
-    private location: Location) { }
+    private monografiaService: MonografiaService,
+    private publicService: PublicService,
+    private location: Location) {
+    this.localService.onChangeContextTitle.emit('Local');
+    this.monografiaService.emitShowAddButton.emit(true);
+  }
 
   ngOnInit() {
+    this.sub = this.localService.onChangeContext.subscribe(
+      context => this.onChangeContext = context
+    );
+
+    this.publicService.enableReadMode.emit(false);
   }
 
   onFilterSearch(nome?: string): void {

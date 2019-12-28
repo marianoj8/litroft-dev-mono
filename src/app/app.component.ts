@@ -23,6 +23,7 @@ import { AuthService } from './shared/services/security/auth.service';
 import { TurmaService } from './turmas/modules/turma.service';
 import { AdminService } from './admin/modules/admin.service';
 import { environment } from 'src/environments/environment';
+import { LocalService } from './locals/modules/local.service';
 
 @Component({
   selector: 'app-root',
@@ -73,6 +74,7 @@ export class AppComponent implements OnInit, AfterContentChecked, OnDestroy {
     private turmaService: TurmaService,
     private grupoService: GrupoService,
     private projetoService: ProjetoService,
+    private localService: LocalService,
     private publicService: PublicService,
     public institutoService: InstitutoService,
     private formBuilder: FormBuilder,
