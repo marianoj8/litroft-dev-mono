@@ -15,6 +15,8 @@ import { MyErrorStateMatch } from 'src/app/shared/validators/field-validator';
 import { ProvinciaService } from 'src/app/provincia/modules/provincia.service';
 import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs/internal/observable/of';
+import { Municipio } from '../../shared/model/monicipio';
+import { MunicipioService } from 'src/app/municipio/modules/municipio.service';
 
 @Component({
   selector: 'app-local-form',
@@ -30,6 +32,8 @@ export class LocalFormComponent implements OnInit {
   local: Local = new Local();
   provinciaError$ = new Subject<boolean>();
   provincias$: Observable<Provincia[]>;
+  municipioError$ = new Subject<boolean>();
+  municipios$: Observable<Municipio[]>;
   private id = 0;
 
   constructor(
@@ -37,6 +41,7 @@ export class LocalFormComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
     private localService: LocalService,
+    private municipioService: MunicipioService,
     private provinciaService: ProvinciaService,
     private notificationService: NotificationService,
     private location: Location
@@ -47,6 +52,12 @@ export class LocalFormComponent implements OnInit {
   ngOnInit() {
 
     this.localService.onChangeContext.emit(true);
+
+    this.municipios$ = this.municipioService.list()
+      .pipe(catchError(err => {
+        this.municipioError$.next(true);
+        return of(null);
+      }));
 
     this.provincias$ = this.provinciaService.list()
       .pipe(catchError(err => {
