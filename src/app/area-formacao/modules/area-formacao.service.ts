@@ -30,16 +30,10 @@ export class AreaFormacaoService implements CustomRepository<AreaFormacao, numbe
     return this.service.list('areaformacao');
   }
 
-  filterByNomeDuracao(filter: CustomFilter): Observable<AreaFormacao[]> {
-    return this.service.list(`areaformacao/l?nome=${!!filter.nome ? filter.nome : ''}&duracao=${!!filter.duracao ? filter.duracao : 1}`)
+  filterByDescription(filter: CustomFilter): Observable<AreaFormacao[]> {
+    return this.service.list(`areaformacao?descricao=${!!filter.descricao ? filter.descricao : ''}`)
       ;
   }
-
-  filterByDuracao(duracao: number): Observable<AreaFormacao[]> {
-    return this.service
-      .list(`areaformacao/l?duracao=${!!duracao ? duracao : 1}`);
-  }
-
 
   save(t: AreaFormacao): Observable<AreaFormacao> {
     if (t.id) {
