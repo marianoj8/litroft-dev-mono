@@ -33,9 +33,9 @@ export class LocalListComponent implements OnInit {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   displaydColumns: string[] = [
-    'destrito',
-    'duracao',
-    'departamento',
+    'distrito',
+    'municipio',
+    'provincia',
     'detalhe',
     'edit',
     'delete'
