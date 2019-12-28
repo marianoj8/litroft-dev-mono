@@ -42,12 +42,12 @@ export class LocalService implements CustomRepository<Local, number> {
 
   save(t: Local): Observable<Local> {
     if (t.id) {
-      return this.service.update('interno/local', t);
+      return this.service.update('admin/local', t);
     }
-    return this.service.save('interno/local', t);
+    return this.service.save('admin/local', t);
   }
 
   deleteById(id: number): Observable<void> {
-    return this.service.deleteById('interno/local', id);
+    return this.service.deleteById('admin/local', id);
   }
 }
