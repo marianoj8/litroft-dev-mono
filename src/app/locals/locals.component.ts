@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs/internal/Subscription';
 
 import { Local } from '../shared/model/local';
 import { CustomFilter } from '../shared/model/support/custom-filter';
+import { LocalService } from './modules/local.service';
 
 
 
@@ -19,12 +20,21 @@ export class LocalsComponent implements OnInit {
   public onChangeContext = false;
   cursos$: Observable<Local[]>;
   cursosError$ = new Subject<boolean>();
-  filtro: CustomFilter = new CustomFilter();
+  filter: CustomFilter = new CustomFilter();
   private sub: Subscription;
 
-  constructor() { }
+  constructor(private localService: LocalService) { }
 
   ngOnInit() {
+  }
+
+  onFilterSearch(nome?: string): void {
+    this.filter.nome = nome === undefined ? '' : nome;
+    this.localService.findValueParams.emit(this.filter);
+  }
+
+  cleanSearchField() {
+    this.onFilterSearch('');
   }
 
 }
