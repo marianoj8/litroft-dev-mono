@@ -25,7 +25,6 @@ import { MunicipioService } from 'src/app/municipio/modules/municipio.service';
 })
 export class LocalFormComponent implements OnInit {
   formGroup01: FormGroup;
-  formGroup02: FormGroup;
   locals$: Observable<Local[]>;
   matcher = new MyErrorStateMatch();
   showAndHideView: EventEmitter = new EventEmitter();
@@ -79,13 +78,9 @@ export class LocalFormComponent implements OnInit {
 
           this.formGroup01.patchValue({
             distrito: this.local.distrito,
-            municipio: this.local.municipio.id
-          });
-
-          this.formGroup02.patchValue({
+            municipio: this.local.municipio.id,
             provincia: this.local.provincia.id
           });
-
         });
 
     }
@@ -99,13 +94,10 @@ export class LocalFormComponent implements OnInit {
         Validators.maxLength(80)]],
 
       municipio: [1, [
-        Validators.required]]
-    });
+        Validators.required]],
 
-    this.formGroup02 = this.formBuilder.group({
       provincia: [null, Validators.required]
     });
-
   }
 
   onSaveButton(stepper: MatVerticalStepper) {
@@ -121,7 +113,7 @@ export class LocalFormComponent implements OnInit {
   private save(stepper: MatVerticalStepper, state): void {
     this.local.distrito = this.formGroup01.controls.distrito.value;
     this.local.municipio = this.formGroup01.controls.municipio.value;
-    this.local.provincia = new Provincia(this.formGroup02.controls.provincia.value);
+    this.local.provincia = new Provincia(this.formGroup01.controls.provincia.value);
 
     this.localService.save(this.local)
       .subscribe(
