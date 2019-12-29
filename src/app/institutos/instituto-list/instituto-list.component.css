@@ -30,9 +30,14 @@ mat-nav-list a mat-icon {
   overflow: auto;
 }
 
-mat-nav-list a p, h5{
+mat-nav-list a p,
+h5 {
   text-align: start;
 }
-av-list a p, h5{
+av-list a p,
+h5 {
   text-align: start;
+}
+mat-sidenav-content {
+  height: 475px;
 }
