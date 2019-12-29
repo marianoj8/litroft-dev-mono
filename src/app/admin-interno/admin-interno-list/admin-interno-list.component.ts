@@ -34,7 +34,7 @@ export class AdminInternoListComponent implements OnInit, OnDestroy {
     'nome',
     'sobrenome',
     'sexo',
-    'telefone',
+    'instituto',
     'detalhe',
     'edit',
     'delete'
