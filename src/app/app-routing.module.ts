@@ -92,12 +92,11 @@ const routes: Routes = [
     // resolve: [AdminResolverGuard],
     loadChildren: 'src/app/admin/modules/admin.module#AdminModule',
   },
-  // {
-  //   path: 'admin-interno',
-  //   canActivate: [AuthGuard],
-  //   // resolve: [AdminResolverGuard],
-  //   loadChildren: 'src/app/admin/modules/adminInterno.module#AdminInternoModule',
-  // },
+  {
+    path: 'directores',
+    canActivate: [AuthGuard],
+    loadChildren: 'src/app/admin-interno/modules/adminInterno.module#AdminInternoModule',
+  },
   {
     path: 'denaid',
     component: AcessDenaidComponent,
