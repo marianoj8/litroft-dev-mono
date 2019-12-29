@@ -114,7 +114,7 @@
             <mat-icon color="primary">home</mat-icon>
             Home
           </a>
-          <a mat-list-item routerLinkActive="active" [routerLink]="['directores']">
+          <a mat-list-item routerLinkActive="active" [routerLink]="['directores']" *ngIf="!showOrHideMenu">
             <mat-icon color="primary">group</mat-icon>
             Directores
           </a>
