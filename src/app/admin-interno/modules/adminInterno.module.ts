@@ -3,11 +3,16 @@ import { AdminInternoComponent } from '../admin-interno.component';
 import { MaterialModule } from '../../material/material.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AdminInternoRoutingModule } from './adminInterno-routing.module';
+import { CommonModule } from '@angular/common';
+import { AdminInternoListComponent } from '../admin-interno-list/admin-interno-list.component';
 
 @NgModule({
-  declarations: [AdminInternoComponent],
+  declarations: [
+    AdminInternoComponent,
+    AdminInternoListComponent
+  ],
   imports: [
-    NgModule,
+    CommonModule,
     AdminInternoRoutingModule,
     MaterialModule,
     ReactiveFormsModule,
@@ -15,6 +20,6 @@ import { AdminInternoRoutingModule } from './adminInterno-routing.module';
   ],
   exports: []
 })
-export class AdminInterno {
+export class AdminInternoModule {
 
 }
