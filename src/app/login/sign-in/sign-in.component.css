@@ -1,4 +1,4 @@
-form{
+form {
   padding: 0 5%;
   padding-left: 8%;
 }
@@ -13,7 +13,7 @@ input {
   width: 100%;
 }
 
-button.btn-large{
+button.btn-large {
   margin-top: 2%;
   margin-right: 5%;
 }
@@ -28,4 +28,14 @@ button.btn-large{
   mat-form-field.container {
     padding: 0px 0%;
   }
+}
+.recovery {
+  align-content: center;
+  text-align: right;
+  widows: 100%;
+  padding-top: 15px;
+
+}
+.recovery-button {
+  margin-top: 25px;
 }
