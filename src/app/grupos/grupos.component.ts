@@ -46,7 +46,7 @@ export class GruposComponent implements OnInit, OnDestroy {
     this.onFilterSearch('');
   }
 
-  onFilterSearch(descricao: string) {
+  onFilterSearch(descricao?: string) {
     this.filter.descricao = descricao === undefined ? '' : descricao;
     this.grupoService.findValueParams.emit(this.filter);
   }

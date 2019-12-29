@@ -28,7 +28,7 @@ export class PublicComponent implements OnInit {
 
   }
 
-  onFilterSearch(descricao: string) {
+  onFilterSearch(descricao?: string) {
     this.filter = new CustomFilter();
     this.filter.descricao = descricao;
     this.publicService.inFilterMonografias.emit(this.filter);
