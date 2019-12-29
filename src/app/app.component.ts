@@ -25,6 +25,7 @@ import { AdminService } from './admin/modules/admin.service';
 import { environment } from 'src/environments/environment';
 import { LocalService } from './locals/modules/local.service';
 import { AreaFormacaoService } from './area-formacao/modules/area-formacao.service';
+import { AdminInternoService } from './admin-interno/modules/adminInterno.service';
 
 @Component({
   selector: 'app-root',
@@ -68,6 +69,7 @@ export class AppComponent implements OnInit, AfterContentChecked, OnDestroy {
     private loginService: LoginService,
     private cursoService: CursoService,
     private departamentoService: DepartamentoService,
+    private adminInternoService: AdminInternoService,
     private especialidadeService: EspecialidadeService,
     private monografiaService: MonografiaService,
     private estudanteService: EstudanteService,
@@ -123,6 +125,13 @@ export class AppComponent implements OnInit, AfterContentChecked, OnDestroy {
       }
     );
     this.sub = this.departamentoService.onChangeContextTitle.subscribe(
+      value => {
+        this.contextMenu = value;
+        this.showDateSelect = false;
+        this.onChangeContext = true;
+      }
+    );
+    this.sub = this.adminInternoService.onChangeContextTitle.subscribe(
       value => {
         this.contextMenu = value;
         this.showDateSelect = false;
