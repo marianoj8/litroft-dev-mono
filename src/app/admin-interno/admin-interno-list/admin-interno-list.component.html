@@ -34,7 +34,7 @@
     <ng-container matColumnDef="instituto">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Instituto</th>
       <td mat-cell *matCellDef="let adminInterno">
-        {{ adminInterno?.especialidade.descricao }}
+        {{ adminInterno?.instituto?.nome }}
       </td>
     </ng-container>
 
@@ -114,7 +114,7 @@
     >
       <mat-icon matListIcon class="mat-18">person</mat-icon>
       <h5 matLine>{{ item?.nome }} {{ item?.sobreNome }}</h5>
-      <p matLine>{{ item?.fone }} | {{ item?.especialidade?.descricao }}</p>
+      <p matLine>{{ item?.fone }} | {{ item?.instituto?.nome }}</p>
       <mat-divider></mat-divider>
     </a>
   </mat-nav-list>
