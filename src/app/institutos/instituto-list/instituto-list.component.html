@@ -50,10 +50,7 @@
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-    <div
-      style="padding-bottom: 40px;"
-      class="container mat-elevation-z8 table hide-on-med-and-down"
-    >
+    <div class="container mat-elevation-z8 table hide-on-med-and-down">
       <table
         *ngIf="institutos; else loading"
         mat-table
@@ -102,8 +99,8 @@
           </th>
           <td mat-cell *matCellDef="let instituto">
             {{ instituto?.local?.provincia?.nome }},
-            {{ instituto?.local?.monicipio?.nome }}
-            ({{ instituto?.local?.destrito }})
+            {{ instituto?.local?.municipio?.nome }}
+            ({{ instituto?.local?.distrito }})
           </td>
         </ng-container>
 
