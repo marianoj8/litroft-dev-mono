@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dist/imism-litroft",
+    "public": "dist/litroft-dev-mono",
     "ignore": [
       "firebase.json",
       "**/.*",

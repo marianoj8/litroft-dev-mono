@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "imism-litroft": {
+    "litroft-dev-mono": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/imism-litroft",
+            "outputPath": "dist/litroft-dev-mono",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -60,18 +60,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "imism-litroft:build"
+            "browserTarget": "litroft-dev-mono:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "imism-litroft:build:production"
+              "browserTarget": "litroft-dev-mono:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "imism-litroft:build"
+            "browserTarget": "litroft-dev-mono:build"
           }
         },
         "test": {
@@ -108,11 +108,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "imism-litroft:serve"
+            "devServerTarget": "litroft-dev-mono:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "imism-litroft:serve:production"
+              "devServerTarget": "litroft-dev-mono:serve:production"
             }
           }
         },
@@ -123,5 +123,5 @@
       }
     }
   },
-  "defaultProject": "imism-litroft"
+  "defaultProject": "litroft-dev-mono"
 }
