@@ -1,25 +1,90 @@
-<mat-card>
-  <mat-card-header>
-    <mat-card-title *ngIf="false">title</mat-card-title>
-    <mat-card-subtitle *ngIf="false">subtitle</mat-card-subtitle>
-  </mat-card-header>
-  <mat-card-content>
-    <form class="space-in top-space">
-      <mat-form-field>
-        <!-- <mat-input-container floatPlaceholder="auto">
-                </mat-input-container> -->
-        <input matInput type="number" required placeholder="Numero de Seriie" class="input-style" />
+<form [formGroup]="activationForm" (ngSubmit)="onSubmit()" id="activationForm">
+  <mat-form-field class="container field" id="serial">
+    <input matInput formControlName="serial" placeholder="Numero de serie" class="input-style" />
+    <mat-error *ngIf="
+        activationForm.controls['serial'].hasError('minlength') &&
+        !activationForm.controls['serial'].hasError('required')
+      ">
+      Numero de serie deve ter no minimo <strong>8 caraters</strong>
+    </mat-error>
 
-        <span matPrefix>
-          <mat-icon color="primary">code</mat-icon>
-        </span>
-      </mat-form-field>
-    </form>
-  </mat-card-content>
-  <mat-card-actions>
-    <button class="large-button space-arround" mat-raised-button color="primary">
-      <mat-icon class="mat-20">security</mat-icon>
-      Verificar e activar
+    <mat-error *ngIf="activationForm.controls['serial'].hasError('maxlength')">
+      Numero de serie não deve ter acima de <strong>12 caraters</strong>
+    </mat-error>
+
+    <mat-error *ngIf="activationForm.controls['serial'].hasError('required')">
+      Numero de serie é <strong>obrigatorio</strong>
+    </mat-error>
+
+    <span matPrefix>
+      <mat-icon color="primary">vpn_key</mat-icon>
+    </span>
+  </mat-form-field>
+  <mat-form-field class="container field" id="username">
+    <input
+      matInput
+      formControlName="username"
+      type="text"
+      placeholder="Usuario"
+      class="input-style"
+    />
+    <span matPrefix>
+      <mat-icon color="primary">account_circle</mat-icon>
+    </span>
+    <mat-error
+      *ngIf="
+        activationForm.controls['username'].hasError('minlength') &&
+        !activationForm.controls['username'].hasError('required')
+      "
+    >
+      Nome deve ter no minimo <strong>8 caraters</strong>
+    </mat-error>
+
+    <mat-error *ngIf="activationForm.controls['username'].hasError('maxlength')">
+      Nome do usuario não deve ter acima de <strong>30 caraters</strong>
+    </mat-error>
+
+    <mat-error *ngIf="activationForm.controls['username'].hasError('required')">
+      Nome do usuario é <strong>obrigatorio</strong>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="container field" id="password">
+    <input
+      matInput
+      formControlName="password"
+      [type]="hide ? 'password' : 'text'"
+      placeholder="Senha"
+      class="input-style"
+    />
+    <mat-error
+      *ngIf="
+        activationForm.controls['password'].hasError('minlength') &&
+        !activationForm.controls['password'].hasError('required')
+      "
+    >
+      A senha deve ter no minimo <strong>6 caraters</strong>
+    </mat-error>
+
+    <mat-error *ngIf="activationForm.controls['password'].hasError('maxlength')">
+      A senha não deve ter acima de <strong>30 caraters</strong>
+    </mat-error>
+
+    <mat-error *ngIf="activationForm.controls['password'].hasError('required')">
+      Senha é <strong>obrigatorio</strong>
+    </mat-error>
+
+    <span matPrefix> <mat-icon color="primary">locked</mat-icon> </span>
+  </mat-form-field>
+  <div>
+    <button id="btnLogin" [disabled]="!activationForm.valid" class="btn-large aligned" mat-raised-button color="primary"
+      type="submit">
+      Verificar conta
+      <mat-icon>verified_user</mat-icon>
     </button>
-  </mat-card-actions>
-</mat-card>
+  </div>
+</form>
+<div class="container recovery">
+  <a class="recovery-button" routerLink="">
+    Escqueceu a senha?
+  </a>
+</div>
