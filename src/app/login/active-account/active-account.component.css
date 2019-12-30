@@ -1,35 +1,46 @@
-.max-space {
-  padding: 2rem 4rem;
+form {
+  padding: 0 5%;
+  padding-left: 8%;
 }
-
-.max-space-1 {
-  padding: 0rem 8rem;
-}
-
-.top-space {
-  padding-top: 1rem;
+mat-form-field {
+  margin-top: 5%;
+  margin-left: 1.7%;
 }
 
 input {
-  font-size: 13pt;
-  padding: 0px 6px;
-  width: 80%;
+  font-size: 12.5pt;
+  padding-left: 2%;
+  width: 100%;
 }
 
-mat-form-field {
-  width: 52%;
+button.btn-large {
+  margin-top: 2%;
+  margin-right: 5%;
 }
 
-mat-card-subtitle {
-  text-align: end;
-  margin: 2px;
+@media only screen and (min-width: 993px) {
+  mat-form-field.container {
+    padding: 0px 0%;
+  }
 }
 
-.large-button {
-  width: 30%;
+@media only screen and (max-width: 600px) {
+  mat-form-field.container {
+    padding: 0px 0%;
+  }
 }
+.recovery {
+  align-content: center;
+  text-align: right;
+  widows: 100%;
+  padding-top: 15px;
 
-.space-arround {
-  padding-right: 3px;
-  margin-bottom: 5px;
+}
+.recovery-button {
+  margin-top: 25px;
+}
+.aligned{
+  width: 100%;
+  text-align: right;
+  align-content: flex-end;
 }
