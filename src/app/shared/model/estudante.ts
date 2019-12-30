@@ -19,6 +19,7 @@ export class Estudante implements CustomAbstractEntity {
   curso: Curso;
   inGruop: boolean;
   adminInterno: AdminInterno;
+  numeroSerie: string;
 
   constructor(id?: number) {
     this.id = id ? id : null;

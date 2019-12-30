@@ -18,6 +18,7 @@ export class AdminInterno implements CustomAbstractEntity {
   endereco: string;
   instituto: Instituto;
   admin: Admin;
+  numeroSerie: string;
 
   constructor(id?: number) {
     this.id = id ? id : null;

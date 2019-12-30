@@ -17,6 +17,7 @@ export class Orientador implements CustomAbstractEntity {
   endereco: string;
   especialidade: Especialidade;
   adminInterno: AdminInterno;
+  numeroSerie: string;
 
   constructor(id?: number) {
     this.id = id ? id : null;
