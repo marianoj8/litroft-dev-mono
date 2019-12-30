@@ -22,6 +22,12 @@ export class AuthService {
         take(1)
       );
   }
+  private active(user: UsernameAndPassword): Observable<Token> {
+    return this.htp.post<Token>(`${environment.API}/signup?serial=${user.serialNumber}`, user)
+      .pipe(
+        take(1)
+      );
+  }
 
   addTokenToLocalStorage(data: Token): void {
     console.log(data);
@@ -45,6 +51,14 @@ export class AuthService {
     } else {
       this.router.navigate(['']);
     }
+  }
+
+  public activeAccount(user: UsernameAndPassword) {
+    this.active(user).subscribe((token: Token) => {
+      if (token !== undefined && token !== null) {
+        this.login({ username: user.username, password: user.password }).subscribe(data => this.addTokenToLocalStorage(data));
+      }
+    });
   }
 
   doLogOut() {
