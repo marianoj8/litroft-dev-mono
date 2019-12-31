@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   BaseUrl: 'http://localhost:8080',
   // API: '/litroft/api/v1/rm'
-  API: '/api'
+  API: '/apiv1'
 };
 
 /*
