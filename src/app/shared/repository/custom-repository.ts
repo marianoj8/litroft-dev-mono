@@ -1,6 +1,5 @@
-import { CustomAbstractEntity } from 'src/app/shared/model/customEntity';
 import { Observable } from 'rxjs';
-import { MatTableDataSource } from '@angular/material';
+import { CustomAbstractEntity } from 'src/app/shared/model/customEntity';
 
 export interface CustomRepository<T extends CustomAbstractEntity, ID extends number> {
 
