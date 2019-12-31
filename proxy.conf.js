@@ -1,11 +1,11 @@
 // Removendo o CORS
 const PROXY_CONFIG = [
   {
-    context: ['/api'],
-    target: 'http://localhost:8080/litroft/api/v1/rm',
+    context: ['/apiv1'],
+    target: 'http://localhost:8080/',
     secure: false,
     logLeval: 'debug',
-    pathRewrite: { '^/api': '' }
+    pathRewrite: { '^/apiv1': '' }
   }
 ];
 
