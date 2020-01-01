@@ -64,7 +64,7 @@ export class InstitutoListComponent implements OnInit {
   }
 
   onRefrash(data?: CustomFilter) {
-    this.sub = this.institutoService.listFiltered(data.nome, data.sigla)
+    this.sub = this.institutoService.listFiltered(data)
       .pipe(
         catchError(err => {
           // this.dialogService.open(ErrorLoadingComponent);

@@ -93,7 +93,7 @@ export class InstitutoPriveteListComponent implements OnInit {
   // }
 
   onRefrash(data?: CustomFilter) {
-    this.sub = this.institutoService.listFiltered(data.nome === undefined ? '' : data.nome, data.sigla === undefined ? '' : data.sigla)
+    this.sub = this.institutoService.listFiltered(data)
       .pipe(
         catchError(err => {
           // this.dialogService.open(ErrorLoadingComponent);
