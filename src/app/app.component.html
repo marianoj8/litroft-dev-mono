@@ -93,12 +93,16 @@
       </div>
     </div>
     <mat-divider></mat-divider>
-    <mat-toolbar *ngIf="authService.loggedIn()">
-      <h2 style="text-align: center; width: 90%;">
+    <mat-toolbar style="height: 12px;" *ngIf="authService.loggedIn()">
+      <h2 style="text-align: center; width: 90%; font-weight: 700; color: rgba(0, 0, 0, 0.7);">
         {{ acessType }}
       </h2>
+      <mat-toolbar-row style="height: 10.5px;">
+        <p style="text-align: center; font-size: 9pt; font-weight: 600; width: 100%;">
+          {{nome}}
+        </p>
+      </mat-toolbar-row>
     </mat-toolbar>
-
     <mat-toolbar *ngIf="!authService.loggedIn()">
       <h2 style="text-align: center; width: 90%;">
         Institutos Médios
