@@ -17,11 +17,12 @@ export class AuthService {
   constructor(private htp: HttpClient, public router: Router) { }
 
   login(user: UsernameAndPassword): Observable<Token> {
-    return this.htp.post<Token>(`${environment.BaseUrl}/login`, user)
+    return this.htp.post<Token>(`${environment.API.substring(0, 6)}/login`, user)
       .pipe(
         take(1)
       );
   }
+
   private active(user: UsernameAndPassword): Observable<Token> {
     return this.htp.post<Token>(`${environment.API}/signup?serial=${user.serialNumber}`, user)
       .pipe(
