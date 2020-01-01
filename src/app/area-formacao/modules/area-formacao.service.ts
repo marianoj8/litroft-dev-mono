@@ -1,16 +1,17 @@
+import { HttpClient } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-
 import { CustomFilter } from 'src/app/shared/model/support/custom-filter';
-import { CustomRepository } from 'src/app/shared/repository/custom-repository';
-import { CrudService } from 'src/app/shared/services/crud/crud.service';
+
 import { AreaFormacao } from './../../shared/model/AreaFormacao';
+import { environment } from '../../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AreaFormacaoService implements CustomRepository<AreaFormacao, number> {
+export class AreaFormacaoService {
 
+  url = environment.API;
   findValueParam = new EventEmitter<string>();
   onChangeContextTitle = new EventEmitter<string>();
   findValueParamFromServer = new EventEmitter<CustomFilter>();
@@ -20,29 +21,29 @@ export class AreaFormacaoService implements CustomRepository<AreaFormacao, numbe
   emitOnEditButtonCliked = new EventEmitter<number>();
   emitOnDeleteButtonCliked = new EventEmitter<number>();
 
-  constructor(private service: CrudService<AreaFormacao, number>) { }
+  constructor(private http: HttpClient) { }
 
   getById(id: number): Observable<AreaFormacao> {
-    return this.service.getById('areaformacao', id);
+    return this.http.get<AreaFormacao>(`${this.url}/areaformacao/${id}`);
   }
 
   list(): Observable<AreaFormacao[]> {
-    return this.service.list('areaformacao');
+    return this.http.get<AreaFormacao[]>(`${this.url}/areaformacao`);
   }
 
   filterByDescription(filter: CustomFilter): Observable<AreaFormacao[]> {
-    return this.service.list(`areaformacao?descricao=${!!filter.descricao ? filter.descricao : ''}`)
+    return this.http.get<AreaFormacao[]>(`${this.url}/areaformacao?descricao=${!!filter.descricao ? filter.descricao : ''}`)
       ;
   }
 
   save(t: AreaFormacao): Observable<AreaFormacao> {
     if (t.id) {
-      return this.service.update('admin/areaformacao', t);
+      return this.http.put<AreaFormacao>(`${this.url}/admin/areaformacao`, t);
     }
-    return this.service.save('admin/areaformacao', t);
+    return this.http.post<AreaFormacao>(`${this.url}/admin/areaformacao`, t);
   }
 
   deleteById(id: number): Observable<void> {
-    return this.service.deleteById('admin/areaformacao', id);
+    return this.http.delete<void>(`${this.url}/admin/areaformacao/${id}`);
   }
 }
