@@ -3,14 +3,17 @@ import { CustomRepository } from 'src/app/shared/repository/custom-repository';
 import { AdminInterno } from 'src/app/shared/model/adminInterno';
 import { CustomFilter } from 'src/app/shared/model/support/custom-filter';
 import { MatTableDataSource } from '@angular/material';
-import { CrudService } from 'src/app/shared/services/crud/crud.service';
+import { CrudService } from 'src/app/shared/https/crud/crud.http';
 import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdminInternoService implements CustomRepository<AdminInterno, number> {
 
+  url = environment.API;
   findValueParam = new EventEmitter<string>();
   onChangeContextTitle = new EventEmitter<string>();
   findValueParamFromServer = new EventEmitter<CustomFilter>();
@@ -21,42 +24,40 @@ export class AdminInternoService implements CustomRepository<AdminInterno, numbe
   emitOnDeleteButtonCliked = new EventEmitter<number>();
 
   AdminInternoTable: MatTableDataSource<AdminInterno[]>;
-  constructor(private service: CrudService<AdminInterno, number>) {
+  constructor(private http: HttpClient) {
 
   }
 
   getById(id: number): Observable<AdminInterno> {
-    return this.service.getById('admin/adminInterno', id);
+    return this.http.get<AdminInterno>(`${this.url}/admin/adminInterno/${id}`);
   }
 
   list(): Observable<AdminInterno[]> {
-    return this.service.list('admin/adminInterno');
+    return this.http.get<AdminInterno[]>(`${this.url}/admin/adminInterno`);
   }
 
   filterByNomeSexo(filterParam: CustomFilter): Observable<AdminInterno[]> {
     filterParam = this.filterResolve(filterParam);
-    return this.service
-      .list(`admin/adminInterno?nome=${filterParam.nome}&sexo=${filterParam.sexo}`);
+    return this.http
+      .get<AdminInterno[]>(`${this.url}/admin/adminInterno?nome=${filterParam.nome}&sexo=${filterParam.sexo}`);
   }
 
   filterBySexoAndEspecialidade(filterParam: CustomFilter): Observable<AdminInterno[]> {
     filterParam = this.filterResolve(filterParam);
-    return this.service
-      .list(`admin/adminInterno?sexo=${filterParam.sexo}`);
+    return this.http
+      .get<AdminInterno[]>(`${this.url}/admin/adminInterno?sexo=${filterParam.sexo}`);
   }
 
   save(t: AdminInterno): Observable<AdminInterno> {
 
     if (t.id) {
-      console.log('Update');
-      return this.service.update('admin/adminInterno', t);
+      return this.http.put<AdminInterno>(`${this.url}/admin/adminInterno`, t);
     }
-    console.log('Saved');
-    return this.service.save('admin/adminInterno', t);
+    return this.http.post<AdminInterno>(`${this.url}/admin/adminInterno`, t);
   }
 
   deleteById(id: number): Observable<void> {
-    return this.service.deleteById('admin/adminInterno', id);
+    return this.http.delete<void>(`${this.url}/admin/adminInterno${id}`);
   }
 
   filterResolve(filterParam: CustomFilter): CustomFilter {
