@@ -1,17 +1,18 @@
+import { HttpClient } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
 import { MatTableDataSource } from '@angular/material';
 import { Observable } from 'rxjs';
 
 import { Estudante } from 'src/app/shared/model/estudante';
 import { CustomFilter } from 'src/app/shared/model/support/custom-filter';
-import { CrudService } from 'src/app/shared/services/crud/crud.service';
-import { CustomRepository } from './../../shared/repository/custom-repository';
+import { environment } from '../../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
 })
-export class EstudanteService implements CustomRepository<Estudante, number> {
+export class EstudanteService {
 
+  url = environment.API;
   findValueParam = new EventEmitter<string>();
   onChangeContextTitle = new EventEmitter<string>();
   findValueParamFromServer = new EventEmitter<CustomFilter>();
@@ -22,63 +23,61 @@ export class EstudanteService implements CustomRepository<Estudante, number> {
   emitOnDeleteButtonCliked = new EventEmitter<number>();
 
   estudanteTable: MatTableDataSource<Estudante[]>;
-  constructor(private service: CrudService<Estudante, number>) {
+  constructor(private http: HttpClient) {
   }
 
   getById(id: number): Observable<Estudante> {
-    return this.service.getById('interno/estudante', id);
+    return this.http.get<Estudante>(`${this.url}/interno/estudante/${id}`);
   }
 
   list(): Observable<Estudante[]> {
-    return this.service.list('interno/estudante/l');
+    return this.http.get<Estudante[]>(`${this.url}/interno/estudante/l`);
   }
 
-  filterByNomeSexoCurso(filterParam: CustomFilter): Observable<Estudante[]> {
-    filterParam = this.filterResolve(filterParam);
-    return this.service
-      .list(`interno/estudante/l?nome=${filterParam.nome}&curso=${filterParam.curso}&sexo=${filterParam.sexo}`);
+  filterByNomeSexoCurso(query: CustomFilter): Observable<Estudante[]> {
+    query = this.filterResolve(query);
+    return this.http
+      .get<Estudante[]>(`${this.url}/interno/estudante/l?nome=${query.nome}&curso=${query.curso}&sexo=${query.sexo}`);
   }
 
   filterBySexoAndCurso(curso: string, sexo: string): Observable<Estudante[]> {
-    return this.service
-      .list(`interno/estudante/l?curso=${!!curso ? curso : ''}&sexo=${!!sexo ? sexo : ''}`);
+    return this.http
+      .get<Estudante[]>(`${this.url}/interno/estudante/l?curso=${!!curso ? curso : ''}&sexo=${!!sexo ? sexo : ''}`);
   }
 
   filterBySexoAndCursoAndPosition(curso: string, sexo: string, p: string): Observable<Estudante[]> {
-    return this.service
-      .list(`interno/estudante/l?curso=${!!curso ? curso : ''}&sexo=${!!sexo ? sexo : ''}&posicao=${!!p ? p : ''}`);
+    return this.http
+      .get<Estudante[]>(`${this.url}/interno/estudante/l?curso=${!!curso ? curso : ''}&sexo=${!!sexo ? sexo : ''}&posicao=${!!p ? p : ''}`);
   }
 
-  filterBySexoAndCursoAngGroup(filterParam: CustomFilter): Observable<Estudante[]> {
-    filterParam = this.filterResolve(filterParam);
-    return this.service
-      .list(`interno/estudante/l/g?curso=${filterParam.curso}&sexo=${filterParam.sexo}&isGroup=${filterParam.isGroup}`);
+  filterBySexoAndCursoAngGroup(q: CustomFilter): Observable<Estudante[]> {
+    q = this.filterResolve(q);
+    return this.http
+      .get<Estudante[]>(`${this.url}/interno/estudante/l/g?curso=${q.curso}&sexo=${q.sexo}&isGroup=${q.isGroup}`);
   }
 
   save(t: Estudante): Observable<Estudante> {
 
     if (t.id) {
-      console.log('Update');
-      return this.service.update('interno/estudante', t);
+      return this.http.put<Estudante>(`${this.url}/interno/estudante`, t);
     }
-    console.log('Saved');
-    return this.service.save('interno/estudante', t);
+    return this.http.post<Estudante>(`${this.url}/interno/estudante`, t);
   }
 
   set(t: Estudante[]): Observable<Estudante[]> {
-    return this.service.setGruop('interno/estudante/set', t);
+    return this.http.put<Estudante[]>(`${this.url}/interno/estudante/set`, t);
   }
 
   deleteById(id: number): Observable<void> {
-    return this.service.deleteById('interno/estudante', id);
+    return this.http.delete<void>(`${this.url}/interno/estudante/${id}`);
   }
 
-  private filterResolve(filterParam: CustomFilter): CustomFilter {
-    filterParam.nome = filterParam.nome === undefined ? '' : filterParam.nome;
-    filterParam.curso = filterParam.curso === undefined ? '' : filterParam.curso;
-    filterParam.sexo = filterParam.sexo === undefined ? '' : filterParam.sexo;
-    filterParam.isGroup = filterParam.isGroup === undefined ? false : filterParam.isGroup;
-    return filterParam;
+  private filterResolve(query: CustomFilter): CustomFilter {
+    query.nome = query.nome === undefined ? '' : query.nome;
+    query.curso = query.curso === undefined ? '' : query.curso;
+    query.sexo = query.sexo === undefined ? '' : query.sexo;
+    query.isGroup = query.isGroup === undefined ? false : query.isGroup;
+    return query;
   }
 
 }
