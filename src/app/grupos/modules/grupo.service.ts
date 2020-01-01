@@ -1,16 +1,18 @@
-import { Injectable, EventEmitter } from '@angular/core';
-import { CustomRepository } from 'src/app/shared/repository/custom-repository';
+import { HttpClient } from '@angular/common/http';
+import { EventEmitter, Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+
+import { Estudante } from 'src/app/shared/model/estudante';
 import { Grupo } from 'src/app/shared/model/grupo';
 import { CustomFilter } from 'src/app/shared/model/support/custom-filter';
-import { CrudService } from 'src/app/shared/services/crud/crud.service';
-import { Observable } from 'rxjs';
-import { Estudante } from 'src/app/shared/model/estudante';
+import { environment } from '../../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
 })
-export class GrupoService implements CustomRepository<Grupo, number> {
+export class GrupoService {
 
+  url = environment.API;
   findValueParam = new EventEmitter<string>();
   onChangeContextTitle = new EventEmitter<string>();
   findValueParamFromServer = new EventEmitter<CustomFilter>();
@@ -21,46 +23,44 @@ export class GrupoService implements CustomRepository<Grupo, number> {
   emitOnDeleteButtonCliked = new EventEmitter<number>();
   emitSelectedElements = new EventEmitter<Estudante[]>();
 
-  constructor(private service: CrudService<Grupo, number>) { }
+  constructor(private http: HttpClient) { }
 
   getById(id: number): Observable<Grupo> {
-    return this.service.getById('interno/grupo', id);
+    return this.http.get<Grupo>(`${this.url}/interno/grupo/${id}`);
   }
 
   list(): Observable<Grupo[]> {
-    return this.service.list('interno/grupo/l');
+    return this.http.get<Grupo[]>(`${this.url}/interno/grupo/l`);
   }
 
   listByDescricao(descricao: string): Observable<Grupo[]> {
     descricao = descricao === undefined ? '' : descricao;
-    return this.service.list(`interno/grupo/l?descricao=${descricao}`);
+    return this.http.get<Grupo[]>(`${this.url}/interno/grupo/l?descricao=${descricao}`);
   }
 
   listPublic(): Observable<Grupo[]> {
-    return this.service.list('grupo/l/public');
+    return this.http.get<Grupo[]>(`${this.url}/grupo/l/public`);
   }
 
   filterByDescricaoAndTow(filter: CustomFilter): Observable<Grupo[]> {
     filter = this.filterResolve(filter);
-    return this.service.list(`interno/grupo/l?descricao=${filter.descricao}&curso=${filter.curso}&turma=${filter.turma}`);
+    return this.http.get<Grupo[]>(`${this.url}/interno/grupo/l?descricao=${filter.descricao}&curso=${filter.curso}&turma=${filter.turma}`);
   }
 
   filterByDuracao(duracao: number): Observable<Grupo[]> {
-    return this.service
-      .list(`interno/grupo/l?duracao=${!!duracao ? duracao : 1}`);
+    return this.http
+      .get<Grupo[]>(`${this.url}/interno/grupo/l?duracao=${!!duracao ? duracao : 1}`);
   }
-
 
   save(t: Grupo): Observable<Grupo> {
     if (t.id) {
-      console.log('Updating');
-      return this.service.update('interno/grupo', t);
+      return this.http.put<Grupo>(`${this.url}/interno/grupo`, t);
     }
-    return this.service.save('interno/grupo', t);
+    return this.http.post<Grupo>(`${this.url}/interno/grupo`, t);
   }
 
   deleteById(id: number): Observable<void> {
-    return this.service.deleteById('interno/grupo', id);
+    return this.http.delete<void>(`${this.url}/interno/grupo/${id}`);
   }
 
   private filterResolve(filter: CustomFilter): CustomFilter {
