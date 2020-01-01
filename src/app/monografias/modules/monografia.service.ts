@@ -1,18 +1,18 @@
-import { HttpClient, HttpEventType } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { delay } from 'rxjs/internal/operators/delay';
+
 import { Monografia } from 'src/app/shared/model/monografia';
 import { CustomFilter } from 'src/app/shared/model/support/custom-filter';
-import { CrudService } from 'src/app/shared/services/crud/crud.service';
 import { environment } from 'src/environments/environment';
-import { delay } from 'rxjs/internal/operators/delay';
-import { filter } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MonografiaService {
 
+  url = environment.API;
   findValueParam = new EventEmitter<string>();
   onChangeContextTitle = new EventEmitter<string>();
   findValueParamFromServer = new EventEmitter<CustomFilter>();
@@ -28,29 +28,27 @@ export class MonografiaService {
   grupoId: number;
   projeto: number;
   pagina: number;
-  url = environment.API;
 
-  constructor(private service: CrudService<Monografia, number>, private http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
   getById(id: number): Observable<Monografia> {
-    return this.service.getById('interno/monografia', id);
+    return this.http.get<Monografia>(`${this.url}/interno/monografia/${id}`);
   }
 
   list(): Observable<Monografia[]> {
-    return this.service.list('interno/monografia/l?duracao=1');
+    return this.http.get<Monografia[]>(`${this.url}/interno/monografia/l?duracao=1`);
   }
 
-  filterByNomeDuracao(filterParam: CustomFilter): Observable<Monografia[]> {
-    filterParam = this.filterResolve(filterParam);
-    return this.service
-      .list(`interno/monografia/l?nome=${filterParam.nome}&duracao=${filterParam.duracao}`);
+  filterByNomeDuracao(q: CustomFilter): Observable<Monografia[]> {
+    q = this.filterResolve(q);
+    return this.http
+      .get<Monografia[]>(`${this.url}/interno/monografia/l?nome=${q.nome}&duracao=${q.duracao}`);
   }
 
   filterByDuracao(duracao: number): Observable<Monografia[]> {
-    return this.service
-      .list(`interno/monografia/l?duracao=${!!duracao ? duracao : 1}`);
+    return this.http
+      .get<Monografia[]>(`${this.url}/interno/monografia/l?duracao=${!!duracao ? duracao : 1}`);
   }
-
 
   save(t: Monografia): Observable<any> {
     const formData: FormData = new FormData();
@@ -69,7 +67,7 @@ export class MonografiaService {
   }
 
   deleteById(id: number): Observable<void> {
-    return this.service.deleteById('monografia', id);
+    return this.http.delete<void>(`${this.url}/monografia/${id}`);
   }
 
   private filterResolve(filterParam: CustomFilter): CustomFilter {
