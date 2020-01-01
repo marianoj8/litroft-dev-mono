@@ -246,7 +246,7 @@
       <div *ngIf="!authService.loggedIn()">
         <div>
           <mat-form-field class="field-max">
-            <input #search matInput width="100px" type="text" [(ngModel)]="institutoFilter" (keyup)="findInstituto()"
+            <input #search matInput width="100px" type="text" [(ngModel)]="customFilter.nome" (keyup)="findInstituto()"
               placeholder="Procurar" />
             <span matSuffix>
               <mat-icon color="primary">search</mat-icon>
