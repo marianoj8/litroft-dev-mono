@@ -22,7 +22,7 @@ export class InstitutoService {
 
   constructor(
     private http: HttpClient
-  ) {}
+  ) { }
 
   getById(id: number): Observable<Instituto> {
     return this.http.get<Instituto>(`${this.url}/instituto/${id}`);
@@ -55,6 +55,7 @@ export class InstitutoService {
 
   private filterResolve(filterParam: CustomFilter): CustomFilter {
     filterParam.nome = filterParam.nome === undefined ? '' : filterParam.nome;
+    filterParam.descricao = filterParam.descricao === undefined ? '' : filterParam.descricao;
     filterParam.sigla = filterParam.sigla === undefined ? '' : filterParam.sigla;
     return filterParam;
   }
