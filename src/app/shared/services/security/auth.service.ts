@@ -40,6 +40,8 @@ export class AuthService {
       localStorage.setItem('token', data.token);
       localStorage.setItem('expirationTime', data.expiration);
       localStorage.setItem('acessType', data.accessType);
+      localStorage.setItem('nome', data.user.nome);
+      localStorage.setItem('sobrenome', data.user.sobrenome);
       localStorage.setItem('entity', data.user.entity);
       localStorage.setItem('entityLogoUri', data.user.entityLogoUri);
       this.doLogIn(data.user.entity);
@@ -68,6 +70,8 @@ export class AuthService {
     localStorage.removeItem('entity');
     localStorage.removeItem('entityLogoUri');
     // localStorage.removeItem('fone');
+    localStorage.removeItem('nome');
+    localStorage.removeItem('sobrenome');
     // localStorage.removeItem('email');
     localStorage.removeItem('acessType');
     localStorage.removeItem('token');
