@@ -1,14 +1,15 @@
+import { HttpClient } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { Especialidade } from 'src/app/shared/model/especialidade';
 import { CustomFilter } from 'src/app/shared/model/support/custom-filter';
-import { CustomRepository } from 'src/app/shared/repository/custom-repository';
-import { CrudService } from 'src/app/shared/services/crud/crud.service';
+import { environment } from '../../../environments/environment.prod';
 
 @Injectable({ providedIn: 'root' })
-export class EspecialidadeService implements CustomRepository<Especialidade, number> {
+export class EspecialidadeService {
 
+  url = environment.API;
   findValueParam = new EventEmitter<string>();
   onChangeContextTitle = new EventEmitter<string>();
   findValueParamFromServer = new EventEmitter<CustomFilter>();
@@ -18,28 +19,28 @@ export class EspecialidadeService implements CustomRepository<Especialidade, num
   emitOnEditButtonCliked = new EventEmitter<number>();
   emitOnDeleteButtonCliked = new EventEmitter<number>();
 
-  constructor(private service: CrudService<Especialidade, number>) { }
+  constructor(private http: HttpClient) { }
 
   getById(id: number): Observable<Especialidade> {
-    return this.service.getById('interno/especialidade', id);
+    return this.http.get<Especialidade>(`${this.url}/interno/especialidade/${id}`);
   }
 
   list(): Observable<Especialidade[]> {
-    return this.service.list('interno/especialidade/l');
+    return this.http.get<Especialidade[]>(`${this.url}/interno/especialidade/l`);
   }
 
-  filterByNome(filter: CustomFilter): Observable<Especialidade[]> {
-    return this.service.list(`interno/especialidade/l?descricao=${!!filter.nome ? filter.nome : ''}`);
+  filterByNome(q: CustomFilter): Observable<Especialidade[]> {
+    return this.http.get<Especialidade[]>(`${this.url}/interno/especialidade/l?descricao=${!!q.nome ? q.nome : ''}`);
   }
 
   save(t: Especialidade): Observable<Especialidade> {
     if (t.id) {
-      return this.service.update('interno/especialidade', t);
+      return this.http.put<Especialidade>(`${this.url}/interno/especialidade`, t);
     }
-    return this.service.save('interno/especialidade', t);
+    return this.http.post<Especialidade>(`${this.url}/interno/especialidade`, t);
   }
 
   deleteById(id: number): Observable<void> {
-    return this.service.deleteById('interno/especialidade', id);
+    return this.http.delete<void>(`${this.url}/interno/especialidade/${id}`);
   }
 }
