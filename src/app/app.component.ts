@@ -50,6 +50,7 @@ export class AppComponent implements OnInit, AfterContentChecked, OnDestroy {
   private sub: Subscription;
   customFilter = new CustomFilter();
   acessType = '';
+  nome = '';
   showOrHideMenu = false;
   selectedInstLogo = '';
 
@@ -286,6 +287,7 @@ export class AppComponent implements OnInit, AfterContentChecked, OnDestroy {
 
   ngAfterContentChecked(): void {
     this.acessType = localStorage.getItem('entity');
+    this.nome = localStorage.getItem('nome');
     if (this.acessType !== 'Administrador') {
       this.selectedInstLogo = `${environment.API}/mono/downloadLogo/${localStorage.getItem('entityLogoUri')}`;
       this.showOrHideMenu = true;
