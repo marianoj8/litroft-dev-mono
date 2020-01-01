@@ -1,14 +1,16 @@
-import { Injectable, EventEmitter } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { EventEmitter, Injectable } from '@angular/core';
 import { MatTableDataSource } from '@angular/material';
-import { CrudService } from 'src/app/shared/services/crud/crud.service';
-import { Orientador } from 'src/app/shared/model/orientador';
 import { Observable } from 'rxjs';
+
+import { Orientador } from 'src/app/shared/model/orientador';
 import { CustomFilter } from 'src/app/shared/model/support/custom-filter';
-import { CustomRepository } from 'src/app/shared/repository/custom-repository';
+import { environment } from '../../../environments/environment.prod';
 
 @Injectable({ providedIn: 'root' })
-export class OrientadorService implements CustomRepository<Orientador, number> {
+export class OrientadorService {
 
+  url = environment.API;
   findValueParam = new EventEmitter<string>();
   onChangeContextTitle = new EventEmitter<string>();
   findValueParamFromServer = new EventEmitter<CustomFilter>();
@@ -19,42 +21,38 @@ export class OrientadorService implements CustomRepository<Orientador, number> {
   emitOnDeleteButtonCliked = new EventEmitter<number>();
 
   OrientadorTable: MatTableDataSource<Orientador[]>;
-  constructor(private service: CrudService<Orientador, number>) {
-
-  }
+  constructor(private http: HttpClient) { }
 
   getById(id: number): Observable<Orientador> {
-    return this.service.getById('interno/orientador', id);
+    return this.http.get<Orientador>(`${this.url}/interno/orientador/${id}`);
   }
 
   list(): Observable<Orientador[]> {
-    return this.service.list('interno/orientador/l');
+    return this.http.get<Orientador[]>(`${this.url}/interno/orientador/l`);
   }
 
-  filterByNomeSexoEspecialidade(filterParam: CustomFilter): Observable<Orientador[]> {
-    filterParam = this.filterResolve(filterParam);
-    return this.service
-      .list(`interno/orientador/l?nome=${filterParam.nome}&sexo=${filterParam.sexo}&especialidade=${filterParam.descricao}`);
+  filterByNomeSexoEspecialidade(q: CustomFilter): Observable<Orientador[]> {
+    q = this.filterResolve(q);
+    return this.http
+      .get<Orientador[]>(`${this.url}/interno/orientador/l?nome=${q.nome}&sexo=${q.sexo}&especialidade=${q.descricao}`);
   }
 
-  filterBySexoAndEspecialidade(filterParam: CustomFilter): Observable<Orientador[]> {
-    filterParam = this.filterResolve(filterParam);
-    return this.service
-      .list(`interno/orientador/l?sexo=${filterParam.sexo}&especialidade=${filterParam.descricao}`);
+  filterBySexoAndEspecialidade(q: CustomFilter): Observable<Orientador[]> {
+    q = this.filterResolve(q);
+    return this.http
+      .get<Orientador[]>(`${this.url}/interno/orientador/l?sexo=${q.sexo}&especialidade=${q.descricao}`);
   }
 
   save(t: Orientador): Observable<Orientador> {
 
     if (t.id) {
-      console.log('Update');
-      return this.service.update('interno/orientador', t);
+      return this.http.put<Orientador>(`${this.url}/interno/orientador`, t);
     }
-    console.log('Saved');
-    return this.service.save('interno/orientador', t);
+    return this.http.post<Orientador>(`${this.url}/interno/orientador`, t);
   }
 
   deleteById(id: number): Observable<void> {
-    return this.service.deleteById('interno/orientador', id);
+    return this.http.delete<void>(`${this.url}/interno/orientador/${id}`);
   }
 
   filterResolve(filterParam: CustomFilter): CustomFilter {
