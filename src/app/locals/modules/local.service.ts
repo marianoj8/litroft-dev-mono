@@ -1,15 +1,17 @@
-import { Injectable, EventEmitter } from '@angular/core';
-import { CustomFilter } from 'src/app/shared/model/support/custom-filter';
-import { Local } from 'src/app/shared/model/local';
-import { CustomRepository } from 'src/app/shared/repository/custom-repository';
-import { CrudService } from 'src/app/shared/services/crud/crud.service';
+import { EventEmitter, Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
+
+import { Local } from 'src/app/shared/model/local';
+import { CustomFilter } from 'src/app/shared/model/support/custom-filter';
+import { environment } from '../../../environments/environment.prod';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
-export class LocalService implements CustomRepository<Local, number> {
+export class LocalService {
 
+  url = environment.API;
   findValueParam = new EventEmitter<string>();
   onChangeContextTitle = new EventEmitter<string>();
   findValueParamFromServer = new EventEmitter<CustomFilter>();
@@ -19,35 +21,35 @@ export class LocalService implements CustomRepository<Local, number> {
   emitOnEditButtonCliked = new EventEmitter<number>();
   emitOnDeleteButtonCliked = new EventEmitter<number>();
 
- constructor(private service: CrudService<Local, number>) { }
+  constructor(private http: HttpClient) { }
 
   getById(id: number): Observable<Local> {
-    return this.service.getById('interno/local', id);
+    return this.http.get<Local>(`${this.url}/interno/local/${id}`);
   }
 
   list(): Observable<Local[]> {
-    return this.service.list('local');
+    return this.http.get<Local[]>(`${this.url}/local`);
   }
 
   filterByNome(filter: CustomFilter): Observable<Local[]> {
-    return this.service.list(`local?destrito=${!!filter.nome ? filter.nome : ''}`)
+    return this.http.get<Local[]>(`${this.url}/local?destrito=${!!filter.nome ? filter.nome : ''}`)
       ;
   }
 
   filterByDuracao(duracao: number): Observable<Local[]> {
-    return this.service
-      .list(`interno/local/l?duracao=${!!duracao ? duracao : 1}`);
+    return this.http
+      .get<Local[]>(`${this.url}/interno/local/l?duracao=${!!duracao ? duracao : 1}`);
   }
 
 
   save(t: Local): Observable<Local> {
     if (t.id) {
-      return this.service.update('admin/local', t);
+      return this.http.put<Local>(`${this.url}/admin/local`, t);
     }
-    return this.service.save('admin/local', t);
+    return this.http.post<Local>(`${this.url}/admin/local`, t);
   }
 
   deleteById(id: number): Observable<void> {
-    return this.service.deleteById('admin/local', id);
+    return this.http.delete<void>(`${this.url}/admin/local/${id}`);
   }
 }
