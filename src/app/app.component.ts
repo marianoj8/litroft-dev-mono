@@ -26,6 +26,7 @@ import { environment } from 'src/environments/environment';
 import { LocalService } from './locals/modules/local.service';
 import { AreaFormacaoService } from './area-formacao/modules/area-formacao.service';
 import { AdminInternoService } from './admin-interno/modules/adminInterno.service';
+import { CustomFilter } from './shared/model/support/custom-filter';
 
 @Component({
   selector: 'app-root',
@@ -47,7 +48,7 @@ export class AppComponent implements OnInit, AfterContentChecked, OnDestroy {
   public institutos: Instituto[];
   btnMonografiaText = 'Monografias Internas';
   private sub: Subscription;
-  institutoFilter = '';
+  customFilter = new CustomFilter();
   acessType = '';
   showOrHideMenu = false;
   selectedInstLogo = '';
@@ -260,7 +261,7 @@ export class AppComponent implements OnInit, AfterContentChecked, OnDestroy {
   }
 
   findInstituto() {
-    this.institutoService.listFiltered(this.institutoFilter, '').subscribe(
+    this.institutoService.listFiltered(this.customFilter).subscribe(
       (resp) => this.institutos = resp
     );
   }
