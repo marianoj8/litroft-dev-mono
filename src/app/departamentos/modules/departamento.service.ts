@@ -1,15 +1,15 @@
+import { HttpClient } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { Departamento } from 'src/app/shared/model/departamento';
 import { CustomFilter } from 'src/app/shared/model/support/custom-filter';
-import { CustomRepository } from 'src/app/shared/repository/custom-repository';
-import { CrudService } from 'src/app/shared/services/crud/crud.service';
+import { environment } from '../../../environments/environment.prod';
 
 @Injectable({ providedIn: 'root' })
-export class DepartamentoService implements CustomRepository<Departamento, number> {
+export class DepartamentoService {
 
-
+  url = environment.API;
   findValueParam = new EventEmitter<string>();
   onChangeContextTitle = new EventEmitter<string>();
   findValueParamFromServer = new EventEmitter<CustomFilter>();
@@ -19,28 +19,28 @@ export class DepartamentoService implements CustomRepository<Departamento, numbe
   emitOnEditButtonCliked = new EventEmitter<number>();
   emitOnDeleteButtonCliked = new EventEmitter<number>();
 
-  constructor(private service: CrudService<Departamento, number>) { }
+  constructor(private http: HttpClient) { }
 
   getById(id: number): Observable<Departamento> {
-    return this.service.getById('interno/departamento', id);
+    return this.http.get<Departamento>(`${this.url}/interno/departamento/${id}`);
   }
 
   list(): Observable<Departamento[]> {
-    return this.service.list('interno/departamento/l');
+    return this.http.get<Departamento[]>(`${this.url}/interno/departamento/l`);
   }
 
   filterByNome(filter: CustomFilter): Observable<Departamento[]> {
-    return this.service.list(`interno/departamento/l?nome=${!!filter.nome ? filter.nome : ''}`);
+    return this.http.get<Departamento[]>(`${this.url}/interno/departamento/l?nome=${!!filter.nome ? filter.nome : ''}`);
   }
 
   save(t: Departamento): Observable<Departamento> {
     if (t.id) {
-      return this.service.update('interno/departamento', t);
+      return this.http.put<Departamento>(`${this.url}/interno/departamento`, t);
     }
-    return this.service.save('interno/departamento', t);
+    return this.http.post<Departamento>(`${this.url}/interno/departamento`, t);
   }
 
   deleteById(id: number): Observable<void> {
-    return this.service.deleteById('interno/departamento', id);
+    return this.http.delete<void>(`${this.url}/interno/departamento/${id}`);
   }
 }
