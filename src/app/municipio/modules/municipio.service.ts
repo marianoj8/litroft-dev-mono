@@ -1,15 +1,17 @@
-import { Injectable, EventEmitter } from '@angular/core';
-import { CrudService } from 'src/app/shared/services/crud/crud.service';
-import { CustomFilter } from 'src/app/shared/model/support/custom-filter';
-import { CustomRepository } from 'src/app/shared/repository/custom-repository';
+import { HttpClient } from '@angular/common/http';
+import { EventEmitter, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+
 import { Municipio } from 'src/app/shared/model/monicipio';
+import { CustomFilter } from 'src/app/shared/model/support/custom-filter';
+import { environment } from '../../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
 })
-export class MunicipioService implements CustomRepository<Municipio, number> {
+export class MunicipioService {
 
+  url = environment.API;
   findValueParam = new EventEmitter<string>();
   onChangeContextTitle = new EventEmitter<string>();
   findValueParamFromServer = new EventEmitter<CustomFilter>();
@@ -19,35 +21,34 @@ export class MunicipioService implements CustomRepository<Municipio, number> {
   emitOnEditButtonCliked = new EventEmitter<number>();
   emitOnDeleteButtonCliked = new EventEmitter<number>();
 
-  constructor(private service: CrudService<Municipio, number>) { }
+  constructor(private http: HttpClient) { }
 
   getById(id: number): Observable<Municipio> {
-    return this.service.getById('interno/municipio', id);
+    return this.http.get<Municipio>(`${this.url}/interno/municipio/${id}`);
   }
 
   list(): Observable<Municipio[]> {
-    return this.service.list('interno/municipio');
+    return this.http.get<Municipio[]>(`${this.url}/interno/municipio`);
   }
 
   filterByNome(filter: CustomFilter): Observable<Municipio[]> {
-    return this.service.list(`interno/municipio?destrito=${!!filter.nome ? filter.nome : ''}`)
+    return this.http.get<Municipio[]>(`${this.url}/interno/municipio?destrito=${!!filter.nome ? filter.nome : ''}`)
       ;
   }
 
   filterByDuracao(duracao: number): Observable<Municipio[]> {
-    return this.service
-      .list(`interno/municipio/l?duracao=${!!duracao ? duracao : 1}`);
+    return this.http
+      .get<Municipio[]>(`${this.url}/interno/municipio/l?duracao=${!!duracao ? duracao : 1}`);
   }
-
 
   save(t: Municipio): Observable<Municipio> {
     if (t.id) {
-      return this.service.update('admin/municipio', t);
+      return this.http.put<Municipio>(`${this.url}/admin/municipio`, t);
     }
-    return this.service.save('admin/municipio', t);
+    return this.http.post<Municipio>(`${this.url}/admin/municipio`, t);
   }
 
   deleteById(id: number): Observable<void> {
-    return this.service.deleteById('admin/municipio', id);
+    return this.http.delete<void>(`${this.url}/admin/municipio/${id}`);
   }
 }
