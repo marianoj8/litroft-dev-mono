@@ -6,6 +6,7 @@ import { AuthGuard } from './shared/guard/auth.guard';
 import { CustomErrorPageComponent } from './custom-error-page/custom-error-page.component';
 import { AcessDenaidComponent } from './shared/acess-denaid/acess-denaid.component';
 import { AdminResolverGuard } from './admin/guard/AdminResolverGuard.guard';
+import { AdminInternoGuard } from './admin-interno/guard/admin-interno.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'public', pathMatch: 'full' },
@@ -16,11 +17,13 @@ const routes: Routes = [
   {
     path: 'home',
     canActivate: [AuthGuard],
+    canLoad: [AuthGuard],
     loadChildren: 'src/app/home/modules/home.module#HomeModule'
   },
   {
     path: 'monografias',
     canActivate: [AuthGuard],
+    canLoad: [AuthGuard],
     loadChildren: 'src/app/monografias/modules/monografia.module#MonografiaModule'
   },
   {
@@ -30,11 +33,13 @@ const routes: Routes = [
   {
     path: 'cursos',
     canActivate: [AuthGuard],
+    canLoad: [AuthGuard],
     loadChildren: 'src/app/cursos/modules/curso.module#CursoModule'
   },
   {
     path: 'projetos',
     canActivate: [AuthGuard],
+    canLoad: [AuthGuard],
     loadChildren: 'src/app/projetos/modules/projeto.module#ProjetoModule'
   },
   {
@@ -45,41 +50,49 @@ const routes: Routes = [
   {
     path: 'estudantes',
     canActivate: [AuthGuard],
+    canLoad: [AuthGuard],
     loadChildren: 'src/app/estudantes/modules/estudante.module#EstudanteModule'
   },
   {
     path: 'grupos',
     canActivate: [AuthGuard],
+    canLoad: [AuthGuard],
     loadChildren: 'src/app/grupos/modules/grupo.module#GrupoModule'
   },
   {
     path: 'orientadores',
     canActivate: [AuthGuard],
+    canLoad: [AuthGuard],
     loadChildren: 'src/app/orientadores/modules/orientador.module#OrientadorModule'
   },
   {
     path: 'turmas',
     canActivate: [AuthGuard],
+    canLoad: [AuthGuard],
     loadChildren: 'src/app/turmas/modules/turma.module#TurmaModule'
   },
   {
     path: 'especialidades',
     canActivate: [AuthGuard],
+    canLoad: [AuthGuard],
     loadChildren: 'src/app/especialidades/modules/especialidade.module#EspecialidadeModule'
   },
   {
     path: 'locais',
     canActivate: [AuthGuard],
+    canLoad: [AuthGuard],
     loadChildren: 'src/app/locals/modules/local.module#LocalModule'
   },
   {
     path: 'provincias',
     canActivate: [AuthGuard],
+    canLoad: [AuthGuard],
     loadChildren: 'src/app/provincia/modules/provincia.module#ProvinciaModule'
   },
   {
     path: 'area-formacao',
     canActivate: [AuthGuard],
+    canLoad: [AuthGuard],
     loadChildren: 'src/app/area-formacao/modules/area-formacao.module#AreaFormacaoModule'
   },
   {
@@ -89,12 +102,15 @@ const routes: Routes = [
   {
     path: 'adminstration',
     canActivate: [AuthGuard],
+    canLoad: [AuthGuard],
     // resolve: [AdminResolverGuard],
     loadChildren: 'src/app/admin/modules/admin.module#AdminModule',
   },
   {
     path: 'directores',
     canActivate: [AuthGuard],
+    canLoad: [AuthGuard],
+    canActivateChild: [AdminInternoGuard],
     loadChildren: 'src/app/admin-interno/modules/adminInterno.module#AdminInternoModule',
   },
   {
