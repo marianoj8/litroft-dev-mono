@@ -29,7 +29,7 @@ export class InstitutoService {
   }
 
   list(): Observable<Instituto[]> {
-    console.log(this.url);
+    // console.log(this.url);
     return this.http.get<Instituto[]>(`${this.url}/instituto`);
   }
 
