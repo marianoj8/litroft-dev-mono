@@ -44,13 +44,13 @@ export class InstitutoService {
 
   save(t: Instituto): Observable<Instituto> {
     if (t.id) {
-      return this.http.put<Instituto>('admin/instituto', t);
+      return this.http.put<Instituto>(`${this.url}/admin/instituto`, t);
     }
-    return this.http.post<Instituto>('admin/instituto', t);
+    return this.http.post<Instituto>(`${this.url}/admin/instituto`, t);
   }
 
   deleteById(id: number): Observable<void> {
-    return this.http.delete<void>(`admin/instituto/${id}`);
+    return this.http.delete<void>(`${this.url}/admin/instituto/${id}`);
   }
 
   private filterResolve(filterParam: CustomFilter): CustomFilter {
