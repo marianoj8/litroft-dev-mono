@@ -31,7 +31,6 @@ export class AuthService {
   }
 
   addTokenToLocalStorage(data: Token): void {
-    console.log(data);
     // localStorage.setItem('id', data.user.userId.toString());
     // localStorage.setItem('username', data.user.username);
     // localStorage.setItem('fone', data.user.fone);
