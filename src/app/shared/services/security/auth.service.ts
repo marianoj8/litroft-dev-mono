@@ -16,7 +16,7 @@ export class AuthService {
 
   constructor(private htp: HttpClient, public router: Router) { }
 
-  login(user: UsernameAndPassword): Observable<Token> {
+  public login(user: UsernameAndPassword): Observable<Token> {
     return this.htp.post<Token>(`${environment.API.substring(0, 6)}/login`, user)
       .pipe(
         take(1)
@@ -63,7 +63,7 @@ export class AuthService {
     });
   }
 
-  doLogOut() {
+  public doLogOut() {
     // localStorage.removeItem('id');
     localStorage.removeItem('username');
     localStorage.removeItem('entity');
@@ -83,7 +83,7 @@ export class AuthService {
     return !!(this.getToken());
   }
 
-  getToken(): string {
+  public getToken(): string {
     return localStorage.getItem('token');
   }
 
@@ -101,6 +101,5 @@ export class AuthService {
     this.doLogOut();
     return false;
   }
-
 
 }
