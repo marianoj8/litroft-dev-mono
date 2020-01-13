@@ -34,7 +34,7 @@ export class InstitutoService {
   }
 
   listCursoByInstituto(id: number): Observable<Curso[]> {
-    return this.http.get<Curso[]>(`${this.url}/curso/l/${id}`);
+    return this.http.get<Curso[]>(`${this.url}/curso/l/instituto/${id}`);
   }
 
   listFiltered(filterParam: CustomFilter): Observable<Instituto[]> {
