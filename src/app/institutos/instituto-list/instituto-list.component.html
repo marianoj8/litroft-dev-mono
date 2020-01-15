@@ -43,7 +43,7 @@
     <mat-divider> </mat-divider>
 
     <mat-nav-list>
-      <a mat-list-item *ngFor="let curso of cursosList">
+      <a mat-list-item class="list-of-selected-inst" *ngFor="let curso of cursosList">
         <h1 matLine>{{ curso?.nome }}</h1>
         <p matLine><strong>Duração:</strong> {{ curso?.duracao }} anos</p>
       </a>
