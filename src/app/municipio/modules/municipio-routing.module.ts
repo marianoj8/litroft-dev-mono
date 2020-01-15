@@ -17,6 +17,10 @@ const routes: Routes = [
       {
         path: 'add',
         component: MunicipioFormComponent
+      },
+      {
+        path: 'edit/:id',
+        component: MunicipioFormComponent
       }
     ]
   }
