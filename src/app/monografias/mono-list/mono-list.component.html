@@ -120,32 +120,24 @@
       </div>
     </mat-grid-tile>
   </mat-grid-list>
+
   <div *ngIf="grupos.length === 0">
-    <div
-      style="background-color: whitesmoke; border-radius: 20px; padding: 4% 10% 16% 10%; align-items: center; justify-items: center; align-content: center; align-self: center;"
-    >
-      <div
-        style="background-color: darkgray; width: 150px; height: 150px; align-items: center; justify-items: center; align-content: center; border: 4px solid white; border-radius: 80px; left: 44%; position: relative; box-shadow: 0px 2px 0px rgba(0,0,0,0.5);"
-      >
-        <img
-          src="../../../assets/img/empty_folder.png"
-          height="100px"
-          width="100px"
-          style="position: relative; left: 20%; top: 26px;"
-        />
+    <div class="empty-message-div-1">
+      <div class="empty-message-div-2">
+        <img src="../../../assets/img/empty_folder.png" class="empty-message-icom" />
       </div>
-      <h2 style="color:darkgray; text-align: center;">
-        Nenhuma monografia disponivel.
+      <h2 class="empty-message">
+        Nenhuma monografia disponivel...
       </h2>
       <button
-        [routerLink]="['add']"
-        style="width: 40%; position: relative; left: 30%; align-content: center;  text-align: center; align-self: center;"
-        mat-raised-button
-        color="primary"
-      >
-        Carregar monografia
-        <mat-icon>cloud_upload</mat-icon>
-      </button>
+      [routerLink]="['add']"
+      class="empty-upload-button"
+      mat-raised-button
+      color="primary"
+    >
+      Carregar monografia
+      <mat-icon>cloud_upload</mat-icon>
+    </button>
     </div>
   </div>
 </div>
