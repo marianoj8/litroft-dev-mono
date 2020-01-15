@@ -237,6 +237,19 @@
                 Configurações
               </mat-panel-description>
             </mat-expansion-panel-header>
+
+            <div *ngIf="!showOrHideMenu">
+              <a mat-list-item routerLinkActive="active" [routerLink]="['municipios']">
+                <mat-icon color="primary">location_city</mat-icon>
+                Municipio
+              </a>
+
+              <a mat-list-item routerLinkActive="active" [routerLink]="['provincias']">
+                <mat-icon color="primary">location_city</mat-icon>
+                Provincia
+              </a>
+            </div>
+
             <a mat-list-item routerLinkActive="active" [routerLink]="['sobre']">
               <mat-icon color="primary">info</mat-icon>
               Sobre
