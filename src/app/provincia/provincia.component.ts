@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { CustomFilter } from '../shared/model/support/custom-filter';
 import { Subscription } from 'rxjs';
 import { ProvinciaService } from './modules/provincia.service';
+import { MonografiaService } from '../monografias/modules/monografia.service';
 
 @Component({
   selector: 'app-provincia',
@@ -17,17 +18,17 @@ export class ProvinciaComponent implements OnInit {
 
   constructor(
     private departamentoSerice: ProvinciaService,
+    private monografiaService: MonografiaService,
     private location: Location) {
     this.departamentoSerice.onChangeContextTitle.emit('Provincias');
+    this.monografiaService.emitShowAddButton.emit(true);
   }
 
   ngOnInit() {
     this.sub = this.departamentoSerice.onChangeContext.subscribe(
       context => this.onChangeContext = context
     );
-
   }
-
 
   find(event: KeyboardEvent, value: string) {
     if (event.key === 'Enter') {
