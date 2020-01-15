@@ -13,6 +13,10 @@ const routes: Routes = [
       {
         path: '',
         component: MunicipioListComponent
+      },
+      {
+        path: 'add',
+        component: MunicipioFormComponent
       }
     ]
   }
