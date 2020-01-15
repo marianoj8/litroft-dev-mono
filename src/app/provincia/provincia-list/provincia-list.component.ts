@@ -34,6 +34,7 @@ export class ProvinciaListComponent implements OnInit {
 
   displaydColumns: string[] = [
     'nome',
+    'totalInstituto',
     'detalhe',
     'edit',
     'delete'

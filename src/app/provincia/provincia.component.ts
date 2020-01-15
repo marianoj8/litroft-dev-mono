@@ -1,5 +1,5 @@
 import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CustomFilter } from '../shared/model/support/custom-filter';
 import { Subscription } from 'rxjs';
 import { ProvinciaService } from './modules/provincia.service';
@@ -10,7 +10,7 @@ import { MonografiaService } from '../monografias/modules/monografia.service';
   templateUrl: './provincia.component.html',
   styleUrls: ['./provincia.component.css']
 })
-export class ProvinciaComponent implements OnInit {
+export class ProvinciaComponent implements OnInit, OnDestroy {
   state = false;
   public onChangeContext = false;
   filtro: CustomFilter = new CustomFilter();
