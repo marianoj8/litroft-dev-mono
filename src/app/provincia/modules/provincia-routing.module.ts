@@ -16,6 +16,10 @@ const routes: Routes = [
       {
         path: 'add',
         component: ProvinciaFormComponent,
+      },
+       {
+        path: 'edit/:id',
+        component: ProvinciaFormComponent,
       }
     ]
   }
