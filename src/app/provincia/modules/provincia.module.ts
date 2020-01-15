@@ -4,9 +4,10 @@ import { CommonModule } from '@angular/common';
 import { MaterialModule } from '../../material/material.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ProvinciaRoutingModule } from './provincia-routing.module';
+import { ProvinciaListComponent } from '../provincia-list/provincia-list.component';
 
 @NgModule({
-  declarations: [ProvinciaComponent],
+  declarations: [ProvinciaComponent, ProvinciaListComponent],
   imports: [
     CommonModule,
     ProvinciaRoutingModule,
