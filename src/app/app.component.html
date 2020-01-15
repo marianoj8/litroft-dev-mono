@@ -168,7 +168,7 @@
             </a>
           </mat-expansion-panel>
           <!-- <mat-divider></mat-divider> -->
-          <mat-expansion-panel>
+          <mat-expansion-panel *ngIf="showOrHideMenu">
             <mat-expansion-panel-header>
               <mat-panel-title>
                 <mat-icon color="primary">collections_bookmark</mat-icon>
@@ -280,7 +280,7 @@
           Todas monografias
         </button>
 
-        <a *ngFor="let item of institutos" mat-list-item (click)="schoolClicked(item)">
+        <a class="list-of-selected-inst" *ngFor="let item of institutos" mat-list-item (click)="schoolClicked(item)">
           <div
             style="background: #3f51b5; padding: 5px; align-content: center; align-items: center; margin: 5px; border: 1px solid #3f51b5; border-radius: 25px; width: 30px; height: 30px;">
             <mat-icon style="color: white; position: relative; left: 2px; top: 1px;">school</mat-icon>
@@ -298,9 +298,30 @@
           <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
         </button>
 
-        <span [ngClass]="'context-title'">
+        <span [ngClass]="'context-title'" *ngIf="!isPortable">
           {{ contextMenu }}
         </span>
+        <span [ngClass]="'context-title'" class="login-button-mobile" *ngIf="isPortable && !authService.loggedIn()">
+          <button mat-stroked-button [routerLink]="['/']">
+            <mat-icon>home</mat-icon>
+          </button>
+          <button mat-stroked-button [routerLink]="['/login']">
+            <mat-icon>account_circle</mat-icon>
+          </button>
+          <button mat-stroked-button [routerLink]="['/institutos']">
+            <mat-icon>school</mat-icon>
+          </button>
+        </span>
+
+        <span [ngClass]="'context-title'" class="login-button-mobile" *ngIf="isPortable && authService.loggedIn()">
+          <button mat-stroked-button  (click)="switchBetweenPages()" [routerLink]="['/login']">
+            {{ btnMonografiaText }} <mat-icon>collections_bookmark</mat-icon>
+          </button>
+          <button *ngIf="btnMonografiaText === 'Monografias Externas'"  mat-stroked-button [routerLink]="['monografias/add']">
+            <mat-icon>cloud_upload</mat-icon>
+          </button>
+        </span>
+
         <span class="dateIcon hide-on-med-and-down" [hidden]="emitShowAddButton">
           <button mat-button [routerLink]="['monografias/add']" style="position: relative; bottom: 10px; right: 50%;">
             <mat-icon class="mat-0">cloud_upload</mat-icon>
