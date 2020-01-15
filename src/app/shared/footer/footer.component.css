@@ -6,7 +6,7 @@ mat-toolbar-row#lastRow {
   padding: 0px;
 }
 
-.footer-copyright{
+.footer-copyright {
   width: 100%;
   padding-left: 2%;
   font-size: 12pt;
@@ -16,11 +16,20 @@ mat-toolbar-row#lastRow {
   mat-toolbar-row {
     padding-left: 1%;
   }
-
 }
+
+@media only screen and (min-width: 600px) and (max-width: 992px) {
+}
+
 @media only screen and (max-width: 600px) {
   mat-toolbar-row {
-    padding-left: 1%;
+    padding-left: 2%;
+  }
+
+  .footer-copyright {
+    width: 100%;
+    padding-left: 2%;
+    font-size: small;
   }
 
 }
