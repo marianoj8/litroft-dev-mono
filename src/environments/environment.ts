@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  // API: '/litroft/api/v1/rm'
+  // API: 'https://litroft-mono-api.herokuapp.com/litroft/api/v1/rm'
   API: '/apiv1/litroft/api/v1/rm'
 };
 
