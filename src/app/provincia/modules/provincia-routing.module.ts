@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ProvinciaComponent } from '../provincia.component';
+import { ProvinciaListComponent } from '../provincia-list/provincia-list.component';
 
 const routes: Routes = [
   {
@@ -9,7 +10,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: null,
+        component: ProvinciaListComponent,
       }
     ]
   }
