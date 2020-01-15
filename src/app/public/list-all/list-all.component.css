@@ -1,4 +1,3 @@
-
 .container-card {
   height: 100%;
   width: 100%;
@@ -44,7 +43,6 @@
   max-width: 100px;
   color: #fff;
   margin-left: 35.8%;
-
 }
 
 .container-card .card .face.face1 .content h4 {
@@ -82,4 +80,155 @@
   margin: 15px 0 0;
   text-align: left;
   width: 300px;
+}
+
+.empty-message-div-1 {
+  background-color: whitesmoke;
+  border-radius: 20px;
+  padding: 8% 10% 16% 10%;
+  align-items: center;
+  justify-items: center;
+  align-content: center;
+  align-self: center;
+}
+
+.empty-message-div-2 {
+  background-color: darkgray;
+  width: 150px;
+  height: 150px;
+  align-items: center;
+  justify-items: center;
+  align-content: center;
+  border: 4px solid white;
+  border-radius: 80px;
+  left: 44%;
+  position: relative;
+  box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.5);
+}
+
+.empty-message-icom {
+  position: relative;
+  left: 20%;
+  top: 26px;
+  height: 100px;
+  width: 100px;
+}
+
+.empty-message {
+  color: darkgray;
+  text-align: center;
+}
+
+@media only screen and (min-width: 993px) {
+  .empty-message-div-2 {
+    background-color: darkgray;
+    width: 150px;
+    height: 150px;
+    align-items: center;
+    justify-items: center;
+    align-content: center;
+    border: 4px solid white;
+    border-radius: 80px;
+    left: 44%;
+    position: relative;
+    box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.5);
+  }
+
+  .empty-message-icom {
+    position: relative;
+    left: 20%;
+    top: 26px;
+    height: 100px;
+    width: 100px;
+  }
+
+  .empty-message {
+    color: darkgray;
+    text-align: center;
+  }
+}
+
+@media only screen and (min-width: 600px) and (max-width: 992px) {
+
+  .empty-message-div-1 {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    padding: 8% 10% 16% 10%;
+    align-items: center;
+    justify-items: center;
+    align-content: center;
+    align-self: center;
+    margin-top: 0%;
+  }
+
+  .empty-message-div-2 {
+    width: 150px;
+    height: 150px;
+    align-items: center;
+    justify-items: center;
+    align-content: center;
+    border: 4px solid white;
+    border-radius: 80px;
+    left: 40%;
+    position: relative;
+    box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.9);
+  }
+
+  .empty-message-icom {
+    position: relative;
+    left: 20%;
+    top: 26px;
+    height: 100px;
+    width: 100px;
+  }
+
+  .empty-message {
+    color: darkgray;
+    text-align: center;
+    margin-top: 8%;
+    margin-bottom: 24%;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .empty-message-div-1 {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    padding: 8% 10% 16% 10%;
+    align-items: center;
+    justify-items: center;
+    align-content: center;
+    align-self: center;
+    margin-top: 4%;
+  }
+
+  .empty-message-div-2 {
+    width: 150px;
+    height: 150px;
+    align-items: center;
+    justify-items: center;
+    align-content: center;
+    border: 4px solid white;
+    border-radius: 90px;
+    left: 26%;
+    top: 80px;
+    position: relative;
+    box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.5);
+  }
+
+  .empty-message-icom {
+    position: relative;
+    left: 20%;
+    top: 26px;
+    height: 100px;
+    width: 100px;
+  }
+
+  .empty-message {
+    font-size: medium;
+    color: darkgray;
+    text-align: center;
+    margin-top: 36%;
+    margin-bottom: 50%;
+  }
 }
