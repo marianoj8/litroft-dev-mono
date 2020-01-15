@@ -39,5 +39,20 @@ h5 {
   text-align: start;
 }
 mat-sidenav-content {
-  height: 475px;
+  height: 485px;
+}
+
+@media only screen and (min-width: 993px) {
+}
+
+@media only screen and (min-width: 600px) and (max-width: 992px) {
+}
+
+@media only screen and (max-width: 600px) {
+  .list-of-selected-inst{
+    font-size: small;
+  }
+  strong{
+    font-size: small;
+  }
 }
