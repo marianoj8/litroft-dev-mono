@@ -37,9 +37,10 @@ import { ProvinciaService } from './provincia/modules/provincia.service';
 export class AppComponent implements OnInit, AfterContentChecked, OnDestroy {
 
 
-  title = 'Litroft Dev - Mono';
+  title = 'Litroft Mono';
   contextMenu = '***';
   mostrarMenu = false;
+  isPortable = false;
   public emitShowAddButton = false;
   onChangeContext: boolean;
   showDateSelect = false;
@@ -59,7 +60,11 @@ export class AppComponent implements OnInit, AfterContentChecked, OnDestroy {
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
-      map(result => result.matches),
+      map(result => {
+        this.isPortable = result.matches;
+        this.cursoService.isPortable.emit(result.matches);
+        return result.matches;
+      }),
       share()
     );
 
@@ -87,7 +92,6 @@ export class AppComponent implements OnInit, AfterContentChecked, OnDestroy {
     public institutoService: InstitutoService,
     private formBuilder: FormBuilder,
   ) {
-
   }
 
   ngOnInit(): void {
@@ -96,8 +100,6 @@ export class AppComponent implements OnInit, AfterContentChecked, OnDestroy {
     for (let i = 2008; i <= new Date().getFullYear(); i++) {
       this.years.push(i);
     }
-
-
 
     this.institutoService.list().subscribe(resp => this.institutos = resp);
 
