@@ -84,6 +84,12 @@ const routes: Routes = [
     loadChildren: 'src/app/locals/modules/local.module#LocalModule'
   },
   {
+    path: 'municipios',
+    canActivate: [AuthGuard],
+    canLoad: [AuthGuard],
+    loadChildren: 'src/app/municipio/modules/municipio.module#MunicipioModule'
+  },
+  {
     path: 'provincias',
     canActivate: [AuthGuard],
     canLoad: [AuthGuard],
