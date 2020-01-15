@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { MunicipioComponent } from '../municipio.component';
+import { MunicipioListComponent } from '../municipio-list/municipio-list.component';
+import { MunicipioFormComponent } from '../municipio-form/municipio-form.component';
 
 const routes: Routes = [
   {
@@ -10,7 +12,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: null
+        component: MunicipioListComponent
       }
     ]
   }
