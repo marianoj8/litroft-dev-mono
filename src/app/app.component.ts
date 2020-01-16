@@ -28,6 +28,7 @@ import { AreaFormacaoService } from './area-formacao/modules/area-formacao.servi
 import { AdminInternoService } from './admin-interno/modules/adminInterno.service';
 import { CustomFilter } from './shared/model/support/custom-filter';
 import { ProvinciaService } from './provincia/modules/provincia.service';
+import { MunicipioService } from './municipio/modules/municipio.service';
 
 @Component({
   selector: 'app-root',
@@ -84,6 +85,7 @@ export class AppComponent implements OnInit, AfterContentChecked, OnDestroy {
     private orientadorService: OrientadorService,
     private turmaService: TurmaService,
     private grupoService: GrupoService,
+    private municipioService: MunicipioService,
     private provinciaService: ProvinciaService,
     private areaFormacaoService: AreaFormacaoService,
     private projetoService: ProjetoService,
@@ -180,6 +182,14 @@ export class AppComponent implements OnInit, AfterContentChecked, OnDestroy {
       }
     );
     this.sub = this.monografiaService.onChangeContextTitle.subscribe(
+      value => {
+        this.contextMenu = value;
+        this.showDateSelect = false;
+        this.onChangeContext = true;
+      }
+    );
+
+    this.sub = this.municipioService.onChangeContextTitle.subscribe(
       value => {
         this.contextMenu = value;
         this.showDateSelect = false;
