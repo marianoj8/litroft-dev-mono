@@ -9,6 +9,11 @@ import { EspecialidadeService } from 'src/app/especialidades/modules/especialida
 import { TurmaService } from 'src/app/turmas/modules/turma.service';
 import { DepartamentoService } from 'src/app/departamentos/modules/departamento.service';
 import { GrupoService } from './../../grupos/modules/grupo.service';
+import { MunicipioService } from 'src/app/municipio/modules/municipio.service';
+import { ProvinciaService } from 'src/app/provincia/modules/provincia.service';
+import { InstitutoService } from 'src/app/institutos/modules/instituto.service';
+import { AreaFormacaoService } from 'src/app/area-formacao/modules/area-formacao.service';
+import { LocalService } from 'src/app/locals/modules/local.service';
 
 @Component({
   selector: 'app-more-options-dialog',
@@ -22,8 +27,13 @@ export class MoreOptionsDialogComponent implements OnInit {
     private estudanteService: EstudanteService,
     private orientadorService: OrientadorService,
     private cursoService: CursoService,
+    private municipioService: MunicipioService,
+    private provinciaService: ProvinciaService,
+    private institutoService: InstitutoService,
     private especialidadeService: EspecialidadeService,
     private turmaService: TurmaService,
+    private localService: LocalService,
+    private areaFormacaoService: AreaFormacaoService,
     private departamentoService: DepartamentoService,
     private grupoService: GrupoService
   ) { }
@@ -43,6 +53,21 @@ export class MoreOptionsDialogComponent implements OnInit {
         break;
       case 'Curso':
         this.cursoService.emitOnDetalheButtonCliked.emit(id);
+        break;
+      case 'Instituto':
+        this.institutoService.emitOnDetalheButtonCliked.emit(id);
+        break;
+      case 'Municipio':
+        this.municipioService.emitOnDetalheButtonCliked.emit(id);
+        break;
+      case 'Provincia':
+        this.provinciaService.emitOnDetalheButtonCliked.emit(id);
+        break;
+      case 'AreaFormacao':
+        this.areaFormacaoService.emitOnDetalheButtonCliked.emit(id);
+        break;
+      case 'Local':
+        this.localService.emitOnDetalheButtonCliked.emit(id);
         break;
       case 'Especialidade':
         this.especialidadeService.emitOnDetalheButtonCliked.emit(id);
@@ -71,6 +96,21 @@ export class MoreOptionsDialogComponent implements OnInit {
         break;
       case 'Curso':
         this.cursoService.emitOnEditButtonCliked.emit(id);
+        break;
+      case 'Instituto':
+        this.institutoService.emitOnEditButtonCliked.emit(id);
+        break;
+      case 'Municipio':
+        this.municipioService.emitOnEditButtonCliked.emit(id);
+        break;
+      case 'Provincia':
+        this.provinciaService.emitOnEditButtonCliked.emit(id);
+        break;
+      case 'AreaFormacao':
+        this.areaFormacaoService.emitOnEditButtonCliked.emit(id);
+        break;
+      case 'Local':
+        this.localService.emitOnEditButtonCliked.emit(id);
         break;
       case 'Especialidade':
         this.especialidadeService.emitOnEditButtonCliked.emit(id);
