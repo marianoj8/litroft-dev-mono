@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { DeleteDialogComponent } from 'src/app/shared/delete-dialog/delete-dialog.component';
 import { MoreOptionsDialogComponent } from 'src/app/shared/more-options-dialog/more-options-dialog.component';
 import { MatTableDataSource, MatDialog, MatSort } from '@angular/material';
@@ -18,7 +18,7 @@ import { MatDailogTypeParam } from 'src/app/shared/model/support/mat-dialog-type
   templateUrl: './provincia-list.component.html',
   styleUrls: ['./provincia-list.component.css']
 })
-export class ProvinciaListComponent implements OnInit {
+export class ProvinciaListComponent implements OnInit, OnDestroy {
 
   dialogParam: MatDailogTypeParam = new MatDailogTypeParam();
   valueParam = '';
