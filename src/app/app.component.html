@@ -95,13 +95,15 @@
     <mat-divider></mat-divider>
     <div *ngIf="authService.loggedIn()">
       <mat-toolbar style="height: 12px;">
-        <h2 style="text-align: center; width: 90%; font-weight: 700; color: rgba(0, 0, 0, 0.7);">
-          {{ acessType }}
-        </h2>
-        <mat-toolbar-row style="height: 10.5px;">
-          <p style="text-align: center; font-size: 9pt; font-weight: 600; width: 100%;">
+        <mat-toolbar-row>
+          <h2 style="text-align: center; width: 90%; font-weight: 700; color: rgba(0, 0, 0, 0.7);">
+            {{ acessType }}
+          </h2>
+        </mat-toolbar-row>
+        <mat-toolbar-row style="height: 10.5px; width: 100%;">
+          <h5 style="text-align: center; font-size: 9pt; font-weight: 600; width: 100%; padding-bottom: 12px; margin-left: -10px;">
             {{nome}}
-          </p>
+          </h5>
         </mat-toolbar-row>
       </mat-toolbar>
     </div>
@@ -191,7 +193,7 @@
             </a>
           </mat-expansion-panel>
           <!-- <mat-divider></mat-divider> -->
-          <mat-expansion-panel *ngIf="!showOrHideMenu">
+          <mat-expansion-panel *ngIf="!showOrHideMenu" [expanded]="true">
             <mat-expansion-panel-header>
               <mat-panel-title>
                 <mat-icon color="primary">school</mat-icon>
@@ -314,10 +316,11 @@
         </span>
 
         <span [ngClass]="'context-title'" class="login-button-mobile" *ngIf="isPortable && authService.loggedIn()">
-          <button mat-stroked-button  (click)="switchBetweenPages()" [routerLink]="['/login']">
+          <button mat-stroked-button (click)="switchBetweenPages()" [routerLink]="['/login']">
             {{ btnMonografiaText }} <mat-icon>collections_bookmark</mat-icon>
           </button>
-          <button *ngIf="btnMonografiaText === 'Monografias Externas'"  mat-stroked-button [routerLink]="['monografias/add']">
+          <button *ngIf="btnMonografiaText === 'Monografias Externas'" mat-stroked-button
+            [routerLink]="['monografias/add']">
             <mat-icon>cloud_upload</mat-icon>
           </button>
         </span>
