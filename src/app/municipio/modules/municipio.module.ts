@@ -4,6 +4,8 @@ import { MunicipioRoutingModule } from './municipio-routing.module';
 import { MunicipioComponent } from '../municipio.component';
 import { MunicipioListComponent } from '../municipio-list/municipio-list.component';
 import { MunicipioFormComponent } from '../municipio-form/municipio-form.component';
+import { MaterialModule } from '../../material/material.module';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -13,7 +15,10 @@ import { MunicipioFormComponent } from '../municipio-form/municipio-form.compone
   ],
   imports: [
     CommonModule,
-    MunicipioRoutingModule
+    MunicipioRoutingModule,
+    MaterialModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   exports: []
 })
