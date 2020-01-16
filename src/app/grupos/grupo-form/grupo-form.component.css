@@ -25,6 +25,11 @@ mat-vertical-stepper {
   }
 }
 
+
+@media only screen and (min-width: 600px) and (max-width: 992px) {
+
+}
+
 @media only screen and (max-width: 600px) {
   mat-vertical-stepper {
     margin-top: 8%;
@@ -33,4 +38,16 @@ mat-vertical-stepper {
   mat-step{
     padding-bottom: 4%;
   }
+
+  .field-max {
+    width: 98%;
+  }
+
+  .field-min-1 {
+    width: 98%;
+  }
+  .field-min-2 {
+    width: 98%;
+  }
+
 }
