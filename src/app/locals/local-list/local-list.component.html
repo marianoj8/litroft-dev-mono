@@ -83,10 +83,10 @@
       Cadastrar Novo Local
     </button>
     <a mat-list-item (click)="openMoreOptionDialog(item.id)" *ngFor="let item of locaisList">
-      <mat-icon matListIcon class="mat-18">book</mat-icon>
-      <h5 matLine>{{ item?.destrito }}</h5>
+      <mat-icon matListIcon class="mat-18">location_on</mat-icon>
+      <h5 matLine>{{ item?.distrito }}</h5>
       <p matLine>
-        {{ item?.duracao < 2 ? item?.duracao + ' Ano' : item?.duracao + ' Anos' }}
+        {{item?.municipio.nome}}, {{item?.provincia.nome}}
       </p>
       <mat-divider></mat-divider>
     </a>
