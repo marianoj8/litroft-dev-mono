@@ -17,7 +17,9 @@ export class AuthService {
   constructor(private htp: HttpClient, public router: Router) { }
 
   public login(user: UsernameAndPassword): Observable<Token> {
-    return this.htp.post<Token>(`${environment.API.substring(0, 6)}/login`, user)
+    const url = environment.API.replace('/litroft/api/v1/rm', '');
+    console.log(url);
+    return this.htp.post<Token>(`${url}/login`, user)
       .pipe(
         take(1)
       );
