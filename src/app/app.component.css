@@ -165,9 +165,35 @@ mat-toolbar-row#row2 a#lastLink {
 }
 
 @media only screen and (min-width: 993px) {
+  .list-of-selected-inst {
+    font-size: medium;
+  }
+  strong {
+    font-size: small;
+  }
+  .login-button-mobile {
+    margin-left: 1%;
+  }
+  .login-button-mobile,
+  button {
+    margin-left: 0%;
+  }
 }
 
 @media only screen and (min-width: 600px) and (max-width: 992px) {
+  .list-of-selected-inst {
+    font-size: medium;
+  }
+  strong {
+    font-size: small;
+  }
+  .login-button-mobile {
+    margin-left: 1%;
+  }
+  .login-button-mobile,
+  button {
+    margin-left: 0%;
+  }
 }
 
 @media only screen and (max-width: 600px) {
@@ -180,7 +206,8 @@ mat-toolbar-row#row2 a#lastLink {
   .login-button-mobile {
     margin-left: 1%;
   }
-  .login-button-mobile, button {
+  .login-button-mobile,
+  span button {
     margin-left: 4%;
   }
 }
