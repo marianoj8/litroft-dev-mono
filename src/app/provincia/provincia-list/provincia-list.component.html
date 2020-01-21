@@ -13,10 +13,9 @@
     </ng-container>
 
     <ng-container matColumnDef="totalInstituto">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Instituto</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Municipios</th>
       <td mat-cell *matCellDef="let provincia">
-        <!-- {{ provincia?.totalCurso }} -->
-        3
+        {{ provincia?.totalMunicipio }}
       </td>
     </ng-container>
 
