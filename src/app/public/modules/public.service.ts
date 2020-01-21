@@ -11,6 +11,7 @@ import { Instituto } from './../../shared/model/instituto';
 @Injectable({ providedIn: 'root' })
 export class PublicService {
   url = environment.API;
+  pdfSrc = '';
   inPublicPage = new EventEmitter<boolean>();
   onChangeContextTitle = new EventEmitter<string>();
   onChangeContext = new EventEmitter<boolean>();
@@ -21,7 +22,14 @@ export class PublicService {
   public emitSelectedSchool = new EventEmitter<Instituto>();
   constructor(
     private http: HttpClient,
-  ) { }
+  ) {
+
+  }
+
+  loadFileFromAPI(id: string) {
+    const localapi1 = this.url.replace('apiv1', '');
+    this.pdfSrc = `http://localhost:8080${localapi1}/mono/download/${id}`;
+  }
 
 
   listByInstitutoId(id?: number): Observable<Grupo[]> {
