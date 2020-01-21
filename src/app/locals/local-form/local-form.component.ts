@@ -17,6 +17,7 @@ import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs/internal/observable/of';
 import { Municipio } from '../../shared/model/monicipio';
 import { MunicipioService } from 'src/app/municipio/modules/municipio.service';
+import { CustomFilter } from '../../shared/model/support/custom-filter';
 
 @Component({
   selector: 'app-local-form',
@@ -33,6 +34,7 @@ export class LocalFormComponent implements OnInit {
   provincias$: Observable<Provincia[]>;
   municipioError$ = new Subject<boolean>();
   municipios$: Observable<Municipio[]>;
+  filter = new CustomFilter();
   private id = 0;
 
   constructor(
@@ -52,12 +54,6 @@ export class LocalFormComponent implements OnInit {
 
     this.localService.onChangeContext.emit(true);
 
-    this.municipios$ = this.municipioService.list()
-      .pipe(catchError(err => {
-        this.municipioError$.next(true);
-        return of(null);
-      }));
-
     this.provincias$ = this.provinciaService.list()
       .pipe(catchError(err => {
         this.provinciaError$.next(true);
@@ -65,6 +61,17 @@ export class LocalFormComponent implements OnInit {
       }));
 
     this.initForms();
+
+    this.formGroup01.controls.provincia.valueChanges
+      .subscribe(value => {
+        this.filter.nome = '';
+        this.filter.provinciaId = value;
+        this.municipios$ = this.municipioService.filterByNomeAndProvincia(this.filter)
+          .pipe(catchError(err => {
+            this.municipioError$.next(true);
+            return of(null);
+          }));
+      });
 
     if (this.router.url.match('/edit')) {
       this.activatedRoute.params
