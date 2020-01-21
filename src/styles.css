@@ -185,7 +185,7 @@ table {
   margin-top: 3%;
   padding-top: 8px;
   color: #fff;
-  background-color: #3f51b5;
+  /* background-color: #3f51b5; */
   position: absolute;
   width: 100%;
   /* clear: initial;
@@ -266,7 +266,7 @@ table {
   -moz-outline-radius: 50px;
 }
 /* .search {
-  
+
   width: 20%;
   max-width: 75%;
   min-width: 75%;
