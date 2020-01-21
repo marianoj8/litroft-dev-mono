@@ -1,9 +1,15 @@
 .spaced > * {
   margin-top: 0.3rem;
 }
-
 .field-max {
-  width: 95%;
+  width: 94.5%;
+}
+
+.field-min-1 {
+  width: 62%;
+}
+.field-min-2 {
+  width: 26%;
 }
 
 mat-vertical-stepper {
@@ -18,6 +24,15 @@ mat-vertical-stepper {
   }
 }
 
+@media only screen and (min-width: 600px) and (max-width: 992px) {
+  .field-min-1 {
+    width: 62%;
+  }
+  .field-min-2 {
+    width: 26%;
+  }
+}
+
 @media only screen and (max-width: 600px) {
   mat-vertical-stepper {
     margin-top: 8%;
@@ -25,5 +40,11 @@ mat-vertical-stepper {
   }
   mat-step {
     padding-bottom: 4%;
+  }
+  .field-min-1 {
+    width: 95%;
+  }
+  .field-min-2 {
+    width: 95%;
   }
 }
