@@ -7,4 +7,5 @@ export class CustomFilter {
   turma: string;
   duracao: number;
   isGroup: boolean;
+  provinciaId: number;
 }
