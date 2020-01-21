@@ -9,6 +9,11 @@ import { MunicipioService } from '../modules/municipio.service';
 import { NotificationService } from 'src/app/shared/services/notification/notification.service';
 import { MatVerticalStepper } from '@angular/material';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Subject, Observable, of } from 'rxjs';
+import { Provincia } from 'src/app/shared/model/provincia';
+import { ProvinciaService } from 'src/app/provincia/modules/provincia.service';
+import { catchError, filter } from 'rxjs/operators';
+import { CustomFilter } from '../../shared/model/support/custom-filter';
 
 @Component({
   selector: 'app-municipio-form',
@@ -21,6 +26,9 @@ export class MunicipioFormComponent implements OnInit {
   matcher = new MyErrorStateMatch();
   showAndHideView: EventEmitter = new EventEmitter();
   municipio: Municipio = new Municipio();
+  provinciaError$ = new Subject<boolean>();
+  provincias$: Observable<Provincia[]>;
+  filter = new CustomFilter();
   private id = 0;
 
   constructor(
@@ -28,6 +36,7 @@ export class MunicipioFormComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
     private municipioService: MunicipioService,
+    private provinciaService: ProvinciaService,
     private notificationService: NotificationService,
     private location: Location
   ) {
@@ -37,6 +46,12 @@ export class MunicipioFormComponent implements OnInit {
   ngOnInit() {
     this.municipioService.onChangeContext.emit(true);
     this.initForms();
+
+    this.provincias$ = this.provinciaService.list()
+      .pipe(catchError(err => {
+        this.provinciaError$.next(true);
+        return of(null);
+      }));
 
     if (this.router.url.match('/edit')) {
       this.activatedRoute.params
@@ -51,8 +66,10 @@ export class MunicipioFormComponent implements OnInit {
           this.formGroup01.patchValue({
             nome: this.municipio.nome,
           });
+          this.formGroup01.patchValue({
+            provincia: this.municipio.provincia.id,
+          });
         });
-
     }
   }
 
@@ -62,6 +79,8 @@ export class MunicipioFormComponent implements OnInit {
         Validators.required,
         Validators.minLength(3),
         Validators.maxLength(70)]],
+
+      provincia: [null, [Validators.required]]
     });
 
   }
@@ -78,6 +97,7 @@ export class MunicipioFormComponent implements OnInit {
 
   private save(stepper: MatVerticalStepper, state): void {
     this.municipio.nome = this.formGroup01.controls.nome.value;
+    this.municipio.provincia = new Municipio(this.formGroup01.controls.provincia.value);
 
     this.municipioService.save(this.municipio)
       .subscribe(
