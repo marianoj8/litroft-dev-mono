@@ -268,7 +268,7 @@ export class AppComponent implements OnInit, AfterContentChecked, OnDestroy {
 
     this.publicService.emitSelectedSchool.subscribe((resp: Instituto) => {
 
-      this.contextMenu = (resp.id !== null) ? `Monografias do Instituto ${resp.nome}` : 'Monografias Externas';
+      this.contextMenu = (resp.id !== null) ? `Monografias do Instituto Médio ${resp.nome}` : 'Monografias Externas';
 
     });
   }
