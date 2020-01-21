@@ -9,7 +9,24 @@
         <ng-template matStepLabel>
           Nome da municipio
         </ng-template>
-        <mat-form-field class="field-max field-padding">
+
+        <mat-form-field class="field-min-2 field-padding">
+          <mat-select matInput formControlName="provincia" required placeholder="Provincia">
+            <mat-option *ngIf="provinciaError$ | async">Ocorreu um erro ao carregar provincias...
+            </mat-option>
+            <ng-container *ngFor="let provincia of provincias$ | async">
+              <mat-option *ngIf="!provincia">lista vasia</mat-option>
+              <mat-option [value]="provincia.id">
+                {{ provincia.nome }}
+              </mat-option>
+            </ng-container>
+          </mat-select>
+          <mat-error *ngIf="formGroup01.controls['provincia'].hasError('required')">
+            Provincia é <strong>obrigatorio</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="field-min-1 field-padding">
           <input
             matInput
             autocomplete="false"
