@@ -31,6 +31,11 @@ export class MunicipioService {
     return this.http.get<Municipio[]>(`${this.url}/interno/municipio`);
   }
 
+  filterByNomeAndProvincia(filter: CustomFilter): Observable<Municipio[]> {
+    return this.http.get<Municipio[]>(`${this.url}/interno/municipio/l/${!!filter.provinciaId ? filter.provinciaId : 1}?destrito=${!!filter.nome ? filter.nome : ''}`)
+      ;
+  }
+
   filterByNome(filter: CustomFilter): Observable<Municipio[]> {
     return this.http.get<Municipio[]>(`${this.url}/interno/municipio?destrito=${!!filter.nome ? filter.nome : ''}`)
       ;
