@@ -5,6 +5,8 @@ import { environment } from 'src/environments/environment';
 
 import { PublicService } from '../modules/public.service';
 import { MonografiaService } from 'src/app/monografias/modules/monografia.service';
+import { HttpClient, HttpRequest } from '@angular/common/http';
+import { url } from 'inspector';
 
 @Component({
   selector: 'app-read-mode',
@@ -19,7 +21,8 @@ export class ReadModeComponent implements OnInit {
   pdfSrc = '';
   public onChangeContext = false;
   constructor(
-    private publicService: PublicService,
+    private http: HttpClient,
+    public publicService: PublicService,
     private monografiaService: MonografiaService,
     private activetedRoute: ActivatedRoute,
     private location: Location) {
@@ -29,8 +32,15 @@ export class ReadModeComponent implements OnInit {
 
 
   ngOnInit() {
-    this.pdfSrc = `${environment.API}/mono/download/${this.activetedRoute.snapshot.params.id}`;
+    this.publicService.loadFileFromAPI(this.activetedRoute.snapshot.params.id);
     this.publicService.enableReadMode.emit(false);
+  }
+
+  private loadFile(): void {
+    this.http.request('GET', `${environment.API}/mono/download/${this.activetedRoute.snapshot.params.id}`)
+      .subscribe(data => {
+
+      });
   }
 
   onEnableReadMode() {
