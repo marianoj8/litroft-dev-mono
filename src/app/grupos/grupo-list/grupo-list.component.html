@@ -106,11 +106,12 @@
   <mat-nav-list class="mat-elevation-z8 container" *ngIf="grupos; else loadingOnList">
     <button class="btn-large" mat-raised-button color="primary" (click)="add()">
       <mat-icon>add</mat-icon>
-      Cadastrar Nova Grupo
+      Cadastrar Novo Grupo
     </button>
     <a mat-list-item (click)="openMoreOptionDialog(item.id)" *ngFor="let item of gruposList">
-      <mat-icon matListIcon class="mat-18">book</mat-icon>
+      <mat-icon matListIcon class="mat-18">group</mat-icon>
       <h5 matLine>{{ item?.descricao }}</h5>
+      <h5 matLine>{{item?.turma?.sigla}} | {{ item?.anoLetivo }}</h5>
       <mat-divider></mat-divider>
     </a>
   </mat-nav-list>
