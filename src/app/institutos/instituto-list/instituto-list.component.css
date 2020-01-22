@@ -42,6 +42,18 @@ mat-sidenav-content {
   height: 485px;
 }
 
+.arrow-back-icon {
+  position: relative;
+  top: -150px;
+  left: -35%;
+}
+.arrow-back-icon mat-icon {
+  color: "primary";
+}
+.arrow-back-icon a {
+  background-color: "primary";
+}
+
 @media only screen and (min-width: 993px) {
 }
 
@@ -49,10 +61,15 @@ mat-sidenav-content {
 }
 
 @media only screen and (max-width: 600px) {
-  .list-of-selected-inst{
+  .list-of-selected-inst {
     font-size: small;
   }
-  strong{
+  strong {
     font-size: small;
+  }
+  .arrow-back-icon {
+    position: relative;
+    top: -150px;
+    left: -30%;
   }
 }
