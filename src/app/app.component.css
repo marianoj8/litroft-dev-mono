@@ -200,6 +200,9 @@ mat-toolbar-row#row2 a#lastLink {
   .list-of-selected-inst {
     font-size: medium;
   }
+  .list-of-selected-inst mat-icon {
+    color: black;
+  }
   strong {
     font-size: small;
   }
