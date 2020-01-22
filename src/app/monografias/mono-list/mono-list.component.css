@@ -1,4 +1,5 @@
 .container-card {
+  font-size: 11.2pt;
   height: 100%;
   width: 100%;
   position: relative;
@@ -10,6 +11,7 @@
   width: 100%;
   position: relative;
 }
+
 .container-card .card .face {
   height: 200px;
   width: 100%;
@@ -50,14 +52,13 @@
   text-justify: auto;
   color: #fff;
   text-align: center;
-  font-size: 1em;
+  font-size: 11pt;
 }
 
 .container-card .card .face.face2 {
   position: relative;
   background: #fff;
   display: flex;
-  /* justify-content: center; */
   align-items: center;
   padding: 20px;
   box-sizing: border-box;
@@ -69,10 +70,34 @@
   transform: translateY(0);
 }
 
+#readButton {
+  font-size: small;
+  width: 56%;
+}
+#infoButton {
+  font-size: small;
+  margin-left: 3px;
+  width: 40%;
+}
+.container-card .card .face.face1 .content mat-icon {
+  margin-left: -30%;
+  margin-bottom: -18px;
+  color: #fff;
+  font-size: small;
+}
+
+.container-card .card .face.face1 .content p {
+  align-self: center;
+  margin-bottom: -6px;
+  color: #fff;
+  font-size: small;
+}
+
 .container-card .card .face.face2 .content p {
   margin: 0px;
   padding: 0px;
 }
+
 .container-card .card .face.face2 .content p#pCurso {
   margin: 12px 0 0;
 }
@@ -81,12 +106,6 @@
   text-align: left;
   width: 300px;
 }
-/*
-.container-card .card .face.face2 .content a:hover {
-  background: #3f51b5;
-  color: #fff;
-  transition: 0.5s;
-} */
 
 .empty-message-div-1 {
   background-color: whitesmoke;
@@ -182,6 +201,24 @@
     margin-top: 8%;
     margin-bottom: 24%;
   }
+
+  .container-card .card .face.face1 .content mat-icon {
+    margin-left: -24%;
+    margin-bottom: -18px;
+    color: #fff;
+    font-size: small;
+  }
+
+
+  #readButton {
+    font-size: small;
+    width: 55%;
+  }
+  #infoButton {
+    font-size: small;
+    margin-left: 4px;
+    width: 40%;
+  }
 }
 
 @media only screen and (max-width: 600px) {
@@ -233,5 +270,25 @@
     align-content: center;
     text-align: center;
     align-self: center;
+  }
+
+  .container-card .card .face.face1 .content mat-icon {
+    margin-left: -10%;
+    margin-bottom: -18px;
+    color: #fff;
+    font-size: small;
+  }
+  .container-card .card .face.face2 .content {
+    font-size: small;
+  }
+
+  #readButton {
+    font-size: small;
+    width: 55%;
+  }
+  #infoButton {
+    font-size: small;
+    margin-left: 4px;
+    width: 38%;
   }
 }
