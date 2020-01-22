@@ -11,6 +11,9 @@
               <h4>
                 ({{grupo.adminInterno.instituto.sigla}}) | {{ grupo.anoLetivo }}
               </h4>
+              <p>
+                <mat-icon id="viewIcon">visibility</mat-icon>247 visualizações
+              </p>
             </div>
           </div>
           <div class="face face2">
@@ -18,56 +21,16 @@
               {{ grupo.descricao }}
               <p id="pCurso"><strong>Curso:</strong> {{ grupo.curso.nome }}</p>
               <p><strong>Turma:</strong> {{ grupo.turma.sigla }}</p>
-              <p><strong>Instituto:</strong> {{ grupo.adminInterno.instituto.nome }} ({{grupo.adminInterno.instituto.sigla}})</p>
+              <p><strong>Instituto:</strong> {{ grupo.adminInterno.instituto.nome }}
+                ({{grupo.adminInterno.instituto.sigla}})</p>
               <p><strong>Ano lectivo:</strong> {{ grupo.anoLetivo }}</p>
-              <a mat-raised-button color="primary" (click)="onReadMode(grupo.monografiaID)">
+              <a mat-raised-button id="readButton" color="primary" (click)="onReadMode(grupo.monografiaID)">
                 <mat-icon>format_align_justify</mat-icon>
                 Ler monografia
               </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </mat-grid-tile>
-  </mat-grid-list>
-
-  <mat-grid-list
-    cols="2"
-    [rowHeight]="'30px'"
-    [gutterSize]="'10px'"
-    class="hide-on-large-only hide-on-small-and-down"
-  >
-    <mat-grid-tile
-      color="primary"
-      class="mat-elevation-z2"
-      [colspan]="1"
-      [rowspan]="10"
-      *ngFor="let grupo of grupos"
-    >
-      <div class="container-card">
-        <div class="card">
-          <div class="face face1">
-            <div class="content">
-              <img src="../../../assets/notebook.png" />
-              <h4 *ngIf="grupo.descricao.length > 30">{{ grupo.descricao.substring(0, 28) }}...</h4>
-              <h4 *ngIf="grupo.descricao.length < 30">{{ grupo.descricao }}</h4>
-              <h4>
-                {{ grupo.anoLetivo }}
-              </h4>
-            </div>
-          </div>
-          <div class="face face2">
-            <div class="content">
-              {{ grupo.descricao }}
-              <p id="pCurso"><strong>Curso:</strong> {{ grupo.curso.nome }}</p>
-              <p><strong>Turma:</strong> {{ grupo.turma.sigla }}</p>
-              <p><strong>Ano lectivo:</strong> {{ grupo.anoLetivo }}</p>
-              <a
-                mat-raised-button
-                color="primary"
-                (click)="onReadMode(grupo.monografiaID)"
-                ><mat-icon>format_align_justify</mat-icon>
-                Ler monografia
+              <a mat-raised-button id="infoButton" color="primary" (click)="onReadMode(grupo.monografiaID)">
+                <mat-icon>info</mat-icon>
+                Detalhe
               </a>
             </div>
           </div>
@@ -76,19 +39,8 @@
     </mat-grid-tile>
   </mat-grid-list>
 
-  <mat-grid-list
-    cols="1"
-    [rowHeight]="'30px'"
-    [gutterSize]="'10px'"
-    class="hide-on-med-and-up"
-  >
-    <mat-grid-tile
-      color="primary"
-      class="mat-elevation-z2"
-      [colspan]="1"
-      [rowspan]="10"
-      *ngFor="let grupo of grupos"
-    >
+  <mat-grid-list cols="2" [rowHeight]="'30px'" [gutterSize]="'10px'" class="hide-on-large-only hide-on-small-and-down">
+    <mat-grid-tile color="primary" class="mat-elevation-z2" [colspan]="1" [rowspan]="10" *ngFor="let grupo of grupos">
       <div class="container-card">
         <div class="card">
           <div class="face face1">
@@ -97,8 +49,11 @@
               <h4 *ngIf="grupo.descricao.length > 30">{{ grupo.descricao.substring(0, 28) }}...</h4>
               <h4 *ngIf="grupo.descricao.length < 30">{{ grupo.descricao }}</h4>
               <h4>
-                {{ grupo.anoLetivo }}
+                ({{grupo.adminInterno.instituto.sigla}}) | {{ grupo.anoLetivo }}
               </h4>
+              <p>
+                <mat-icon id="viewIcon">visibility</mat-icon>247 visualizações
+              </p>
             </div>
           </div>
           <div class="face face2">
@@ -106,13 +61,56 @@
               {{ grupo.descricao }}
               <p id="pCurso"><strong>Curso:</strong> {{ grupo.curso.nome }}</p>
               <p><strong>Turma:</strong> {{ grupo.turma.sigla }}</p>
+              <p><strong>Instituto:</strong> {{ grupo.adminInterno.instituto.nome }}
+                ({{grupo.adminInterno.instituto.sigla}})</p>
               <p><strong>Ano lectivo:</strong> {{ grupo.anoLetivo }}</p>
-              <a
-                mat-raised-button
-                color="primary"
-                (click)="onReadMode(grupo.monografiaID)"
-                ><mat-icon>format_align_justify</mat-icon>
+              <a mat-raised-button id="readButton" color="primary" (click)="onReadMode(grupo.monografiaID)">
+                <mat-icon>format_align_justify</mat-icon>
                 Ler monografia
+              </a>
+              <a mat-raised-button id="infoButton" color="primary" (click)="onReadMode(grupo.monografiaID)">
+                <mat-icon>info</mat-icon>
+                Detalhe
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+
+  <mat-grid-list cols="1" [rowHeight]="'30px'" [gutterSize]="'10px'" class="hide-on-med-and-up">
+    <mat-grid-tile color="primary" class="mat-elevation-z2" [colspan]="1" [rowspan]="10" *ngFor="let grupo of grupos">
+      <div class="container-card">
+        <div class="card">
+          <div class="face face1">
+            <div class="content">
+              <img src="../../../assets/notebook.png" />
+              <h4 *ngIf="grupo.descricao.length > 30">{{ grupo.descricao.substring(0, 28) }}...</h4>
+              <h4 *ngIf="grupo.descricao.length < 30">{{ grupo.descricao }}</h4>
+              <h4>
+                ({{grupo.adminInterno.instituto.sigla}}) | {{ grupo.anoLetivo }}
+              </h4>
+              <p>
+                <mat-icon id="viewIcon">visibility</mat-icon>247 visualizações
+              </p>
+            </div>
+          </div>
+          <div class="face face2">
+            <div class="content">
+              {{ grupo.descricao }}
+              <p id="pCurso"><strong>Curso:</strong> {{ grupo.curso.nome }}</p>
+              <p><strong>Turma:</strong> {{ grupo.turma.sigla }}</p>
+              <p><strong>Instituto:</strong> {{ grupo.adminInterno.instituto.nome }}
+                ({{grupo.adminInterno.instituto.sigla}})</p>
+              <p><strong>Ano lectivo:</strong> {{ grupo.anoLetivo }}</p>
+              <a mat-raised-button id="readButton" color="primary" (click)="onReadMode(grupo.monografiaID)">
+                <mat-icon>format_align_justify</mat-icon>
+                Ler monografia
+              </a>
+              <a mat-raised-button id="infoButton" color="primary" (click)="onReadMode(grupo.monografiaID)">
+                <mat-icon>info</mat-icon>
+                Detalhe
               </a>
             </div>
           </div>
@@ -129,15 +127,10 @@
       <h2 class="empty-message">
         Nenhuma monografia disponivel...
       </h2>
-      <button
-      [routerLink]="['add']"
-      class="empty-upload-button"
-      mat-raised-button
-      color="primary"
-    >
-      Carregar monografia
-      <mat-icon>cloud_upload</mat-icon>
-    </button>
+      <button [routerLink]="['add']" class="empty-upload-button" mat-raised-button color="primary">
+        Carregar monografia
+        <mat-icon>cloud_upload</mat-icon>
+      </button>
     </div>
   </div>
 </div>
