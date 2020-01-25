@@ -11,8 +11,11 @@
               <h4>
                 ({{grupo.adminInterno.instituto.sigla}}) | {{ grupo.anoLetivo }}
               </h4>
-              <p>
-                <mat-icon id="viewIcon">visibility</mat-icon>247 visualizações
+              <p *ngIf="grupo?.monoViewsCount < 1000" >
+                <mat-icon id="viewIcon">visibility</mat-icon>{{grupo?.monoViewsCount}} visualizações
+              </p>
+              <p *ngIf="grupo?.monoViewsCount > 1000" >
+                <mat-icon id="viewIcon">visibility</mat-icon>{{grupo?.monoViewsCount | viewesNumber | number:'1.1-1'}}K visualizações
               </p>
             </div>
           </div>
@@ -24,11 +27,11 @@
               <p><strong>Instituto:</strong> {{ grupo.adminInterno.instituto.nome }}
                 ({{grupo.adminInterno.instituto.sigla}})</p>
               <p><strong>Ano lectivo:</strong> {{ grupo.anoLetivo }}</p>
-              <a mat-raised-button id="readButton" color="primary" (click)="onReadMode(grupo.monografiaID)">
+              <a mat-raised-button id="readButton" color="primary" (click)="onReadMode(grupo)">
                 <mat-icon>format_align_justify</mat-icon>
                 Ler monografia
               </a>
-              <a mat-raised-button id="infoButton" color="primary" (click)="onReadMode(grupo.monografiaID)">
+              <a mat-raised-button id="infoButton" color="primary" (click)="onReadMode(grupo)">
                 <mat-icon>info</mat-icon>
                 Detalhe
               </a>
@@ -51,8 +54,11 @@
               <h4>
                 ({{grupo.adminInterno.instituto.sigla}}) | {{ grupo.anoLetivo }}
               </h4>
-              <p>
-                <mat-icon id="viewIcon">visibility</mat-icon>247 visualizações
+              <p *ngIf="grupo?.monoViewsCount < 1000" >
+                <mat-icon id="viewIcon">visibility</mat-icon>{{grupo?.monoViewsCount}} visualizações
+              </p>
+              <p *ngIf="grupo?.monoViewsCount > 1000" >
+                <mat-icon id="viewIcon">visibility</mat-icon>{{grupo?.monoViewsCount | viewesNumber | number:'1.1-1'}}K visualizações
               </p>
             </div>
           </div>
@@ -64,11 +70,11 @@
               <p><strong>Instituto:</strong> {{ grupo.adminInterno.instituto.nome }}
                 ({{grupo.adminInterno.instituto.sigla}})</p>
               <p><strong>Ano lectivo:</strong> {{ grupo.anoLetivo }}</p>
-              <a mat-raised-button id="readButton" color="primary" (click)="onReadMode(grupo.monografiaID)">
+              <a mat-raised-button id="readButton" color="primary" (click)="onReadMode(grupo)">
                 <mat-icon>format_align_justify</mat-icon>
                 Ler monografia
               </a>
-              <a mat-raised-button id="infoButton" color="primary" (click)="onReadMode(grupo.monografiaID)">
+              <a mat-raised-button id="infoButton" color="primary" (click)="onReadMode(grupo)">
                 <mat-icon>info</mat-icon>
                 Detalhe
               </a>
@@ -91,8 +97,11 @@
               <h4>
                 ({{grupo.adminInterno.instituto.sigla}}) | {{ grupo.anoLetivo }}
               </h4>
-              <p>
-                <mat-icon id="viewIcon">visibility</mat-icon>247 visualizações
+              <p *ngIf="grupo?.monoViewsCount < 1000" >
+                <mat-icon id="viewIcon">visibility</mat-icon>{{grupo?.monoViewsCount}} visualizações
+              </p>
+              <p *ngIf="grupo?.monoViewsCount > 1000" >
+                <mat-icon id="viewIcon">visibility</mat-icon>{{grupo?.monoViewsCount | viewesNumber | number:'1.1-1'}}K visualizações
               </p>
             </div>
           </div>
@@ -104,11 +113,11 @@
               <p><strong>Instituto:</strong> {{ grupo.adminInterno.instituto.nome }}
                 ({{grupo.adminInterno.instituto.sigla}})</p>
               <p><strong>Ano lectivo:</strong> {{ grupo.anoLetivo }}</p>
-              <a mat-raised-button id="readButton" color="primary" (click)="onReadMode(grupo.monografiaID)">
+              <a mat-raised-button id="readButton" color="primary" (click)="onReadMode(grupo)">
                 <mat-icon>format_align_justify</mat-icon>
                 Ler monografia
               </a>
-              <a mat-raised-button id="infoButton" color="primary" (click)="onReadMode(grupo.monografiaID)">
+              <a mat-raised-button id="infoButton" color="primary" (click)="onReadMode(grupo)">
                 <mat-icon>info</mat-icon>
                 Detalhe
               </a>
