@@ -167,6 +167,15 @@
     width: 100px;
   }
 
+  .empty-upload-button {
+    width: 50%;
+    position: relative;
+    left: 25%;
+    align-content: center;
+    text-align: center;
+    align-self: center;
+  }
+
   .empty-message {
     color: darkgray;
     text-align: center;
@@ -200,6 +209,15 @@
     text-align: center;
     margin-top: 8%;
     margin-bottom: 24%;
+  }
+
+  .empty-upload-button {
+    width: 100%;
+    position: relative;
+    left: 0%;
+    align-content: center;
+    text-align: center;
+    align-self: center;
   }
 
   .container-card .card .face.face1 .content mat-icon {
