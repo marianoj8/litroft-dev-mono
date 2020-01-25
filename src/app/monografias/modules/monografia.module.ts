@@ -10,6 +10,7 @@ import { MonoFormComponent } from '../mono-form/mono-form.component';
 import { MonoListComponent } from '../mono-list/mono-list.component';
 import { MonografiasComponent } from '../monografias.component';
 import { MonografiaRoutingModule } from './monografia-routing.module';
+import { CustomPipesModule } from '../../shared/custom-pipes/module/custom-pipes.module';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { MonografiaRoutingModule } from './monografia-routing.module';
     MonografiaRoutingModule,
     MatFormFieldModule,
     PdfViewerModule,
-    FormsModule
+    FormsModule,
+    CustomPipesModule
   ],
 })
 export class MonografiaModule { }
