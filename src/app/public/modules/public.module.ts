@@ -7,6 +7,7 @@ import { PublicRoutingModule } from './public-routing.module';
 import { ListAllComponent } from '../list-all/list-all.component';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { ReadModeComponent } from '../read-mode/read-mode.component';
+import { CustomPipesModule } from 'src/app/shared/custom-pipes/module/custom-pipes.module';
 
 @NgModule({
   declarations: [PublicComponent, ListAllComponent, ReadModeComponent],
@@ -14,7 +15,8 @@ import { ReadModeComponent } from '../read-mode/read-mode.component';
     CommonModule,
     MaterialModule,
     PublicRoutingModule,
-    PdfViewerModule
+    PdfViewerModule,
+    CustomPipesModule
   ],
   exports: []
 })
