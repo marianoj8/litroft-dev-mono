@@ -310,9 +310,6 @@ export class AppComponent implements OnInit, AfterContentChecked, OnDestroy {
   ngAfterContentChecked(): void {
     this.acessType = localStorage.getItem('entity');
     this.nome = localStorage.getItem('nome') + ' ' + localStorage.getItem('sobrenome');
-    const regexNome1 = '(([A-zÀ-ú]{2,10})*){2}'; //Nome
-    const regexNome2 = '(([A-zÀ-ú]{2,10})*){4,}$'; //Sobrenome
-    this.nome = this.nome.match(regexNome1)[0] + ' ' + this.nome.match(regexNome2)[0];
     if (this.acessType !== 'Administrador') {
       this.selectedInstLogo = `${environment.API}/mono/downloadLogo/${localStorage.getItem('entityLogoUri')}`;
       this.showOrHideMenu = true;
