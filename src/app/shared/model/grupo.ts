@@ -14,6 +14,7 @@ export class Grupo implements CustomAbstractEntity {
   posicao: string;
   turma: Turma;
   anoLetivo: number;
+  monoViewsCount: number;
   orientador: Orientador;
   curso: Curso;
   adminInterno: AdminInterno;
