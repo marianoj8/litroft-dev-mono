@@ -45,19 +45,9 @@ export class MonoListComponent implements OnInit {
       });
   }
 
-  // onFileSelected() {
-  //   let doc: any = document.querySelector('#file');
-  //   if (typeof (FileReader) !== 'undefined') {
-  //     let reader = new FileReader();
-  //     reader.onload = (e: any) => {
-  //       this.pdfSrc = e.target.result;
-  //     }
-
-  //     reader.readAsArrayBuffer(doc.files[0])
-  //   }
-  // }
-
-  onReadMode(value: string) {
-    this.router.navigate(['public/reading', value]);
+  onReadMode(grupo: Grupo) {
+    this.grupoService.updateView(grupo).subscribe();
+    this.router.navigate(['public/reading', grupo.monografiaID]);
   }
+
 }

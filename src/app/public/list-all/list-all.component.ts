@@ -6,6 +6,7 @@ import { PublicService } from '../modules/public.service';
 import { MonografiaService } from './../../monografias/modules/monografia.service';
 import { Instituto } from 'src/app/shared/model/instituto';
 import { CustomFilter } from '../../shared/model/support/custom-filter';
+import { GrupoService } from 'src/app/grupos/modules/grupo.service';
 
 @Component({
   selector: 'app-list-all',
@@ -24,6 +25,7 @@ export class ListAllComponent implements OnInit {
   constructor(
     private router: Router,
     private monografiaService: MonografiaService,
+    private grupoService: GrupoService,
     private publicService: PublicService) {
     this.publicService.onChangeContext.emit(true);
     this.monografiaService.emitShowAddButton.emit(true);
@@ -73,8 +75,9 @@ export class ListAllComponent implements OnInit {
       });
   }
 
-  onReadMode(value: string) {
-    this.router.navigate(['public/reading', value]);
+  onReadMode(grupo: Grupo) {
+    this.grupoService.updateView(grupo).subscribe();
+    this.router.navigate(['public/reading', grupo.monografiaID]);
   }
 
 }
