@@ -59,6 +59,10 @@ export class GrupoService {
     return this.http.post<Grupo>(`${this.url}/interno/grupo`, t);
   }
 
+  updateView(t: Grupo) {
+    this.http.put<void>(`${this.url}/grupo`, t);
+  }
+
   deleteById(id: number): Observable<void> {
     return this.http.delete<void>(`${this.url}/interno/grupo/${id}`);
   }
