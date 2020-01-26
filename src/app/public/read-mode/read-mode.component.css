@@ -83,3 +83,21 @@
   transition: all 1.5s;
   color: #606060;
 }
+
+button.btn-large {
+  text-align-last: left;
+  text-align: left;
+  width: 90%;
+}
+
+button.btn-large-1 {
+  margin-left: 8px;
+  text-align-last: left;
+  text-align: left;
+  width: 3%;
+}
+
+/* button.btn-large {
+  text-align: start;
+  width: 100%;
+} */
