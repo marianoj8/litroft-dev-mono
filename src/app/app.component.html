@@ -31,7 +31,7 @@
       </a>
       <a routerLinkActive="active" [routerLink]="['institutos/private-list']" mat-button *ngIf="!showOrHideMenu">
         <mat-icon left>school</mat-icon>
-        Institutos
+        Departamentos
       </a>
       <a routerLinkActive="active" [routerLink]="['cursos']" mat-button *ngIf="showOrHideMenu">
         <mat-icon>school</mat-icon>
@@ -58,7 +58,7 @@
       </a>
       <a routerLinkActive="active" [routerLink]="['institutos']" mat-button>
         <mat-icon>school</mat-icon>
-        Institutos
+        Departamentos
       </a>
     </span>
   </mat-toolbar-row>
@@ -111,7 +111,7 @@
 
     <mat-toolbar *ngIf="!authService.loggedIn()">
       <h2 style="text-align: center; width: 90%;">
-        Institutos Médios
+        ISPAJ
       </h2>
     </mat-toolbar>
 
@@ -200,12 +200,12 @@
                 <mat-icon color="primary">school</mat-icon>
               </mat-panel-title>
               <mat-panel-description>
-                Institutos
+                Departamentos
               </mat-panel-description>
             </mat-expansion-panel-header>
             <a mat-list-item routerLinkActive="active" [routerLink]="['institutos/private-list']">
               <mat-icon color="primary">school</mat-icon>
-              Institutos
+              Departamentos
             </a>
             <a mat-list-item routerLinkActive="active" [routerLink]="['area-formacao']">
               <mat-icon color="primary">domain</mat-icon>
@@ -280,7 +280,7 @@
         <button mat-button (click)="clearSelectedSchool()"
           style="width: 100%; margin-top: -20px; margin-bottom: 20px; text-align: center;">
           <mat-icon color="primary">refresh</mat-icon>
-          Todas monografias
+          Todos os departamentos
         </button>
 
         <a class="list-of-selected-inst" *ngFor="let item of institutos" mat-list-item (click)="schoolClicked(item)">
