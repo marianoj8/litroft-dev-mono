@@ -42,12 +42,7 @@
     <ng-container matColumnDef="endereco">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Endereço</th>
       <td mat-cell *matCellDef="let estudante">
-        <ng-container *ngIf="estudante.endereco.length > 30">
-          {{ estudante?.endereco.substring(0, 30).concat('...') }}
-        </ng-container>
-        <ng-container *ngIf="estudante.endereco.length < 30">
-          {{ estudante?.endereco }}
-        </ng-container>
+        {{ estudante?.endereco }}
       </td>
     </ng-container>
 
