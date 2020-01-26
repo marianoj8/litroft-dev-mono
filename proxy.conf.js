@@ -2,8 +2,8 @@
 const PROXY_CONFIG = [
   {
     context: ['/apiv1'],
-    target: 'https://litroft-mono-api.herokuapp.com',
-    secure: true,
+    target: 'http://localhost:8080',
+    secure: false,
     logLeval: 'debug',
     pathRewrite: { '^/apiv1': '' }
   }
