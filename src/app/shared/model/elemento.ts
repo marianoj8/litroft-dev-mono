@@ -15,7 +15,6 @@ export class Elemento implements CustomAbstractEntity {
   grupo: Grupo;
   curso: Curso;
   posicao: string;
-  adminInterno: AdminInterno;
 
   constructor(
     id?: number,

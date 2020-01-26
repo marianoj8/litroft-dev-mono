@@ -1,5 +1,4 @@
 import { Curso } from '../../shared/model/curso';
-import { AdminInterno } from './adminInterno';
 import { CustomAbstractEntity } from './customEntity';
 
 export class Estudante implements CustomAbstractEntity {
@@ -18,7 +17,6 @@ export class Estudante implements CustomAbstractEntity {
   numeroProcesso: string;
   curso: Curso;
   inGruop: boolean;
-  adminInterno: AdminInterno;
   numeroSerie: string;
 
   constructor(id?: number) {

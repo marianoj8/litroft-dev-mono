@@ -1,6 +1,4 @@
 import { CustomAbstractEntity } from './customEntity';
-import { Admin } from './admin';
-import { AdminInterno } from './adminInterno';
 
 export class Departamento implements CustomAbstractEntity {
 
@@ -10,7 +8,6 @@ export class Departamento implements CustomAbstractEntity {
   totalModified: number;
   nome: string;
   totalCurso: number;
-  adminInterno: AdminInterno;
 
 
   constructor(id?: number) {

@@ -1,4 +1,3 @@
-import { AdminInterno } from './adminInterno';
 import { Curso } from './curso';
 import { CustomAbstractEntity } from './customEntity';
 import { Orientador } from './orientador';
@@ -17,7 +16,6 @@ export class Grupo implements CustomAbstractEntity {
   monoViewsCount: number;
   orientador: Orientador;
   curso: Curso;
-  adminInterno: AdminInterno;
   monografiaID: string;
 
 

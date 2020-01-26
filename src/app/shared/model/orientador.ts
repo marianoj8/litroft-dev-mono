@@ -1,4 +1,3 @@
-import { AdminInterno } from './adminInterno';
 import { CustomAbstractEntity } from './customEntity';
 import { Especialidade } from './especialidade';
 
@@ -16,7 +15,6 @@ export class Orientador implements CustomAbstractEntity {
   email: string;
   endereco: string;
   especialidade: Especialidade;
-  adminInterno: AdminInterno;
   numeroSerie: string;
 
   constructor(id?: number) {
