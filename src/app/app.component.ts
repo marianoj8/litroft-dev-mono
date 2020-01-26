@@ -268,18 +268,18 @@ export class AppComponent implements OnInit, AfterContentChecked, OnDestroy {
 
     this.publicService.emitSelectedSchool.subscribe((resp: Instituto) => {
 
-      this.contextMenu = (resp.id !== null) ? `Monografias do Instituto Médio ${resp.nome}` : 'Monografias Externas';
+      this.contextMenu = (resp.id !== null) ? `Monografias do departamento de ${resp.nome}` : 'Todas as monografias';
 
     });
   }
 
   switchBetweenPages() {
     if (this.router.routerState.snapshot.url.includes('monografias')) {
-      this.btnMonografiaText = 'Monografias Internas';
+      this.btnMonografiaText = 'Todas as monografias';
       this.router.navigate(['public']);
     } else {
       this.router.navigate(['monografias']);
-      this.btnMonografiaText = 'Monografias Externas';
+      this.btnMonografiaText = 'Todas as monografias';
     }
   }
 
