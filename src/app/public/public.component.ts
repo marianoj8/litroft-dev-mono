@@ -17,7 +17,7 @@ export class PublicComponent implements OnInit {
 
 
   constructor(private publicService: PublicService) {
-    this.publicService.onChangeContextTitle.emit('Monografias Externas');
+    this.publicService.onChangeContextTitle.emit('Todas as monografias');
 
     this.publicService.onChangeContext.subscribe(
       value => this.onChangeContext = value
