@@ -53,32 +53,31 @@
   background: #3f51b5;
 }
 
-
-.float-btn-icon-2{
+.float-btn-icon-2 {
   transition: all 1.5s;
   color: white;
 }
-.float-btn-icon-3{
+.float-btn-icon-3 {
   transition: all 1.5s;
   color: white;
 }
 
 .floating-btn-active {
   visibility: visible;
-  background:rgb(242, 242, 242);
+  background: rgb(242, 242, 242);
 }
 
-.float-btn-icon-1-active{
+.float-btn-icon-1-active {
   visibility: visible;
   transition: all 1.5s;
   color: #606060;
 }
-.float-btn-icon-2-active{
+.float-btn-icon-2-active {
   visibility: visible;
   transition: all 1.5s;
   color: #606060;
 }
-.float-btn-icon-3-active{
+.float-btn-icon-3-active {
   visibility: visible;
   transition: all 1.5s;
   color: #606060;
@@ -87,17 +86,36 @@
 button.btn-large {
   text-align-last: left;
   text-align: left;
-  width: 90%;
+  width: 80%;
 }
 
 button.btn-large-1 {
   margin-left: 8px;
   text-align-last: left;
   text-align: left;
-  width: 3%;
+  width: 18%;
 }
 
 /* button.btn-large {
   text-align: start;
   width: 100%;
 } */
+@media only screen and (min-width: 993px) {
+}
+@media only screen and (min-width: 600px) and (max-width: 992px) {
+}
+@media only screen and (max-width: 600px) {
+  button.btn-large {
+    text-align-last: left;
+    text-align: left;
+    width: 100%;
+  }
+
+  button.btn-large-1 {
+    margin-top: 8px;
+    margin-left: 0px;
+    text-align-last: left;
+    text-align: left;
+    width: 100%;
+  }
+}
