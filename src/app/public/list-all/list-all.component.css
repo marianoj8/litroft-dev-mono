@@ -64,14 +64,20 @@
   width: 40%;
 }
 .container-card .card .face.face1 .content mat-icon {
-  margin-left: -30%;
+  /* margin-left: -30%; */
+  position: absolute;
+  float: left;
+  right: 118px;
   margin-bottom: -18px;
   color: #fff;
   font-size: small;
 }
 
 .container-card .card .face.face1 .content p {
-  align-self: center;
+  position: relative;
+  float: right;
+  right: -55px;
+  align-self: flex-end;
   margin-bottom: -6px;
   color: #fff;
   font-size: small;
@@ -213,12 +219,24 @@
   }
 
   .container-card .card .face.face1 .content mat-icon {
-    margin-left: -24%;
+    /* margin-left: -30%; */
+    position: absolute;
+    float: left;
+    right: 118px;
     margin-bottom: -18px;
     color: #fff;
     font-size: small;
   }
 
+  .container-card .card .face.face1 .content p {
+    position: relative;
+    float: right;
+    right: -30px;
+    align-self: flex-end;
+    margin-bottom: -6px;
+    color: #fff;
+    font-size: small;
+  }
 
   #readButton {
     font-size: small;
@@ -273,8 +291,21 @@
     margin-bottom: 50%;
   }
   .container-card .card .face.face1 .content mat-icon {
-    margin-left: -10%;
+    /* margin-left: -30%; */
+    position: absolute;
+    float: left;
+    right: 118px;
     margin-bottom: -18px;
+    color: #fff;
+    font-size: small;
+  }
+
+  .container-card .card .face.face1 .content p {
+    position: relative;
+    float: right;
+    right: -45px;
+    align-self: flex-end;
+    margin-bottom: -6px;
     color: #fff;
     font-size: small;
   }
