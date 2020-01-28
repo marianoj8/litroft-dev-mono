@@ -28,8 +28,8 @@ export class PublicService {
 
   loadFileFromAPI(id: string) {
     const localapi1 = this.url.replace('apiv1', '');
-    // this.pdfSrc = `http://localhost:8080${localapi1}/mono/download/${id}`;
-    this.pdfSrc = `${localapi1}/mono/download/${id}`;
+    this.pdfSrc = `http://localhost:8080${localapi1}/mono/download/${id}`;
+    // this.pdfSrc = `${localapi1}/mono/download/${id}`;
   }
 
 
