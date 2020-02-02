@@ -180,6 +180,17 @@
     color: darkgray;
     text-align: center;
   }
+
+  #readButton {
+    font-size: small;
+    width: 55%;
+  }
+  #infoButton {
+    font-size: small;
+    margin-left: 4px;
+    width: 7rem;
+  }
+
 }
 
 @media only screen and (min-width: 600px) and (max-width: 992px) {
@@ -235,7 +246,7 @@
   #infoButton {
     font-size: small;
     margin-left: 4px;
-    width: 40%;
+    width: 7rem;
   }
 }
 
@@ -288,13 +299,6 @@
     align-content: center;
     text-align: center;
     align-self: center;
-  }
-
-  .container-card .card .face.face1 .content mat-icon {
-    margin-left: -10%;
-    margin-bottom: -18px;
-    color: #fff;
-    font-size: small;
   }
   .container-card .card .face.face2 .content {
     font-size: small;

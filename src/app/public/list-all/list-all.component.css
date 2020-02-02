@@ -56,23 +56,14 @@
 
 #readButton {
   font-size: small;
-  width: 56%;
-}
-#infoButton {
-  font-size: small;
-  margin-left: 3px;
-  width: 40%;
-}
-.container-card .card .face.face1 .content mat-icon {
-  /* margin-left: -30%; */
-  position: absolute;
-  float: left;
-  right: 118px;
-  margin-bottom: -18px;
-  color: #fff;
-  font-size: small;
+  width: 55%;
 }
 
+#infoButton {
+  font-size: small;
+  margin-left: 4px;
+  width: 7rem;
+}
 .container-card .card .face.face1 .content p {
   position: relative;
   float: right;
@@ -176,6 +167,17 @@
     color: darkgray;
     text-align: center;
   }
+
+  #readButton {
+    font-size: small;
+    width: 55%;
+  }
+  #infoButton {
+    font-size: small;
+    margin-left: 4px;
+    width: 7rem;
+  }
+
 }
 
 @media only screen and (min-width: 600px) and (max-width: 992px) {
@@ -218,16 +220,6 @@
     margin-bottom: 24%;
   }
 
-  .container-card .card .face.face1 .content mat-icon {
-    /* margin-left: -30%; */
-    position: absolute;
-    float: left;
-    right: 118px;
-    margin-bottom: -18px;
-    color: #fff;
-    font-size: small;
-  }
-
   .container-card .card .face.face1 .content p {
     position: relative;
     float: right;
@@ -245,7 +237,7 @@
   #infoButton {
     font-size: small;
     margin-left: 4px;
-    width: 40%;
+    width: 7rem;
   }
 }
 
@@ -290,22 +282,12 @@
     margin-top: 36%;
     margin-bottom: 50%;
   }
-  .container-card .card .face.face1 .content mat-icon {
-    /* margin-left: -30%; */
-    position: absolute;
-    float: left;
-    right: 118px;
-    margin-bottom: -18px;
-    color: #fff;
-    font-size: small;
-  }
-
   .container-card .card .face.face1 .content p {
-    position: relative;
+    position: absolute;
     float: right;
-    right: -45px;
-    align-self: flex-end;
-    margin-bottom: -6px;
+    right: 0px;
+    margin-top: -6px;
+    margin-right: 8px;
     color: #fff;
     font-size: small;
   }
