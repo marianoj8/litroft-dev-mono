@@ -94,6 +94,8 @@ export class AppComponent implements OnInit, AfterContentChecked, OnDestroy {
     public institutoService: InstitutoService,
     private formBuilder: FormBuilder,
   ) {
+    this.monografiaService.emitShowAddButton
+      .subscribe(resp => this.emitShowAddButton = resp);
   }
 
   ngOnInit(): void {
@@ -117,14 +119,15 @@ export class AppComponent implements OnInit, AfterContentChecked, OnDestroy {
     );
 
     this.sub = this.loginService.onChangeContextTitle.subscribe(
-      value => this.contextMenu = value
-    );
+      value => {
+        this.contextMenu = value;
+      });
     this.sub = this.loginService.onChangeContext.subscribe(
       value => {
+        this.emitShowAddButton = true;
         this.onChangeContext = value;
+      });
 
-      }
-    );
     this.sub = this.cursoService.onChangeContextTitle.subscribe(
       value => {
         this.contextMenu = value;
