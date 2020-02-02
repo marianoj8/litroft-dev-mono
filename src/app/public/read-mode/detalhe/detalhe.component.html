@@ -10,11 +10,11 @@
       <p style="text-align: justify; text-indent: 10px;">Lorem, ipsum dolor sit amet consectetur adipisicing elit.
         Quibusdam nemo laudantium eaque error molestiae
         asperiores libero esse nisi. Error nesciunt consequatur dolorem reprehenderit.</p>
-        <mat-divider></mat-divider>
+      <mat-divider></mat-divider>
       <div>
         <button mat-button *ngIf="monografia?.projeto?.grupo?.monoViewsCount < 1000">
           <mat-icon>visibility</mat-icon>Visualizações:
-          <b>{{monografia?.projeto?.grupo?.monoViewsCount| viewesNumber | number:'1.1-1'}}K</b>
+          <b>{{monografia?.projeto?.grupo?.monoViewsCount}}</b>
         </button>
         <button mat-button *ngIf="monografia?.projeto?.grupo?.monoViewsCount > 1000">
           <mat-icon style="font-size: 14pt;">visibility</mat-icon>Visualizações:
