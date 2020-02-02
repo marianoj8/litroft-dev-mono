@@ -34,6 +34,9 @@ export class MonografiaService {
   getById(id: number): Observable<Monografia> {
     return this.http.get<Monografia>(`${this.url}/interno/monografia/${id}`);
   }
+  getOneById(id: string): Observable<Monografia> {
+    return this.http.get<Monografia>(`${this.url}/monografia/${id}`);
+  }
 
   list(): Observable<Monografia[]> {
     return this.http.get<Monografia[]>(`${this.url}/interno/monografia/l?duracao=1`);
