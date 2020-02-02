@@ -1,7 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PublicService } from '../../modules/public.service';
 import { on } from 'cluster';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
+import { MonografiaService } from '../../../monografias/modules/monografia.service';
+import { Monografia } from '../../../shared/model/monografia';
+import { ActivatedRoute, RouterStateSnapshot } from '@angular/router';
 
 @Component({
   selector: 'app-detalhe',
@@ -10,10 +13,18 @@ import { Subscription } from 'rxjs';
 })
 export class DetalheComponent implements OnInit, OnDestroy {
   subscription: Subscription;
-  constructor(private publicService: PublicService) { }
+  monografia: Monografia;
+  constructor(
+    private publicService: PublicService,
+    private monografiaService: MonografiaService,
+    private route: ActivatedRoute) {
+
+  }
 
   step = 0;
   ngOnInit(): void {
+    this.monografiaService.getOneById(this.route.snapshot.url[1].path)
+      .subscribe(onValue => this.monografia = onValue);
     this.subscription = this.publicService.emitMonoDetalhe.subscribe(d => this.onActiveStyle());
   }
 
