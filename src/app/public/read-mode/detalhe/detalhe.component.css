@@ -7,15 +7,6 @@
   right: 0px;
   transition: 1s all;
 }
-/* .container:hover {
-  height: 10%;
-  width: 32%;
-  margin-left: -4%;
-  position: relative;
-  float: right;
-  right: 20px;
-  transition: 1s all;
-} */
 
 .example-headers-align .mat-expansion-panel-header-title,
 .example-headers-align .mat-expansion-panel-header-description {
@@ -29,4 +20,36 @@
 
 mat-form-field {
   margin-right: 12px;
+}
+
+.large {
+  margin-top: 4px;
+  width: 100%;
+}
+
+@media only screen and (min-width: 993px) {
+  .container-active {
+    height: 10%;
+    width: 32%;
+    margin-left: -4%;
+    position: relative;
+    float: right;
+    right: 20px;
+    transition: 1s all;
+  }
+}
+
+@media only screen and (min-width: 600px) and (max-width: 992px) {
+}
+
+@media only screen and (max-width: 600px) {
+  .container-active {
+    height: 10%;
+    width: 90%;
+    margin-left: 10%;
+    position: relative;
+    float: right;
+    right: 20px;
+    transition: 1s all;
+  }
 }
