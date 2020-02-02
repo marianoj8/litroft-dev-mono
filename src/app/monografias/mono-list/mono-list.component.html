@@ -11,12 +11,12 @@
               <h4>
                 ({{grupo.adminInterno.instituto.sigla}}) | {{ grupo.anoLetivo }}
               </h4>
-              <p *ngIf="grupo?.monoViewsCount < 1000" >
-                <mat-icon id="viewIcon">visibility</mat-icon>{{grupo?.monoViewsCount}} visualizações
-              </p>
-              <p *ngIf="grupo?.monoViewsCount > 1000" >
-                <mat-icon id="viewIcon">visibility</mat-icon>{{grupo?.monoViewsCount | viewesNumber | number:'1.1-1'}}K visualizações
-              </p>
+              <h4 *ngIf="grupo?.monoViewsCount < 1000" style="font-size: small; margin: 0px; font-weight: 100;">
+                {{grupo?.monoViewsCount}} visualizações
+              </h4>
+              <h4 *ngIf="grupo?.monoViewsCount > 1000" style="font-size: small; margin: 0px; font-weight: 100;">
+                {{grupo?.monoViewsCount | viewesNumber | number:'1.1-1'}}K visualizações
+              </h4>
             </div>
           </div>
           <div class="face face2">
@@ -54,12 +54,12 @@
               <h4>
                 ({{grupo.adminInterno.instituto.sigla}}) | {{ grupo.anoLetivo }}
               </h4>
-              <p *ngIf="grupo?.monoViewsCount < 1000" >
-                <mat-icon id="viewIcon">visibility</mat-icon>{{grupo?.monoViewsCount}} visualizações
-              </p>
-              <p *ngIf="grupo?.monoViewsCount > 1000" >
-                <mat-icon id="viewIcon">visibility</mat-icon>{{grupo?.monoViewsCount | viewesNumber | number:'1.1-1'}}K visualizações
-              </p>
+              <h4 *ngIf="grupo?.monoViewsCount < 1000" style="font-size: small; margin: 0px; font-weight: 100;">
+                {{grupo?.monoViewsCount}} visualizações
+              </h4>
+              <h4 *ngIf="grupo?.monoViewsCount > 1000" style="font-size: small; margin: 0px; font-weight: 100;">
+                {{grupo?.monoViewsCount | viewesNumber | number:'1.1-1'}}K visualizações
+              </h4>
             </div>
           </div>
           <div class="face face2">
@@ -97,12 +97,12 @@
               <h4>
                 ({{grupo.adminInterno.instituto.sigla}}) | {{ grupo.anoLetivo }}
               </h4>
-              <p *ngIf="grupo?.monoViewsCount < 1000" >
-                <mat-icon id="viewIcon">visibility</mat-icon>{{grupo?.monoViewsCount}} visualizações
-              </p>
-              <p *ngIf="grupo?.monoViewsCount > 1000" >
-                <mat-icon id="viewIcon">visibility</mat-icon>{{grupo?.monoViewsCount | viewesNumber | number:'1.1-1'}}K visualizações
-              </p>
+              <h4 *ngIf="grupo?.monoViewsCount < 1000" style="font-size: small; margin: 0px; font-weight: 100;">
+                {{grupo?.monoViewsCount}} visualizações
+              </h4>
+              <h4 *ngIf="grupo?.monoViewsCount > 1000" style="font-size: small; margin: 0px; font-weight: 100;">
+                {{grupo?.monoViewsCount | viewesNumber | number:'1.1-1'}}K visualizações
+              </h4>
             </div>
           </div>
           <div class="face face2">
