@@ -20,6 +20,7 @@ export class PublicService {
   emitInstitutoList = new EventEmitter<Instituto[]>();
   inFilterMonografias = new EventEmitter<CustomFilter>();
   public emitSelectedSchool = new EventEmitter<Instituto>();
+  public emitMonoDetalhe = new EventEmitter<boolean>();
   constructor(
     private http: HttpClient,
   ) {
