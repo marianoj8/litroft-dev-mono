@@ -36,6 +36,10 @@ export class ReadModeComponent implements OnInit {
     this.publicService.enableReadMode.emit(false);
   }
 
+  public onActiveDetails(): void {
+    this.publicService.emitMonoDetalhe.emit(true);
+  }
+
   private loadFile(): void {
     this.http.request('GET', `${environment.API}/mono/download/${this.activetedRoute.snapshot.params.id}`)
       .subscribe(data => {
