@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 import { Municipio } from 'src/app/shared/model/monicipio';
 import { CustomFilter } from 'src/app/shared/model/support/custom-filter';
-import { environment } from '../../../environments/environment.prod';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'

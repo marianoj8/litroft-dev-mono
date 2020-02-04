@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 import { Especialidade } from 'src/app/shared/model/especialidade';
 import { CustomFilter } from 'src/app/shared/model/support/custom-filter';
-import { environment } from '../../../environments/environment.prod';
+import { environment } from 'src/environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class EspecialidadeService {

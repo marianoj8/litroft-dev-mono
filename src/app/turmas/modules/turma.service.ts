@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 import { CustomFilter } from 'src/app/shared/model/support/custom-filter';
 import { Turma } from 'src/app/shared/model/turma';
-import { environment } from '../../../environments/environment.prod';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'

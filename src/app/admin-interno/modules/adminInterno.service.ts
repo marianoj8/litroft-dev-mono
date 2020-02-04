@@ -6,7 +6,7 @@ import { AdminInterno } from 'src/app/shared/model/adminInterno';
 import { CustomFilter } from 'src/app/shared/model/support/custom-filter';
 import { CustomRepository } from 'src/app/shared/repository/custom-repository';
 
-import { environment } from '../../../environments/environment.prod';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'

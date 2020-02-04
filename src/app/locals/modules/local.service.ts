@@ -3,8 +3,8 @@ import { Observable } from 'rxjs/internal/Observable';
 
 import { Local } from 'src/app/shared/model/local';
 import { CustomFilter } from 'src/app/shared/model/support/custom-filter';
-import { environment } from '../../../environments/environment.prod';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'

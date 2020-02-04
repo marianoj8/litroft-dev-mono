@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 import { Curso } from 'src/app/shared/model/curso';
 import { CustomFilter } from 'src/app/shared/model/support/custom-filter';
-import { environment } from '../../../environments/environment.prod';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'

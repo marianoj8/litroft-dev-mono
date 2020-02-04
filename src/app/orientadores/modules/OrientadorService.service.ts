@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 
 import { Orientador } from 'src/app/shared/model/orientador';
 import { CustomFilter } from 'src/app/shared/model/support/custom-filter';
-import { environment } from '../../../environments/environment.prod';
+import { environment } from 'src/environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class OrientadorService {
