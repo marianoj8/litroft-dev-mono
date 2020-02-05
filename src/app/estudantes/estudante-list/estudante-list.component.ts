@@ -36,7 +36,7 @@ export class EstudanteListComponent implements OnInit, OnDestroy {
     'processo',
     'nome',
     'sexo',
-    'sobrenome',
+    'turma',
     'curso',
     'detalhe',
     'edit',
