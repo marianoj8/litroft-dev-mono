@@ -17,7 +17,12 @@ import { EstudanteService } from '../modules/estudante.service';
 import { CursoService } from './../../cursos/modules/curso.service';
 import { Estudante } from './../../shared/model/estudante';
 import { Turma } from 'src/app/shared/model/turma';
+import { Provincia } from 'src/app/shared/model/provincia';
+import { Municipio } from 'src/app/shared/model/municipio';
 import { TurmaService } from 'src/app/turmas/modules/turma.service';
+import { ProvinciaService } from 'src/app/provincia/modules/provincia.service';
+import { MunicipioService } from 'src/app/municipio/modules/municipio.service';
+import { CustomFilter } from '../../shared/model/support/custom-filter';
 
 @Component({
   selector: 'app-estudante-from',
@@ -44,6 +49,13 @@ export class EstudanteFromComponent implements OnInit {
   estudante: Estudante = new Estudante();
   private curso: Curso = new Curso();
   private turma: Turma = new Turma();
+  private provincia: Provincia = new Provincia();
+  private municipio: Municipio = new Municipio();
+  provinciaError$ = new Subject<boolean>();
+  provincias$: Observable<Provincia[]>;
+  municipioError$ = new Subject<boolean>();
+  municipios$: Observable<Municipio[]>;
+  filter = new CustomFilter();
   private id = 0;
 
   constructor(
@@ -53,6 +65,8 @@ export class EstudanteFromComponent implements OnInit {
     private estudanteService: EstudanteService,
     private cursoSerice: CursoService,
     private turmaService: TurmaService,
+    private municipioService: MunicipioService,
+    private provinciaService: ProvinciaService,
     private notificationService: NotificationService,
     private dialog: MatDialog,
     private location: Location,
@@ -70,6 +84,24 @@ export class EstudanteFromComponent implements OnInit {
         return of([]);
       }));
 
+    this.provincias$ = this.provinciaService.list()
+      .pipe(catchError(err => {
+        this.provinciaError$.next(true);
+        return of(null);
+      }));
+
+    this.formGroup04.controls.provincia.valueChanges
+      .subscribe(value => {
+        this.filter.nome = '';
+        this.filter.provinciaId = value;
+        this.municipios$ = this.municipioService.filterByNomeAndProvincia(this.filter)
+          .pipe(catchError(err => {
+            this.municipioError$.next(true);
+            return of(null);
+          }));
+      });
+
+
     this.formGroup05.controls.curso.valueChanges
       .subscribe((onValue) => {
         this.turmaService.findAllByCurso(onValue)
@@ -85,7 +117,6 @@ export class EstudanteFromComponent implements OnInit {
       this.estudanteService.getById(this.id)
         .subscribe(data => {
           this.estudante = data;
-
           this.formGroup01.patchValue({
             nome: this.estudante.nome,
             sobrenome: this.estudante.sobreNome
@@ -103,6 +134,8 @@ export class EstudanteFromComponent implements OnInit {
           });
 
           this.formGroup04.patchValue({
+            provincia: this.estudante.provincia.id,
+            municipio: this.estudante.municipio.id,
             endereco: this.estudante.endereco
           });
 
@@ -134,7 +167,7 @@ export class EstudanteFromComponent implements OnInit {
         Validators.required,
         Validators.minLength(10),
         Validators.maxLength(10)]],
-        bi: [null, Validators.required]
+      bi: [null, Validators.required]
     });
 
     this.formGroup03 = this.formBuilder.group({
@@ -143,6 +176,8 @@ export class EstudanteFromComponent implements OnInit {
     });
 
     this.formGroup04 = this.formBuilder.group({
+      provincia: [null, Validators.required],
+      municipio: [null, Validators.required],
       endereco: [null]
     });
 
@@ -169,16 +204,20 @@ export class EstudanteFromComponent implements OnInit {
     this.estudante.sobreNome = this.formGroup01.controls.sobrenome.value;
     this.estudante.sexo = this.formGroup02.controls.sexo.value;
     this.estudante.dataNascimento = this.resolveDateFormat();
-    this.estudante.bi = this.formGroup03.controls.bi.value;
+    this.estudante.bi = this.formGroup02.controls.bi.value;
     this.estudante.fone = this.formGroup03.controls.fone.value;
-    this.estudante.email = this.formGroup04.controls.email.value;
+    this.estudante.email = this.formGroup03.controls.email.value;
     this.estudante.endereco = this.formGroup04.controls.endereco.value;
     this.estudante.numeroProcesso = this.formGroup05.controls.numeroProcesso.value;
 
     this.curso.id = this.formGroup05.controls.curso.value as number;
     this.turma.id = this.formGroup05.controls.turma.value as number;
+    this.provincia.id = this.formGroup04.controls.provincia.value as number;
+    this.municipio.id = this.formGroup04.controls.municipio.value as number;
     this.estudante.curso = this.curso;
     this.estudante.turma = this.turma;
+    this.estudante.provincia = this.provincia;
+    this.estudante.municipio = this.municipio;
 
     this.estudanteService.save(this.estudante)
       .subscribe(
