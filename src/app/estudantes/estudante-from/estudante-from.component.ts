@@ -16,6 +16,8 @@ import { MyErrorStateMatch } from 'src/app/shared/validators/field-validator';
 import { EstudanteService } from '../modules/estudante.service';
 import { CursoService } from './../../cursos/modules/curso.service';
 import { Estudante } from './../../shared/model/estudante';
+import { Turma } from 'src/app/shared/model/turma';
+import { TurmaService } from 'src/app/turmas/modules/turma.service';
 
 @Component({
   selector: 'app-estudante-from',
@@ -32,13 +34,16 @@ export class EstudanteFromComponent implements OnInit {
   formGroup04: FormGroup;
   formGroup05: FormGroup;
   cursos$: Observable<Curso[]>;
+  turmas: Turma[];
   cursoError$ = new Subject<boolean>();
+  turmaError$ = new Subject<boolean>();
   estudanteError$ = new Subject<boolean>();
 
   matcher = new MyErrorStateMatch();
   showAndHideView: EventEmitter = new EventEmitter();
   estudante: Estudante = new Estudante();
   private curso: Curso = new Curso();
+  private turma: Turma = new Turma();
   private id = 0;
 
   constructor(
@@ -47,6 +52,7 @@ export class EstudanteFromComponent implements OnInit {
     private formBuilder: FormBuilder,
     private estudanteService: EstudanteService,
     private cursoSerice: CursoService,
+    private turmaService: TurmaService,
     private notificationService: NotificationService,
     private dialog: MatDialog,
     private location: Location,
@@ -63,6 +69,12 @@ export class EstudanteFromComponent implements OnInit {
         this.cursoError$.next(true);
         return of([]);
       }));
+
+      this.formGroup05.controls.curso.valueChanges
+        .subscribe((onValue) => {
+          this.turmaService.findAllByCurso(onValue)
+            .subscribe(onValues=> this.turmas = onValues);
+      });
 
     if (this.router.url.match('/edit')) {
       this.activatedRoute.params
@@ -96,7 +108,8 @@ export class EstudanteFromComponent implements OnInit {
 
           this.formGroup05.patchValue({
             numeroProcesso: this.estudante.numeroProcesso,
-            curso: this.estudante.curso.id
+            curso: this.estudante.curso.id,
+            turma: this.estudante.turma.id
           });
 
         });
@@ -138,6 +151,7 @@ export class EstudanteFromComponent implements OnInit {
         Validators.required,
         Validators.minLength(5)]],
       curso: [null, Validators.required],
+      turma: [null, Validators.required]
     });
   }
 
@@ -162,7 +176,9 @@ export class EstudanteFromComponent implements OnInit {
     this.estudante.numeroProcesso = this.formGroup05.controls.numeroProcesso.value;
 
     this.curso.id = this.formGroup05.controls.curso.value as number;
+    this.turma.id = this.formGroup05.controls.turma.value as number;
     this.estudante.curso = this.curso;
+    this.estudante.turma = this.turma;
 
     this.estudanteService.save(this.estudante)
       .subscribe(
