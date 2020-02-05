@@ -93,11 +93,12 @@ export class EstudanteFromComponent implements OnInit {
 
           this.formGroup02.patchValue({
             sexo: this.estudante.sexo,
-            dataNascimento: this.estudante.dataNascimento
+            dataNascimento: this.estudante.dataNascimento,
+            bi: this.estudante.bi
           });
 
           this.formGroup03.patchValue({
-            bi: this.estudante.bi,
+
             fone: this.estudante.fone
           });
 
@@ -133,11 +134,11 @@ export class EstudanteFromComponent implements OnInit {
       dataNascimento: ['', [
         Validators.required,
         Validators.minLength(10),
-        Validators.maxLength(10)]]
+        Validators.maxLength(10)]],
+        bi: [null, Validators.required]
     });
 
     this.formGroup03 = this.formBuilder.group({
-      bi: [null, Validators.required],
       fone: [null, [Validators.required]]
     });
 

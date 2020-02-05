@@ -119,6 +119,18 @@
             Data de Nascimento é <strong>obrigatorio</strong>
           </mat-error>
         </mat-form-field>
+        <mat-form-field class="field field-padding">
+          <input
+            matInput
+            formControlName="bi"
+            autocomplete="false"
+            required
+            placeholder="B.I ou passaport"
+          />
+          <mat-error *ngIf="formGroup02.controls['bi'].hasError('required')">
+            B.I ou passaporte é <strong>obrigatorio</strong>
+          </mat-error>
+        </mat-form-field>
         <div class="spaced">
           <button mat-raised-button class="large" matStepperPrevious>
             <mat-icon>arrow_upward</mat-icon>
@@ -144,18 +156,7 @@
         <ng-template matStepLabel>
           Numero do B.I ou Passaport e telefone
         </ng-template>
-        <mat-form-field class="field field-padding">
-          <input
-            matInput
-            formControlName="bi"
-            autocomplete="false"
-            required
-            placeholder="B.I ou passaport"
-          />
-          <mat-error *ngIf="formGroup03.controls['bi'].hasError('required')">
-            B.I ou passaporte é <strong>obrigatorio</strong>
-          </mat-error>
-        </mat-form-field>
+
         <mat-form-field class="field field-padding">
           <input
             matInput
