@@ -7,7 +7,8 @@
         </mat-panel-title>
       </mat-expansion-panel-header>
       <h3 style="width: 100%; text-align: center; font-size: medium;">{{monografia?.projeto?.tema}}</h3>
-      <p style="text-align: justify; text-indent: 10px;">Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+      <p style="text-align: justify; text-indent: 10px;">
+       Lorem, ipsum dolor sit amet consectetur adipisicing elit.
         Quibusdam nemo laudantium eaque error molestiae
         asperiores libero esse nisi. Error nesciunt consequatur dolorem reprehenderit.</p>
       <mat-divider></mat-divider>
@@ -35,31 +36,19 @@
     <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
       <mat-expansion-panel-header>
         <mat-panel-title>
-          Orientador
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-      <h3>Orientador</h3>
-      <h4>{{monografia?.projeto?.grupo?.orientador?.nome}}</h4>
-      <button mat-raised-button class="large" (click)="prevStep()">
-        <mat-icon>
-          arrow_upward</mat-icon>Voltar
-      </button>
-      <button mat-raised-button class="large" color="primary" (click)="nextStep()">
-        <mat-icon>arrow_downward</mat-icon>Próximo
-      </button>
-    </mat-expansion-panel>
-
-    <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle>
-      <mat-expansion-panel-header>
-        <mat-panel-title>
           Autores
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <!-- <mat-nav-list dense>
-        <a mat-list-item *ngFor="let item of monografia$ | async" href="item">
-          {{item?.projeto.tema}}
+      <mat-nav-list dense>
+        <a mat-list-item *ngFor="let item of ['Mariano JavaSwing','Madalena Kotlin', 'Jorge Dart']">
+         <mat-icon mat-list-icon>people</mat-icon>
+         <p matLine>{{item}}</p>
         </a>
-      </mat-nav-list> -->
+      </mat-nav-list>
+      <mat-divider></mat-divider>
+      <p><b>Orientaodr: </b> {{ monografia?.projeto?.grupo?.orientador?.nome}}
+        {{monografia?.projeto?.grupo?.orientador?.sobreNome}}</p>
+      <p><b>Especialidade: </b> {{ monografia?.projeto?.grupo?.orientador?.especialidade?.descricao}}</p>
       <button mat-raised-button class="large" color="primary" (click)="prevStep()">
         <mat-icon>
           arrow_upward</mat-icon>Voltar
