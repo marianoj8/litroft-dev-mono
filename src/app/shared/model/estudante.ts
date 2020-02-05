@@ -1,6 +1,7 @@
 import { Curso } from '../../shared/model/curso';
 import { AdminInterno } from './adminInterno';
 import { CustomAbstractEntity } from './customEntity';
+import { Turma } from './turma';
 
 export class Estudante implements CustomAbstractEntity {
   id: number;
@@ -17,6 +18,7 @@ export class Estudante implements CustomAbstractEntity {
   endereco: string;
   numeroProcesso: string;
   curso: Curso;
+  turma: Turma;
   inGruop: boolean;
   adminInterno: AdminInterno;
   numeroSerie: string;
