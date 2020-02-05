@@ -247,10 +247,50 @@
     <form [formGroup]="formGroup05">
       <div class="field">
         <ng-template matStepLabel>
-          Numero de proesso & Curso
+          Numero de proesso, turma & Curso
         </ng-template>
 
-      <mat-form-field class="field field-padding">
+        <mat-form-field class="field field-padding">
+          <mat-select
+            matInput
+            formControlName="curso"
+            required
+            placeholder="Curso"
+          >
+            <mat-option *ngIf="cursoError$ | async"
+              >Ocorreu um erro ao carregar cursos...
+            </mat-option>
+            <ng-container *ngFor="let curso of cursos">
+              <mat-option *ngIf="!cursos">lista vasia</mat-option>
+              <mat-option [value]="curso.id"> {{ curso.nome }} </mat-option>
+            </ng-container>
+          </mat-select>
+          <mat-error *ngIf="formGroup05.controls['curso'].hasError('required')">
+            Curso é <strong>obrigatorio</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="field-min-1 field-padding">
+          <mat-select
+            matInput
+            formControlName="turma"
+            required
+            placeholder="Turma"
+          >
+            <!-- <mat-option *ngIf="turmaError$ | async"
+              >Ocorreu um erro ao carregar turmas...
+            </mat-option> -->
+            <ng-container *ngFor="let turma of turmas">
+              <mat-option *ngIf="!turmas">lista vasia</mat-option>
+              <mat-option [value]="turma.id"> {{ turma.sigla }} </mat-option>
+            </ng-container>
+          </mat-select>
+          <mat-error *ngIf="formGroup05.controls['turma'].hasError('required')">
+            Turma é <strong>obrigatorio</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="field-min-2 field-padding">
           <input
             matInput
             formControlName="numeroProcesso"
@@ -270,26 +310,6 @@
 
           <mat-error *ngIf="formGroup05.controls['numeroProcesso'].hasError('required')">
             Numero de processo é <strong>obrigatorio</strong>
-          </mat-error>
-        </mat-form-field>
-
-        <mat-form-field class="field field-padding">
-          <mat-select
-            matInput
-            formControlName="curso"
-            required
-            placeholder="Curso"
-          >
-            <mat-option *ngIf="cursoError$ | async"
-              >Ocorreu um erro ao carregar cursos...
-            </mat-option>
-            <ng-container *ngFor="let curso of cursos">
-              <mat-option *ngIf="!cursos">lista vasia</mat-option>
-              <mat-option [value]="curso.id"> {{ curso.nome }} </mat-option>
-            </ng-container>
-          </mat-select>
-          <mat-error *ngIf="formGroup05.controls['curso'].hasError('required')">
-            Curso é <strong>obrigatorio</strong>
           </mat-error>
         </mat-form-field>
 
