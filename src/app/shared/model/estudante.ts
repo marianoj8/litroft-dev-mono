@@ -2,6 +2,8 @@ import { Curso } from '../../shared/model/curso';
 import { AdminInterno } from './adminInterno';
 import { CustomAbstractEntity } from './customEntity';
 import { Turma } from './turma';
+import { Provincia } from './provincia';
+import { Municipio } from './municipio';
 
 export class Estudante implements CustomAbstractEntity {
   id: number;
@@ -22,6 +24,8 @@ export class Estudante implements CustomAbstractEntity {
   inGruop: boolean;
   adminInterno: AdminInterno;
   numeroSerie: string;
+  provincia: Provincia;
+  municipio: Municipio;
 
   constructor(id?: number) {
     this.id = id ? id : null;
