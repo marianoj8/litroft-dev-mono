@@ -70,10 +70,10 @@ export class EstudanteFromComponent implements OnInit {
         return of([]);
       }));
 
-      this.formGroup05.controls.curso.valueChanges
-        .subscribe((onValue) => {
-          this.turmaService.findAllByCurso(onValue)
-            .subscribe(onValues=> this.turmas = onValues);
+    this.formGroup05.controls.curso.valueChanges
+      .subscribe((onValue) => {
+        this.turmaService.findAllByCurso(onValue)
+          .subscribe(onValues => this.turmas = onValues);
       });
 
     if (this.router.url.match('/edit')) {
