@@ -8,7 +8,7 @@ import { CustomFilter } from 'src/app/shared/model/support/custom-filter';
 import { catchError } from 'rxjs/operators';
 import { of, Subject, Subscription } from 'rxjs';
 import { ErrorLoadingComponent } from 'src/app/shared/error-loading/error-loading.component';
-import { Municipio } from 'src/app/shared/model/monicipio';
+import { Municipio } from 'src/app/shared/model/municipio';
 import { MatDailogTypeParam } from 'src/app/shared/model/support/mat-dialog-type-param';
 import { MoreOptionsDialogComponent } from 'src/app/shared/more-options-dialog/more-options-dialog.component';
 import { DeleteDialogComponent } from 'src/app/shared/delete-dialog/delete-dialog.component';

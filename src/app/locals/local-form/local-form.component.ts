@@ -15,7 +15,7 @@ import { MyErrorStateMatch } from 'src/app/shared/validators/field-validator';
 import { ProvinciaService } from 'src/app/provincia/modules/provincia.service';
 import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs/internal/observable/of';
-import { Municipio } from '../../shared/model/monicipio';
+import { Municipio } from '../../shared/model/municipio';
 import { MunicipioService } from 'src/app/municipio/modules/municipio.service';
 import { CustomFilter } from '../../shared/model/support/custom-filter';
 

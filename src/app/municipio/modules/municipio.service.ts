@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { Municipio } from 'src/app/shared/model/monicipio';
+import { Municipio } from 'src/app/shared/model/municipio';
 import { CustomFilter } from 'src/app/shared/model/support/custom-filter';
 import { environment } from 'src/environments/environment';
 

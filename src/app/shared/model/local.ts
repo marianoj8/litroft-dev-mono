@@ -1,6 +1,6 @@
 import { CustomAbstractEntity } from 'src/app/shared/model/customEntity';
 import { Admin } from './admin';
-import { Municipio } from './monicipio';
+import { Municipio } from './municipio';
 import { Provincia } from './provincia';
 
 export class Local implements CustomAbstractEntity {

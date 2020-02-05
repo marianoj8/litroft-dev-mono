@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { Municipio } from 'src/app/shared/model/monicipio';
+import { Municipio } from 'src/app/shared/model/municipio';
 import { MyErrorStateMatch } from 'src/app/shared/validators/field-validator';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { EventEmitter } from 'events';
