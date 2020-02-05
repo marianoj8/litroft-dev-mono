@@ -98,12 +98,11 @@ export class EstudanteFromComponent implements OnInit {
           });
 
           this.formGroup03.patchValue({
-
-            fone: this.estudante.fone
+            fone: this.estudante.fone,
+            email: this.estudante.email
           });
 
           this.formGroup04.patchValue({
-            email: this.estudante.email,
             endereco: this.estudante.endereco
           });
 
@@ -139,11 +138,11 @@ export class EstudanteFromComponent implements OnInit {
     });
 
     this.formGroup03 = this.formBuilder.group({
-      fone: [null, [Validators.required]]
+      fone: [null, [Validators.required]],
+      email: [null, [Validators.required, Validators.email]]
     });
 
     this.formGroup04 = this.formBuilder.group({
-      email: [null, [Validators.required, Validators.email]],
       endereco: [null]
     });
 

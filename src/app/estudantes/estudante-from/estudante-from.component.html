@@ -169,6 +169,30 @@
             Contacto é <strong>obrigatorio</strong>
           </mat-error>
         </mat-form-field>
+
+        <mat-form-field class="field field-padding">
+          <input
+            matInput
+            formControlName="email"
+            [errorStateMatcher]="matcher"
+            autocomplete="false"
+            required
+            placeholder="Email"
+          />
+          <mat-error
+            *ngIf="
+              formGroup03.controls['email'].hasError('email') &&
+              !formGroup03.controls['email'].hasError('required')
+            "
+          >
+            Por favor, insira um email valido
+          </mat-error>
+
+          <mat-error *ngIf="formGroup03.controls['email'].hasError('required')">
+            Email é <strong>obrigatorio</strong>
+          </mat-error>
+        </mat-form-field>
+
         <div class="spaced">
           <button mat-raised-button matStepperPrevious class="large">
             <mat-icon>arrow_upward</mat-icon>
@@ -194,28 +218,7 @@
         <ng-template matStepLabel>
           Email e endereço
         </ng-template>
-        <mat-form-field class="field field-padding">
-          <input
-            matInput
-            formControlName="email"
-            [errorStateMatcher]="matcher"
-            autocomplete="false"
-            required
-            placeholder="Email"
-          />
-          <mat-error
-            *ngIf="
-              formGroup04.controls['email'].hasError('email') &&
-              !formGroup04.controls['email'].hasError('required')
-            "
-          >
-            Por favor, insira um email valido
-          </mat-error>
 
-          <mat-error *ngIf="formGroup04.controls['email'].hasError('required')">
-            Email é <strong>obrigatorio</strong>
-          </mat-error>
-        </mat-form-field>
         <mat-form-field class="field field-padding">
           <input
             matInput
