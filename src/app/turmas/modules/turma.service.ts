@@ -39,6 +39,10 @@ export class TurmaService {
     return this.http.get<Turma[]>(`${this.url}/interno/turma/l/c?curso=${!!id ? id : ''}&nome=13`);
   }
 
+  findAllByCurso(id: number): Observable<Turma[]> {
+    return this.http.get<Turma[]>(`${this.url}/interno/turma/l/c?curso=${!!id ? id : ''}`);
+  }
+
   save(t: Turma): Observable<Turma> {
     if (t.id) {
       return this.http.put<Turma>(`${this.url}/interno/turma`, t);
