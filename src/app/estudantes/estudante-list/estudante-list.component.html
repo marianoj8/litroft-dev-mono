@@ -23,17 +23,17 @@
       </td>
     </ng-container>
 
+    <ng-container matColumnDef="sexo">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Sexo</th>
+      <td mat-cell *matCellDef="let estudante">
+        {{ estudante?.sexo }}
+      </td>
+    </ng-container>
+
     <ng-container matColumnDef="sobrenome">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Sobrenome</th>
       <td mat-cell *matCellDef="let estudante">
         {{ estudante?.sobreNome }}
-      </td>
-    </ng-container>
-
-    <ng-container matColumnDef="sexo">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Sexo</th>
-      <td mat-cell *matCellDef="let estudante">
-        {{ estudante?.sexo === "M" ? "Masculino" : "Femenino" }}
       </td>
     </ng-container>
 

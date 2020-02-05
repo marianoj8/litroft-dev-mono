@@ -35,8 +35,8 @@ export class EstudanteListComponent implements OnInit, OnDestroy {
   displaydColumns: string[] = [
     'processo',
     'nome',
-    'sobrenome',
     'sexo',
+    'sobrenome',
     'curso',
     'detalhe',
     'edit',
