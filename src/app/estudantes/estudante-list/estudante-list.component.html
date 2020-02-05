@@ -17,9 +17,9 @@
     </ng-container>
 
     <ng-container matColumnDef="nome">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Nome</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Nome completo</th>
       <td mat-cell *matCellDef="let estudante">
-        {{ estudante?.nome }}
+        {{ estudante?.nome }} {{ estudante?.sobreNome }}
       </td>
     </ng-container>
 
