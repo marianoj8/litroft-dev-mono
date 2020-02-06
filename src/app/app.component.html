@@ -100,17 +100,16 @@
 
       </div>
     </div>
-    <mat-divider></mat-divider>
-    <div *ngIf="authService.loggedIn()">
-      <mat-toolbar style="height: 12px;">
+    <!-- <mat-divider></mat-divider> -->
+    <div class="profile-container" *ngIf="authService.loggedIn()">
+      <mat-toolbar>
         <mat-toolbar-row>
-          <h2 style="text-align: center; width: 90%; font-weight: 700; color: rgba(0, 0, 0, 0.7);">
+          <p>
             {{ acessType }}
-          </h2>
+          </p>
         </mat-toolbar-row>
-        <mat-toolbar-row style="height: 10.5px; width: 100%;">
-          <h5
-            style="text-align: center; font-size: 9pt; font-weight: 600; width: 100%; padding-bottom: 12px; margin-left: -10px;">
+        <mat-toolbar-row>
+          <h5>
             {{nome | profileName}}
           </h5>
         </mat-toolbar-row>
@@ -123,11 +122,12 @@
       </h2>
     </mat-toolbar>
 
-    <mat-divider> </mat-divider>
+    <!-- <mat-divider class="separator"> </mat-divider> -->
 
     <mat-nav-list>
       <div *ngIf="authService.loggedIn()">
         <mat-accordion class="example-headers-align">
+          <mat-divider> </mat-divider>
           <a mat-list-item routerLinkActive="active" [routerLink]="['home']">
             <mat-icon color="primary">home</mat-icon>
             Home
@@ -292,8 +292,7 @@
         </button>
 
         <a class="list-of-selected-inst" *ngFor="let item of institutos" mat-list-item (click)="schoolClicked(item)">
-          <div
-            style="padding: 5px; align-content: center; align-items: center; margin-top: 5px; margin-bottom: 5px; margin-right: 5px; width: 30px; height: 30px;">
+          <div>
             <mat-icon color="primary" style="position: relative; top: 1px;">school</mat-icon>
           </div>
           {{ item.nome }}

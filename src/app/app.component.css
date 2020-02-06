@@ -10,6 +10,41 @@ mat-toolbar {
 .sidenav {
   width: 260px;
 }
+.sidenav mat-toolbar {
+  height: 12px;
+}
+
+/* .sidenav mat-toolbar-row{
+  height: 10.5px; width: 100%;
+} */
+
+.mat-toolbar-row,
+.mat-toolbar-single-row {
+  white-space: normal;
+}
+
+.sidenav mat-toolbar mat-toolbar-row p {
+  color: rgba(0, 0, 0, 0.7);
+  text-align: center;
+  font-weight: 200;
+  width: 100%;
+  font-size: medium;
+}
+
+.sidenav mat-toolbar mat-toolbar-row h5 {
+  text-align: center;
+  font-size: 9pt;
+  font-weight: 600;
+  width: 100%;
+  padding-top: 4px;
+}
+
+.profile-container {
+  margin-bottom: 30px;
+}
+.separator {
+  padding-top: 10px;
+}
 
 .sidenav .mat-toolbar {
   background: inherit;
@@ -166,7 +201,20 @@ mat-toolbar-row#row2 a#lastLink {
 
 @media only screen and (min-width: 993px) {
   .list-of-selected-inst {
-    font-size: medium;
+    font-size: 11pt;
+    /* text-align: justify; */
+    text-indent: -5px;
+    padding-top: 40px;
+  }
+  .list-of-selected-inst div {
+    padding: 5px;
+    align-content: center;
+    align-items: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-right: 5px;
+    width: 30px;
+    height: 30px;
   }
   strong {
     font-size: small;
@@ -182,7 +230,10 @@ mat-toolbar-row#row2 a#lastLink {
 
 @media only screen and (min-width: 600px) and (max-width: 992px) {
   .list-of-selected-inst {
-    font-size: medium;
+    font-size: 11pt;
+    /* text-align: justify; */
+    text-indent: -5px;
+    padding-top: 40px;
   }
   strong {
     font-size: small;
