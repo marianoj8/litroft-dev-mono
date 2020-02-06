@@ -40,9 +40,9 @@
         </mat-panel-title>
       </mat-expansion-panel-header>
       <mat-nav-list dense>
-        <a mat-list-item *ngFor="let item of ['Mariano JavaSwing','Madalena Kotlin', 'Jorge Dart']">
+        <a mat-list-item *ngFor="let item of elementos$ | async">
          <mat-icon style="font-size: 18pt;" mat-list-icon>person_pin</mat-icon>
-         <p style="font-size: small;" matLine>{{item}}</p>
+         <p style="font-size: small;" matLine>{{item.estudante.nome}} {{item.estudante.sobreNome}}</p>
         </a>
       </mat-nav-list>
       <mat-divider></mat-divider>
