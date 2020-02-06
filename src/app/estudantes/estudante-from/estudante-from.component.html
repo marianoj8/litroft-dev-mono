@@ -55,13 +55,13 @@
         <ng-template matStepLabel>
           Genero, Data de nascimento & BI/Port
         </ng-template>
-        <mat-form-field class="field field-padding">
+        <mat-form-field class="field-min-2 field-padding">
           <mat-select matInput formControlName="sexo" placeholder="Sexo">
             <mat-option checked value="M">Masculino</mat-option>
             <mat-option value="F">Femenino</mat-option>
           </mat-select>
         </mat-form-field>
-        <mat-form-field class="field field-padding">
+        <mat-form-field class="field-min-1 field-padding">
           <input matInput formControlName="dataNascimento" [matDatepicker]="picker" required se
             placeholder="Data de Nasciemnto" />
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
