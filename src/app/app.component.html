@@ -140,7 +140,7 @@
             Directores
           </a>
           <mat-divider></mat-divider>
-          <mat-expansion-panel>
+          <mat-expansion-panel hideToggle>
             <mat-expansion-panel-header *ngIf="showOrHideMenu">
               <mat-panel-title>
                 <mat-icon color="primary">person_pin</mat-icon>
@@ -163,7 +163,7 @@
             </a>
           </mat-expansion-panel>
           <!-- <mat-divider></mat-divider> -->
-          <mat-expansion-panel>
+          <mat-expansion-panel hideToggle>
             <mat-expansion-panel-header *ngIf="showOrHideMenu">
               <mat-panel-title>
                 <mat-icon color="primary">recent_actors</mat-icon>
@@ -182,7 +182,7 @@
             </a>
           </mat-expansion-panel>
           <!-- <mat-divider></mat-divider> -->
-          <mat-expansion-panel *ngIf="showOrHideMenu">
+          <mat-expansion-panel *ngIf="showOrHideMenu" hideToggle>
             <mat-expansion-panel-header>
               <mat-panel-title>
                 <mat-icon color="primary">collections_bookmark</mat-icon>
@@ -205,7 +205,7 @@
             </a>
           </mat-expansion-panel>
           <!-- <mat-divider></mat-divider> -->
-          <mat-expansion-panel *ngIf="!showOrHideMenu" [expanded]="true">
+          <mat-expansion-panel *ngIf="!showOrHideMenu" [expanded]="true" hideToggle>
             <mat-expansion-panel-header>
               <mat-panel-title>
                 <mat-icon color="primary">school</mat-icon>
@@ -227,7 +227,7 @@
               Locais
             </a>
           </mat-expansion-panel>
-          <mat-expansion-panel *ngIf="showOrHideMenu">
+          <mat-expansion-panel *ngIf="showOrHideMenu" hideToggle>
             <mat-expansion-panel-header>
               <mat-panel-title>
                 <mat-icon color="primary">domain</mat-icon>
@@ -242,7 +242,7 @@
             </a>
           </mat-expansion-panel>
           <!-- <mat-divider></mat-divider> -->
-          <mat-expansion-panel>
+          <mat-expansion-panel hideToggle>
             <mat-expansion-panel-header>
               <mat-panel-title>
                 <mat-icon color="primary">settings</mat-icon>
