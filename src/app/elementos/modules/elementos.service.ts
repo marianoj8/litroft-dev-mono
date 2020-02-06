@@ -33,6 +33,10 @@ export class ElementoService {
     return this.http.get<Elemento[]>(`${this.url}/interno/elemento/l?position=${p}&curso=${c}&grupo=${g}`);
   }
 
+  listByPublicParams(p: string, c: number, g: number, i: number): Observable<Elemento[]> {
+    return this.http.get<Elemento[]>(`${this.url}/elemento/l?position=${p}&curso=${c}&grupo=${g}&instituto=${i}`);
+  }
+
   filterByDuracao(duracao: number): Observable<Elemento[]> {
     return this.http
       .get<Elemento[]>(`${this.url}/interno/elemento/l?duracao=${!!duracao ? duracao : 1}`);
