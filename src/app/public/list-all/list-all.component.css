@@ -1,3 +1,4 @@
+
 .container-card {
   font-size: 11.2pt;
   height: 100%;
@@ -78,7 +79,6 @@
   position: relative;
   background: #fff;
   display: flex;
-  /* justify-content: center; */
   align-items: center;
   padding: 20px;
   box-sizing: border-box;
@@ -98,7 +98,7 @@
   margin: 12px 0 0;
 }
 .container-card .card .face.face2 .content a {
-  margin: 15px 0 0;
+  margin: 2px 0 0;
   text-align: left;
   width: 300px;
 }
@@ -177,7 +177,6 @@
     margin-left: 4px;
     width: 7rem;
   }
-
 }
 
 @media only screen and (min-width: 600px) and (max-width: 992px) {
@@ -305,4 +304,3 @@
     width: 38%;
   }
 }
-
