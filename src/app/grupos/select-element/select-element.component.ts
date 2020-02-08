@@ -41,7 +41,7 @@ export class SelectElementComponent implements OnInit {
   constructor(
     public service: EstudanteService,
     public grupoService: GrupoService,
-    @Inject(MAT_DIALOG_DATA) public dataCursoName: string) {
+    @Inject(MAT_DIALOG_DATA) public dialogData: CustomFilter) {
 
   }
 
@@ -77,8 +77,8 @@ export class SelectElementComponent implements OnInit {
       .subscribe(data => this.estudantes.filter = data);
 
     this.filtro.isGroup = false;
-    this.filtro.curso = this.dataCursoName.trim();
-
+    this.filtro.curso = this.dialogData.curso;
+    this.filtro.turma = this.dialogData.turma;
     this.onRefrash(this.filtro);
   }
 
@@ -88,7 +88,8 @@ export class SelectElementComponent implements OnInit {
   }
 
   onRefrash(data?: CustomFilter) {
-    this.sub = this.service.filterBySexoAndCursoAngGroup(data)
+    console.log(data);
+    this.sub = this.service.filterByNotGrupo(data)
       .pipe(
         catchError(err => {
           // this.dialogService.open(ErrorLoadingComponent);
