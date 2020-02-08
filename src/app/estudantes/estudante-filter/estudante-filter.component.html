@@ -2,68 +2,75 @@
   <mat-icon class="mat-18">search</mat-icon>
   Opções de filtro
 </h2>
-<div id="mainContainer" class="container mat-elevation-z8">
-  <mat-accordion class="example-headers-align">
-    <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
-      <mat-expansion-panel-header>
-        <mat-panel-title>Curso</mat-panel-title>
-      </mat-expansion-panel-header>
-      <mat-select placeholder="Selecionar curso">
-        <ng-container *ngFor="let curso of cursos$ | async">
-          <mat-option [value]="curso.id" (onSelectionChange)="onSelectedCurso(curso)">
-            {{ curso.nome }}
-          </mat-option>
-        </ng-container>
-      </mat-select>
-    </mat-expansion-panel>
+<form [formGroup]="formGroup">
+  <div id="mainContainer" class="container mat-elevation-z8">
+    <mat-accordion class="example-headers-align">
+      <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Curso</mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-form-field class="field field-padding">
+          <mat-select matInput formControlName="curso" placeholder="Curso">
+            <mat-option [value]="''"> Todos os cursos </mat-option>
+            <ng-container *ngFor="let curso of cursos">
+              <mat-option [value]="curso.id"> {{ curso.nome }} </mat-option>
+            </ng-container>
+          </mat-select>
+        </mat-form-field>
+      </mat-expansion-panel>
 
-    <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
-      <mat-expansion-panel-header>
-        <mat-panel-title>Turma</mat-panel-title>
-      </mat-expansion-panel-header>
-      <mat-select placeholder="Selecionar turma">
-        <ng-container *ngFor="let turma of turma$ | async">
-          <mat-option [value]="turma.id">
-            {{ turma.sigla }}
-          </mat-option>
-        </ng-container>
-      </mat-select>
-    </mat-expansion-panel>
+      <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Turma</mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-form-field>
+          <mat-select matInput formControlName="turma" placeholder="Turma">
+            <mat-option [value]="''"> Todas as turmas </mat-option>
+            <ng-container *ngFor="let turma of turmas">
+              <mat-option [value]="turma"> {{ turma.sigla }} </mat-option>
+            </ng-container>
+          </mat-select>
+        </mat-form-field>
+      </mat-expansion-panel>
 
-    <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle>
-      <mat-expansion-panel-header>
-        <mat-panel-title>Ano Letivo</mat-panel-title>
-      </mat-expansion-panel-header>
-      <mat-select placeholder="Selecionar Ano">
-        <mat-option *ngFor="let year of [2016, 2017, 2018, 2019]" [value]="year">
-          {{ year }}
-        </mat-option>
-      </mat-select>
-    </mat-expansion-panel>
+      <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Ano Letivo</mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-form-field class="field field-padding">
+          <mat-select matInput formControlName="anoletivo" placeholder="Ano">
+            <ng-container *ngFor="let year of years">
+              <mat-option [value]="year"> {{ year }} </mat-option>
+            </ng-container>
+          </mat-select>
+        </mat-form-field>
+      </mat-expansion-panel>
 
-    <mat-expansion-panel [expanded]="step === 3" (opened)="setStep(3)" hideToggle>
-      <mat-expansion-panel-header>
-        <mat-panel-title>Sexo</mat-panel-title>
-      </mat-expansion-panel-header>
-      <mat-select placeholder="Selecionar sexo">
-        <mat-option *ngFor="let sexo of ['Todos', 'Masculino', 'Femenino']" [value]="sexo"
-          (onSelectionChange)="onSelectedSexo(sexo)">
-          {{ sexo }}
-        </mat-option>
-      </mat-select>
-    </mat-expansion-panel>
-  </mat-accordion>
-</div>
-
-<mat-dialog-actions>
-  <div class="actions">
-    <button class="btn-large" mat-raised-button matDialogClose>
-      <mat-icon>arrow_back</mat-icon>
-      Cancelar
-    </button>
-    <button class="btn-large" mat-raised-button matDialogClose="true" color="primary" (click)="onApplyFilter()">
-      <mat-icon>done_all</mat-icon>
-      Aplicar filtro
-    </button>
+      <mat-expansion-panel [expanded]="step === 3" (opened)="setStep(3)" hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Sexo</mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-form-field class="field field-padding">
+          <mat-select matInput formControlName="sexo" placeholder="Sexo">
+            <mat-option *ngFor="let sexo of ['Todos', 'Masculino', 'Femenino']" [value]="sexo">
+              {{ sexo }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-expansion-panel>
+    </mat-accordion>
   </div>
-</mat-dialog-actions>
+
+  <mat-dialog-actions>
+    <div class="actions">
+      <button class="btn-large" mat-raised-button matDialogClose>
+        <mat-icon>arrow_back</mat-icon>
+        Cancelar
+      </button>
+      <button class="btn-large" mat-raised-button matDialogClose="true" color="primary" (click)="onApplyFilter()">
+        <mat-icon>done_all</mat-icon>
+        Aplicar filtro
+      </button>
+    </div>
+  </mat-dialog-actions>
+</form>
