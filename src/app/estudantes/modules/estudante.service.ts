@@ -45,6 +45,18 @@ export class EstudanteService {
       .get<Estudante[]>(`${this.url}/interno/estudante/l?curso=${!!curso ? curso : ''}&sexo=${!!sexo ? sexo : ''}`);
   }
 
+  filterByAllAtributs(query: CustomFilter): Observable<Estudante[]> {
+    query = this.filterResolve(query);
+    return this.http
+      .get<Estudante[]>(`${this.url}/interno/estudante/l/all?curso=${query.curso}&turma=${query.turma}&sexo=${query.sexo}&entrada=${query.entrada}`);
+  }
+
+  filterByNotGrupo(query: CustomFilter): Observable<Estudante[]> {
+    query = this.filterResolve(query);
+    return this.http
+      .get<Estudante[]>(`${this.url}/interno/estudante/l/notgrup?nome=${query.nome}&curso=${query.curso}&turma=${query.turma}&sexo=${query.sexo}`);
+  }
+
   filterBySexoAndCursoAndPosition(curso: string, sexo: string, p: string): Observable<Estudante[]> {
     return this.http
       .get<Estudante[]>(`${this.url}/interno/estudante/l?curso=${!!curso ? curso : ''}&sexo=${!!sexo ? sexo : ''}&posicao=${!!p ? p : ''}`);
@@ -75,8 +87,11 @@ export class EstudanteService {
   private filterResolve(query: CustomFilter): CustomFilter {
     query.nome = query.nome === undefined ? '' : query.nome;
     query.curso = query.curso === undefined ? '' : query.curso;
+    query.turma = query.turma === undefined ? '' : query.turma;
     query.sexo = query.sexo === undefined ? '' : query.sexo;
     query.isGroup = query.isGroup === undefined ? false : query.isGroup;
+    query.anoletivo = query.anoletivo === undefined ? new Date().getFullYear() : query.anoletivo;
+    query.entrada = query.entrada === undefined ? new Date().getFullYear() : query.entrada;
     return query;
   }
 
