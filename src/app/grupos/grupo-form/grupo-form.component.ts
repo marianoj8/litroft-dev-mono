@@ -170,6 +170,14 @@ export class GrupoFormComponent implements OnInit {
           this.onRefrash(data.posicao, data.curso.id, data.id);
         });
     }
+
+    this.formGroup02.controls.turma.valueChanges
+      .subscribe(onValue => this.turmaService.getById(onValue)
+        .subscribe((newValue: Turma) => {
+          this.filtro.curso = newValue.curso.nome;
+          this.filtro.turma = newValue.sigla;
+        }));
+
   }
 
   onRefrash(position?: string, curso?: number, grupo?: number) {
@@ -274,7 +282,7 @@ export class GrupoFormComponent implements OnInit {
   showElementSelector() {
     const dialogRef = this.dialog.open(SelectElementComponent,
       {
-        data: this.curso.nome ? this.curso.nome : '*',
+        data: this.filtro,
         height: '510px',
         width: '960px',
         disableClose: true
