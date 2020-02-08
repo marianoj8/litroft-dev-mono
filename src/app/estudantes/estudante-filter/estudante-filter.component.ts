@@ -7,6 +7,7 @@ import { CustomFilter } from 'src/app/shared/model/support/custom-filter';
 import { EstudanteService } from '../modules/estudante.service';
 import { TurmaService } from 'src/app/turmas/modules/turma.service';
 import { Turma } from 'src/app/shared/model/turma';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-estudante-filter',
@@ -18,22 +19,62 @@ export class EstudanteFilterComponent implements OnInit {
   curso = 0;
   step = 0;
   filter: CustomFilter = new CustomFilter();
-  cursos$: Observable<Curso[]>;
-  turma$: Observable<Turma[]>;
+  cursos: Curso[];
+  turmas: Turma[];
+  years: number[];
+  formGroup: FormGroup;
 
   constructor(
     private turmaService: TurmaService,
     private cursoSerice: CursoService,
     private estudanteSerice: EstudanteService,
+    private formBuilder: FormBuilder
   ) { }
 
   ngOnInit() {
-    this.cursos$ = this.cursoSerice.list();
-  }
+    this.formGroup = this.formBuilder.group({
+      curso: [null],
+      turma: [null],
+      anoletivo: [new Date().getFullYear()],
+      sexo: 'Todos'
+    });
 
-  onSelectedCurso(curso: Curso) {
-    this.filter.curso = curso.nome;
-    this.turma$ = this.turmaService.findAllByCurso(curso.id);
+    this.turmas = [];
+    this.cursos = [];
+    this.years = [];
+
+    this.cursoSerice.list()
+      .subscribe(onValue => this.cursos = onValue);
+
+    this.formGroup.controls.curso.valueChanges
+      .subscribe((onValue) => {
+        this.turmaService.findAllByCurso(onValue)
+          .subscribe(onValues => {
+            this.turmas = onValues;
+            if (this.turmas.length > 0) {
+              this.filter.curso = this.turmas[0].curso.nome;
+            }
+          });
+      });
+
+    this.formGroup.controls.turma.valueChanges
+      .subscribe((onValue: Turma) => {
+        this.filter.turma = onValue.sigla;
+      });
+
+    this.formGroup.controls.sexo.valueChanges
+      .subscribe((onValue) => this.onSelectedSexo(onValue)
+      );
+
+    this.formGroup.controls.anoletivo.valueChanges
+      .subscribe((onValue) => {
+        // this.filter.anoletivo = onValue;
+        this.filter.entrada = onValue;
+      });
+
+    for (let i = 2008; i <= new Date().getFullYear(); i++) {
+      this.years.push(i);
+    }
   }
 
   onSelectedSexo(sexo: string) {
@@ -45,6 +86,7 @@ export class EstudanteFilterComponent implements OnInit {
       this.filter.sexo = '';
     }
   }
+
   setStep(index: number) {
     this.step = index;
   }
@@ -59,6 +101,8 @@ export class EstudanteFilterComponent implements OnInit {
 
   onApplyFilter() {
     this.estudanteSerice.findValueParams.emit(this.filter);
+    console.log(this.filter);
+
   }
 
 }
