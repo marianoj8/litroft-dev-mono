@@ -57,7 +57,7 @@ export class EstudanteListComponent implements OnInit, OnDestroy {
     this.service.onChangeContext.emit(false);
 
     this.sub = this.service.findValueParams
-      .subscribe(data => this.onRefrash(data));
+      .subscribe(data => this.onFiltered(data));
 
     this.sub = this.service.findValueParam
       .subscribe(data => this.estudantes.filter = data);
@@ -84,6 +84,29 @@ export class EstudanteListComponent implements OnInit, OnDestroy {
 
   onRefrash(data?: CustomFilter) {
     this.sub = this.service.filterBySexoAndCurso(data.curso === undefined ? '' : data.curso, data.sexo === undefined ? '' : data.sexo)
+      .pipe(
+        catchError(err => {
+          this.dialogService.open(ErrorLoadingComponent);
+          this.error$.next(true);
+          return of(null);
+        })
+      )
+      .subscribe(
+        next => {
+          const array = next.map((item: Estudante) => {
+            return {
+              ...item
+            };
+
+          });
+          this.estudantes = new MatTableDataSource(array);
+          this.estudantes.sort = this.sort;
+          this.estudantesList = this.estudantes.data;
+        });
+  }
+
+  onFiltered(data?: CustomFilter) {
+    this.sub = this.service.filterByAllAtributs(data)
       .pipe(
         catchError(err => {
           this.dialogService.open(ErrorLoadingComponent);
