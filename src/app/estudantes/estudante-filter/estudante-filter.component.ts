@@ -23,6 +23,7 @@ export class EstudanteFilterComponent implements OnInit {
   turmas: Turma[];
   years: number[];
   formGroup: FormGroup;
+  isAllYears: boolean;
 
   constructor(
     private turmaService: TurmaService,
@@ -32,9 +33,11 @@ export class EstudanteFilterComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.isAllYears = false;
     this.formGroup = this.formBuilder.group({
       curso: [null],
       turma: [null],
+      anoletivoType: [3],
       anoletivo: [new Date().getFullYear()],
       sexo: 'Todos'
     });
@@ -66,10 +69,20 @@ export class EstudanteFilterComponent implements OnInit {
       .subscribe((onValue) => this.onSelectedSexo(onValue)
       );
 
+    this.formGroup.controls.anoletivoType.valueChanges
+      .subscribe((onValue) => {
+        if (onValue === 3) {
+          this.isAllYears = false;
+        } else {
+          this.isAllYears = true;
+        }
+        this.filter.anoletivoType = onValue;
+      });
+
     this.formGroup.controls.anoletivo.valueChanges
       .subscribe((onValue) => {
-        // this.filter.anoletivo = onValue;
         this.filter.entrada = onValue;
+        this.filter.finalista = onValue;
       });
 
     for (let i = 2008; i <= new Date().getFullYear(); i++) {
