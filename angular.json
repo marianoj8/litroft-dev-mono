@@ -116,10 +116,10 @@
             }
           }
         },
-        "deploy": {
-          "builder": "@angular/fire:deploy",
-          "options": {}
-        }
+        // "deploy": {
+        //   "builder": "@angular/fire:deploy",
+        //   "options": {}
+        // }
       }
     }
   },
