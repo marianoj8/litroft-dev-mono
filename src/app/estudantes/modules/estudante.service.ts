@@ -37,7 +37,7 @@ export class EstudanteService {
   filterByNomeSexoCurso(query: CustomFilter): Observable<Estudante[]> {
     query = this.filterResolve(query);
     return this.http
-      .get<Estudante[]>(`${this.url}/interno/estudante/l?nome=${query.nome}&curso=${query.curso}&sexo=${query.sexo}`);
+      .get<Estudante[]>(`${this.url}/interno/estudante/l?nome=${query.nome}&curso=${query.curso}&sexo=${query.sexo}&turma=${query.turma}`);
   }
 
   filterBySexoAndCurso(curso: string, sexo: string): Observable<Estudante[]> {
@@ -45,10 +45,16 @@ export class EstudanteService {
       .get<Estudante[]>(`${this.url}/interno/estudante/l?curso=${!!curso ? curso : ''}&sexo=${!!sexo ? sexo : ''}`);
   }
 
-  filterByAllAtributs(query: CustomFilter): Observable<Estudante[]> {
+  filterByAllAtributsEntrada(query: CustomFilter): Observable<Estudante[]> {
     query = this.filterResolve(query);
     return this.http
-      .get<Estudante[]>(`${this.url}/interno/estudante/l/all?curso=${query.curso}&turma=${query.turma}&sexo=${query.sexo}&entrada=${query.entrada}`);
+      .get<Estudante[]>(`${this.url}/interno/estudante/l/entrada?curso=${query.curso}&turma=${query.turma}&sexo=${query.sexo}&entrada=${query.entrada}`);
+  }
+
+  filterByAllAtributsFinalista(query: CustomFilter): Observable<Estudante[]> {
+    query = this.filterResolve(query);
+    return this.http
+      .get<Estudante[]>(`${this.url}/interno/estudante/l/finalista?curso=${query.curso}&turma=${query.turma}&sexo=${query.sexo}&finalista=${query.finalista}`);
   }
 
   filterByNotGrupo(query: CustomFilter): Observable<Estudante[]> {
@@ -92,6 +98,7 @@ export class EstudanteService {
     query.isGroup = query.isGroup === undefined ? false : query.isGroup;
     query.anoletivo = query.anoletivo === undefined ? new Date().getFullYear() : query.anoletivo;
     query.entrada = query.entrada === undefined ? new Date().getFullYear() : query.entrada;
+    query.finalista = query.finalista === undefined ? new Date().getFullYear() : query.finalista;
     return query;
   }
 
