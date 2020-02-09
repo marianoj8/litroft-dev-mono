@@ -10,4 +10,6 @@ export class CustomFilter {
   isGroup: boolean;
   provinciaId: number;
   entrada: number;
+  finalista: number;
+  anoletivoType: number;
 }
