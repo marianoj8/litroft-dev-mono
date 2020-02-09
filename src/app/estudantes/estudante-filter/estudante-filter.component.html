@@ -35,9 +35,17 @@
 
       <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle>
         <mat-expansion-panel-header>
-          <mat-panel-title>Ano Letivo</mat-panel-title>
+          <mat-panel-title>Data</mat-panel-title>
         </mat-expansion-panel-header>
         <mat-form-field class="field field-padding">
+          <mat-select matInput formControlName="anoletivoType" placeholder="Ano">
+            <ng-container
+              *ngFor="let year of [{id:1,tipo:'Data de entrada'},{id:2,tipo:'Data de finalização'},{id:3,tipo:'Todos os anos letivos'}]">
+              <mat-option [value]="year.id"> {{ year.tipo }} </mat-option>
+            </ng-container>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field *ngIf="isAllYears" class="field field-padding">
           <mat-select matInput formControlName="anoletivo" placeholder="Ano">
             <ng-container *ngFor="let year of years">
               <mat-option [value]="year"> {{ year }} </mat-option>
