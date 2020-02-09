@@ -106,26 +106,70 @@ export class EstudanteListComponent implements OnInit, OnDestroy {
   }
 
   onFiltered(data?: CustomFilter) {
-    this.sub = this.service.filterByAllAtributs(data)
-      .pipe(
-        catchError(err => {
-          this.dialogService.open(ErrorLoadingComponent);
-          this.error$.next(true);
-          return of(null);
-        })
-      )
-      .subscribe(
-        next => {
-          const array = next.map((item: Estudante) => {
-            return {
-              ...item
-            };
+    if (data.anoletivoType === 1) {
+      this.sub = this.service.filterByAllAtributsEntrada(data)
+        .pipe(
+          catchError(err => {
+            this.dialogService.open(ErrorLoadingComponent);
+            this.error$.next(true);
+            return of(null);
+          })
+        )
+        .subscribe(
+          next => {
+            const array = next.map((item: Estudante) => {
+              return {
+                ...item
+              };
 
+            });
+            this.estudantes = new MatTableDataSource(array);
+            this.estudantes.sort = this.sort;
+            this.estudantesList = this.estudantes.data;
           });
-          this.estudantes = new MatTableDataSource(array);
-          this.estudantes.sort = this.sort;
-          this.estudantesList = this.estudantes.data;
-        });
+    } else if (data.anoletivoType === 2) {
+      this.sub = this.service.filterByAllAtributsFinalista(data)
+        .pipe(
+          catchError(err => {
+            this.dialogService.open(ErrorLoadingComponent);
+            this.error$.next(true);
+            return of(null);
+          })
+        )
+        .subscribe(
+          next => {
+            const array = next.map((item: Estudante) => {
+              return {
+                ...item
+              };
+
+            });
+            this.estudantes = new MatTableDataSource(array);
+            this.estudantes.sort = this.sort;
+            this.estudantesList = this.estudantes.data;
+          });
+    } else {
+      this.sub = this.service.filterByNomeSexoCurso(data)
+        .pipe(
+          catchError(err => {
+            this.dialogService.open(ErrorLoadingComponent);
+            this.error$.next(true);
+            return of(null);
+          })
+        )
+        .subscribe(
+          next => {
+            const array = next.map((item: Estudante) => {
+              return {
+                ...item
+              };
+
+            });
+            this.estudantes = new MatTableDataSource(array);
+            this.estudantes.sort = this.sort;
+            this.estudantesList = this.estudantes.data;
+          });
+    }
   }
 
   private showErrorMessage() {
