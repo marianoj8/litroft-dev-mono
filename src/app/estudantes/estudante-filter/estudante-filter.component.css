@@ -3,8 +3,26 @@ ul .item {
 }
 
 .actions {
-  top: 80px;;
+  top: 80px;
   clear: both;
   position: relative;
   width: 100%;
+}
+
+@media only screen and (min-width: 993px) {
+}
+
+@media only screen and (min-width: 600px) and (max-width: 992px) {
+}
+
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100%;
+  }
+  .actions {
+    top: 80px;
+    clear: both;
+    position: relative;
+    width: 100%;
+  }
 }

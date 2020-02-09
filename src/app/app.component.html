@@ -87,14 +87,15 @@
 
           </ng-container>
         </ng-container>
+
         <ng-container *ngIf="!showOrHideMenu">
           <ng-container *ngIf="authService.loggedIn()">
-            <img src="../assets/index.jpg" style="position: relative; top: 2px; left: 20%; height: 98%; width: 78%;" />
+            <img src="../assets/index.jpg" style="position: relative; top: 2px; left: 20%; height: 90%; width: 70%;"/>
           </ng-container>
         </ng-container>
 
         <ng-container *ngIf="!authService.loggedIn()">
-          <img src="../assets/index.jpg" style="position: relative; top: 2px; left: 20%; height: 98%; width: 78%;" />
+          <img src="../assets/index.jpg" style="position: relative; top: 2px; left: 20%; height: 90%; width: 70%;" />
 
         </ng-container>
 
@@ -277,7 +278,7 @@
         </mat-accordion>
       </div>
 
-      <div *ngIf="!authService.loggedIn()">
+      <div *ngIf="!authService.loggedIn()" style="margin-top: 20px;">
         <div>
           <mat-form-field class="field-max">
             <input #search matInput width="100px" type="text" [(ngModel)]="customFilter.nome" (keyup)="findInstituto()"
