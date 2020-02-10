@@ -4,40 +4,38 @@
       <mat-expansion-panel #panel1 [expanded]="true">
         <mat-expansion-panel-header>
           <mat-panel-title>
-            {{ estudante?.nome }}
+            {{ estudante?.nome.concat(' ' + estudante?.sobreNome) | profileName}}
           </mat-panel-title>
         </mat-expansion-panel-header>
-        <mat-label>Nome</mat-label>: {{ estudante?.nome }}
+        <mat-label>Nome</mat-label>: <samp class="text-value">{{ estudante?.nome }}</samp>
         <mat-divider></mat-divider>
-        <mat-label>Sobrenome</mat-label>: {{ estudante?.sobreNome }}
+        <mat-label>Sobrenome</mat-label>: <samp class="text-value">{{ estudante?.sobreNome }}</samp>
         <mat-divider></mat-divider>
-        <mat-label>Sexo</mat-label>:
-        {{ estudante?.sexo === "M" ? "Masculino" : "Femenino" }}
+        <mat-label>Sexo</mat-label>: <samp class="text-value">
+          {{ estudante?.sexo === "M" ? "Masculino" : "Femenino" }}</samp>
         <mat-divider></mat-divider>
-        <mat-label>Data/Nascimento</mat-label>:
-        {{ estudante?.dataNascimento | date }}
+        <mat-label>Data/Nascimento</mat-label>: <samp class="text-value">
+          {{ estudante?.dataNascimento | date }}</samp>
         <mat-divider></mat-divider>
-        <mat-label>B.I/P</mat-label>: {{ estudante?.bi }}
+        <mat-label>B.I/P</mat-label>: <samp class="text-value">{{ estudante?.bi }}</samp>
         <mat-divider></mat-divider>
-        <mat-label>Telefone</mat-label>: {{ estudante?.fone }}
+        <mat-label>Telefone</mat-label>: <samp class="text-value">{{ estudante?.fone }}</samp>
         <mat-divider></mat-divider>
-        <mat-label>Email</mat-label>: {{ estudante?.email }}
+        <mat-label>Email</mat-label>: <samp class="text-value">{{ estudante?.email }}</samp>
         <mat-divider></mat-divider>
-        <mat-label>Endereco</mat-label>: {{ estudante?.endereco }}
+        <mat-label>Provincia</mat-label>: <samp class="text-value">{{ estudante?.provincia.nome }}</samp>
+        <mat-divider></mat-divider>
+        <mat-label>Municipio</mat-label>: <samp class="text-value">{{ estudante?.municipio.nome }}</samp>
+        <mat-divider></mat-divider>
+        <mat-label>Endereco</mat-label>: <samp class="text-value">{{ estudante?.endereco }}</samp>
         <mat-divider></mat-divider>
         <mat-label>Curso</mat-label>:
-        <a
-          [routerLink]="['/cursos/detalhe', estudante.curso.id]"
-          color="primary"
-          >{{ estudante?.curso.nome }}
+        <a [routerLink]="['/cursos/detalhe', estudante.curso.id]" color="primary">
+          {{ estudante?.curso.nome }}
         </a>
         <mat-action-row>
-          <button
-            class="btn-large"
-            [routerLink]="['/estudantes/edit', estudante?.id]"
-            mat-raised-button
-            color="primary"
-          >
+          <button class="btn-large" [routerLink]="['/estudantes/edit', estudante?.id]" mat-raised-button
+            color="primary">
             <mat-icon class="mat-18">edit</mat-icon>
             Editar
           </button>
@@ -49,7 +47,7 @@
             Mais detalhe
           </mat-panel-title>
         </mat-expansion-panel-header>
-        <mat-label>Criado em</mat-label>: {{ estudante?.createdAt | date }}
+        <mat-label>Criado em</mat-label>: <samp class="text-value">{{ estudante?.createdAt | date }}</samp>
         <div *ngIf="estudante?.lastModifiedAt">
           <mat-divider></mat-divider>
           <mat-label>Ultima alteração em</mat-label>:
@@ -65,8 +63,10 @@
           }}
         </div>
         <mat-divider></mat-divider>
-        <mat-label>Pro</mat-label>: {{ estudante?.adminInterno.instituto.nome }}
-        ({{estudante?.adminInterno.instituto.sigla}})
+        <p class="max-size">
+          {{ estudante?.adminInterno.instituto.nome }}
+          ({{estudante?.adminInterno.instituto.sigla}})
+        </p>
       </mat-expansion-panel>
     </mat-accordion>
   </div>
