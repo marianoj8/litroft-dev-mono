@@ -1,3 +1,4 @@
+import { CustomPipesModule } from 'src/app/shared/custom-pipes/module/custom-pipes.module';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -27,6 +28,7 @@ import { EstudanteFilterComponent } from '../estudante-filter/estudante-filter.c
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
+    CustomPipesModule
   ],
   exports: []
 })
