@@ -8,6 +8,7 @@ import { InscricaoRoutingModule } from './inscricao-routing.module';
 import { MaterialModule } from 'src/app/material/material.module';
 import { InscricaoFormComponent } from '../inscricao-form/inscricao-form.component';
 import { InscricaoInfoComponent } from '../inscricao-info/inscricao-info.component';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,9 @@ import { InscricaoInfoComponent } from '../inscricao-info/inscricao-info.compone
     InscricaoRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule],
+    RouterModule,
+    PdfViewerModule
+  ],
   exports: [],
   providers: [],
 })
