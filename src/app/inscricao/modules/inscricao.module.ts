@@ -1,3 +1,4 @@
+import { InscricaoRoutingModule } from './inscricao-routing.module';
 import { NgModule } from '@angular/core';
 
 import { InscricaoComponent } from './../inscricao.component';
@@ -6,7 +7,7 @@ import { InscricaoComponent } from './../inscricao.component';
   declarations: [
     InscricaoComponent
   ],
-  imports: [],
+  imports: [InscricaoRoutingModule],
   exports: [],
   providers: [],
 })
