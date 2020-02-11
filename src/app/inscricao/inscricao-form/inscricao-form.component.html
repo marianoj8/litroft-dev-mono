@@ -1,4 +1,4 @@
-<mat-vertical-stepper *ngIf="institutos$ | async as cursos; else loading" [linear]="estudante.id" #stepper
+<mat-vertical-stepper *ngIf="institutos$ | async as cursos; else loading" [linear]="!estudante.id" #stepper
   class="container mat-elevation-z6">
   <mat-step [stepControl]="formGroup01">
     <form [formGroup]="formGroup01">
