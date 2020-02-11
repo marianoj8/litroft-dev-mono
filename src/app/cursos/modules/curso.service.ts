@@ -32,6 +32,10 @@ export class CursoService {
     return this.http.get<Curso[]>(`${this.url}/interno/curso/l`);
   }
 
+  publicList(institutoId: number): Observable<Curso[]> {
+    return this.http.get<Curso[]>(`${this.url}/curso/public/instituto/${institutoId}`);
+  }
+
   filterByNomeDuracao(q: CustomFilter): Observable<Curso[]> {
     return this.http.get<Curso[]>(`${this.url}/interno/curso/l?nome=${!!q.nome ? q.nome : ''}&duracao=${!!q.duracao ? q.duracao : 1}`)
       ;
