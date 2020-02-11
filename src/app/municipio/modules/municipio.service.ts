@@ -24,27 +24,27 @@ export class MunicipioService {
   constructor(private http: HttpClient) { }
 
   getById(id: number): Observable<Municipio> {
-    return this.http.get<Municipio>(`${this.url}/interno/municipio/${id}`);
+    return this.http.get<Municipio>(`${this.url}/municipio/${id}`);
   }
 
   list(): Observable<Municipio[]> {
-    return this.http.get<Municipio[]>(`${this.url}/interno/municipio`);
+    return this.http.get<Municipio[]>(`${this.url}/municipio`);
   }
 
   filterByNomeAndProvincia(filter: CustomFilter): Observable<Municipio[]> {
-    return this.http.get<Municipio[]>(`${this.url}/interno/municipio/l/
+    return this.http.get<Municipio[]>(`${this.url}/municipio/l/
     ${!!filter.provinciaId ? filter.provinciaId : 1}?destrito=${!!filter.nome ? filter.nome : ''}`)
       ;
   }
 
   filterByNome(filter: CustomFilter): Observable<Municipio[]> {
-    return this.http.get<Municipio[]>(`${this.url}/interno/municipio?destrito=${!!filter.nome ? filter.nome : ''}`)
+    return this.http.get<Municipio[]>(`${this.url}/municipio?destrito=${!!filter.nome ? filter.nome : ''}`)
       ;
   }
 
   filterByDuracao(duracao: number): Observable<Municipio[]> {
     return this.http
-      .get<Municipio[]>(`${this.url}/interno/municipio/l?duracao=${!!duracao ? duracao : 1}`);
+      .get<Municipio[]>(`${this.url}/municipio/l?duracao=${!!duracao ? duracao : 1}`);
   }
 
   save(t: Municipio): Observable<Municipio> {
