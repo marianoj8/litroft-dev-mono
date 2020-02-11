@@ -1,6 +1,8 @@
 import { InscricaoComponent } from './../inscricao.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { InscricaoFormComponent } from '../inscricao-form/inscricao-form.component';
+import { InscricaoInfoComponent } from '../inscricao-info/inscricao-info.component';
 
 const routes: Routes = [
   {
@@ -9,7 +11,11 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: null
+        component: InscricaoInfoComponent
+      },
+      {
+        path: 'form-studant',
+        component: InscricaoFormComponent
       }
     ]
   }
