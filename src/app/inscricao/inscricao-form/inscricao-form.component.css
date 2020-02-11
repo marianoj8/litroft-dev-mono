@@ -2,7 +2,7 @@
   margin-top: 0.3rem;
 }
 
-.field-max{
+.field-max {
   width: 95%;
 }
 
@@ -12,8 +12,14 @@
 .field-min-2 {
   width: 25%;
 }
-.field-curso{
+.field-curso {
   width: 54%;
+}
+.distrito-bairro {
+}
+.field-bi-passport,
+.distrito-bairro {
+  width: 32%;
 }
 
 @media only screen and (min-width: 600px) and (max-width: 992px) {
