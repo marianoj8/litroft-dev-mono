@@ -23,15 +23,15 @@ export class ProvinciaService implements CustomRepository<Provincia, number> {
   constructor(private http: HttpClient) { }
 
   getById(id: number): Observable<Provincia> {
-    return this.http.get<Provincia>(`${this.url}/interno/provincia/${id}`);
+    return this.http.get<Provincia>(`${this.url}/provincia/${id}`);
   }
 
   list(): Observable<Provincia[]> {
-    return this.http.get<Provincia[]>(`${this.url}/interno/provincia`);
+    return this.http.get<Provincia[]>(`${this.url}/provincia`);
   }
 
   filterByNome(filter: CustomFilter): Observable<Provincia[]> {
-    return this.http.get<Provincia[]>(`${this.url}/interno/provincia/?nome=${!!filter.nome ? filter.nome : ''}`);
+    return this.http.get<Provincia[]>(`${this.url}/provincia/?nome=${!!filter.nome ? filter.nome : ''}`);
   }
 
   save(t: Provincia): Observable<Provincia> {
