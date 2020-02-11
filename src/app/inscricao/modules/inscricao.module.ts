@@ -1,7 +1,11 @@
 import { NgModule } from '@angular/core';
 
+import { InscricaoComponent } from './../inscricao.component';
+
 @NgModule({
-  declarations: [],
+  declarations: [
+    InscricaoComponent
+  ],
   imports: [],
   exports: [],
   providers: [],
