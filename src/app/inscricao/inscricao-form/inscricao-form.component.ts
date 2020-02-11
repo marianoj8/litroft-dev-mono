@@ -26,6 +26,7 @@ import { catchError } from 'rxjs/operators';
 import { ErrorLoadingComponent } from 'src/app/shared/error-loading/error-loading.component';
 import { InscricaoService } from '../modules/inscricao.service';
 import { InstitutoService } from 'src/app/institutos/modules/instituto.service';
+import { LoadingUploadComponent } from 'src/app/shared/loading-upload/loading-upload.component';
 
 @Component({
   selector: 'app-inscricao-form',
@@ -60,6 +61,9 @@ export class InscricaoFormComponent implements OnInit {
   municipios$: Observable<Municipio[]>;
   filter = new CustomFilter();
   private id = 0;
+  pdfSrc = '';
+  dialogServiceRef;
+  private selectedFile: File = null;
 
   constructor(
     private router: Router,
@@ -73,7 +77,7 @@ export class InscricaoFormComponent implements OnInit {
     private municipioService: MunicipioService,
     private provinciaService: ProvinciaService,
     private notificationService: NotificationService,
-    private dialog: MatDialog,
+    private dialogService: MatDialog,
     private location: Location,
     public monografiaService: MonografiaService) {
     this.monografiaService.emitShowAddButton.emit(true);
@@ -85,7 +89,7 @@ export class InscricaoFormComponent implements OnInit {
 
     this.institutos$ = this.institutoSerice.list()
       .pipe(catchError(err => {
-        this.dialog.open(ErrorLoadingComponent);
+        this.dialogService.open(ErrorLoadingComponent);
         this.institutoError$.next(true);
         return of([]);
       }));
@@ -119,7 +123,7 @@ export class InscricaoFormComponent implements OnInit {
 
         this.cursos$ = this.cursoSerice.publicList(onValue.id)
           .pipe(catchError(err => {
-            this.dialog.open(ErrorLoadingComponent);
+            this.dialogService.open(ErrorLoadingComponent);
             this.cursoError$.next(true);
             return of([]);
           }));
@@ -134,45 +138,6 @@ export class InscricaoFormComponent implements OnInit {
           });
       });
 
-    if (this.router.url.match('/edit')) {
-      this.activatedRoute.params
-        .subscribe(data => {
-          this.id = data.id;
-        });
-
-      this.estudanteService.getById(this.id)
-        .subscribe(data => {
-          this.estudante = data;
-          this.formGroup01.patchValue({
-            nome: this.estudante.nome,
-            sobrenome: this.estudante.sobreNome
-          });
-
-          this.formGroup02.patchValue({
-            sexo: this.estudante.sexo,
-            dataNascimento: this.estudante.dataNascimento,
-            bi: this.estudante.bi
-          });
-
-          this.formGroup03.patchValue({
-            fone: this.estudante.fone,
-            email: this.estudante.email
-          });
-
-          this.formGroup04.patchValue({
-            provincia: this.estudante.provincia.id,
-            municipio: this.estudante.municipio.id,
-            endereco: this.estudante.endereco
-          });
-
-          this.formGroup05.patchValue({
-            numeroProcesso: this.estudante.numeroProcesso,
-            curso: this.estudante.curso.id,
-            turma: this.estudante.turma.id
-          });
-
-        });
-    }
   }
 
   initForms() {
@@ -215,9 +180,6 @@ export class InscricaoFormComponent implements OnInit {
     });
 
     this.formGroup06 = this.formBuilder.group({
-      numeroProcesso: ['', [
-        Validators.required,
-        Validators.minLength(5)]],
       curso: [null, Validators.required],
       turma: [null, Validators.required]
     });
@@ -303,6 +265,39 @@ export class InscricaoFormComponent implements OnInit {
 
     return finalDate;
   }
+
+  onFileSelected(event) {
+    const doc: any = document.querySelector('#file');
+    this.onUpload(event);
+
+    if (typeof (FileReader) !== 'undefined') {
+      const reader: FileReader = new FileReader();
+      reader.onload = (e: any) => {
+        this.pdfSrc = e.target.result;
+      };
+
+      reader.readAsArrayBuffer(doc.files[0]);
+    }
+  }
+
+  onUpload(event) {
+    this.selectedFile = event.target.files[0] as File;
+  }
+
+  openLoadingUpload() {
+    this.dialogServiceRef = this.dialogService.open(
+      LoadingUploadComponent,
+      {
+        height: '165px',
+        width: '380px'
+      });
+
+    this.dialogServiceRef.afterClosed().subscribe((result: boolean) => {
+      if (result) {
+      }
+    });
+  }
+
 
   back() {
     this.location.back();
