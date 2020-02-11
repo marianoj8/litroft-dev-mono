@@ -29,6 +29,7 @@ import { AdminInternoService } from './admin-interno/modules/adminInterno.servic
 import { CustomFilter } from './shared/model/support/custom-filter';
 import { ProvinciaService } from './provincia/modules/provincia.service';
 import { MunicipioService } from './municipio/modules/municipio.service';
+import { InscricaoService } from './inscricao/modules/inscricao.service';
 
 @Component({
   selector: 'app-root',
@@ -92,6 +93,7 @@ export class AppComponent implements OnInit, AfterContentChecked, OnDestroy {
     private localService: LocalService,
     private publicService: PublicService,
     public institutoService: InstitutoService,
+    public inscricaoService: InscricaoService,
     private formBuilder: FormBuilder,
   ) {
     this.monografiaService.emitShowAddButton
@@ -178,6 +180,13 @@ export class AppComponent implements OnInit, AfterContentChecked, OnDestroy {
       }
     );
     this.sub = this.estudanteService.onChangeContextTitle.subscribe(
+      value => {
+        this.contextMenu = value;
+        this.showDateSelect = false;
+        this.onChangeContext = true;
+      }
+    );
+    this.sub = this.inscricaoService.onChangeContextTitle.subscribe(
       value => {
         this.contextMenu = value;
         this.showDateSelect = false;
