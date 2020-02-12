@@ -16,6 +16,7 @@ export class InscricaoInfoComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.inscricaoService.onChangeContext.emit(false);
     this.inscricaoService.emitFormScreen.subscribe(onValue => this.add());
   }
 
