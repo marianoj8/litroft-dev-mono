@@ -11,7 +11,7 @@
         </mat-expansion-panel-header>
         <mat-form-field class="field field-padding">
           <mat-select matInput formControlName="curso" placeholder="Curso">
-            <mat-option [value]="''"> Todos os cursos </mat-option>
+            <mat-option [value]="''">Todos os cursos</mat-option>
             <ng-container *ngFor="let curso of cursos">
               <mat-option [value]="curso.id"> {{ curso.nome }} </mat-option>
             </ng-container>
@@ -25,7 +25,7 @@
         </mat-expansion-panel-header>
         <mat-form-field>
           <mat-select matInput formControlName="turma" placeholder="Turma">
-            <mat-option [value]="''"> Todas as turmas </mat-option>
+            <mat-option [value]="''">Todas as turmas</mat-option>
             <ng-container *ngFor="let turma of turmas">
               <mat-option [value]="turma"> {{ turma.sigla }} </mat-option>
             </ng-container>
