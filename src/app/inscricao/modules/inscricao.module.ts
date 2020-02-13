@@ -9,12 +9,14 @@ import { MaterialModule } from 'src/app/material/material.module';
 import { InscricaoFormComponent } from '../inscricao-form/inscricao-form.component';
 import { InscricaoInfoComponent } from '../inscricao-info/inscricao-info.component';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { InscricaoOptionsComponent } from '../inscricao-options/inscricao-options.component';
 
 @NgModule({
   declarations: [
     InscricaoComponent,
     InscricaoFormComponent,
-    InscricaoInfoComponent
+    InscricaoInfoComponent,
+    InscricaoOptionsComponent
   ],
   imports: [
     CommonModule,
