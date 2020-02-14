@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { MatriculaComponent } from './../matricula.component';
 import { MatriculaOpcaoComponent } from './../matricula-opcao/matricula-opcao.component';
+import { MatriculaFormComponent } from '../matricula-form/matricula-form.component';
 
 const routes: Routes = [
   {
@@ -12,6 +13,10 @@ const routes: Routes = [
       {
         path: '',
         component: MatriculaOpcaoComponent
+      },
+      {
+        path: 'from',
+        component: MatriculaFormComponent
       }
     ]
   }
