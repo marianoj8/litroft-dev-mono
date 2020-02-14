@@ -35,6 +35,10 @@ const routes: Routes = [
     loadChildren: 'src/app/inscricao/modules/inscricao.module#InscricaoModule'
   },
   {
+    path: 'matriculas',
+    loadChildren: 'src/app/matricula/modules/matricula.module#MatriculaModule'
+  },
+  {
     path: 'cursos',
     canActivate: [AuthGuard],
     canLoad: [AuthGuard],
