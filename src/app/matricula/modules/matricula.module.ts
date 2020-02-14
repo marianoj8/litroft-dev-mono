@@ -1,3 +1,4 @@
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 
@@ -20,7 +21,8 @@ import { MatriculaFormComponent } from '../matricula-form/matricula-form.compone
     MaterialModule,
     MatriculaRoutingModule,
     ReactiveFormsModule,
-    RouterModule
+    RouterModule,
+    PdfViewerModule
   ],
   exports: [],
   providers: [],
