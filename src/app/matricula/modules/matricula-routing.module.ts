@@ -15,7 +15,15 @@ const routes: Routes = [
         component: MatriculaOpcaoComponent
       },
       {
-        path: 'from',
+        path: 'from/primario',
+        component: MatriculaFormComponent
+      },
+      {
+        path: 'from/ciculo1',
+        component: MatriculaFormComponent
+      },
+      {
+        path: 'from/ciculo2',
         component: MatriculaFormComponent
       }
     ]
