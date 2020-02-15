@@ -1,0 +1,48 @@
+.spaced > * {
+  margin-top: 0.3rem;
+}
+
+.field-max {
+  width: 95%;
+}
+
+.field-min-1 {
+  width: 25%;
+}
+.field-min-2 {
+  width: 25%;
+}
+.field-curso {
+  width: 54%;
+}
+.distrito-bairro {
+}
+.field-bi-passport,
+.distrito-bairro {
+  width: 32%;
+}
+
+@media only screen and (min-width: 600px) and (max-width: 992px) {
+  .field-min-1 {
+    width: 25%;
+  }
+  .field-min-2 {
+    width: 25%;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  mat-vertical-stepper {
+    margin-top: 8%;
+    margin-bottom: 28.6%;
+  }
+  mat-step {
+    padding-bottom: 4%;
+  }
+  .field-min-1 {
+    width: 95%;
+  }
+  .field-min-2 {
+    width: 95%;
+  }
+}
