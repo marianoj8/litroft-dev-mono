@@ -19,6 +19,7 @@ export class Instituto implements CustomAbstractEntity {
   oficinas: number;
   salas: number;
   cursos: number;
+  nivel: string;
   local: Local;
   areaFormacao: AreaFormacao;
   admin: Admin;
