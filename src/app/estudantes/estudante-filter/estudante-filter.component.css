@@ -3,10 +3,14 @@ ul .item {
 }
 
 .actions {
-  top: 80px;
-  clear: both;
+  display: block;
   position: relative;
-  width: 100%;
+  margin-top: 10px;
+  /* width: 100%; */
+}
+
+.field-max{
+  width: 95%;
 }
 
 @media only screen and (min-width: 993px) {
