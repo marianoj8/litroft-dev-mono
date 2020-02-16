@@ -29,9 +29,9 @@
         <mat-icon left>person_pin</mat-icon>
         Estudantes
       </a>
-      <a routerLinkActive="active" [routerLink]="['institutos/private-list']" mat-button *ngIf="!showOrHideMenu">
+      <a routerLinkActive="active" [routerLink]="['institutos']" mat-button *ngIf="!showOrHideMenu">
         <mat-icon left>school</mat-icon>
-        Institutos
+        Escolas
       </a>
       <a routerLinkActive="active" [routerLink]="['cursos']" mat-button *ngIf="showOrHideMenu">
         <mat-icon>school</mat-icon>
@@ -58,7 +58,11 @@
       </a>
       <a routerLinkActive="active" [routerLink]="['institutos']" mat-button>
         <mat-icon>school</mat-icon>
-        Institutos
+        Escolas
+      </a>
+      <a routerLinkActive="active" [routerLink]="['matriculas']" mat-button>
+        <mat-icon>assignment</mat-icon>
+        Matriculas
       </a>
       <a routerLinkActive="active" [routerLink]="['inscricao/subscriptions-options']" mat-button>
         <mat-icon>assignment</mat-icon>
@@ -122,7 +126,7 @@
 
     <mat-toolbar *ngIf="!authService.loggedIn()">
       <h2 style="text-align: center; width: 90%;">
-        Institutos Médios
+        Escolas
       </h2>
     </mat-toolbar>
 
@@ -212,12 +216,20 @@
                 <mat-icon color="primary">school</mat-icon>
               </mat-panel-title>
               <mat-panel-description>
-                Institutos
+                Escolas
               </mat-panel-description>
             </mat-expansion-panel-header>
-            <a mat-list-item routerLinkActive="active" [routerLink]="['institutos/private-list']">
+            <a mat-list-item routerLinkActive="active" [routerLink]="['/institutos/private/list']">
               <mat-icon color="primary">school</mat-icon>
-              Institutos
+              Ensino Primario
+            </a>
+            <a mat-list-item routerLinkActive="active" [routerLink]="['/institutos/private/ciclo1/list']">
+              <mat-icon color="primary">school</mat-icon>
+              Ensino do I ciclo
+            </a>
+            <a mat-list-item routerLinkActive="active" [routerLink]="['/institutos/private/ciclo2/list']">
+              <mat-icon color="primary">school</mat-icon>
+              Ensino do II ciclo
             </a>
             <a mat-list-item routerLinkActive="active" [routerLink]="['area-formacao']">
               <mat-icon color="primary">domain</mat-icon>
