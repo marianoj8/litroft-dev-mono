@@ -3,7 +3,7 @@ import { CustomAbstractEntity } from 'src/app/shared/model/customEntity';
 import { AdminInterno } from './adminInterno';
 import { Departamento } from './departamento';
 
-export class Curso implements CustomAbstractEntity {
+export class EnsinoNivel implements CustomAbstractEntity {
 
   id: number;
   createdAt: string;
