@@ -12,4 +12,5 @@ export class CustomFilter {
   entrada: number;
   finalista: number;
   anoletivoType: number;
+  nivel: number;
 }
