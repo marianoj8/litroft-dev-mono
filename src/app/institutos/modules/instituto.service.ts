@@ -45,7 +45,7 @@ export class InstitutoService {
   listFilteredWithNivel(filterParam: CustomFilter): Observable<Instituto[]> {
     filterParam = this.filterResolve(filterParam);
     return this.http.
-    get<Instituto[]>(`${this.url}/instituto/nivelid?nome=${filterParam.nome}&sigla=${filterParam.sigla}&numero=${filterParam.numero}&nivel=${filterParam.nivelId}`);
+      get<Instituto[]>(`${this.url}/instituto/nivelid?nome=${filterParam.nome}&sigla=${filterParam.sigla}&numero=${filterParam.numero}&nivel=${filterParam.nivelId}`);
   }
 
   save(t: Instituto): Observable<Instituto> {
