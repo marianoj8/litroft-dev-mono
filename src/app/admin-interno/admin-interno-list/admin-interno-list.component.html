@@ -11,16 +11,9 @@
   >
 
     <ng-container matColumnDef="nome">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Nome</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Nome completo</th>
       <td mat-cell *matCellDef="let adminInterno">
-        {{ adminInterno?.nome }}
-      </td>
-    </ng-container>
-
-    <ng-container matColumnDef="sobrenome">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Sobrenome</th>
-      <td mat-cell *matCellDef="let adminInterno">
-        {{ adminInterno?.sobreNome }}
+        {{ adminInterno?.nome }} {{ adminInterno?.sobreNome }}
       </td>
     </ng-container>
 
