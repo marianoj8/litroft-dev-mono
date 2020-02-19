@@ -9,7 +9,7 @@
         <mat-expansion-panel-header>
           <mat-panel-title>Curso</mat-panel-title>
         </mat-expansion-panel-header>
-        <mat-form-field class="field field-padding">
+        <mat-form-field class="field-max field-padding">
           <mat-select matInput formControlName="curso" placeholder="Curso">
             <mat-option [value]="''">Todos os cursos</mat-option>
             <ng-container *ngFor="let curso of cursos">
@@ -23,7 +23,7 @@
         <mat-expansion-panel-header>
           <mat-panel-title>Turma</mat-panel-title>
         </mat-expansion-panel-header>
-        <mat-form-field>
+        <mat-form-field class="field-max">
           <mat-select matInput formControlName="turma" placeholder="Turma">
             <mat-option [value]="''">Todas as turmas</mat-option>
             <ng-container *ngFor="let turma of turmas">
@@ -37,7 +37,7 @@
         <mat-expansion-panel-header>
           <mat-panel-title>Data</mat-panel-title>
         </mat-expansion-panel-header>
-        <mat-form-field class="field field-padding">
+        <mat-form-field class="field-max field-padding">
           <mat-select matInput formControlName="anoletivoType" placeholder="Ano">
             <ng-container
               *ngFor="let year of [{id:1,tipo:'Data de entrada'},{id:2,tipo:'Data de finalização'},{id:3,tipo:'Todos os anos letivos'}]">
@@ -45,7 +45,7 @@
             </ng-container>
           </mat-select>
         </mat-form-field>
-        <mat-form-field *ngIf="isAllYears" class="field field-padding">
+        <mat-form-field *ngIf="isAllYears" class="field-max field-padding">
           <mat-select matInput formControlName="anoletivo" placeholder="Ano">
             <ng-container *ngFor="let year of years">
               <mat-option [value]="year"> {{ year }} </mat-option>
@@ -58,7 +58,7 @@
         <mat-expansion-panel-header>
           <mat-panel-title>Sexo</mat-panel-title>
         </mat-expansion-panel-header>
-        <mat-form-field class="field field-padding">
+        <mat-form-field class="field-max field-padding">
           <mat-select matInput formControlName="sexo" placeholder="Sexo">
             <mat-option *ngFor="let sexo of ['Todos', 'Masculino', 'Femenino']" [value]="sexo">
               {{ sexo }}
@@ -68,17 +68,18 @@
       </mat-expansion-panel>
     </mat-accordion>
   </div>
-
-  <mat-dialog-actions>
-    <div class="actions">
-      <button class="btn-large" mat-raised-button matDialogClose>
-        <mat-icon>arrow_back</mat-icon>
-        Cancelar
-      </button>
-      <button class="btn-large" mat-raised-button matDialogClose="true" color="primary" (click)="onApplyFilter()">
-        <mat-icon>done_all</mat-icon>
-        Aplicar filtro
-      </button>
-    </div>
-  </mat-dialog-actions>
+  <div class="actions">
+    <button class="btn-large" mat-raised-button matDialogClose>
+      <mat-icon>arrow_back</mat-icon>
+      Cancelar
+    </button>
+    <button class="btn-large" mat-raised-button matDialogClose="true" color="primary" (click)="onApplyFilter()">
+      <mat-icon>done_all</mat-icon>
+      Aplicar filtro
+    </button>
+  </div>
 </form>
+
+<!-- <mat-dialog-actions> -->
+
+<!-- </mat-dialog-actions> -->
