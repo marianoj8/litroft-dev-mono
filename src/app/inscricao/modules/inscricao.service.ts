@@ -19,6 +19,7 @@ export class InscricaoService {
   emitOnEditButtonCliked = new EventEmitter<number>();
   emitOnDeleteButtonCliked = new EventEmitter<number>();
   emitFormScreen = new EventEmitter<boolean>();
+  emitSubOption = new EventEmitter<boolean>();
 
   estudanteTable: MatTableDataSource<Estudante[]>;
   constructor(private http: HttpClient) {
