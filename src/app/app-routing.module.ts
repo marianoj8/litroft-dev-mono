@@ -39,6 +39,14 @@ const routes: Routes = [
     loadChildren: 'src/app/matricula/modules/matricula.module#MatriculaModule'
   },
   {
+    path: 'ensino-nivel',
+    loadChildren: 'src/app/ensino-nivel/modules/ensino-nivel.module#EnsinoNivelModule'
+  },
+  {
+    path: 'periodos',
+    loadChildren: 'src/app/periodos/modules/periodos.module#PeriodoModule'
+  },
+  {
     path: 'cursos',
     canActivate: [AuthGuard],
     canLoad: [AuthGuard],
