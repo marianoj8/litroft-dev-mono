@@ -1,3 +1,5 @@
+import { log } from 'util';
+import { EnsinoNivel } from './../../shared/model/ensinoNivel';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDailogTypeParam } from 'src/app/shared/model/support/mat-dialog-type-param';
 import { CustomFilter } from 'src/app/shared/model/support/custom-filter';
@@ -15,6 +17,7 @@ import { DeleteDialogComponent } from 'src/app/shared/delete-dialog/delete-dialo
 import { Instituto } from 'src/app/shared/model/instituto';
 import { InstitutoService } from '../modules/instituto.service';
 import { Departamento } from 'src/app/shared/model/departamento';
+import { EnsinoNivelService } from 'src/app/ensino-nivel/modules/ensino-nivel.service';
 
 @Component({
   selector: 'app-instituto-privete-list',
@@ -32,6 +35,7 @@ export class InstitutoPriveteListComponent implements OnInit {
   institutosList: Instituto[] = [];
   cursosList: Curso[] = [];
   error$ = new Subject<boolean>();
+  public nivelEnsino: number;
 
 
 
@@ -52,51 +56,133 @@ export class InstitutoPriveteListComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private institutoService: InstitutoService,
+    private ensinoNivelService: EnsinoNivelService,
     private monografiaService: MonografiaService,
     private notification: NotificationService,
     private dialogService: MatDialog) {
     this.monografiaService.emitShowAddButton.emit(true);
+    this.institutoService.onChangeContext.emit(false);
+    this.institutoService.emitShowSearchBar.emit(true);
   }
 
   ngOnInit() {
-    this.institutoService.onChangeContext.emit(false);
+    this.institutoService.emitShowSearchBar.emit(true);
+    this.institutoService.onChangeContextTitle.emit('Escolas do Ensino Primario');
+    if (this.router.routerState.snapshot.url.includes('/institutos/private/list')) {
+      this.nivelEnsino = 0;
+      this.filtro.nivel = 'Ensino Primario';
+      this.displaydColumns = [
+        'sigla',
+        'numero',
+        'nome',
+        'localizacao',
+        'detalhe',
+        'edit',
+        'delete'
+      ];
 
-    this.sub = this.institutoService.findValueParams
-      .subscribe(next => this.onRefrash(next));
+      this.onRefrash(this.filtro);
 
-    // this.sub = this.service.findValueParam
-    //   .subscribe(next => this.cursos.filter = next);
+      this.sub = this.institutoService.findValueParams
+        .subscribe(next => this.onRefrash(next));
 
-    this.onRefrash(this.filtro);
+      this.sub = this.institutoService.emitOnDetalheButtonCliked.subscribe(
+        (next) => this.detalhe(next)
+      );
 
-    this.sub = this.institutoService.emitOnDetalheButtonCliked.subscribe(
-      (next) => this.detalhe(next)
-    );
+      this.sub = this.institutoService.emitOnEditButtonCliked.subscribe(
+        (next) => this.edit(next)
+      );
 
-    this.sub = this.institutoService.emitOnEditButtonCliked.subscribe(
-      (next) => this.edit(next)
-    );
+      this.sub = this.institutoService.emitOnDeleteButtonCliked.subscribe(
+        (next) => this.openDeleteDialog(next)
+      );
 
-    this.sub = this.institutoService.emitOnDeleteButtonCliked.subscribe(
-      (next) => this.openDeleteDialog(next)
-    );
+      this.sub = this.institutoService.findValueParams.subscribe(
+        (value: CustomFilter) => this.onRefrash(value)
+      );
 
-    this.sub = this.institutoService.findValueParams.subscribe(
-      (value: CustomFilter) => this.onRefrash(value)
-    );
+    }
+
+    if (this.router.routerState.snapshot.url.includes('/institutos/private/ciclo1/list')) {
+      this.institutoService.onChangeContextTitle.emit('Escolas do I Ciclo');
+      this.nivelEnsino = 1;
+      this.filtro.nivel = 'Ensino do I Ciclo';
+      this.displaydColumns = [
+        'sigla',
+        'numero',
+        'nome',
+        'localizacao',
+        'detalhe',
+        'edit',
+        'delete'
+      ];
+
+      this.onRefrash(this.filtro);
+
+      this.sub = this.institutoService.findValueParams
+        .subscribe(next => this.onRefrash(next));
+
+      this.sub = this.institutoService.emitOnDetalheButtonCliked.subscribe(
+        (next) => this.detalhe(next)
+      );
+
+      this.sub = this.institutoService.emitOnEditButtonCliked.subscribe(
+        (next) => this.edit(next)
+      );
+
+      this.sub = this.institutoService.emitOnDeleteButtonCliked.subscribe(
+        (next) => this.openDeleteDialog(next)
+      );
+
+      this.sub = this.institutoService.findValueParams.subscribe(
+        (value: CustomFilter) => this.onRefrash(value)
+      );
+    }
+
+    if (this.router.routerState.snapshot.url.includes('/institutos/private/ciclo2/list')) {
+      this.institutoService.onChangeContextTitle.emit('Escolas do II Ciclo');
+      this.nivelEnsino = 2;
+      this.filtro.nivel = 'Ensino do II Ciclo';
+      this.displaydColumns = [
+        'sigla',
+        'nome',
+        'formacao',
+        'cursos',
+        'localizacao',
+        'detalhe',
+        'edit',
+        'delete'
+      ];
+
+      this.onRefrash(this.filtro);
+
+      this.sub = this.institutoService.findValueParams
+        .subscribe(next => this.onRefrash(next));
+
+      this.sub = this.institutoService.emitOnDetalheButtonCliked.subscribe(
+        (next) => this.detalhe(next)
+      );
+
+      this.sub = this.institutoService.emitOnEditButtonCliked.subscribe(
+        (next) => this.edit(next)
+      );
+
+      this.sub = this.institutoService.emitOnDeleteButtonCliked.subscribe(
+        (next) => this.openDeleteDialog(next)
+      );
+
+      this.sub = this.institutoService.findValueParams.subscribe(
+        (value: CustomFilter) => this.onRefrash(value)
+      );
+    }
   }
-
-  // onFilterFromServer(data: CustomFilter) {
-  //   this.sub = this.service.filterByNomeDuracao(data).subscribe(
-  //     (next: Curso[]) => this.cursosList = next
-  //   );
-  // }
 
   onRefrash(data?: CustomFilter) {
     this.sub = this.institutoService.listFiltered(data)
       .pipe(
         catchError(err => {
-          // this.dialogService.open(ErrorLoadingComponent);
+          this.dialogService.open(ErrorLoadingComponent);
           this.error$.next(true);
           return of(null);
         })
@@ -124,7 +210,17 @@ export class InstitutoPriveteListComponent implements OnInit {
   }
 
   add() {
-    this.router.navigate(['institutos/add']);
+    if (this.nivelEnsino === 0) {
+      this.router.navigate(['institutos/add/primario']);
+    }
+
+    if (this.nivelEnsino === 1) {
+      this.router.navigate(['institutos/add/ciclo1']);
+    }
+
+    if (this.nivelEnsino === 2) {
+      this.router.navigate(['institutos/add/ciclo2']);
+    }
   }
 
   detalhe(instituto: Instituto) {
@@ -132,7 +228,18 @@ export class InstitutoPriveteListComponent implements OnInit {
   }
 
   edit(instituto: Instituto) {
-    this.router.navigate(['institutos/edit', instituto.id]);
+
+    if (this.nivelEnsino === 0) {
+      this.router.navigate(['institutos/edit/primario', instituto.id]);
+    }
+
+    if (this.nivelEnsino === 1) {
+      this.router.navigate(['institutos/edit/ciclo1', instituto.id]);
+    }
+
+    if (this.nivelEnsino === 2) {
+      this.router.navigate(['institutos/edit/ciclo2', instituto.id]);
+    }
   }
 
   OnDestroy() {
