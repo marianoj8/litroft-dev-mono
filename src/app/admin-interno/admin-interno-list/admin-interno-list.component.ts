@@ -32,7 +32,6 @@ export class AdminInternoListComponent implements OnInit, OnDestroy {
 
   displaydColumns: string[] = [
     'nome',
-    'sobrenome',
     'sexo',
     'instituto',
     'detalhe',
