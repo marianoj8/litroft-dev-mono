@@ -19,6 +19,7 @@ export class InstitutoService {
   emitOnDeleteButtonCliked = new EventEmitter<number>();
   url = environment.API;
   emitSelectedInstituto = new EventEmitter<Instituto>();
+  emitShowSearchBar = new EventEmitter<boolean>();
 
   constructor(
     private http: HttpClient
@@ -29,7 +30,6 @@ export class InstitutoService {
   }
 
   list(): Observable<Instituto[]> {
-    // console.log(this.url);
     return this.http.get<Instituto[]>(`${this.url}/instituto`);
   }
 
@@ -39,7 +39,13 @@ export class InstitutoService {
 
   listFiltered(filterParam: CustomFilter): Observable<Instituto[]> {
     filterParam = this.filterResolve(filterParam);
-    return this.http.get<Instituto[]>(`${this.url}/instituto?nome=${filterParam.nome}&sigla=${filterParam.sigla}`);
+    return this.http.get<Instituto[]>(`${this.url}/instituto?nome=${filterParam.nome}&sigla=${filterParam.sigla}&numero=${filterParam.numero}&nivel=${filterParam.nivel}`);
+  }
+
+  listFilteredWithNivel(filterParam: CustomFilter): Observable<Instituto[]> {
+    filterParam = this.filterResolve(filterParam);
+    return this.http.
+    get<Instituto[]>(`${this.url}/instituto/nivelid?nome=${filterParam.nome}&sigla=${filterParam.sigla}&numero=${filterParam.numero}&nivel=${filterParam.nivelId}`);
   }
 
   save(t: Instituto): Observable<Instituto> {
@@ -57,6 +63,9 @@ export class InstitutoService {
     filterParam.nome = filterParam.nome === undefined ? '' : filterParam.nome;
     filterParam.descricao = filterParam.descricao === undefined ? '' : filterParam.descricao;
     filterParam.sigla = filterParam.sigla === undefined ? '' : filterParam.sigla;
+    filterParam.nivelId = filterParam.nivel === undefined ? 0 : filterParam.nivelId;
+    filterParam.nivel = filterParam.nivel === undefined ? '' : filterParam.nivel;
+    filterParam.numero = filterParam.numero === undefined ? '' : filterParam.numero;
     return filterParam;
   }
 
