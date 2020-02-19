@@ -18,7 +18,7 @@ export class InstitutoNivelComponent implements OnInit {
   ngOnInit() {
   }
 
-  private listarEscola(option: number): void {
+  public listarEscola(option: number): void {
     if (option === 0) {
       this.router.navigate(['private/list'], { relativeTo: this.activatedRoute });
     }
