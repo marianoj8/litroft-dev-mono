@@ -68,6 +68,10 @@ export class InscricaoComponent implements OnInit, OnDestroy {
     this.inscricaoService.emitFormScreen.emit(true);
   }
 
+  emitSubscriptionOption() {
+    this.inscricaoService.emitSubOption.emit(true);
+  }
+
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
