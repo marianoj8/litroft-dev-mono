@@ -1,9 +1,11 @@
+import { EnsinoNivel } from './ensinoNivel';
 import { CustomAbstractEntity } from 'src/app/shared/model/customEntity';
 
 import { Admin } from './admin';
 import { AreaFormacao } from './AreaFormacao';
 import { Local } from './local';
 import { SobreInstituto } from './sobreInstituto';
+import { Periodo } from './periodo';
 
 export class Instituto implements CustomAbstractEntity {
 
@@ -19,8 +21,9 @@ export class Instituto implements CustomAbstractEntity {
   oficinas: number;
   salas: number;
   cursos: number;
-  nivel: string;
   local: Local;
+  periodo: Periodo;
+  nivel: EnsinoNivel;
   areaFormacao: AreaFormacao;
   admin: Admin;
   sobreInstituto: SobreInstituto;
