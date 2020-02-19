@@ -14,6 +14,7 @@ import { CustomFilter } from '../shared/model/support/custom-filter';
 export class InstitutoComponent implements OnInit, OnDestroy {
 
   public onChangeContext = false;
+  public emitShowSearchBar = false;
   filter = new CustomFilter();
   private sub: Subscription;
 
@@ -22,7 +23,7 @@ export class InstitutoComponent implements OnInit, OnDestroy {
     private cursoService: CursoService,
     private monografiaService: MonografiaService,
     private location: Location) {
-    this.cursoService.onChangeContextTitle.emit('Institutos');
+    this.institutoService.onChangeContextTitle.emit('Escolas do ensono primario ao II ciclo');
     this.monografiaService.emitShowAddButton.emit(true);
   }
 
@@ -30,6 +31,11 @@ export class InstitutoComponent implements OnInit, OnDestroy {
     this.sub = this.institutoService.onChangeContext.subscribe(
       context => this.onChangeContext = context
     );
+
+    this.sub = this.institutoService.emitShowSearchBar.subscribe(
+      context => this.emitShowSearchBar = context
+    );
+
   }
 
   cleanSearchField() {
@@ -46,6 +52,7 @@ export class InstitutoComponent implements OnInit, OnDestroy {
 
   back() {
     this.location.back();
+    this.institutoService.emitShowSearchBar.emit(false);
   }
 
   ngOnDestroy() {
