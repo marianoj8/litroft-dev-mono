@@ -174,8 +174,7 @@
             <ng-container *ngFor="let instituto of institutos">
               <mat-option *ngIf="!instituto">lista vasia</mat-option>
               <mat-option [value]="instituto.id">
-                {{instituto.sigla}} - {{ instituto.nome }} [{{ instituto.numero}} |
-                {{instituto.areaFormacao.descricao }}]
+                {{instituto.sigla}} - {{ instituto.nome }} [{{ instituto.numero}}]
               </mat-option>
             </ng-container>
           </mat-select>
