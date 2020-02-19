@@ -1,229 +1,427 @@
 <mat-vertical-stepper [linear]="!instituto.id" #stepper class="container mat-elevation-z6">
-  <mat-step [stepControl]="formGroup01">
-    <form [formGroup]="formGroup01">
-      <div class="field">
-        <ng-template matStepLabel>
-          Nome, sigla & numero do instituto
-        </ng-template>
-        <mat-form-field class="field field-padding">
-          <input matInput autocomplete="false" formControlName="nome" required placeholder="Nome" />
-          <mat-error *ngIf="
+
+  <!-- Nivel de Ensino: Primario e I ciclo-->
+  <div *ngIf="nivelEnsino === 0 || nivelEnsino === 1">
+    <mat-step [stepControl]="formGroup01">
+      <form [formGroup]="formGroup01">
+        <div class="field">
+          <ng-template matStepLabel>
+            Nome, sigla & numero da escola
+          </ng-template>
+          <mat-form-field class="field field-padding">
+            <input matInput autocomplete="false" formControlName="nome" required placeholder="Nome" />
+            <mat-error *ngIf="
               formGroup01.controls['nome'].hasError('minlength') &&
               !formGroup01.controls['nome'].hasError('required')
             ">
-            Nome deve ter no minimo <strong>3 caraters</strong>
-          </mat-error>
+              Nome deve ter no minimo <strong>3 caraters</strong>
+            </mat-error>
 
-          <mat-error *ngIf="formGroup01.controls['nome'].hasError('maxlength')">
-            Nome não deve ter acima de <strong>80 caraters</strong>
-          </mat-error>
+            <mat-error *ngIf="formGroup01.controls['nome'].hasError('maxlength')">
+              Nome não deve ter acima de <strong>80 caraters</strong>
+            </mat-error>
 
-          <mat-error *ngIf="formGroup01.controls['nome'].hasError('required')">
-            Nome é <strong>obrigatorio</strong>
-          </mat-error>
-        </mat-form-field>
-        <mat-form-field class="field-min-1 field-padding">
-          <input matInput autocomplete="false" formControlName="sigla" required placeholder="Sigla" />
-          <mat-error *ngIf="
+            <mat-error *ngIf="formGroup01.controls['nome'].hasError('required')">
+              Nome é <strong>obrigatorio</strong>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="field-min-1 field-padding">
+            <input matInput autocomplete="false" formControlName="sigla" required placeholder="Sigla" />
+            <mat-error *ngIf="
               formGroup01.controls['sigla'].hasError('minlength') &&
               !formGroup01.controls['sigla'].hasError('required')
             ">
-            Sigla deve ter no minimo <strong>3 caraters</strong>
-          </mat-error>
+              Sigla deve ter no minimo <strong>3 caraters</strong>
+            </mat-error>
 
-          <mat-error *ngIf="formGroup01.controls['sigla'].hasError('maxlength')">
-            Sigla não deve ter acima de <strong>80 caraters</strong>
-          </mat-error>
+            <mat-error *ngIf="formGroup01.controls['sigla'].hasError('maxlength')">
+              Sigla não deve ter acima de <strong>80 caraters</strong>
+            </mat-error>
 
-          <mat-error *ngIf="formGroup01.controls['sigla'].hasError('required')">
-            Sigla é <strong>obrigatorio</strong>
-          </mat-error>
-        </mat-form-field>
-        <mat-form-field class="field-min-2 field-padding">
-          <input matInput autocomplete="false" formControlName="numero" required placeholder="Numero" />
-          <mat-error *ngIf="
+            <mat-error *ngIf="formGroup01.controls['sigla'].hasError('required')">
+              Sigla é <strong>obrigatorio</strong>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="field-min-2 field-padding">
+            <input matInput autocomplete="false" formControlName="numero" required placeholder="Numero" />
+            <mat-error *ngIf="
               formGroup01.controls['numero'].hasError('minlength') &&
               !formGroup01.controls['numero'].hasError('required')
             ">
-            Numero deve ter no minimo <strong>3 digitos</strong>
-          </mat-error>
+              Numero deve ter no minimo <strong>3 digitos</strong>
+            </mat-error>
 
-          <mat-error *ngIf="formGroup01.controls['numero'].hasError('maxlength')">
-            Numero não deve ter acima de <strong>12 digitos</strong>
-          </mat-error>
+            <mat-error *ngIf="formGroup01.controls['numero'].hasError('maxlength')">
+              Numero não deve ter acima de <strong>12 digitos</strong>
+            </mat-error>
 
-          <mat-error *ngIf="formGroup01.controls['sigla'].hasError('required')">
-            Numero é <strong>obrigatorio</strong>
-          </mat-error>
-        </mat-form-field>
-        <div class="spaced">
-          <button color="primary" class="large" mat-raised-button matStepperNext>
-            <mat-icon>arrow_downward</mat-icon>
-            Avançar
-          </button>
+            <mat-error *ngIf="formGroup01.controls['sigla'].hasError('required')">
+              Numero é <strong>obrigatorio</strong>
+            </mat-error>
+          </mat-form-field>
+          <div class="spaced">
+            <button color="primary" class="large" mat-raised-button matStepperNext>
+              <mat-icon>arrow_downward</mat-icon>
+              Avançar
+            </button>
+          </div>
         </div>
-      </div>
-    </form>
-  </mat-step>
+      </form>
+    </mat-step>
 
-  <mat-step [stepControl]="formGroup02">
-    <form [formGroup]="formGroup02">
-      <div class="field">
-        <ng-template matStepLabel>
-          Salas, laboratorios & oficinas
-        </ng-template>
-        <mat-form-field class="field-min-1 field-padding">
-          <input matInput formControlName="salas" type="number" required placeholder="Salas de aulas" />
-          <mat-error *ngIf="
+    <mat-step [stepControl]="formGroup02">
+      <form [formGroup]="formGroup02">
+        <div class="field">
+          <ng-template matStepLabel>
+            Salas, Periodo & Localização da escola
+          </ng-template>
+          <mat-form-field class="field-min-1 field-padding">
+            <input matInput formControlName="salas" type="number" required placeholder="Salas de aulas" />
+            <mat-error *ngIf="
               formGroup02.controls['salas'].hasError('min') &&
               !formGroup02.controls['salas'].hasError('required')
             ">
-            Dever ter no minino <strong>8 salas</strong>
-          </mat-error>
-          <mat-error *ngIf="formGroup02.controls['salas'].hasError('required')">
-            Numero de salas é <strong>obrigatorio</strong>
-          </mat-error>
-        </mat-form-field>
-        <mat-form-field class="field-min-1 field-padding">
-          <input matInput formControlName="laboratorios" type="number" required placeholder="Laboratorios" />
-          <mat-error *ngIf="formGroup02.controls['laboratorios'].hasError('required')">
-            Numero de laboratorios é <strong>obrigatorio</strong>
-          </mat-error>
-        </mat-form-field>
-        <mat-form-field class="field-min-1 field-padding">
-          <input matInput formControlName="oficinas" type="number" required placeholder="Oficinas" />
-          <mat-error *ngIf="formGroup02.controls['oficinas'].hasError('required')">
-            Numero de oficinas é <strong>obrigatorio</strong>
-          </mat-error>
-        </mat-form-field>
+              Dever ter no minino <strong>8 salas</strong>
+            </mat-error>
+            <mat-error *ngIf="formGroup02.controls['salas'].hasError('required')">
+              Numero de salas é <strong>obrigatorio</strong>
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="field-min-3 field-padding">
+            <mat-select matInput formControlName="periodo" required placeholder="Periodo">
+              <ng-container *ngFor="let periodo of periodos$ | async">
+                <mat-option [value]="periodo.id">
+                  {{ periodo.descricao }}
+                </mat-option>
+              </ng-container>
+            </mat-select>
+            <mat-error *ngIf="formGroup02.controls['periodo'].hasError('required')">
+              Periodo é <strong>obrigatorio</strong>
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="field field-padding">
+            <mat-select matInput formControlName="local" required placeholder="Local">
+              <ng-container *ngFor="let local of locais$ | async">
+                <mat-option [value]="local.id">
+                  {{ local.distrito }},
+                  {{ local.municipio.nome }},
+                  {{ local.provincia.nome }}
+                </mat-option>
+              </ng-container>
+            </mat-select>
+            <mat-error *ngIf="formGroup02.controls['local'].hasError('required')">
+              Local é <strong>obrigatorio</strong>
+            </mat-error>
+          </mat-form-field>
+
+          <button mat-stroked-button matStepperPrevious class="large">
+            <mat-icon>arrow_upward</mat-icon>
+            Anterior
+          </button>
+          <div class="spaced">
+            <button color="primary" class="large" mat-raised-button matStepperNext>
+              <mat-icon>arrow_downward</mat-icon>
+              Avançar
+            </button>
+          </div>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step [stepControl]="formGroup04">
+      <form [formGroup]="formGroup04">
+        <div class="field">
+          <ng-template matStepLabel>
+            Sobre o Instituto
+          </ng-template>
+          <mat-form-field class="field-max field-padding">
+
+            <textarea matInput aria-expanded="true" mat-line="5" autocomplete="false" formControlName="sobre" required
+              placeholder="sobre"></textarea>
+
+            <mat-error *ngIf="formGroup04.controls['sobre'].hasError('required')">
+              Nome é <strong>obrigatorio</strong>
+            </mat-error>
+          </mat-form-field>
+          <button mat-stroked-button matStepperPrevious class="large">
+            <mat-icon>arrow_upward</mat-icon>
+            Anterior
+          </button>
+          <div class="spaced">
+            <button color="primary" class="large" mat-raised-button matStepperNext>
+              <mat-icon>arrow_downward</mat-icon>
+              Avançar
+            </button>
+          </div>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step>
+      <ng-template matStepLabel>Concluir com processo de {{ !instituto.id ? "cadastro" : "alteração" }} de escola
+      </ng-template>
+      <div class="spaced">
         <button mat-stroked-button matStepperPrevious class="large">
           <mat-icon>arrow_upward</mat-icon>
           Anterior
         </button>
-        <div class="spaced">
-          <button color="primary" class="large" mat-raised-button matStepperNext>
-            <mat-icon>arrow_downward</mat-icon>
-            Avançar
-          </button>
-        </div>
+        <button class="mat-elevation-z8" *ngIf="!instituto.id" color="primary" mat-raised-button class="large"
+          (click)="onSaveButton(stepper)">
+          <mat-icon>save</mat-icon>
+          Salvar
+        </button>
+        <button color="primary" class="large" mat-raised-button (click)="onSaveButtonAndList(stepper)">
+          <mat-icon>save</mat-icon>
+          {{ !instituto.id ? "Salvar e listar" : "Salvar" }}
+        </button>
       </div>
-    </form>
-  </mat-step>
+    </mat-step>
+  </div>
 
-  <mat-step [stepControl]="formGroup03">
-    <form [formGroup]="formGroup03">
-      <div class="field">
-        <ng-template matStepLabel>
-          Área de formação & Localização
-        </ng-template>
-        <mat-form-field class="field field-padding">
-          <mat-select matInput formControlName="areaFormacao" required placeholder="Área de formação">
-            <!-- <mat-option *ngIf="departamentoError$ | async"
+  <!-- Nivel de Ensino: II Ciclo -->
+  <div *ngIf="nivelEnsino === 2">
+    <mat-step [stepControl]="formGroup01">
+      <form [formGroup]="formGroup01">
+        <div class="field">
+          <ng-template matStepLabel>
+            Nome, sigla & numero da escola
+          </ng-template>
+          <mat-form-field class="field field-padding">
+            <input matInput autocomplete="false" formControlName="nome" required placeholder="Nome" />
+            <mat-error *ngIf="
+              formGroup01.controls['nome'].hasError('minlength') &&
+              !formGroup01.controls['nome'].hasError('required')
+            ">
+              Nome deve ter no minimo <strong>3 caraters</strong>
+            </mat-error>
+
+            <mat-error *ngIf="formGroup01.controls['nome'].hasError('maxlength')">
+              Nome não deve ter acima de <strong>80 caraters</strong>
+            </mat-error>
+
+            <mat-error *ngIf="formGroup01.controls['nome'].hasError('required')">
+              Nome é <strong>obrigatorio</strong>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="field-min-1 field-padding">
+            <input matInput autocomplete="false" formControlName="sigla" required placeholder="Sigla" />
+            <mat-error *ngIf="
+              formGroup01.controls['sigla'].hasError('minlength') &&
+              !formGroup01.controls['sigla'].hasError('required')
+            ">
+              Sigla deve ter no minimo <strong>3 caraters</strong>
+            </mat-error>
+
+            <mat-error *ngIf="formGroup01.controls['sigla'].hasError('maxlength')">
+              Sigla não deve ter acima de <strong>80 caraters</strong>
+            </mat-error>
+
+            <mat-error *ngIf="formGroup01.controls['sigla'].hasError('required')">
+              Sigla é <strong>obrigatorio</strong>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="field-min-2 field-padding">
+            <input matInput autocomplete="false" formControlName="numero" required placeholder="Numero" />
+            <mat-error *ngIf="
+              formGroup01.controls['numero'].hasError('minlength') &&
+              !formGroup01.controls['numero'].hasError('required')
+            ">
+              Numero deve ter no minimo <strong>3 digitos</strong>
+            </mat-error>
+
+            <mat-error *ngIf="formGroup01.controls['numero'].hasError('maxlength')">
+              Numero não deve ter acima de <strong>12 digitos</strong>
+            </mat-error>
+
+            <mat-error *ngIf="formGroup01.controls['sigla'].hasError('required')">
+              Numero é <strong>obrigatorio</strong>
+            </mat-error>
+          </mat-form-field>
+          <div class="spaced">
+            <button color="primary" class="large" mat-raised-button matStepperNext>
+              <mat-icon>arrow_downward</mat-icon>
+              Avançar
+            </button>
+          </div>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step [stepControl]="formGroup02">
+      <form [formGroup]="formGroup02">
+        <div class="field">
+          <ng-template matStepLabel>
+            Salas, laboratorios & oficinas
+          </ng-template>
+          <mat-form-field class="field-min-1 field-padding">
+            <input matInput formControlName="salas" type="number" required placeholder="Salas de aulas" />
+            <mat-error *ngIf="
+              formGroup02.controls['salas'].hasError('min') &&
+              !formGroup02.controls['salas'].hasError('required')
+            ">
+              Dever ter no minino <strong>8 salas</strong>
+            </mat-error>
+            <mat-error *ngIf="formGroup02.controls['salas'].hasError('required')">
+              Numero de salas é <strong>obrigatorio</strong>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="field-min-1 field-padding">
+            <input matInput formControlName="laboratorios" type="number" required placeholder="Laboratorios" />
+            <mat-error *ngIf="formGroup02.controls['laboratorios'].hasError('required')">
+              Numero de laboratorios é <strong>obrigatorio</strong>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="field-min-1 field-padding">
+            <input matInput formControlName="oficinas" type="number" required placeholder="Oficinas" />
+            <mat-error *ngIf="formGroup02.controls['oficinas'].hasError('required')">
+              Numero de oficinas é <strong>obrigatorio</strong>
+            </mat-error>
+          </mat-form-field>
+          <button mat-stroked-button matStepperPrevious class="large">
+            <mat-icon>arrow_upward</mat-icon>
+            Anterior
+          </button>
+          <div class="spaced">
+            <button color="primary" class="large" mat-raised-button matStepperNext>
+              <mat-icon>arrow_downward</mat-icon>
+              Avançar
+            </button>
+          </div>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step [stepControl]="formGroup03">
+      <form [formGroup]="formGroup03">
+        <div class="field">
+          <ng-template matStepLabel>
+            Área de formação & Localização
+          </ng-template>
+          <mat-form-field class="field-min-3">
+            <mat-select matInput formControlName="areaFormacao" required placeholder="Área de formação">
+              <!-- <mat-option *ngIf="departamentoError$ | async"
               >Ocorreu um erro ao carregar institutos...
             </mat-option>
              -->
-            <ng-container *ngFor="let item of areaFormacao$ | async">
-              <mat-option [value]="item.id">
-                {{ item.descricao }}
-              </mat-option>
-            </ng-container>
-          </mat-select>
-          <mat-error *ngIf="
+              <ng-container *ngFor="let item of areaFormacao$ | async">
+                <mat-option [value]="item.id">
+                  {{ item.descricao }}
+                </mat-option>
+              </ng-container>
+            </mat-select>
+            <mat-error *ngIf="
               formGroup03.controls['areaFormacao'].hasError('min') &&
               !formGroup03.controls['areaFormacao'].hasError('required')
             ">
-            Dever ter no minino <strong>8 salas</strong>
-          </mat-error>
-          <mat-error *ngIf="formGroup03.controls['areaFormacao'].hasError('required')">
-            Numero de salas é <strong>obrigatorio</strong>
-          </mat-error>
-        </mat-form-field>
-        <mat-form-field class="field field-padding">
-          <mat-select matInput formControlName="local" required placeholder="Local">
-            <!-- <mat-option *ngIf="departamentoError$ | async"
+              Dever ter no minino <strong>8 salas</strong>
+            </mat-error>
+            <mat-error *ngIf="formGroup03.controls['areaFormacao'].hasError('required')">
+              Numero de salas é <strong>obrigatorio</strong>
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="field-min-3 field-padding">
+            <mat-select matInput formControlName="periodo" required placeholder="Periodo">
+              <ng-container *ngFor="let periodo of periodos$ | async">
+                <mat-option [value]="periodo.id">
+                  {{ periodo.descricao }}
+                </mat-option>
+              </ng-container>
+            </mat-select>
+            <mat-error *ngIf="formGroup03.controls['periodo'].hasError('required')">
+              Periodo é <strong>obrigatorio</strong>
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="field field-padding">
+            <mat-select matInput formControlName="local" required placeholder="Local">
+              <!-- <mat-option *ngIf="departamentoError$ | async"
               >Ocorreu um erro ao carregar institutos...
             </mat-option>
              -->
-            <ng-container *ngFor="let local of locais$ | async">
-              <mat-option [value]="local.id">
-                {{ local.distrito }},
-                {{ local.municipio.nome }},
-                {{ local.provincia.nome }}
-              </mat-option>
-            </ng-container>
-          </mat-select>
-          <mat-error *ngIf="formGroup03.controls['local'].hasError('required')">
-            Local é <strong>obrigatorio</strong>
-          </mat-error>
-        </mat-form-field>
-        <button mat-stroked-button matStepperPrevious class="large">
-          <mat-icon>arrow_upward</mat-icon>
-          Anterior
-        </button>
-        <div class="spaced">
-          <button color="primary" class="large" mat-raised-button matStepperNext>
-            <mat-icon>arrow_downward</mat-icon>
-            Avançar
+              <ng-container *ngFor="let local of locais$ | async">
+                <mat-option [value]="local.id">
+                  {{ local.distrito }},
+                  {{ local.municipio.nome }},
+                  {{ local.provincia.nome }}
+                </mat-option>
+              </ng-container>
+            </mat-select>
+            <mat-error *ngIf="formGroup03.controls['local'].hasError('required')">
+              Local é <strong>obrigatorio</strong>
+            </mat-error>
+          </mat-form-field>
+          <button mat-stroked-button matStepperPrevious class="large">
+            <mat-icon>arrow_upward</mat-icon>
+            Anterior
           </button>
+          <div class="spaced">
+            <button color="primary" class="large" mat-raised-button matStepperNext>
+              <mat-icon>arrow_downward</mat-icon>
+              Avançar
+            </button>
+          </div>
         </div>
-      </div>
-    </form>
-  </mat-step>
+      </form>
+    </mat-step>
 
-  <mat-step [stepControl]="formGroup04">
-    <form [formGroup]="formGroup04">
-      <div class="field">
-        <ng-template matStepLabel>
-          Sobre o Instituto
-        </ng-template>
-        <mat-form-field class="field-max field-padding">
+    <mat-step [stepControl]="formGroup04">
+      <form [formGroup]="formGroup04">
+        <div class="field">
+          <ng-template matStepLabel>
+            Sobre o Instituto
+          </ng-template>
+          <mat-form-field class="field-max field-padding">
 
-          <textarea matInput aria-expanded="true" mat-line="5" autocomplete="false" formControlName="sobre" required
-            placeholder="sobre"></textarea>
-          <!-- <span matPrefix></span>
+            <textarea matInput aria-expanded="true" mat-line="5" autocomplete="false" formControlName="sobre" required
+              placeholder="sobre"></textarea>
+            <!-- <span matPrefix></span>
               <span matSuffix></span>
               <mat-hint align="start">
                   Hint text
               </mat-hint> -->
 
 
-          <mat-error *ngIf="formGroup04.controls['sobre'].hasError('required')">
-            Nome é <strong>obrigatorio</strong>
-          </mat-error>
-        </mat-form-field>
+            <mat-error *ngIf="formGroup04.controls['sobre'].hasError('required')">
+              Nome é <strong>obrigatorio</strong>
+            </mat-error>
+          </mat-form-field>
+          <button mat-stroked-button matStepperPrevious class="large">
+            <mat-icon>arrow_upward</mat-icon>
+            Anterior
+          </button>
+          <div class="spaced">
+            <button color="primary" class="large" mat-raised-button matStepperNext>
+              <mat-icon>arrow_downward</mat-icon>
+              Avançar
+            </button>
+          </div>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step>
+      <ng-template matStepLabel>Concluir com processo de {{ !instituto.id ? "cadastro" : "alteração" }} de escola
+      </ng-template>
+      <div class="spaced">
         <button mat-stroked-button matStepperPrevious class="large">
           <mat-icon>arrow_upward</mat-icon>
           Anterior
         </button>
-        <div class="spaced">
-          <button color="primary" class="large" mat-raised-button matStepperNext>
-            <mat-icon>arrow_downward</mat-icon>
-            Avançar
-          </button>
-        </div>
+        <button class="mat-elevation-z8" *ngIf="!instituto.id" color="primary" mat-raised-button class="large"
+          (click)="onSaveButton(stepper)">
+          <mat-icon>save</mat-icon>
+          Salvar
+        </button>
+        <button color="primary" class="large" mat-raised-button (click)="onSaveButtonAndList(stepper)">
+          <mat-icon>save</mat-icon>
+          {{ !instituto.id ? "Salvar e listar" : "Salvar" }}
+        </button>
       </div>
-    </form>
-  </mat-step>
-
-  <mat-step>
-    <ng-template matStepLabel>Concluir com processo de {{ !instituto.id ? "cadastro" : "alteração" }} de
-      instituto</ng-template>
-    <div class="spaced">
-      <button mat-stroked-button matStepperPrevious class="large">
-        <mat-icon>arrow_upward</mat-icon>
-        Anterior
-      </button>
-      <button class="mat-elevation-z8" *ngIf="!instituto.id" color="primary" mat-raised-button class="large"
-        (click)="onSaveButton(stepper)">
-        <mat-icon>save</mat-icon>
-        Salvar
-      </button>
-      <button color="primary" class="large" mat-raised-button (click)="onSaveButtonAndList(stepper)">
-        <mat-icon>save</mat-icon>
-        {{ !instituto.id ? "Salvar e listar" : "Salvar" }}
-      </button>
-    </div>
-  </mat-step>
+    </mat-step>
+  </div>
 
 </mat-vertical-stepper>
 <ng-template #loading>
