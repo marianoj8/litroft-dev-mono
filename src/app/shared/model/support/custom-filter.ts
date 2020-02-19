@@ -12,5 +12,7 @@ export class CustomFilter {
   entrada: number;
   finalista: number;
   anoletivoType: number;
-  nivel: number;
+  nivelId: number;
+  nivel: string;
+  numero: string;
 }
