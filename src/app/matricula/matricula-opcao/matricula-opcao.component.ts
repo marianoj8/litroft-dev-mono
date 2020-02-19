@@ -1,4 +1,4 @@
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { MatriculaService } from '../modules/matricula.service';
 
@@ -11,6 +11,7 @@ export class MatriculaOpcaoComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private activatedRoute: ActivatedRoute,
     private matriculaService: MatriculaService
   ) { }
 
