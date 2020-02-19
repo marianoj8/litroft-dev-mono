@@ -28,6 +28,8 @@ import { LoadingUploadComponent } from 'src/app/shared/loading-upload/loading-up
 import { EventEmitter } from 'events';
 import { log } from 'util';
 import { MatriculaService } from '../modules/matricula.service';
+import { Periodo } from 'src/app/shared/model/periodo';
+import { PeriodoService } from 'src/app/periodos/modules/periodos.service';
 
 @Component({
   selector: 'app-matricula-form',
@@ -42,6 +44,7 @@ export class MatriculaFormComponent implements OnInit {
   public formGroup05: FormGroup;
   public formGroup06: FormGroup;
   cursos$: Observable<Curso[]>;
+  periodos$: Observable<Periodo[]>;
   institutos$: Observable<Instituto[]>;
   turmas: Turma[];
   cursoError$ = new Subject<boolean>();
@@ -68,7 +71,7 @@ export class MatriculaFormComponent implements OnInit {
   private estudanteIdade: number;
   private currentYear = new Date().getFullYear();
 
-  //Variaves auxiliar de formulario
+  // Variaves auxiliar de formulario
   public nivelEnsino = 1;
   public placeHolserP2C3 = '***';
   public placeHolserP5C1 = '***';
@@ -93,6 +96,7 @@ export class MatriculaFormComponent implements OnInit {
     private turmaService: TurmaService,
     private municipioService: MunicipioService,
     private provinciaService: ProvinciaService,
+    private periodoService: PeriodoService,
     private matriculaService: MatriculaService,
     private notificationService: NotificationService,
     private dialogService: MatDialog,
@@ -103,9 +107,17 @@ export class MatriculaFormComponent implements OnInit {
 
   ngOnInit() {
     this.inscricaoService.onChangeContext.emit(true);
+    this.periodos$ = this.periodoService.list();
     if (this.router.routerState.snapshot.url.includes('/matriculas/from/primario')) {
       this.nivelEnsino = 0;
       this.initPrimaryForms();
+      this.formGroup05.controls.instituto.valueChanges
+        .subscribe((onValue: Instituto) => {
+          this.formGroup05.patchValue({
+            sigla: onValue.sigla,
+            numero: onValue.numero
+          });
+        });
     }
 
     if (this.router.routerState.snapshot.url.includes('/matriculas/from/ciculo1')) {
@@ -218,6 +230,7 @@ export class MatriculaFormComponent implements OnInit {
         Validators.required,
         Validators.minLength(10),
         Validators.maxLength(10)]],
+      optinDoc: [null, Validators.required],
       bi: [null, Validators.required]
     });
 

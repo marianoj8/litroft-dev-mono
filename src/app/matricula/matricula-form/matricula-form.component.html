@@ -59,7 +59,7 @@
           <ng-template matStepLabel>
             Genero, Data de nascimento & Cédula
           </ng-template>
-          <mat-form-field class="field-min-2 field-padding">
+          <mat-form-field class="field-min-2">
             <mat-select matInput formControlName="sexo" placeholder="Sexo">
               <mat-option checked value="M">Masculino</mat-option>
               <mat-option value="F">Femenino</mat-option>
@@ -81,12 +81,26 @@
               Data de Nascimento é <strong>obrigatorio</strong>
             </mat-error>
           </mat-form-field>
+
           <mat-form-field class="field-bi-passport field-padding">
-            <input matInput formControlName="bi" autocomplete="false" required [placeholder]="placeHolserP2C3" />
+            <mat-select matInput formControlName="optinDoc" required placeholder="Documento de Identificação">
+              <ng-container
+                *ngFor="let optionDoc of ['Acento de Nascimento','Cédula','Bilhete de Identidade','Passaporte']">
+                <mat-option [value]="optionDoc"> {{ optionDoc }} </mat-option>
+              </ng-container>
+            </mat-select>
+            <mat-error *ngIf="formGroup02.controls['optinDoc'].hasError('required')">
+              Documento é <strong>obrigatorio</strong>
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="field-max">
+            <input matInput formControlName="bi" autocomplete="false" required placeholder="Numero" />
             <mat-error *ngIf="formGroup02.controls['bi'].hasError('required')">
               Este campo é <strong>obrigatorio</strong>
             </mat-error>
           </mat-form-field>
+
           <div class="spaced">
             <button mat-raised-button class="large" matStepperPrevious>
               <mat-icon>arrow_upward</mat-icon>
@@ -242,8 +256,8 @@
 
           <mat-form-field class="field-min-2 field-padding">
             <mat-select matInput formControlName="periodo" required placeholder="Selecione um perido">
-              <ng-container *ngFor="let periodo of ['Manhã','Tarde']">
-                <mat-option [value]="periodo"> {{ periodo }} </mat-option>
+              <ng-container *ngFor="let periodo of periodos$ | async">
+                <mat-option [value]="periodo"> {{ periodo?.descricao }} </mat-option>
               </ng-container>
             </mat-select>
             <mat-error *ngIf="formGroup05.controls['periodo'].hasError('required')">
@@ -874,7 +888,7 @@
       <form [formGroup]="formGroup05">
         <div class="field">
           <ng-template matStepLabel>
-           Institutos
+            Institutos
           </ng-template>
 
           <mat-form-field class="field-max">
