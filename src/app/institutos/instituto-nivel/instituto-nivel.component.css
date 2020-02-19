@@ -301,7 +301,7 @@ nav {
 
 @media screen and (max-width: 800px) {
   .titulo {
-    font-size: 45px;
+    font-size: 35px;
   }
 
   .contenido-header {
@@ -312,6 +312,17 @@ nav {
 
   .contenido-header > img {
     width: 400px;
+  }
+
+  .articulo > mat-icon {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+    padding-left: 5.7rem;
+    text-align: center;
+    padding-top: 20px;
+    border-radius: 50%;
+    font-size: 50pt;
   }
 
   .textos-header {
@@ -398,6 +409,17 @@ nav {
   .contenido-header {
     height: 400px;
     font-size: 12px;
+  }
+
+  .articulo > mat-icon {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+    padding-left: 12rem;
+    text-align: center;
+    padding-top: 20px;
+    border-radius: 50%;
+    font-size: 50pt;
   }
 
   .nav {
