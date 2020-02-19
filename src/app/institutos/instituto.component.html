@@ -1,5 +1,6 @@
-<div [hidden]="onChangeContext">
+<div [hidden]="!emitShowSearchBar">
   <mat-card color="primary">
+    <mat-icon class="icon-back" color="primary" (click)="back()" [hidden]="!onChangeContext" >arrow_back</mat-icon>
     <div class="space-arround">
       <mat-icon class="icon-settings" color="primary" (click)="onFilterSearch()">settings</mat-icon>
       <mat-form-field class="search">
