@@ -9,6 +9,7 @@ import { InstitutoComponent } from '../instituto.component';
 import { InstiutoRoutingModule } from './instituto-routing.module';
 import { InstitutoDetalheComponent } from '../instituto-detalhe/instituto-detalhe.component';
 import { InstitutoPriveteListComponent } from '../instituto-privete-list/instituto-privete-list.component';
+import { InstitutoNivelComponent } from '../instituto-nivel/instituto-nivel.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { InstitutoPriveteListComponent } from '../instituto-privete-list/institu
     InstitutoListComponent,
     InstitutoFormComponent,
     InstitutoDetalheComponent,
-    InstitutoPriveteListComponent
+    InstitutoPriveteListComponent,
+    InstitutoNivelComponent
   ],
   imports: [
     CommonModule,
