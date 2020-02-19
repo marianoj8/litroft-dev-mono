@@ -18,7 +18,7 @@ export class MatriculaOpcaoComponent implements OnInit {
   ngOnInit() {
   }
 
-  private opnForm(option: number): void {
+  public openForm(option: number): void {
     if (option === 0) {
       this.router.navigate(['from/primario'], { relativeTo: this.activatedRoute });
     }
