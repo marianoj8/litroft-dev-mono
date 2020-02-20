@@ -17,7 +17,7 @@ export class AuthService {
   constructor(private htp: HttpClient, public router: Router) { }
 
   public login(user: UsernameAndPassword): Observable<Token> {
-    const url = environment.API.replace('/litroft/api/v1/rm', '');
+    const url = environment.API.replace('/kipper/api/v1/rm', '');
     return this.htp.post<Token>(`${url}/login`, user)
       .pipe(
         take(1)
