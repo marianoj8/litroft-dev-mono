@@ -6,7 +6,6 @@ import { AuthGuard } from './shared/guard/auth.guard';
 import { CustomErrorPageComponent } from './custom-error-page/custom-error-page.component';
 import { AcessDenaidComponent } from './shared/acess-denaid/acess-denaid.component';
 import { AdminResolverGuard } from './admin/guard/AdminResolverGuard.guard';
-import { AdminInternoGuard } from './admin-interno/guard/admin-interno.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'public', pathMatch: 'full' },
@@ -19,32 +18,6 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     canLoad: [AuthGuard],
     loadChildren: 'src/app/home/modules/home.module#HomeModule'
-  },
-  {
-    path: 'monografias',
-    canActivate: [AuthGuard],
-    canLoad: [AuthGuard],
-    loadChildren: 'src/app/monografias/modules/monografia.module#MonografiaModule'
-  },
-  {
-    path: 'institutos',
-    loadChildren: 'src/app/institutos/modules/instituto.module#InstitutoModule'
-  },
-  {
-    path: 'inscricao',
-    loadChildren: 'src/app/inscricao/modules/inscricao.module#InscricaoModule'
-  },
-  {
-    path: 'matriculas',
-    loadChildren: 'src/app/matricula/modules/matricula.module#MatriculaModule'
-  },
-  {
-    path: 'ensino-nivel',
-    loadChildren: 'src/app/ensino-nivel/modules/ensino-nivel.module#EnsinoNivelModule'
-  },
-  {
-    path: 'periodos',
-    loadChildren: 'src/app/periodos/modules/periodos.module#PeriodoModule'
   },
   {
     path: 'cursos',
@@ -127,13 +100,6 @@ const routes: Routes = [
     canLoad: [AuthGuard],
     // resolve: [AdminResolverGuard],
     loadChildren: 'src/app/admin/modules/admin.module#AdminModule',
-  },
-  {
-    path: 'directores',
-    canActivate: [AuthGuard],
-    canLoad: [AuthGuard],
-    canActivateChild: [AdminInternoGuard],
-    loadChildren: 'src/app/admin-interno/modules/adminInterno.module#AdminInternoModule',
   },
   {
     path: 'denaid',
