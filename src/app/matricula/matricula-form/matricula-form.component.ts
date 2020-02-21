@@ -73,13 +73,14 @@ export class MatriculaFormComponent implements OnInit {
 
   // Variaves auxiliar de formulario
   public nivelEnsino = 1;
-  public placeHolserP2C3 = '***';
+  public placeHolserP2C3 = 'Documento de Identificação';
+  public placeHolserP2C4 = 'Agruadando tipo de documento...';
   public placeHolserP5C1 = '***';
 
   public tituloP2 = 'Genero, Data de nascimento & BI/Port';
   public tituloP3 = '***';
   public tituloP5 = '***';
-  public tituloP6 = '***';
+  public tituloP6 = 'Documentos';
   public tituloP7 = '***';
 
   public showFields = true;
@@ -111,6 +112,25 @@ export class MatriculaFormComponent implements OnInit {
     if (this.router.routerState.snapshot.url.includes('/matriculas/from/primario')) {
       this.nivelEnsino = 0;
       this.initPrimaryForms();
+
+      this.formGroup02.controls.optinDoc.valueChanges
+        .subscribe(onValue => {
+          switch (onValue) {
+            case 'Cédula':
+              this.placeHolserP2C4 = 'Processo numero';
+              break;
+            case 'Acento de Nascimento':
+              this.placeHolserP2C4 = 'Acento numero';
+              break;
+            case 'Bilhete de Identidade':
+              this.placeHolserP2C4 = 'B.I numero';
+              break;
+            case 'Passaporte':
+              this.placeHolserP2C4 = 'Passaporte numero';
+              break;
+          }
+        });
+
       this.formGroup05.controls.instituto.valueChanges
         .subscribe((onValue: Instituto) => {
           this.formGroup05.patchValue({
@@ -190,11 +210,11 @@ export class MatriculaFormComponent implements OnInit {
           }
 
           if (this.estudanteIdade >= 5 && this.estudanteIdade <= 8) {
-            this.tituloP2 = 'Genero, Data de nascimento & Cédula';
-            this.tituloP3 = 'Telefone & Email do encarregado';
-            this.tituloP5 = 'Escolas do Ensino Primario';
-            this.placeHolserP2C3 = 'Boletin de nascimento (Processo n:)';
-            this.placeHolserP5C1 = 'Selecione uma escola';
+            // this.tituloP2 = 'Genero, Data de nascimento & Cédula';
+            // this.tituloP3 = 'Telefone & Email do encarregado';
+            // this.tituloP5 = 'Escolas do Ensino Primario';
+            // this.placeHolserP2C3 = 'Boletin de nascimento (Processo n:)';
+            // this.placeHolserP5C1 = 'Selecione uma escola';
             this.showFields = false;
           }
         }
@@ -204,13 +224,13 @@ export class MatriculaFormComponent implements OnInit {
 
   public initPrimaryForms(): void {
 
-    this.tituloP2 = 'Genero, Data de nascimento & Cédula';
-    this.tituloP3 = 'Telefone & Email do encarregado';
-    this.tituloP5 = 'Escolas do Ensino Primario';
-    this.tituloP6 = 'Escolas do Ensino Primario';
-    this.tituloP7 = 'Cédula';
-    this.placeHolserP2C3 = 'Boletin de nascimento (Processo n:)';
-    this.placeHolserP5C1 = 'Selecione uma escola';
+    // this.tituloP2 = 'Genero, Data de nascimento & Cédula';
+    // this.tituloP3 = 'Telefone & Email do encarregado';
+    // this.tituloP5 = 'Escolas do Ensino Primario';
+    // this.tituloP6 = 'Escolas do Ensino Primario';
+    // this.tituloP7 = 'Cédula';
+    // this.placeHolserP2C3 = 'Boletin de nascimento (Processo n:)';
+    // this.placeHolserP5C1 = 'Selecione uma escola';
     this.showFields = false;
 
     this.formGroup01 = this.formBuilder.group({
@@ -408,9 +428,13 @@ export class MatriculaFormComponent implements OnInit {
   }
 
   private resolveDateFormat(): string {
+    // tslint:disable-next-line: prefer-const
     let date = new Date(this.formGroup02.controls.dataNascimento.value).toISOString().slice(0, 10);
+    // tslint:disable-next-line: prefer-const
     let ano: number = Number(date.substring(-1, 4));
+    // tslint:disable-next-line: prefer-const
     let mes: number = Number(date.substring(5, 7));
+    // tslint:disable-next-line: prefer-const
     let dia: number = Number(date.substring(8, 10));
     let finalDate = '';
 
