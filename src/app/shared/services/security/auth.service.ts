@@ -32,10 +32,6 @@ export class AuthService {
   }
 
   addTokenToLocalStorage(data: Token): void {
-    // localStorage.setItem('id', data.user.userId.toString());
-    // localStorage.setItem('username', data.user.username);
-    // localStorage.setItem('fone', data.user.fone);
-    // localStorage.setItem('email', data.user.email);
     if (data.accountId) {
       localStorage.setItem('token', data.token);
       localStorage.setItem('expirationTime', data.expiration);
@@ -66,11 +62,9 @@ export class AuthService {
   }
 
   public doLogOut() {
-    // localStorage.removeItem('id');
     localStorage.removeItem('username');
     localStorage.removeItem('entity');
     localStorage.removeItem('entityLogoUri');
-    // localStorage.removeItem('fone');
     localStorage.removeItem('nome');
     localStorage.removeItem('sobrenome');
     localStorage.removeItem('nivel');
