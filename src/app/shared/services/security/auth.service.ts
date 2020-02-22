@@ -43,6 +43,7 @@ export class AuthService {
       localStorage.setItem('nome', data.user.nome);
       localStorage.setItem('sobrenome', data.user.sobrenome);
       localStorage.setItem('entity', data.user.entity);
+      localStorage.setItem('nivel', data.user.nivel);
       localStorage.setItem('entityLogoUri', data.user.entityLogoUri);
       this.doLogIn(data.user.entity);
     }
