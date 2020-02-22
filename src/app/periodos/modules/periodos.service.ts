@@ -20,6 +20,14 @@ export class PeriodoService {
     return this.http.get<Periodo[]>(`${this.url}/periodo`);
   }
 
+  listForStudant(): Observable<Periodo[]> {
+    return this.http.get<Periodo[]>(`${this.url}/periodo/estudante`);
+  }
+
+  listForAdulto(): Observable<Periodo[]> {
+    return this.http.get<Periodo[]>(`${this.url}/periodo/adulto`);
+  }
+
   listFiltered(filterParam: CustomFilter): Observable<Periodo[]> {
     filterParam = this.filterResolve(filterParam);
     return this.http.get<Periodo[]>(`${this.url}/periodo?descricao=${filterParam.descricao}`);
