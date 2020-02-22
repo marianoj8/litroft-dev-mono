@@ -164,11 +164,11 @@
     <form [formGroup]="formGroup05">
       <div class="field">
         <ng-template matStepLabel>
-          Instituto a dirigir
+          Escola
         </ng-template>
 
         <mat-form-field class="field-max field-padding">
-          <mat-select matInput formControlName="instituto" required placeholder="Instituto">
+          <mat-select matInput formControlName="instituto" required placeholder="Escolas">
             <mat-option *ngIf="institutoError$ | async">Ocorreu um erro ao carregar instituto...
             </mat-option>
             <ng-container *ngFor="let instituto of institutos">
@@ -179,7 +179,7 @@
             </ng-container>
           </mat-select>
           <mat-error *ngIf="formGroup05.controls['instituto'].hasError('required')">
-            Instituto é <strong>obrigatorio</strong>
+            Escola é <strong>obrigatorio</strong>
           </mat-error>
         </mat-form-field>
 
