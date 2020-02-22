@@ -73,7 +73,7 @@ export class AuthService {
     // localStorage.removeItem('fone');
     localStorage.removeItem('nome');
     localStorage.removeItem('sobrenome');
-    // localStorage.removeItem('email');
+    localStorage.removeItem('nivel');
     localStorage.removeItem('acessType');
     localStorage.removeItem('token');
     localStorage.removeItem('expirationTime');
