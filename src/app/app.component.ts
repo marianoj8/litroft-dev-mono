@@ -56,6 +56,7 @@ export class AppComponent implements OnInit, AfterContentChecked, OnDestroy {
   acessType = '';
   nome = '';
   showOrHideMenu = false;
+  showOrHideMenuByNivel = 'No Nivel';
   selectedInstLogo = '';
 
 
@@ -325,6 +326,7 @@ export class AppComponent implements OnInit, AfterContentChecked, OnDestroy {
     if (this.acessType !== 'Administrador') {
       this.selectedInstLogo = `${environment.API}/mono/downloadLogo/${localStorage.getItem('entityLogoUri')}`;
       this.showOrHideMenu = true;
+      this.showOrHideMenuByNivel = localStorage.getItem('nivel');
     } else {
       this.showOrHideMenu = false;
     }
