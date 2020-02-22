@@ -33,23 +33,39 @@
         <mat-icon left>school</mat-icon>
         Escolas
       </a>
-      <a routerLinkActive="active" [routerLink]="['cursos']" mat-button *ngIf="showOrHideMenu">
-        <mat-icon>school</mat-icon>
-        Cursos
-      </a>
-      <a routerLinkActive="active" [routerLink]="['grupos']" mat-button *ngIf="showOrHideMenu">
-        <mat-icon right>group</mat-icon>
-        Grupos
-      </a>
-      <a routerLinkActive="active" [routerLink]="['projetos']" mat-button *ngIf="showOrHideMenu">
-        <mat-icon right>widgets</mat-icon>
-        Projectos
-      </a>
-      <a style="position: relative; left: 30%;" routerLinkActive="active" (click)="switchBetweenPages()" mat-button
-        *ngIf="showOrHideMenu">
-        <mat-icon right>collections_bookmark</mat-icon>
-        {{ btnMonografiaText }}
-      </a>
+      <ng-container *ngIf="showOrHideMenuByNivel !== 'Ensino do II Ciclo'">
+        <a routerLinkActive="active" [routerLink]="['institutos']" mat-button>
+          <mat-icon>view_quilt</mat-icon>
+          Pauta
+        </a>
+        <a routerLinkActive="active" [routerLink]="['institutos']" mat-button>
+          <mat-icon>view_quilt</mat-icon>
+          Certificados
+        </a>
+        <a routerLinkActive="active" [routerLink]="['institutos']" mat-button>
+          <mat-icon>view_quilt</mat-icon>
+          Vitrine
+        </a>
+      </ng-container>
+      <ng-container *ngIf="showOrHideMenuByNivel === 'Ensino do II Ciclo'">
+        <a routerLinkActive="active" [routerLink]="['cursos']" mat-button *ngIf="showOrHideMenu">
+          <mat-icon>school</mat-icon>
+          Cursos
+        </a>
+        <a routerLinkActive="active" [routerLink]="['grupos']" mat-button *ngIf="showOrHideMenu">
+          <mat-icon right>group</mat-icon>
+          Grupos
+        </a>
+        <a routerLinkActive="active" [routerLink]="['projetos']" mat-button *ngIf="showOrHideMenu">
+          <mat-icon right>widgets</mat-icon>
+          Projectos
+        </a>
+        <a style="position: relative; left: 30%;" routerLinkActive="active" (click)="switchBetweenPages()" mat-button
+          *ngIf="showOrHideMenu">
+          <mat-icon right>collections_bookmark</mat-icon>
+          {{ btnMonografiaText }}
+        </a>
+      </ng-container>
     </span>
     <span *ngIf="!authService.loggedIn()" class="hide-on-small-only spacer">
       <a [routerLinkActive]="'active'" [routerLink]="['/public']" mat-button>
@@ -82,7 +98,7 @@
   <mat-sidenav #drawer class="sidenav" fixedInViewport="false" backgroundColor="primary"
     [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'"
     [opened]="((isHandset$ | async) && authService.loggedIn()) === true">
-    <div style="width: 62%; height: 160px; padding: 8px 0px 0px 90px;">
+    <div style="width: 62%; height: 160px; padding: 8px 0px 0px 90px; ">
       <div style="width: 101%; height: 80%; background-color: #fff; border-radius: 50%; margin-left: -60px;">
 
         <ng-container *ngIf="showOrHideMenu">
@@ -94,7 +110,7 @@
 
         <ng-container *ngIf="!showOrHideMenu">
           <ng-container *ngIf="authService.loggedIn()">
-            <img src="../assets/index.jpg" style="position: relative; top: 2px; left: 20%; height: 90%; width: 70%;"/>
+            <img src="../assets/index.jpg" style="position: relative; top: 2px; left: 20%; height: 90%; width: 70%;" />
           </ng-container>
         </ng-container>
 
