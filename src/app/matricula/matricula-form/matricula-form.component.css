@@ -15,6 +15,11 @@
 .field-curso {
   width: 54%;
 }
+
+.field-periodo-classe-numero {
+  width: 20%;
+}
+
 .distrito-bairro {
 }
 .field-bi-passport,
