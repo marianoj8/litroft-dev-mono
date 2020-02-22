@@ -247,14 +247,25 @@
             </mat-error>
           </mat-form-field>
 
-          <mat-form-field class="field-min-2 field-padding">
+          <mat-form-field class="field-periodo-classe-numero field-padding">
             <input matInput autocomplete="false" formControlName="numero" required placeholder="Numero" />
             <mat-error *ngIf="formGroup05.controls['numero'].hasError('required')">
               Numero é <strong>obrigatorio</strong>
             </mat-error>
           </mat-form-field>
 
-          <mat-form-field class="field-min-2 field-padding">
+          <mat-form-field class="field-periodo-classe-numero field-padding">
+            <mat-select matInput formControlName="periodo" required placeholder="Selecione um classe">
+              <ng-container *ngFor="let classe of ['Iniciação','1 Classe','2 Classe', '3 Classe','4 Classe','5 Classe','6 Classe']">
+                <mat-option [value]="classe"> {{ classe }} </mat-option>
+              </ng-container>
+            </mat-select>
+            <mat-error *ngIf="formGroup05.controls['classe'].hasError('required')">
+              Classe é <strong>obrigatorio</strong>
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="field-periodo-classe-numero field-padding">
             <mat-select matInput formControlName="periodo" required placeholder="Selecione um perido">
               <ng-container *ngFor="let periodo of periodos$ | async">
                 <mat-option [value]="periodo"> {{ periodo?.descricao }} </mat-option>

@@ -139,6 +139,27 @@ export class MatriculaFormComponent implements OnInit {
             numero: onValue.numero
           });
         });
+
+      this.formGroup02.controls.dataNascimento.valueChanges
+        .subscribe((onValue: Date) => {
+          if (this.formGroup02.controls.dataNascimento.value) {
+            console.log(this.formGroup02.controls.dataNascimento.value);
+            this.estudanteIdade = this.currentYear - onValue.getFullYear();
+            if (this.estudanteIdade < 5) {
+              console.log('Idade invalida!');
+            }
+
+            if (this.estudanteIdade >= 5 && this.estudanteIdade <= 8) {
+              this.showFields = false;
+            }
+
+            if (this.estudanteIdade >= 5 && this.estudanteIdade < 18) {
+              this.periodos$ = this.periodoService.listForStudant();
+              this.showFields = false;
+            }
+
+          }
+        });
     }
 
     if (this.router.routerState.snapshot.url.includes('/matriculas/from/ciculo1')) {
@@ -213,13 +234,14 @@ export class MatriculaFormComponent implements OnInit {
           }
 
           if (this.estudanteIdade >= 5 && this.estudanteIdade <= 8) {
-            // this.tituloP2 = 'Genero, Data de nascimento & Cédula';
-            // this.tituloP3 = 'Telefone & Email do encarregado';
-            // this.tituloP5 = 'Escolas do Ensino Primario';
-            // this.placeHolserP2C3 = 'Boletin de nascimento (Processo n:)';
-            // this.placeHolserP5C1 = 'Selecione uma escola';
             this.showFields = false;
           }
+
+          if (this.estudanteIdade >= 5 && this.estudanteIdade < 18) {
+            this.periodos$ = this.periodoService.listForStudant();
+            this.showFields = false;
+          }
+
         }
       });
 
@@ -272,6 +294,7 @@ export class MatriculaFormComponent implements OnInit {
       instituto: [null, Validators.required],
       sigla: [null, Validators.required],
       numero: [null, Validators.required],
+      classe: [null, Validators.required],
       periodo: [null, Validators.required]
     });
   }
