@@ -111,6 +111,7 @@ export class MatriculaFormComponent implements OnInit {
     this.periodos$ = this.periodoService.list();
     if (this.router.routerState.snapshot.url.includes('/matriculas/from/primario')) {
       this.nivelEnsino = 0;
+      this.filter.nivel = 'Ensino Primario';
       this.initPrimaryForms();
 
       this.formGroup02.controls.optinDoc.valueChanges
@@ -142,11 +143,13 @@ export class MatriculaFormComponent implements OnInit {
 
     if (this.router.routerState.snapshot.url.includes('/matriculas/from/ciculo1')) {
       this.nivelEnsino = 1;
+      this.filter.nivel = 'Ensino do I Ciclo';
       this.initICicleForms();
     }
 
     if (this.router.routerState.snapshot.url.includes('/matriculas/from/ciculo2')) {
       this.nivelEnsino = 2;
+      this.filter.nivel = 'Ensino do II Ciclo';
       this.initIICicleForms();
 
       this.formGroup06.controls.curso.valueChanges
@@ -158,7 +161,7 @@ export class MatriculaFormComponent implements OnInit {
         });
     }
 
-    this.institutos$ = this.institutoSerice.list()
+    this.institutos$ = this.institutoSerice.listFiltered(this.filter)
       .pipe(catchError(err => {
         this.dialogService.open(ErrorLoadingComponent);
         this.institutoError$.next(true);
