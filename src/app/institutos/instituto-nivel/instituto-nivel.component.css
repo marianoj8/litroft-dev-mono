@@ -506,3 +506,29 @@ nav {
     margin-bottom: 40px;
   }
 }
+
+@media only screen and (max-width: 500px) {
+  .articulo > mat-icon {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+    padding-left: 9.2rem;
+    text-align: center;
+    padding-top: 20px;
+    border-radius: 50%;
+    font-size: 50pt;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .articulo > mat-icon {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+    padding-left: 6rem;
+    text-align: center;
+    padding-top: 20px;
+    border-radius: 50%;
+    font-size: 50pt;
+  }
+}
