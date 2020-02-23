@@ -33,7 +33,6 @@
         <mat-icon left>school</mat-icon>
         Escolas
       </a>
-      <ng-container *ngIf="showOrHideMenuByNivel !== 'Ensino do II Ciclo'">
         <a routerLinkActive="active" [routerLink]="['institutos']" mat-button>
           <mat-icon>view_quilt</mat-icon>
           Pauta
@@ -46,20 +45,7 @@
           <mat-icon>view_quilt</mat-icon>
           Vitrine
         </a>
-      </ng-container>
       <ng-container *ngIf="showOrHideMenuByNivel === 'Ensino do II Ciclo'">
-        <a routerLinkActive="active" [routerLink]="['cursos']" mat-button *ngIf="showOrHideMenu">
-          <mat-icon>school</mat-icon>
-          Cursos
-        </a>
-        <a routerLinkActive="active" [routerLink]="['grupos']" mat-button *ngIf="showOrHideMenu">
-          <mat-icon right>group</mat-icon>
-          Grupos
-        </a>
-        <a routerLinkActive="active" [routerLink]="['projetos']" mat-button *ngIf="showOrHideMenu">
-          <mat-icon right>widgets</mat-icon>
-          Projectos
-        </a>
         <a style="position: relative; left: 30%;" routerLinkActive="active" (click)="switchBetweenPages()" mat-button
           *ngIf="showOrHideMenu">
           <mat-icon right>collections_bookmark</mat-icon>
@@ -174,10 +160,12 @@
               <mat-icon color="primary">person_pin</mat-icon>
               Estudantes
             </a>
-            <a mat-list-item routerLinkActive="active" [routerLink]="['cursos']">
-              <mat-icon color="primary">school</mat-icon>
-              Cursos
-            </a>
+            <ng-container *ngIf="showOrHideMenuByNivel === 'Ensino do II Ciclo'">
+              <a mat-list-item routerLinkActive="active" [routerLink]="['cursos']">
+                <mat-icon color="primary">school</mat-icon>
+                Cursos
+              </a>
+            </ng-container>
             <a mat-list-item routerLinkActive="active" [routerLink]="['turmas']">
               <mat-icon color="primary">group_work</mat-icon>
               Turmas
@@ -190,17 +178,25 @@
                 <mat-icon color="primary">recent_actors</mat-icon>
               </mat-panel-title>
               <mat-panel-description>
-                Orientadores
+                Professores
               </mat-panel-description>
             </mat-expansion-panel-header>
-            <a mat-list-item routerLinkActive="active" [routerLink]="['orientadores']">
-              <mat-icon color="primary">recent_actors</mat-icon>
-              Orientadores
-            </a>
-            <a mat-list-item routerLinkActive="active" [routerLink]="['especialidades']">
-              <mat-icon color="primary">beenhere</mat-icon>
-              Especialidades
-            </a>
+            <mat-panel-description>
+              <a mat-list-item routerLinkActive="active" [routerLink]="['orientadores']">
+                <mat-icon color="primary">recent_actors</mat-icon>
+                Professores
+              </a>
+            </mat-panel-description>
+            <ng-container *ngIf="showOrHideMenuByNivel === 'Ensino do II Ciclo'">
+              <a mat-list-item routerLinkActive="active" [routerLink]="['orientadores']">
+                <mat-icon color="primary">recent_actors</mat-icon>
+                Orientadores
+              </a>
+              <a mat-list-item routerLinkActive="active" [routerLink]="['especialidades']">
+                <mat-icon color="primary">beenhere</mat-icon>
+                Especialidades
+              </a>
+            </ng-container>
           </mat-expansion-panel>
           <!-- <mat-divider></mat-divider> -->
           <mat-expansion-panel *ngIf="showOrHideMenu" hideToggle>
