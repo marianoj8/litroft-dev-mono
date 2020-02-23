@@ -157,7 +157,18 @@ export class MatriculaFormComponent implements OnInit {
               this.periodos$ = this.periodoService.listForStudant();
               this.showFields = false;
             }
+          }
+        });
 
+      this.formGroup05.controls.classe.valueChanges
+        .subscribe(onValue => {
+          switch (onValue) {
+            case 'Iniciação':
+            case '1 Class':
+            case '2 Class':
+              // this.periodos$ = this.periodoService.listForAdulto();
+              break;
+            default:
           }
         });
     }
