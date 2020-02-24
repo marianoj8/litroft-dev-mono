@@ -12,128 +12,128 @@ const routes: Routes = [
   { path: '', redirectTo: 'public', pathMatch: 'full' },
   {
     path: 'public',
-    loadChildren: 'src/app/public/modules/public.module#PublicModule'
+    loadChildren: () => import('src/app/public/modules/public.module').then(m => m.PublicModule)
   },
   {
     path: 'home',
     canActivate: [AuthGuard],
     canLoad: [AuthGuard],
-    loadChildren: 'src/app/home/modules/home.module#HomeModule'
+    loadChildren: () => import('src/app/home/modules/home.module').then(m => m.HomeModule)
   },
   {
     path: 'monografias',
     canActivate: [AuthGuard],
     canLoad: [AuthGuard],
-    loadChildren: 'src/app/monografias/modules/monografia.module#MonografiaModule'
+    loadChildren: () => import('src/app/monografias/modules/monografia.module').then(m => m.MonografiaModule)
   },
   {
     path: 'institutos',
-    loadChildren: 'src/app/institutos/modules/instituto.module#InstitutoModule'
+    loadChildren: () => import('src/app/institutos/modules/instituto.module').then(m => m.InstitutoModule)
   },
   {
     path: 'inscricao',
-    loadChildren: 'src/app/inscricao/modules/inscricao.module#InscricaoModule'
+    loadChildren: () => import('src/app/inscricao/modules/inscricao.module').then(m => m.InscricaoModule)
   },
   {
     path: 'matriculas',
-    loadChildren: 'src/app/matricula/modules/matricula.module#MatriculaModule'
+    loadChildren: () => import('src/app/matricula/modules/matricula.module').then(m => m.MatriculaModule)
   },
   {
     path: 'ensino-nivel',
-    loadChildren: 'src/app/ensino-nivel/modules/ensino-nivel.module#EnsinoNivelModule'
+    loadChildren: () => import('src/app/ensino-nivel/modules/ensino-nivel.module').then(m => m.EnsinoNivelModule)
   },
   {
     path: 'periodos',
-    loadChildren: 'src/app/periodos/modules/periodos.module#PeriodoModule'
+    loadChildren: () => import('src/app/periodos/modules/periodos.module').then(m => m.PeriodoModule)
   },
   {
     path: 'cursos',
     canActivate: [AuthGuard],
     canLoad: [AuthGuard],
-    loadChildren: 'src/app/cursos/modules/curso.module#CursoModule'
+    loadChildren: () => import('src/app/cursos/modules/curso.module').then(m => m.CursoModule)
   },
   {
     path: 'projetos',
     canActivate: [AuthGuard],
     canLoad: [AuthGuard],
-    loadChildren: 'src/app/projetos/modules/projeto.module#ProjetoModule'
+    loadChildren: () => import('src/app/projetos/modules/projeto.module').then(m => m.ProjetoModule)
   },
   {
     path: 'departamentos',
     canActivate: [AuthGuard],
-    loadChildren: 'src/app/departamentos/modules/departamento.module#DepartamentoModule'
+    loadChildren: () => import('src/app/departamentos/modules/departamento.module').then(m => m.DepartamentoModule)
   },
   {
     path: 'estudantes',
     canActivate: [AuthGuard],
     canLoad: [AuthGuard],
-    loadChildren: 'src/app/estudantes/modules/estudante.module#EstudanteModule'
+    loadChildren: () => import('src/app/estudantes/modules/estudante.module').then(m => m.EstudanteModule)
   },
   {
     path: 'grupos',
     canActivate: [AuthGuard],
     canLoad: [AuthGuard],
-    loadChildren: 'src/app/grupos/modules/grupo.module#GrupoModule'
+    loadChildren: () => import('src/app/grupos/modules/grupo.module').then(m => m.GrupoModule)
   },
   {
     path: 'orientadores',
     canActivate: [AuthGuard],
     canLoad: [AuthGuard],
-    loadChildren: 'src/app/orientadores/modules/orientador.module#OrientadorModule'
+    loadChildren: () => import('src/app/orientadores/modules/orientador.module').then(m => m.OrientadorModule)
   },
   {
     path: 'turmas',
     canActivate: [AuthGuard],
     canLoad: [AuthGuard],
-    loadChildren: 'src/app/turmas/modules/turma.module#TurmaModule'
+    loadChildren: () => import('src/app/turmas/modules/turma.module').then(m => m.TurmaModule)
   },
   {
     path: 'especialidades',
     canActivate: [AuthGuard],
     canLoad: [AuthGuard],
-    loadChildren: 'src/app/especialidades/modules/especialidade.module#EspecialidadeModule'
+    loadChildren: () => import('src/app/especialidades/modules/especialidade.module').then(m => m.EspecialidadeModule)
   },
   {
     path: 'locais',
     canActivate: [AuthGuard],
     canLoad: [AuthGuard],
-    loadChildren: 'src/app/locals/modules/local.module#LocalModule'
+    loadChildren: () => import('src/app/locals/modules/local.module').then(m => m.LocalModule)
   },
   {
     path: 'municipios',
     canActivate: [AuthGuard],
     canLoad: [AuthGuard],
-    loadChildren: 'src/app/municipio/modules/municipio.module#MunicipioModule'
+    loadChildren: () => import('src/app/municipio/modules/municipio.module').then(m => m.MunicipioModule)
   },
   {
     path: 'provincias',
     canActivate: [AuthGuard],
     canLoad: [AuthGuard],
-    loadChildren: 'src/app/provincia/modules/provincia.module#ProvinciaModule'
+    loadChildren: () => import('src/app/provincia/modules/provincia.module').then(m => m.ProvinciaModule)
   },
   {
     path: 'area-formacao',
     canActivate: [AuthGuard],
     canLoad: [AuthGuard],
-    loadChildren: 'src/app/area-formacao/modules/area-formacao.module#AreaFormacaoModule'
+    loadChildren: () => import('src/app/area-formacao/modules/area-formacao.module').then(m => m.AreaFormacaoModule)
   },
   {
     path: 'login',
-    loadChildren: 'src/app/login/modules/login.module#LoginModule'
+    loadChildren: () => import('src/app/login/modules/login.module').then(m => m.LoginModule)
   },
   {
     path: 'adminstration',
     canActivate: [AuthGuard],
     canLoad: [AuthGuard],
     // resolve: [AdminResolverGuard],
-    loadChildren: 'src/app/admin/modules/admin.module#AdminModule',
+    loadChildren: () => import('src/app/admin/modules/admin.module').then(m => m.AdminModule),
   },
   {
     path: 'directores',
     canActivate: [AuthGuard],
     canLoad: [AuthGuard],
     canActivateChild: [AdminInternoGuard],
-    loadChildren: 'src/app/admin-interno/modules/adminInterno.module#AdminInternoModule',
+    loadChildren: () => import('src/app/admin-interno/modules/adminInterno.module').then(m => m.AdminInternoModule),
   },
   {
     path: 'denaid',
