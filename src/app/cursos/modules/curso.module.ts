@@ -24,9 +24,6 @@ import { CursoRoutingModule } from './curso-routing.module';
     CursoRoutingModule,
     ReactiveFormsModule
   ],
-  entryComponents: [
-    CursoSearchComponent
-  ],
   exports: []
 })
 export class CursoModule { }

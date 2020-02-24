@@ -18,7 +18,6 @@ import { SelectElementComponent } from '../select-element/select-element.compone
     GrupoDetalheComponent,
     SelectElementComponent
   ],
-  entryComponents: [SelectElementComponent],
   imports: [
     CommonModule,
     MaterialModule,

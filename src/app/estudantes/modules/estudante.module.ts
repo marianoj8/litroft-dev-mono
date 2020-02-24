@@ -19,9 +19,6 @@ import { EstudanteFilterComponent } from '../estudante-filter/estudante-filter.c
     EstudanteDetalheComponent,
     EstudanteFilterComponent
   ],
-  entryComponents: [
-    EstudanteFilterComponent
-  ],
   imports: [
     CommonModule,
     EstudanteRoutingModule,
