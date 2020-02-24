@@ -64,7 +64,7 @@ import { CustomPipesModule } from './shared/custom-pipes/module/custom-pipes.mod
     LoadingUploadComponent,
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
