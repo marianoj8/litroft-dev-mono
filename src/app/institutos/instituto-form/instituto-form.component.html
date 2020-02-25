@@ -1,7 +1,7 @@
 <mat-vertical-stepper [linear]="!instituto.id" #stepper class="container mat-elevation-z6">
 
   <!-- Nivel de Ensino: Primario e I ciclo-->
-  <div *ngIf="nivelEnsino === 0 || nivelEnsino === 1">
+  <ng-container *ngIf="nivelEnsino === 0 || nivelEnsino === 1">
     <mat-step [stepControl]="formGroup01">
       <form [formGroup]="formGroup01">
         <div class="field">
@@ -178,10 +178,10 @@
         </button>
       </div>
     </mat-step>
-  </div>
+  </ng-container>
 
   <!-- Nivel de Ensino: II Ciclo -->
-  <div *ngIf="nivelEnsino === 2">
+  <ng-container *ngIf="nivelEnsino === 2">
     <mat-step [stepControl]="formGroup01">
       <form [formGroup]="formGroup01">
         <div class="field">
@@ -421,7 +421,7 @@
         </button>
       </div>
     </mat-step>
-  </div>
+  </ng-container>
 
 </mat-vertical-stepper>
 <ng-template #loading>
