@@ -1,9 +1,8 @@
-<mat-vertical-stepper *ngIf="institutos$ | async as cursos; else loading" [linear]="estudante.id" #stepper
+<mat-vertical-stepper *ngIf="institutos$ | async as cursos; else loading" [linear]="false" #stepper
   class="container mat-elevation-z6">
 
   <!-- Nivel de Ensino: Primario -->
-
-  <div *ngIf="nivelEnsino===0">
+  <ng-container *ngIf="nivelEnsino===0">
     <mat-step [stepControl]="formGroup01">
       <form [formGroup]="formGroup01">
         <div class="field">
@@ -13,8 +12,8 @@
           <mat-form-field class="field field-padding">
             <input matInput autocomplete="false" formControlName="nome" required placeholder="Nome" />
             <mat-error *ngIf="
-              formGroup01.controls['nome'].hasError('minlength') &&
-              !formGroup01.controls['nome'].hasError('required')
+            formGroup01.controls['nome'].hasError('minlength') &&
+            !formGroup01.controls['nome'].hasError('required')
             ">
               Nome deve ter no minimo <strong>3 caraters</strong>
             </mat-error>
@@ -30,9 +29,9 @@
           <mat-form-field class="field field-padding">
             <input matInput formControlName="sobrenome" autocomplete="false" required placeholder="Sobrenome" />
             <mat-error *ngIf="
-              formGroup01.controls['sobrenome'].hasError('minlength') &&
-              !formGroup01.controls['sobrenome'].hasError('required')
-            ">
+          formGroup01.controls['sobrenome'].hasError('minlength') &&
+          !formGroup01.controls['sobrenome'].hasError('required')
+          ">
               Sobrenome deve ter no minimo <strong>3 caraters</strong>
             </mat-error>
 
@@ -53,6 +52,7 @@
         </div>
       </form>
     </mat-step>
+
     <mat-step [stepControl]="formGroup02">
       <form [formGroup]="formGroup02">
         <div class="field">
@@ -71,10 +71,10 @@
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
             <mat-error *ngIf="
-              formGroup02.controls['dataNascimento'].hasError('minlenght') ||
-              (formGroup02.controls['dataNascimento'].hasError('maxlenght') &&
-                !formGroup02.controls['dataNascimento'].hasError('required'))
-            ">
+        formGroup02.controls['dataNascimento'].hasError('minlenght') ||
+        (formGroup02.controls['dataNascimento'].hasError('maxlenght') &&
+        !formGroup02.controls['dataNascimento'].hasError('required'))
+        ">
               Formato de data <strong>invalido</strong>
             </mat-error>
             <mat-error *ngIf="formGroup02.controls['dataNascimento'].hasError('required')">
@@ -133,8 +133,8 @@
             <input matInput formControlName="email" [errorStateMatcher]="matcher" autocomplete="false" required
               placeholder="Email" />
             <mat-error *ngIf="
-              formGroup03.controls['email'].hasError('email') &&
-              !formGroup03.controls['email'].hasError('required')
+            formGroup03.controls['email'].hasError('email') &&
+            !formGroup03.controls['email'].hasError('required')
             ">
               Por favor, insira um email valido
             </mat-error>
@@ -256,7 +256,8 @@
 
           <mat-form-field class="field-periodo-classe-numero field-padding">
             <mat-select matInput formControlName="periodo" required placeholder="Selecione um classe">
-              <ng-container *ngFor="let classe of ['Iniciação','1 Classe','2 Classe', '3 Classe','4 Classe','5 Classe','6 Classe']">
+              <ng-container
+                *ngFor="let classe of ['Iniciação','1 Classe','2 Classe', '3 Classe','4 Classe','5 Classe','6 Classe']">
                 <mat-option [value]="classe"> {{ classe }} </mat-option>
               </ng-container>
             </mat-select>
@@ -337,8 +338,7 @@
         </button>
       </div>
     </mat-step>
-  </div>
-
+  </ng-container>
   <!-- Nivel de Ensino: I ciculo -->
 
   <div *ngIf="nivelEnsino===1">
@@ -351,8 +351,8 @@
           <mat-form-field class="field field-padding">
             <input matInput autocomplete="false" formControlName="nome" required placeholder="Nome" />
             <mat-error *ngIf="
-              formGroup01.controls['nome'].hasError('minlength') &&
-              !formGroup01.controls['nome'].hasError('required')
+            formGroup01.controls['nome'].hasError('minlength') &&
+            !formGroup01.controls['nome'].hasError('required')
             ">
               Nome deve ter no minimo <strong>3 caraters</strong>
             </mat-error>
@@ -693,7 +693,7 @@
 
   <!-- Nivel de Ensino: II ciculo -->
 
-  <div *ngIf="nivelEnsino === 2">
+  <ng-container *ngIf="nivelEnsino === 2">
     <mat-step [stepControl]="formGroup01">
       <form [formGroup]="formGroup01">
         <div class="field">
@@ -1041,7 +1041,7 @@
         </button>
       </div>
     </mat-step>
-  </div>
+  </ng-container>
 
 </mat-vertical-stepper>
 
