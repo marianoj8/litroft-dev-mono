@@ -1,15 +1,5 @@
-<div [hidden]="onChangeContext">
-  <mat-card color="primary">
-    <div class="space-arround">
-      <button class="btn-large" mat-raised-button color="primary" (click)="emitSubscriptionOption()">
-        <mat-icon>style</mat-icon>
-        Preencher formulario de matricula
-      </button>
-    </div>
-  </mat-card>
-</div>
 
-<div [hidden]="!onChangeContext">
+<ng-container *ngIf="onChangeContext">
   <mat-card color="primary">
     <div>
       <span>
@@ -20,6 +10,6 @@
       </span>
     </div>
   </mat-card>
-</div>
+</ng-container>
 
 <router-outlet></router-outlet>
