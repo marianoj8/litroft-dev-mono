@@ -121,6 +121,7 @@ export class HomeComponent implements OnInit {
       'Outubro', 'Novembro', 'Dezembro'
     ];
 
+    // tslint:disable-next-line: prefer-for-of
     for (let index1 = 0; index1 < this.radarChartData.length; index1++) {
       for (let index = 0; index < this.radarChartData[0].data.length; index++) {
         const v = this.radarChartData[index1].data[index];
