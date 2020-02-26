@@ -74,7 +74,8 @@ export class MatriculaComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  back() {
+  public back(): void {
+    this.onChangeContext = false;
     this.location.back();
   }
 
