@@ -1,11 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AdminCanActiveGuard } from './admin/guard/AdminCanActiveGuard.guard';
 import { AuthGuard } from './shared/guard/auth.guard';
 import { CustomErrorPageComponent } from './custom-error-page/custom-error-page.component';
 import { AcessDenaidComponent } from './shared/acess-denaid/acess-denaid.component';
-import { AdminResolverGuard } from './admin/guard/AdminResolverGuard.guard';
 import { AdminInternoGuard } from './admin-interno/guard/admin-interno.guard';
 
 const routes: Routes = [
