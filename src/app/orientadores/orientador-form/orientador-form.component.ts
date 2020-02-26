@@ -197,9 +197,13 @@ export class OrientadorFormComponent implements OnInit {
   }
 
   private resolveDateFormat(): string {
+    // tslint:disable-next-line: prefer-const
     let date = new Date(this.formGroup02.controls.dataNascimento.value).toISOString().slice(0, 10);
+    // tslint:disable-next-line: prefer-const
     let ano: number = Number(date.substring(-1, 4));
+    // tslint:disable-next-line: prefer-const
     let mes: number = Number(date.substring(5, 7));
+    // tslint:disable-next-line: prefer-const
     let dia: number = Number(date.substring(8, 10));
     let finalDate = '';
 
