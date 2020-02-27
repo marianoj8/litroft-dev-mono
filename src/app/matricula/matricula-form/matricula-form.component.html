@@ -85,7 +85,7 @@
           <mat-form-field class="field-bi-passport field-padding">
             <mat-select matInput formControlName="optinDoc" required [placeholder]="placeHolserP2C3">
               <ng-container
-                *ngFor="let optionDoc of ['Cédula','Acento de Nascimento','Bilhete de Identidade','Passaporte']">
+                *ngFor="let optionDoc of optionDocs">
                 <mat-option [value]="optionDoc"> {{ optionDoc }} </mat-option>
               </ng-container>
             </mat-select>
@@ -743,13 +743,14 @@
         </div>
       </form>
     </mat-step>
+
     <mat-step [stepControl]="formGroup02">
       <form [formGroup]="formGroup02">
         <div class="field">
           <ng-template matStepLabel>
-            Genero, Data de nascimento & B.I/Port
+            Genero, Data de nascimento & identificação
           </ng-template>
-          <mat-form-field class="field-min-2 field-padding">
+          <mat-form-field class="field-min-2">
             <mat-select matInput formControlName="sexo" placeholder="Sexo">
               <mat-option checked value="M">Masculino</mat-option>
               <mat-option value="F">Femenino</mat-option>
@@ -761,22 +762,36 @@
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
             <mat-error *ngIf="
-              formGroup02.controls['dataNascimento'].hasError('minlenght') ||
-              (formGroup02.controls['dataNascimento'].hasError('maxlenght') &&
-                !formGroup02.controls['dataNascimento'].hasError('required'))
-            ">
+        formGroup02.controls['dataNascimento'].hasError('minlenght') ||
+        (formGroup02.controls['dataNascimento'].hasError('maxlenght') &&
+        !formGroup02.controls['dataNascimento'].hasError('required'))
+        ">
               Formato de data <strong>invalido</strong>
             </mat-error>
             <mat-error *ngIf="formGroup02.controls['dataNascimento'].hasError('required')">
               Data de Nascimento é <strong>obrigatorio</strong>
             </mat-error>
           </mat-form-field>
+
           <mat-form-field class="field-bi-passport field-padding">
-            <input matInput formControlName="bi" autocomplete="false" required [placeholder]="placeHolserP2C3" />
+            <mat-select matInput formControlName="optinDoc" required [placeholder]="placeHolserP2C3">
+              <ng-container
+                *ngFor="let optionDoc of optionDocs">
+                <mat-option [value]="optionDoc"> {{ optionDoc }} </mat-option>
+              </ng-container>
+            </mat-select>
+            <mat-error *ngIf="formGroup02.controls['optinDoc'].hasError('required')">
+              Documento é <strong>obrigatorio</strong>
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="field-max">
+            <input matInput formControlName="bi" autocomplete="false" required [placeholder]="placeHolserP2C4" />
             <mat-error *ngIf="formGroup02.controls['bi'].hasError('required')">
               Este campo é <strong>obrigatorio</strong>
             </mat-error>
           </mat-form-field>
+
           <div class="spaced">
             <button mat-raised-button class="large" matStepperPrevious>
               <mat-icon>arrow_upward</mat-icon>
@@ -840,7 +855,7 @@
           <ng-template matStepLabel>
             Endereço
           </ng-template>
-          <mat-form-field class="field-min-2 field-padding">
+          <mat-form-field class="field-min-2">
             <mat-select matInput formControlName="provincia" required placeholder="Provincia">
               <mat-option *ngIf="provinciaError$ | async">
                 Ocorreu um erro ao carregar provincias...
@@ -959,10 +974,10 @@
       <form [formGroup]="formGroup06">
         <div class="field">
           <ng-template matStepLabel>
-            Curso & turma
+            Curso, Class & Periodo
           </ng-template>
 
-          <mat-form-field class="field-curso field-padding">
+          <mat-form-field class="field">
             <mat-select matInput formControlName="curso" required placeholder="Curso">
               <mat-option *ngIf="cursoError$ | async">Ocorreu um erro ao carregar cursos...
               </mat-option>
@@ -975,16 +990,26 @@
               Curso é <strong>obrigatorio</strong>
             </mat-error>
           </mat-form-field>
-
-          <mat-form-field class="field-min-1 field-padding">
-            <mat-select matInput formControlName="turma" required placeholder="Turma">
-              <ng-container *ngFor="let turma of turmas">
-                <mat-option *ngIf="!turmas">lista vasia</mat-option>
-                <mat-option [value]="turma"> {{ turma.sigla }} </mat-option>
+          <mat-form-field class="field-periodo-classe-numero field-padding">
+            <mat-select matInput formControlName="periodo" required placeholder="Selecione um classe">
+              <ng-container
+                *ngFor="let classe of ['Iniciação','1 Classe','2 Classe', '3 Classe','4 Classe','5 Classe','6 Classe']">
+                <mat-option [value]="classe"> {{ classe }} </mat-option>
               </ng-container>
             </mat-select>
-            <mat-error *ngIf="formGroup06.controls['turma'].hasError('required')">
-              Turma é <strong>obrigatorio</strong>
+            <mat-error *ngIf="formGroup06.controls['classe'].hasError('required')">
+              Classe é <strong>obrigatorio</strong>
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="field-periodo-classe-numero field-padding">
+            <mat-select matInput formControlName="periodo" required placeholder="Selecione um perido">
+              <ng-container *ngFor="let periodo of periodos$ | async">
+                <mat-option [value]="periodo"> {{ periodo?.descricao }} </mat-option>
+              </ng-container>
+            </mat-select>
+            <mat-error *ngIf="formGroup06.controls['periodo'].hasError('required')">
+              periodo é <strong>obrigatorio</strong>
             </mat-error>
           </mat-form-field>
 
