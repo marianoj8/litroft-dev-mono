@@ -1,3 +1,5 @@
+import { Periodo } from './periodo';
+import { Classe } from './classe';
 import { Curso } from '../../shared/model/curso';
 import { AdminInterno } from './adminInterno';
 import { CustomAbstractEntity } from './customEntity';
@@ -22,6 +24,10 @@ export class Estudante implements CustomAbstractEntity {
   curso: Curso;
   turma: Turma;
   inGruop: boolean;
+  nivel: string;
+  classe: Classe;
+  periodo: Periodo;
+  anoLetivo: number;
   adminInterno: AdminInterno;
   numeroSerie: string;
   provincia: Provincia;

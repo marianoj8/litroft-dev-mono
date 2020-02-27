@@ -6,6 +6,7 @@ describe('TokenInterceptorService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
+    // tslint:disable-next-line: deprecation
     const service: TokenInterceptorService = TestBed.get(TokenInterceptorService);
     expect(service).toBeTruthy();
   });
