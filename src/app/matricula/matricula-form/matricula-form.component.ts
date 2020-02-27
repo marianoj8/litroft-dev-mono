@@ -26,7 +26,6 @@ import { ErrorLoadingComponent } from 'src/app/shared/error-loading/error-loadin
 import { HttpErrorResponse } from '@angular/common/http';
 import { LoadingUploadComponent } from 'src/app/shared/loading-upload/loading-upload.component';
 import { EventEmitter } from 'events';
-import { log } from 'util';
 import { MatriculaService } from '../modules/matricula.service';
 import { Periodo } from 'src/app/shared/model/periodo';
 import { PeriodoService } from 'src/app/periodos/modules/periodos.service';
@@ -69,6 +68,7 @@ export class MatriculaFormComponent implements OnInit {
   dialogServiceRef;
   private selectedFile: File = null;
   private estudanteIdade: number;
+  optionDocs = ['Cédula', 'Acento de Nascimento', 'Bilhete de Identidade', 'Passaporte'];
   private currentYear = new Date().getFullYear();
 
   // Variaves auxiliar de formulario
@@ -183,6 +183,7 @@ export class MatriculaFormComponent implements OnInit {
       this.nivelEnsino = 2;
       this.filter.nivel = 'Ensino do II Ciclo';
       this.initIICicleForms();
+      this.optionDocs = ['Bilhete de Identidade', 'Passaporte'];
 
       this.formGroup06.controls.curso.valueChanges
         .subscribe((onValue: Curso) => {
@@ -372,6 +373,7 @@ export class MatriculaFormComponent implements OnInit {
         Validators.required,
         Validators.minLength(10),
         Validators.maxLength(10)]],
+      optinDoc: [null, Validators.required],
       bi: [null, Validators.required]
     });
 
@@ -395,7 +397,8 @@ export class MatriculaFormComponent implements OnInit {
 
     this.formGroup06 = this.formBuilder.group({
       curso: [null, Validators.required],
-      turma: [null, Validators.required]
+      classe: [null, Validators.required],
+      periodo: [null, Validators.required]
     });
   }
 
@@ -428,7 +431,7 @@ export class MatriculaFormComponent implements OnInit {
     this.estudante.provincia = this.provincia;
     this.estudante.municipio = this.municipio;
 
-    this.estudanteService.save(this.estudante)
+    this.matriculaService.matericular(this.estudante)
       .subscribe(
         (data: Estudante) => {
           if (!!state) {
