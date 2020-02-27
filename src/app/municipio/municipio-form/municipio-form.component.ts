@@ -7,7 +7,7 @@ import { EventEmitter } from 'events';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MunicipioService } from '../modules/municipio.service';
 import { NotificationService } from 'src/app/shared/services/notification/notification.service';
-import { MatVerticalStepper } from '@angular/material';
+import { MatVerticalStepper } from '@angular/material/stepper';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Subject, Observable, of } from 'rxjs';
 import { Provincia } from 'src/app/shared/model/provincia';

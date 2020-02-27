@@ -4,7 +4,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Location } from '@angular/common';
-import { MatDialog, MatVerticalStepper } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
+import { MatVerticalStepper } from '@angular/material/stepper';
 import { Observable, Subject, of } from 'rxjs';
 import { EventEmitter } from 'events';
 

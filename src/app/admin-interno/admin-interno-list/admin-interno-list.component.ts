@@ -1,7 +1,9 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { MatDailogTypeParam } from 'src/app/shared/model/support/mat-dialog-type-param';
 import { CustomFilter } from 'src/app/shared/model/support/custom-filter';
-import { MatTableDataSource, MatSort, MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { AdminInterno } from 'src/app/shared/model/adminInterno';
 import { Subject, Subscription, of } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';

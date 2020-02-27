@@ -1,6 +1,9 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { Component, OnInit, ViewChild, Inject } from '@angular/core';
-import { MatSort, MatTableDataSource, PageEvent, MAT_DIALOG_DATA } from '@angular/material';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { PageEvent } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { of, Subject, Subscription } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { EstudanteService } from 'src/app/estudantes/modules/estudante.service';

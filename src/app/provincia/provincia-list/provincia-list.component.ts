@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { DeleteDialogComponent } from 'src/app/shared/delete-dialog/delete-dialog.component';
 import { MoreOptionsDialogComponent } from 'src/app/shared/more-options-dialog/more-options-dialog.component';
-import { MatTableDataSource, MatDialog, MatSort } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { Provincia } from 'src/app/shared/model/provincia';
 import { ErrorLoadingComponent } from 'src/app/shared/error-loading/error-loading.component';
 import { CustomFilter } from 'src/app/shared/model/support/custom-filter';

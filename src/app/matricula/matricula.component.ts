@@ -5,7 +5,7 @@ import { Curso } from '../shared/model/curso';
 import { CustomFilter } from '../shared/model/support/custom-filter';
 import { InscricaoService } from '../inscricao/modules/inscricao.service';
 import { CursoService } from '../cursos/modules/curso.service';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { catchError } from 'rxjs/operators';
 import { EstudanteFilterComponent } from '../estudantes/estudante-filter/estudante-filter.component';
 

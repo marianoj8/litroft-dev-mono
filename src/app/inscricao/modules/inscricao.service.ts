@@ -1,7 +1,7 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { CustomFilter } from 'src/app/shared/model/support/custom-filter';
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource } from '@angular/material/table';
 import { Estudante } from 'src/app/shared/model/estudante';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';

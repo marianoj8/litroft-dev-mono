@@ -1,6 +1,7 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatSort, MatTableDataSource } from '@angular/material';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { of, Subject, Subscription } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
 import { catchError, map, share } from 'rxjs/operators';

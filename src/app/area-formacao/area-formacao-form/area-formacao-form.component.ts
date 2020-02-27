@@ -6,7 +6,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AreaFormacaoService } from '../modules/area-formacao.service';
 import { MonografiaService } from 'src/app/monografias/modules/monografia.service';
 import { NotificationService } from 'src/app/shared/services/notification/notification.service';
-import { MatVerticalStepper } from '@angular/material';
+import { MatVerticalStepper } from '@angular/material/stepper';
 import { HttpErrorResponse } from '@angular/common/http';
 import { EventEmitter } from 'events';
 import { Location } from '@angular/common';

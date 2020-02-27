@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { MatSnackBar, MatSnackBarConfig } from '@angular/material';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 
 import { SaveSuccessMessageComponent } from './notification-success-save.component';
 import { UpdateSuccessMessageComponent } from './notification-success-update.component';

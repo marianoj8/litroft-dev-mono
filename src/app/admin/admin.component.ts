@@ -7,7 +7,7 @@ import { CustomFilter } from '../shared/model/support/custom-filter';
 import { CursoService } from '../cursos/modules/curso.service';
 import { PublicService } from '../public/modules/public.service';
 import { MonografiaService } from '../monografias/modules/monografia.service';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { catchError } from 'rxjs/operators';
 import { CursoSearchComponent } from '../cursos/curso-search/curso-search.component';
 

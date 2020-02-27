@@ -7,7 +7,7 @@ import { NotificationService } from 'src/app/shared/services/notification/notifi
 import { Provincia } from 'src/app/shared/model/provincia';
 import { EventEmitter } from 'events';
 import { MyErrorStateMatch } from 'src/app/shared/validators/field-validator';
-import { MatVerticalStepper } from '@angular/material';
+import { MatVerticalStepper } from '@angular/material/stepper';
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
