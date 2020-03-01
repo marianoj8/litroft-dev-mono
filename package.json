@@ -16,7 +16,7 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "~9.0.2",
-    "@angular/cdk": "~9.1.0",
+    "@angular/cdk": "~8.2.3",
     "@angular/common": "~9.0.2",
     "@angular/compiler": "~9.0.2",
     "@angular/core": "~9.0.2",
@@ -38,6 +38,7 @@
     "ng2-pdf-viewer": "^5.3.4",
     "rxjs": "^6.5.4",
     "tslib": "^1.10.0",
+    "hammerjs": "^2.0.8",
     "web-animations-js": "^2.3.2",
     "zone.js": "~0.10.2"
   },
