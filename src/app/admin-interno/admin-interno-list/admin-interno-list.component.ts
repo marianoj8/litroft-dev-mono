@@ -160,8 +160,8 @@ export class AdminInternoListComponent implements OnInit, OnDestroy {
     });
   }
 
-  deleteAdminInterno(orientadorId: number) {
-    this.adminInternoService.deleteById(orientadorId)
+  deleteAdminInterno(adminInternoId: number) {
+    this.adminInternoService.deleteById(adminInternoId)
       .subscribe(
         () => {
           this.onRefrash(this.filtro);
