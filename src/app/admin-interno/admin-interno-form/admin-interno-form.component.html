@@ -105,6 +105,7 @@
         </mat-form-field>
         <mat-form-field class="field field-padding">
           <input matInput formControlName="fone" type="text" required placeholder="Telefone" />
+          <span matPrefix>+244</span>
           <mat-error *ngIf="formGroup03.controls['fone'].hasError('required')">
             Contacto é <strong>obrigatorio</strong>
           </mat-error>
