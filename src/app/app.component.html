@@ -31,9 +31,13 @@
       </a>
       <a routerLinkActive="active" [routerLink]="['institutos']" mat-button *ngIf="!showOrHideMenu">
         <mat-icon left>school</mat-icon>
+        Directores
+      </a>
+      <a routerLinkActive="active" [routerLink]="['institutos']" mat-button *ngIf="!showOrHideMenu">
+        <mat-icon left>school</mat-icon>
         Escolas
       </a>
-        <a routerLinkActive="active" [routerLink]="['institutos']" mat-button>
+        <a routerLinkActive="active" [routerLink]="['institutos']" mat-button *ngIf="showOrHideMenu">
           <mat-icon>view_quilt</mat-icon>
           Pauta
         </a>
@@ -41,7 +45,7 @@
           <mat-icon>view_quilt</mat-icon>
           Certificados
         </a>
-        <a routerLinkActive="active" [routerLink]="['institutos']" mat-button>
+        <a routerLinkActive="active" [routerLink]="['institutos']" mat-button *ngIf="showOrHideMenu">
           <mat-icon>view_quilt</mat-icon>
           Vitrine
         </a>
