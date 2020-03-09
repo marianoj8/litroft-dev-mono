@@ -24,6 +24,7 @@ import { MoreOptionsDialogComponent } from './../../shared/more-options-dialog/m
 })
 export class EstudanteListComponent implements OnInit, OnDestroy {
 
+  public isPendente = false;
   pageEvent: PageEvent;
   dialogParam: MatDailogTypeParam = new MatDailogTypeParam();
   valueParam = '';
@@ -58,26 +59,47 @@ export class EstudanteListComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.service.onChangeContext.emit(false);
+    if (!this.router.url.includes('pendentes')) {
+      this.sub = this.service.findValueParams
+        .subscribe(data => this.onFiltered(data));
 
-    this.sub = this.service.findValueParams
-      .subscribe(data => this.onFiltered(data));
+      this.sub = this.service.findValueParam
+        .subscribe(data => this.estudantes.filter = data);
 
-    this.sub = this.service.findValueParam
-      .subscribe(data => this.estudantes.filter = data);
+      this.onRefrash(this.filtro);
 
-    this.onRefrash(this.filtro);
+      this.sub = this.service.emitOnDetalheButtonCliked.subscribe(
+        (next) => this.detalhe(next));
 
-    this.sub = this.service.emitOnDetalheButtonCliked.subscribe(
-      (next) => this.detalhe(next));
+      this.sub = this.service.emitOnEditButtonCliked.subscribe(
+        (next) => this.edit(next));
 
-    this.sub = this.service.emitOnEditButtonCliked.subscribe(
-      (next) => this.edit(next));
+      this.sub = this.service.emitOnDeleteButtonCliked.subscribe(
+        (next) => this.openDeleteDialog(next));
 
-    this.sub = this.service.emitOnDeleteButtonCliked.subscribe(
-      (next) => this.openDeleteDialog(next));
+      this.sub = this.service.findValueParamFromServer.subscribe(
+        (next: CustomFilter) => this.onFilterFromServer(next));
+    }
+    if (this.router.url.includes('pendentes')) {
+      this.isPendente = true;
+      this.displaydColumns = [
+        'nome',
+        'sexo',
+        'curso',
+        'turma',
+        'detalhe',
+        'comfirm',
+        'cancelar'
+      ];
 
-    this.sub = this.service.findValueParamFromServer.subscribe(
-      (next: CustomFilter) => this.onFilterFromServer(next));
+      this.sub = this.service.findValueParams
+        .subscribe(data => this.onFiltered(data));
+
+      this.sub = this.service.findValueParam
+        .subscribe(data => this.estudantes.filter = data);
+      this.filtro.turma = null;
+      this.onRefrashPendente(this.filtro);
+    }
   }
 
   onFilterFromServer(data: CustomFilter) {
@@ -87,6 +109,28 @@ export class EstudanteListComponent implements OnInit, OnDestroy {
 
   onRefrash(data?: CustomFilter) {
     this.sub = this.service.filterBySexoAndCurso(data.curso === undefined ? '' : data.curso, data.sexo === undefined ? '' : data.sexo)
+      .pipe(
+        catchError(err => {
+          this.dialogService.open(ErrorLoadingComponent);
+          this.error$.next(true);
+          return of(null);
+        })
+      )
+      .subscribe(
+        next => {
+          const array = next.map((item: Estudante) => {
+            return {
+              ...item
+            };
+
+          });
+          this.estudantes = new MatTableDataSource(array);
+          this.estudantes.sort = this.sort;
+          this.estudantesList = this.estudantes.data;
+        });
+  }
+  onRefrashPendente(data?: CustomFilter) {
+    this.sub = this.service.filterByNomeSexoCursoPendente(data)
       .pipe(
         catchError(err => {
           this.dialogService.open(ErrorLoadingComponent);
@@ -190,7 +234,7 @@ export class EstudanteListComponent implements OnInit, OnDestroy {
     this.router.navigate(['detalhe', id], { relativeTo: this.activatedRoute });
   }
   edit(id: number) {
-    this.router.navigate(['edit', id], { relativeTo: this.activatedRoute });
+    this.router.navigate(['estudantes/edit', id]);
   }
 
 
