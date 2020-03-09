@@ -10,6 +10,7 @@ import { EstudantesComponent } from '../estudantes.component';
 import { MaterialModule } from './../../material/material.module';
 import { EstudanteRoutingModule } from './estudante-routing.module';
 import { EstudanteFilterComponent } from '../estudante-filter/estudante-filter.component';
+import { EstudanteMasterDetalheComponent } from '../estudante-master-detalhe/estudante-master-detalhe.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { EstudanteFilterComponent } from '../estudante-filter/estudante-filter.c
     EstudanteListComponent,
     EstudanteFromComponent,
     EstudanteDetalheComponent,
-    EstudanteFilterComponent
+    EstudanteFilterComponent,
+    EstudanteMasterDetalheComponent
   ],
   imports: [
     CommonModule,
