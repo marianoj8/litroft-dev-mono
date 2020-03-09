@@ -57,7 +57,7 @@ export class AdminInternoService implements CustomRepository<AdminInterno, numbe
   }
 
   deleteById(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.url}/admin/adminInterno${id}`);
+    return this.http.delete<void>(`${this.url}/admin/adminInterno/${id}`);
   }
 
   filterResolve(filterParam: CustomFilter): CustomFilter {
