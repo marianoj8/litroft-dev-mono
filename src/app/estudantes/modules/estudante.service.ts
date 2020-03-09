@@ -39,6 +39,11 @@ export class EstudanteService {
     return this.http
       .get<Estudante[]>(`${this.url}/interno/estudante/l?nome=${query.nome}&curso=${query.curso}&sexo=${query.sexo}&turma=${query.turma}`);
   }
+   filterByNomeSexoCursoPendente(query: CustomFilter): Observable<Estudante[]> {
+    query = this.filterResolve(query);
+    return this.http
+      .get<Estudante[]>(`${this.url}/interno/estudante/pendente?nome=${query.nome}&curso=${query.curso}&sexo=${query.sexo}`);
+  }
 
   filterBySexoAndCurso(curso: string, sexo: string): Observable<Estudante[]> {
     return this.http
