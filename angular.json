@@ -170,5 +170,8 @@
       }
     }
   },
-  "defaultProject": "litroft-dev-mono"
+  "defaultProject": "litroft-dev-mono",
+  "cli": {
+    "analytics": "dd729bf6-c4e1-4a5f-97b9-1c6079967201"
+  }
 }
