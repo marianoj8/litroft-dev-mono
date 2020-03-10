@@ -6,6 +6,7 @@ import { EstudanteFromComponent } from '../estudante-from/estudante-from.compone
 import { EstudantesComponent } from '../estudantes.component';
 import { EstudanteDetalheComponent } from '../estudante-detalhe/estudante-detalhe.component';
 import { AuthGuard } from 'src/app/shared/guard/auth.guard';
+import { EstudanteMasterDetalheComponent } from '../estudante-master-detalhe/estudante-master-detalhe.component';
 
 const route: Routes = [
   {
@@ -15,6 +16,11 @@ const route: Routes = [
     children: [
       {
         path: '',
+        canActivate: [AuthGuard],
+        component: EstudanteListComponent
+      },
+       {
+        path: 'pendentes',
         canActivate: [AuthGuard],
         component: EstudanteListComponent
       },
@@ -32,6 +38,11 @@ const route: Routes = [
         path: 'detalhe/:id',
         canActivate: [AuthGuard],
         component: EstudanteDetalheComponent
+      } ,
+      {
+        path: 'master/detalhe/:id',
+        canActivate: [AuthGuard],
+        component: EstudanteMasterDetalheComponent
       }
     ]
   },
