@@ -134,6 +134,12 @@ const routes: Routes = [
     loadChildren: () => import('src/app/admin-interno/modules/adminInterno.module').then(m => m.AdminInternoModule),
   },
   {
+    path: 'users-account',
+    canActivate: [AuthGuard],
+    canLoad:[AuthGuard],
+    loadChildren: () => import('src/app/account-setting/modules/account-setting.module').then(m => m.AccountSettingModule),
+  },
+  {
     path: 'denaid',
     component: AcessDenaidComponent,
   },
