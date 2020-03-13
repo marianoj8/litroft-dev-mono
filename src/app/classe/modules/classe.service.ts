@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, EventEmitter } from '@angular/core';
-import { CustomFilter } from 'src/app/shared/model/support/custom-filter';
-import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
+
+import { environment } from 'src/environments/environment';
 import { Classe } from 'src/app/shared/model/classe';
+import { CustomFilter } from 'src/app/shared/model/support/custom-filter';
 
 @Injectable({ providedIn: 'root' })
 export class ClasseService {
