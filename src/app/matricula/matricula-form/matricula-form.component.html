@@ -255,10 +255,10 @@
           </mat-form-field>
 
           <mat-form-field class="field-periodo-classe-numero field-padding">
-            <mat-select matInput formControlName="periodo" required placeholder="Selecione um classe">
+            <mat-select matInput formControlName="classe" required placeholder="Selecione um classe">
               <ng-container
-                *ngFor="let classe of ['Iniciação','1 Classe','2 Classe', '3 Classe','4 Classe','5 Classe','6 Classe']">
-                <mat-option [value]="classe"> {{ classe }} </mat-option>
+                *ngFor="let classe of classe$ | async">
+                <mat-option [value]="classe"> {{ classe.descricao }} </mat-option>
               </ng-container>
             </mat-select>
             <mat-error *ngIf="formGroup05.controls['classe'].hasError('required')">
@@ -332,7 +332,13 @@
           <mat-icon>arrow_upward</mat-icon>
           Anterior
         </button>
-        <button class="mat-elevation-z8 btn1" *ngIf="!estudante.id" color="primary" mat-raised-button class="large">
+        <button
+          class="mat-elevation-z8 btn1"
+          *ngIf="!estudante.id"
+          color="primary"
+          mat-raised-button class="large"
+          (click)="onSaveButtonAndList(stepper)"
+          >
           Concluir matrícula
           <mat-icon>send</mat-icon>
         </button>
