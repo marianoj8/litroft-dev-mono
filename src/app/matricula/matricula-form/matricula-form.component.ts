@@ -1,3 +1,5 @@
+import { ClasseService } from './../../classe/modules/classe.service';
+import { Classe } from './../../shared/model/classe';
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -45,6 +47,7 @@ export class MatriculaFormComponent implements OnInit {
   public formGroup06: FormGroup;
   cursos$: Observable<Curso[]>;
   periodos$: Observable<Periodo[]>;
+  classe$: Observable<Classe[]>;
   institutos$: Observable<Instituto[]>;
   turmas: Turma[];
   cursoError$ = new Subject<boolean>();
@@ -56,6 +59,8 @@ export class MatriculaFormComponent implements OnInit {
   showAndHideView: EventEmitter = new EventEmitter();
   estudante: Estudante = new Estudante();
   private curso: Curso = new Curso();
+  private classe: Classe = new Classe();
+  private instituto: Instituto = new Instituto();
   private turma: Turma = new Turma();
   private provincia: Provincia = new Provincia();
   private municipio: Municipio = new Municipio();
@@ -94,6 +99,7 @@ export class MatriculaFormComponent implements OnInit {
     private estudanteService: EstudanteService,
     private inscricaoService: InscricaoService,
     private cursoSerice: CursoService,
+    private classeService: ClasseService,
     private institutoSerice: InstitutoService,
     private turmaService: TurmaService,
     private municipioService: MunicipioService,
@@ -110,7 +116,8 @@ export class MatriculaFormComponent implements OnInit {
   ngOnInit() {
     this.inscricaoService.onChangeContext.emit(true);
     this.periodos$ = this.periodoService.list();
-    if (this.router.routerState.snapshot.url.includes('/matriculas/from/primario')) {
+    this.classe$ = this.classeService.list();
+    if (this.router.routerState.snapshot.url.match('/matriculas/from/primario')) {
       this.nivelEnsino = 0;
       this.filter.nivel = 'Ensino Primario';
       this.initPrimaryForms();
@@ -163,14 +170,16 @@ export class MatriculaFormComponent implements OnInit {
 
       this.formGroup05.controls.classe.valueChanges
         .subscribe(onValue => {
-          switch (onValue) {
-            case 'Iniciação':
-            case '1 Class':
-            case '2 Class':
-              // this.periodos$ = this.periodoService.listForAdulto();
-              break;
-            default:
-          }
+          console.log(onValue);
+
+          // switch (onValue) {
+          //   case 'Iniciação':
+          //   case '1 Class':
+          //   case '2 Class':
+          //     // this.periodos$ = this.periodoService.listForAdulto();
+          //     break;
+          //   default:
+          // }
         });
     }
 
@@ -193,6 +202,24 @@ export class MatriculaFormComponent implements OnInit {
               this.turmas = onValues;
             });
         });
+
+      this.formGroup05.controls.instituto.valueChanges
+        .subscribe((onValue: Instituto) => {
+
+          this.formGroup05.patchValue({
+            sigla: onValue.sigla,
+            numero: onValue.numero,
+            areaFormacao: onValue.areaFormacao.descricao
+          });
+
+          this.cursos$ = this.cursoSerice.publicList(onValue.id)
+            .pipe(catchError(err => {
+              this.dialogService.open(ErrorLoadingComponent);
+              this.cursoError$.next(true);
+              return of([]);
+            }));
+        });
+
     }
 
     this.institutos$ = this.institutoSerice.listFiltered(this.filter)
@@ -220,22 +247,7 @@ export class MatriculaFormComponent implements OnInit {
           }));
       });
 
-    this.formGroup05.controls.instituto.valueChanges
-      .subscribe((onValue: Instituto) => {
 
-        this.formGroup05.patchValue({
-          sigla: onValue.sigla,
-          numero: onValue.numero,
-          areaFormacao: onValue.areaFormacao.descricao
-        });
-
-        this.cursos$ = this.cursoSerice.publicList(onValue.id)
-          .pipe(catchError(err => {
-            this.dialogService.open(ErrorLoadingComponent);
-            this.cursoError$.next(true);
-            return of([]);
-          }));
-      });
 
     this.formGroup02.controls.dataNascimento.valueChanges
       .subscribe((onValue: Date) => {
@@ -310,6 +322,7 @@ export class MatriculaFormComponent implements OnInit {
       classe: [null, Validators.required],
       periodo: [null, Validators.required]
     });
+
   }
 
   private initICicleForms(): void {
@@ -348,7 +361,8 @@ export class MatriculaFormComponent implements OnInit {
       instituto: [null, Validators.required],
       sigla: [null, Validators.required],
       numero: [null, Validators.required],
-      areaFormacao: [null, Validators.required]
+      areaFormacao: [null, Validators.required],
+      classe: [null, Validators.required]
     });
 
     this.formGroup06 = this.formBuilder.group({
@@ -421,16 +435,29 @@ export class MatriculaFormComponent implements OnInit {
     this.estudante.fone = this.formGroup03.controls.fone.value;
     this.estudante.email = this.formGroup03.controls.email.value;
     this.estudante.endereco = this.formGroup04.controls.endereco.value;
-    this.estudante.numeroProcesso = this.formGroup05.controls.numeroProcesso.value;
+    if (this.nivelEnsino === 0) { }
+    if (this.nivelEnsino === 1) { }
+    if (this.nivelEnsino === 2) {
+      console.log(this.nivelEnsino);
+      this.estudante.numeroProcesso = this.formGroup05.controls.numeroProcesso.value;
+      this.curso.id = this.formGroup05.controls.curso.value as number;
+      this.turma.id = this.formGroup05.controls.turma.value as number;
+      this.estudante.curso = this.curso;
+      this.estudante.turma = this.turma;
 
-    this.curso.id = this.formGroup05.controls.curso.value as number;
-    this.turma.id = this.formGroup05.controls.turma.value as number;
+    }
+    this.instituto = this.formGroup05.controls.instituto.value;
     this.provincia.id = this.formGroup04.controls.provincia.value as number;
     this.municipio.id = this.formGroup04.controls.municipio.value as number;
-    this.estudante.curso = this.curso;
-    this.estudante.turma = this.turma;
     this.estudante.provincia = this.provincia;
     this.estudante.municipio = this.municipio;
+    this.estudante.numeroProcesso = '00214';
+    this.estudante.instituto = this.instituto;
+    this.estudante.periodo = this.formGroup05.controls.periodo.value;
+    this.classe = this.formGroup05.controls.classe.value;
+    this.estudante.classe = this.classe;
+    this.estudante.nivel = this.classe.ensinoNivel.descricao;
+    this.estudante.ensinoNivel = this.classe.ensinoNivel;
 
     this.matriculaService.matericular(this.estudante)
       .subscribe(
