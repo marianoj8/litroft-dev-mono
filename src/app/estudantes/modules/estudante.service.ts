@@ -45,6 +45,12 @@ export class EstudanteService {
       .get<Estudante[]>(`${this.url}/interno/estudante/pendente?nome=${query.nome}&curso=${query.curso}&sexo=${query.sexo}`);
   }
 
+  filterByNomeSexoPendenteNivel(query: CustomFilter): Observable<Estudante[]> {
+    query = this.filterResolve(query);
+    return this.http
+      .get<Estudante[]>(`${this.url}/interno/estudante/pendente/nivelId?nome=${query.nome}&nivelId=${query.nivelId}&sexo=${query.sexo}`);
+  }
+
   filterBySexoAndCurso(curso: string, sexo: string): Observable<Estudante[]> {
     return this.http
       .get<Estudante[]>(`${this.url}/interno/estudante/l?curso=${!!curso ? curso : ''}&sexo=${!!sexo ? sexo : ''}`);
@@ -97,6 +103,7 @@ export class EstudanteService {
 
   private filterResolve(query: CustomFilter): CustomFilter {
     query.nome = query.nome === undefined ? '' : query.nome;
+    query.nivelId = query.nivelId === undefined ? 1 : query.nivelId;
     query.curso = query.curso === undefined ? '' : query.curso;
     query.turma = query.turma === undefined ? '' : query.turma;
     query.sexo = query.sexo === undefined ? '' : query.sexo;
