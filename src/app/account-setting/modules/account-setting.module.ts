@@ -5,9 +5,10 @@ import { NgModule } from '@angular/core';
 import { MaterialModule } from './../../material/material.module';
 import { AccountSettingComponent } from './../account-setting.component';
 import { AccountSettingRoutingModule } from './account-setting-routing.module';
+import { ListSettingsComponent } from '../list-settings/list-settings.component';
 
 @NgModule({
-  declarations: [AccountSettingComponent],
+  declarations: [AccountSettingComponent, ListSettingsComponent],
   imports: [
     CommonModule,
     AccountSettingRoutingModule,
@@ -16,6 +17,6 @@ import { AccountSettingRoutingModule } from './account-setting-routing.module';
     FormsModule
   ],
   exports: [],
-  providers: [],
+  providers: []
 })
 export class AccountSettingModule { }
