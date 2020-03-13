@@ -85,8 +85,9 @@ export class EstudanteListComponent implements OnInit, OnDestroy {
       this.displaydColumns = [
         'nome',
         'sexo',
-        'curso',
-        'turma',
+        'data',
+        'classe',
+        'periodo',
         'detalhe',
         'comfirm',
         'cancelar'
@@ -129,8 +130,9 @@ export class EstudanteListComponent implements OnInit, OnDestroy {
           this.estudantesList = this.estudantes.data;
         });
   }
+
   onRefrashPendente(data?: CustomFilter) {
-    this.sub = this.service.filterByNomeSexoCursoPendente(data)
+    this.sub = this.service.filterByNomeSexoPendenteNivel(data)
       .pipe(
         catchError(err => {
           this.dialogService.open(ErrorLoadingComponent);
