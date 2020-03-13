@@ -9,7 +9,7 @@ export class EnsinoNivel implements CustomAbstractEntity {
   createdAt: string;
   lastModifiedAt: string;
   totalModified: number;
-  nivel: number;
+  descricao: string;
   instituto: Instituto;
 
   constructor(id?: number) {
