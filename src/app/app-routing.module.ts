@@ -110,6 +110,12 @@ const routes: Routes = [
     loadChildren: () => import('src/app/provincia/modules/provincia.module').then(m => m.ProvinciaModule)
   },
   {
+    path: 'classe',
+    canActivate: [AuthGuard],
+    canLoad: [AuthGuard],
+    loadChildren: () => import('src/app/classe/modules/classe.module').then(m => m.ClasseModule)
+  },
+  {
     path: 'area-formacao',
     canActivate: [AuthGuard],
     canLoad: [AuthGuard],
