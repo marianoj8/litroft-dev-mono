@@ -14,7 +14,7 @@ export class MatriculaService {
   }
 
   public matericular(estudante: Estudante): Observable<Estudante> {
-    return this.http.post<Estudante>(`${this.url}/matricula`, estudante)
+    return this.http.post<Estudante>(`${this.url}/matriculas`, estudante)
       .pipe(take(1));
   }
 
