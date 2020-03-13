@@ -16,6 +16,27 @@
         </td>
       </ng-container>
 
+      <ng-container matColumnDef="data">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Idade</th>
+        <td mat-cell *matCellDef="let estudante">
+          {{ estudante?.dataNascimento | idade }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="classe">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Classe</th>
+        <td mat-cell *matCellDef="let estudante">
+          {{ estudante?.classe?.descricao }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="periodo">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Periodo</th>
+        <td mat-cell *matCellDef="let estudante">
+          {{ estudante?.periodo?.descricao }}
+        </td>
+      </ng-container>
+
       <ng-container matColumnDef="curso">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Curso</th>
         <td mat-cell *matCellDef="let estudante">
@@ -40,20 +61,20 @@
       </ng-container>
 
       <ng-container matColumnDef="comfirm">
-        <th mat-header-cell *matHeaderCellDef>Matricula</th>
+        <th mat-header-cell *matHeaderCellDef>Confirmar</th>
         <td mat-cell *matCellDef="let estudante">
           <button mat-raised-button (click)="edit(estudante.id)">
-            <mat-icon color="primary">edit</mat-icon>
+            <mat-icon color="primary">done</mat-icon>
           </button>
         </td>
       </ng-container>
 
       <ng-container matColumnDef="cancelar">
-        <th mat-header-cell *matHeaderCellDef>Matricula</th>
+        <th mat-header-cell *matHeaderCellDef>Cancelar</th>
         <td mat-cell *matCellDef="let estudante">
           <button mat-raised-button matTooltipShowDelay="2000" matTooltipHideDelay="2000"
             matTooltip="Uma vez excluido não tem como reverter as alterações." (click)="openDeleteDialog(estudante.id)">
-            <mat-icon color="warn">delete</mat-icon>
+            <mat-icon color="warn">close</mat-icon>
           </button>
         </td>
       </ng-container>
@@ -90,7 +111,7 @@
       <a mat-list-item (click)="openMoreOptionDialog(item.id)" *ngFor="let item of estudantesList">
         <mat-icon matListIcon class="mat-18">person</mat-icon>
         <h5 matLine>{{ item?.nome }} {{ item?.sobreNome }}</h5>
-        <p matLine>{{ item?.curso.nome }}</p>
+        <!-- <p matLine>{{ item?.curso.nome }}</p> -->
         <mat-divider></mat-divider>
       </a>
     </mat-nav-list>
