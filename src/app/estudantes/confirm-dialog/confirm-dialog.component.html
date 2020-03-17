@@ -1,0 +1,21 @@
+<h2>Turma</h2>
+<p>Selecione uma turam para confirmar a matricula</p>
+<section class="about-us">
+  <div class="contenedor1">
+    <div class="contenedor-articulo">
+      <div
+        class="articulo"
+        data-aos="zoom-in-right"
+        *ngFor="let item of turmas$ | async"
+      >
+        <mat-icon color="primary">group_work</mat-icon>
+        <h4>{{item?.sigla}}</h4>
+        <p></p>
+        <a mat-raised-button color="primary">
+          <mat-icon>done</mat-icon>
+          Confirmar turma
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
