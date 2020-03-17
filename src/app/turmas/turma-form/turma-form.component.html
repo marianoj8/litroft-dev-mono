@@ -37,25 +37,27 @@
           </mat-error>
         </mat-form-field>
 
-        <mat-form-field class="field field-padding">
-          <mat-select
+        <ng-container *ngIf="nivel">
+          <mat-form-field class="field field-padding">
+            <mat-select
             matInput
             formControlName="curso"
             required
             placeholder="Curso"
-          >
+            >
             <mat-option *ngIf="cursoError$ | async"
-              >Ocorreu um erro ao carregar cursos...
-            </mat-option>
-            <ng-container *ngFor="let curso of cursos$ | async">
-              <mat-option *ngIf="!curso">lista vasia</mat-option>
-              <mat-option [value]="curso.id"> {{ curso.nome }} </mat-option>
-            </ng-container>
-          </mat-select>
-          <mat-error *ngIf="formGroup01.controls['curso'].hasError('required')">
-            Curso é <strong>obrigatorio</strong>
-          </mat-error>
-        </mat-form-field>
+            >Ocorreu um erro ao carregar cursos...
+          </mat-option>
+          <ng-container *ngFor="let curso of cursos$ | async">
+            <mat-option *ngIf="!curso">lista vasia</mat-option>
+            <mat-option [value]="curso.id"> {{ curso.nome }} </mat-option>
+          </ng-container>
+        </mat-select>
+        <mat-error *ngIf="formGroup01.controls['curso'].hasError('required')">
+          Curso é <strong>obrigatorio</strong>
+        </mat-error>
+      </mat-form-field>
+    </ng-container>
 
         <div class="spaced">
           <button
