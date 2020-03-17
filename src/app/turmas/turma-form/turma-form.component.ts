@@ -31,6 +31,7 @@ export class TurmaFormComponent implements OnInit {
   turma: Turma = new Turma();
   private id = 0;
   private curso: Curso = new Curso();
+  nivel: boolean;
 
   constructor(
     private router: Router,
@@ -45,6 +46,7 @@ export class TurmaFormComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.nivel = localStorage.getItem('nivel') === 'Ensino do II Ciculo';
     this.turmaService.onChangeContext.emit(true);
     this.initForms();
 
@@ -74,14 +76,22 @@ export class TurmaFormComponent implements OnInit {
   }
 
   initForms() {
-    this.formGroup01 = this.formBuilder.group({
-      sigla: ['', [
-        Validators.required,
-        Validators.minLength(3),
-        Validators.maxLength(30)]],
-      curso: [null, Validators.required],
-    });
-
+    if (this.nivel) {
+      this.formGroup01 = this.formBuilder.group({
+        sigla: ['', [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(30)]],
+        curso: [null, Validators.required],
+      });
+    } else {
+      this.formGroup01 = this.formBuilder.group({
+        sigla: ['', [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(30)]]
+      });
+    }
   }
 
   onSaveButton(stepper: MatVerticalStepper) {
@@ -95,8 +105,10 @@ export class TurmaFormComponent implements OnInit {
   private save(stepper: MatVerticalStepper, state): void {
 
     this.turma.sigla = this.formGroup01.controls.sigla.value;
-    this.curso.id = this.formGroup01.controls.curso.value;
-    this.turma.curso = this.curso;
+    if (this.nivel) {
+      this.curso.id = this.formGroup01.controls.curso.value;
+      this.turma.curso = this.curso;
+    }
 
     this.turmaService.save(this.turma)
       .subscribe(
