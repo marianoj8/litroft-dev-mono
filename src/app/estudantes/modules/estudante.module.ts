@@ -1,3 +1,4 @@
+import { ConfirmDialogComponent } from './../confirm-dialog/confirm-dialog.component';
 import { CustomPipesModule } from 'src/app/shared/custom-pipes/module/custom-pipes.module';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
@@ -19,7 +20,8 @@ import { EstudanteMasterDetalheComponent } from '../estudante-master-detalhe/est
     EstudanteFromComponent,
     EstudanteDetalheComponent,
     EstudanteFilterComponent,
-    EstudanteMasterDetalheComponent
+    EstudanteMasterDetalheComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     CommonModule,
