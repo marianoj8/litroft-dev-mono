@@ -266,7 +266,7 @@ export class EstudanteListComponent implements OnInit, OnDestroy {
   openConfirmDialog(id: number) {
 
     this.dialogParam.id = id;
-    this.dialogParam.entityName = 'Estudante';
+
 
     const dialogRef = this.dialogService.open(
       ConfirmDialogComponent,
