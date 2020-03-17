@@ -451,7 +451,6 @@ export class MatriculaFormComponent implements OnInit {
     this.municipio.id = this.formGroup04.controls.municipio.value as number;
     this.estudante.provincia = this.provincia;
     this.estudante.municipio = this.municipio;
-    this.estudante.numeroProcesso = '00214';
     this.estudante.instituto = this.instituto;
     this.estudante.periodo = this.formGroup05.controls.periodo.value;
     this.classe = this.formGroup05.controls.classe.value;
