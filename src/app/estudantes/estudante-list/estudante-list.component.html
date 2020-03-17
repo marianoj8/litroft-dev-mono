@@ -63,7 +63,7 @@
       <ng-container matColumnDef="comfirm">
         <th mat-header-cell *matHeaderCellDef>Confirmar</th>
         <td mat-cell *matCellDef="let estudante">
-          <button mat-raised-button (click)="edit(estudante.id)">
+          <button mat-raised-button (click)="openConfirmDialog(estudante.id)">
             <mat-icon color="primary">done</mat-icon>
           </button>
         </td>
