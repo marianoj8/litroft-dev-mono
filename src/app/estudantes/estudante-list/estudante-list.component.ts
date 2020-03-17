@@ -7,6 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { of, Subject, Subscription } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 import { MonografiaService } from 'src/app/monografias/modules/monografia.service';
 import { ErrorLoadingComponent } from 'src/app/shared/error-loading/error-loading.component';
 import { Estudante } from 'src/app/shared/model/estudante';
@@ -261,6 +262,28 @@ export class EstudanteListComponent implements OnInit, OnDestroy {
 
     });
   }
+
+  openConfirmDialog(id: number) {
+
+    this.dialogParam.id = id;
+    this.dialogParam.entityName = 'Estudante';
+
+    const dialogRef = this.dialogService.open(
+      ConfirmDialogComponent,
+      {
+        data: this.dialogParam,
+        height: '500px',
+        width: '900px'
+      });
+
+    dialogRef.afterClosed().subscribe((result: boolean) => {
+      if (result) {
+        // this.deleteEstudante(estudante);
+      }
+
+    });
+  }
+
   openDeleteDialog(id: number) {
     const dialogRef = this.dialogService.open(
       DeleteDialogComponent,
