@@ -31,18 +31,13 @@ export class TurmaListComponent implements OnInit, OnDestroy {
   turmasList: Turma[] = [];
   error$ = new Subject<boolean>();
   private sub: Subscription;
+  nivel: boolean;
 
 
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
-  displaydColumns: string[] = [
-    'sigla',
-    'curso',
-    'detalhe',
-    'edit',
-    'delete'
-  ];
+  displaydColumns: string[] = [];
 
   constructor(
     private router: Router,
@@ -52,6 +47,25 @@ export class TurmaListComponent implements OnInit, OnDestroy {
     private dialogService: MatDialog,
     private monografiaService: MonografiaService) {
     this.monografiaService.emitShowAddButton.emit(true);
+
+    this.nivel = localStorage.getItem('nivel') === 'Ensino do II Ciculo';
+
+    if (this.nivel) {
+      this.displaydColumns = [
+        'sigla',
+        'curso',
+        'detalhe',
+        'edit',
+        'delete']
+    } else {
+      this.displaydColumns = [
+        'sigla',
+        'detalhe',
+        'edit',
+        'delete'
+      ]
+    }
+
   }
 
   ngOnInit() {
