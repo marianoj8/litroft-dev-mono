@@ -11,7 +11,7 @@
         <mat-icon color="primary">group_work</mat-icon>
         <h4>{{item?.sigla}}</h4>
         <p></p>
-        <a mat-raised-button color="primary">
+        <a mat-raised-button color="primary" (click)="confirm(item)">
           <mat-icon>done</mat-icon>
           Confirmar turma
         </a>
