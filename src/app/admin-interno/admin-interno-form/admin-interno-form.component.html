@@ -77,6 +77,12 @@
             Data de Nascimento é <strong>obrigatorio</strong>
           </mat-error>
         </mat-form-field>
+        <mat-form-field class="field field-padding">
+          <input matInput formControlName="bi" autocomplete="false" required placeholder="B.I ou passaport" />
+          <mat-error *ngIf="formGroup02.controls['bi'].hasError('required')">
+            B.I ou passaporte é <strong>obrigatorio</strong>
+          </mat-error>
+        </mat-form-field>
         <div class="spaced">
           <button mat-raised-button class="large" matStepperPrevious>
             <mat-icon>arrow_upward</mat-icon>
@@ -95,21 +101,31 @@
     <form [formGroup]="formGroup03">
       <div class="field">
         <ng-template matStepLabel>
-          Numero do B.I ou Passaport e telefone
+          Telefone & Email
         </ng-template>
-        <mat-form-field class="field field-padding">
-          <input matInput formControlName="bi" autocomplete="false" required placeholder="B.I ou passaport" />
-          <mat-error *ngIf="formGroup03.controls['bi'].hasError('required')">
-            B.I ou passaporte é <strong>obrigatorio</strong>
-          </mat-error>
-        </mat-form-field>
+
         <mat-form-field class="field field-padding">
           <input matInput formControlName="fone" type="text" required placeholder="Telefone" />
-          <span matPrefix>+244</span>
           <mat-error *ngIf="formGroup03.controls['fone'].hasError('required')">
             Contacto é <strong>obrigatorio</strong>
           </mat-error>
         </mat-form-field>
+
+        <mat-form-field class="field field-padding">
+          <input matInput formControlName="email" [errorStateMatcher]="matcher" autocomplete="false" required
+            placeholder="Email" />
+          <mat-error *ngIf="
+              formGroup03.controls['email'].hasError('email') &&
+              !formGroup03.controls['email'].hasError('required')
+            ">
+            Por favor, insira um email valido
+          </mat-error>
+
+          <mat-error *ngIf="formGroup03.controls['email'].hasError('required')">
+            Email é <strong>obrigatorio</strong>
+          </mat-error>
+        </mat-form-field>
+
         <div class="spaced">
           <button mat-raised-button matStepperPrevious class="large">
             <mat-icon>arrow_upward</mat-icon>
@@ -128,24 +144,56 @@
     <form [formGroup]="formGroup04">
       <div class="field">
         <ng-template matStepLabel>
-          Email e endereço
+          Endereço
         </ng-template>
-        <mat-form-field class="field field-padding">
-          <input matInput formControlName="email" [errorStateMatcher]="matcher" autocomplete="false" required
-            placeholder="Email" />
-          <mat-error *ngIf="
-              formGroup04.controls['email'].hasError('email') &&
-              !formGroup04.controls['email'].hasError('required')
-            ">
-            Por favor, insira um email valido
-          </mat-error>
-
-          <mat-error *ngIf="formGroup04.controls['email'].hasError('required')">
-            Email é <strong>obrigatorio</strong>
+        <mat-form-field class="field-min-2 field-padding">
+          <mat-select
+              matInput
+              formControlName="provincia"
+              required
+              placeholder="Provincia">
+            <mat-option *ngIf="provinciaError$ | async">
+              Ocorreu um erro ao carregar provincias...
+            </mat-option>
+            <ng-container *ngFor="let provincia of provincias$ | async">
+              <mat-option *ngIf="!provincia">
+                lista vasia
+              </mat-option>
+              <mat-option [value]="provincia.id">
+                {{ provincia.nome }}
+              </mat-option>
+            </ng-container>
+          </mat-select>
+          <mat-error *ngIf="formGroup04.controls['provincia'].hasError('required')">
+            Provincia é <strong>obrigatorio</strong>
           </mat-error>
         </mat-form-field>
+
+        <mat-form-field class="field-min-1 field-padding">
+          <mat-select
+              matInput
+              formControlName="municipio"
+              required
+              placeholder="Municipio">
+            <mat-option *ngIf="municipioError$ | async">
+              Ocorreu um erro ao carregar municipios...
+            </mat-option>
+
+            <ng-container *ngFor="let municipio of municipios$ | async as municipios">
+              <mat-option *ngIf="!municipios">lista vasia</mat-option>
+              <mat-option [value]="municipio.id">
+                {{ municipio.nome }}
+              </mat-option>
+            </ng-container>
+          </mat-select>
+          <mat-error *ngIf="formGroup04.controls['municipio'].hasError('required')">
+            Municipio é <strong>obrigatorio</strong>
+          </mat-error>
+        </mat-form-field>
+
         <mat-form-field class="field field-padding">
-          <input matInput formControlName="endereco" autocomplete="false" required placeholder="Endereço" />
+          <input matInput formControlName="endereco" autocomplete="false" required
+            placeholder="Distrito, bairro, rua, N/casa" />
         </mat-form-field>
         <div class="spaced">
           <button mat-raised-button matStepperPrevious class="large">

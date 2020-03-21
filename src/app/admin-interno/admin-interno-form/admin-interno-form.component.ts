@@ -1,3 +1,6 @@
+import { CustomFilter } from './../../shared/model/support/custom-filter';
+import { Municipio } from './../../shared/model/municipio';
+import { Provincia } from './../../shared/model/provincia';
 import { Location } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
@@ -17,6 +20,9 @@ import { Instituto } from 'src/app/shared/model/instituto';
 import { NotificationService } from 'src/app/shared/services/notification/notification.service';
 import { MyErrorStateMatch } from 'src/app/shared/validators/field-validator';
 import { AdminInternoService } from '../modules/adminInterno.service';
+import { ProvinciaService } from 'src/app/provincia/modules/provincia.service';
+import { MunicipioService } from 'src/app/municipio/modules/municipio.service';
+import { ForbiddenErrorDialogComponent } from 'src/app/shared/forbidden-error-dialog/forbidden-error-dialog.component';
 
 @Component({
   selector: 'app-admin-interno-form',
@@ -30,9 +36,13 @@ export class AdminInternoFormComponent implements OnInit {
   formGroup04: FormGroup;
   formGroup05: FormGroup;
   institutos$: Observable<Instituto[]>;
+  municipios$: Observable<Municipio[]>;
+  provincias$: Observable<Provincia[]>;
+  provinciaError$ = new Subject<boolean>();
+  municipioError$ = new Subject<boolean>();
   adminInternoError$ = new Subject<boolean>();
   institutoError$ = new Subject<boolean>();
-
+  filter = new CustomFilter();
   matcher = new MyErrorStateMatch();
   showAndHideView: EventEmitter = new EventEmitter();
   adminInterno: AdminInterno = new AdminInterno();
@@ -46,7 +56,9 @@ export class AdminInternoFormComponent implements OnInit {
     private adminInternoService: AdminInternoService,
     private institutoSerice: InstitutoService,
     private notificationService: NotificationService,
-    private dialog: MatDialog,
+    private provinciaService: ProvinciaService,
+    private municipioService: MunicipioService,
+    private dialogService: MatDialog,
     private location: Location,
     private monografiaService: MonografiaService) {
     this.monografiaService.emitShowAddButton.emit(true);
@@ -55,13 +67,33 @@ export class AdminInternoFormComponent implements OnInit {
   ngOnInit() {
     this.adminInternoService.onChangeContext.emit(true);
     this.initForms();
+
     this.institutos$ = this.institutoSerice.list()
       .pipe(catchError(err => {
         // console.log(err);
-        this.dialog.open(ErrorLoadingComponent);
+        this.dialogService.open(ErrorLoadingComponent);
         this.institutoError$.next(true);
         return of([]);
       }));
+
+    this.provincias$ = this.provinciaService.list()
+      .pipe(catchError(err => {
+        this.provinciaError$.next(true);
+        return of(null);
+      }));
+
+    this.formGroup04.controls.provincia.valueChanges
+      .subscribe(value => {
+        this.filter.nome = '';
+        this.filter.provinciaId = value;
+        this.municipios$ = this.municipioService.filterByNomeAndProvincia(this.filter)
+          .pipe(catchError(err => {
+            this.municipioError$.next(true);
+            return of(null);
+          }));
+      });
+
+
 
     if (this.router.url.match('/edit')) {
       this.activatedRoute.params
@@ -80,16 +112,18 @@ export class AdminInternoFormComponent implements OnInit {
 
           this.formGroup02.patchValue({
             sexo: this.adminInterno.sexo,
-            dataNascimento: this.adminInterno.dataNascimento
+            dataNascimento: this.adminInterno.dataNascimento,
+            bi: this.adminInterno.bi
           });
 
           this.formGroup03.patchValue({
-            bi: this.adminInterno.bi,
+            email: this.adminInterno.email,
             fone: this.adminInterno.fone
           });
 
           this.formGroup04.patchValue({
-            email: this.adminInterno.email,
+            provincia: this.adminInterno.provincia.id,
+            municipio: this.adminInterno.municipio.id,
             endereco: this.adminInterno.endereco
           });
 
@@ -119,16 +153,18 @@ export class AdminInternoFormComponent implements OnInit {
       dataNascimento: ['', [
         Validators.required,
         Validators.minLength(10),
-        Validators.maxLength(10)]]
+        Validators.maxLength(10)]],
+      bi: [null, Validators.required]
     });
 
     this.formGroup03 = this.formBuilder.group({
-      bi: [null, Validators.required],
-      fone: [null, [Validators.required]]
+      fone: [null, [Validators.required]],
+      email: [null, [Validators.required, Validators.email]]
     });
 
     this.formGroup04 = this.formBuilder.group({
-      email: [null, [Validators.required, Validators.email]],
+      provincia: [null, Validators.required],
+      municipio: [null, Validators.required],
       endereco: [null]
     });
 
@@ -151,36 +187,51 @@ export class AdminInternoFormComponent implements OnInit {
 
     this.adminInterno.nome = this.formGroup01.controls.nome.value;
     this.adminInterno.sobreNome = this.formGroup01.controls.sobrenome.value;
+
     this.adminInterno.sexo = this.formGroup02.controls.sexo.value;
     this.adminInterno.dataNascimento = this.resolveDateFormat();
-    this.adminInterno.bi = this.formGroup03.controls.bi.value;
+    this.adminInterno.bi = this.formGroup02.controls.bi.value;
+
     this.adminInterno.fone = this.formGroup03.controls.fone.value;
-    this.adminInterno.email = this.formGroup04.controls.email.value;
+    this.adminInterno.email = this.formGroup03.controls.email.value;
+
+    this.adminInterno.provincia = new Provincia(this.formGroup04.controls.provincia.value as number);
+    this.adminInterno.municipio = new Municipio(this.formGroup04.controls.municipio.value as number);
     this.adminInterno.endereco = this.formGroup04.controls.endereco.value;
 
     this.adminInterno.instituto = new Instituto(this.formGroup05.controls.instituto.value);
 
+    console.log(this.adminInterno);
+
+
     this.adminInternoService.save(this.adminInterno)
+      .pipe(catchError((err: HttpErrorResponse) => {
+        if (err) {
+          this.dialogService.open(ForbiddenErrorDialogComponent);
+          return of(null);
+        }
+        this.showFailerMessage(err)
+      }))
       .subscribe(
         (data: AdminInterno) => {
-          if (!!state) {
-            if (this.router.url.match('/edit')) {
-              this.showUpdatedMessage();
+          if (data != null) {
+            if (!!state) {
+              if (this.router.url.match('/edit')) {
+                this.showUpdatedMessage();
+              } else {
+                this.showSavedMessage();
+              }
+              this.back();
             } else {
-              this.showSavedMessage();
+              if (this.router.url.match('/edit')) {
+                this.showUpdatedMessage();
+              } else {
+                this.showSavedMessage();
+              }
+              stepper.reset();
             }
-            this.back();
-          } else {
-            if (this.router.url.match('/edit')) {
-              this.showUpdatedMessage();
-            } else {
-              this.showSavedMessage();
-            }
-            stepper.reset();
           }
-        },
-        (err: HttpErrorResponse) => this.showFailerMessage(err)
-      );
+        });
   }
 
   private showFailerMessage(err: HttpErrorResponse): void {
