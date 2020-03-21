@@ -18,4 +18,9 @@ export class MatriculaService {
       .pipe(take(1));
   }
 
+  public matericularConfirm(estudante: Estudante): Observable<Estudante> {
+    return this.http.put<Estudante>(`${this.url}/matriculas/comfirm`, estudante)
+      .pipe(take(1));
+  }
+
 }
