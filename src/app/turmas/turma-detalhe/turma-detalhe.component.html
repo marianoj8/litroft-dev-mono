@@ -9,10 +9,12 @@
         </mat-expansion-panel-header>
         <mat-label>Descrição</mat-label>: {{ turma?.sigla }}
         <mat-divider></mat-divider>
+        <ng-container *ngIf="turma?.curso != null">
         <mat-label>Curso</mat-label>:
         <a [routerLink]="['/cursos/detalhe', turma.curso.id]" color="primary"
-          >{{ turma?.curso.nome }}
+          >{{ turma?.curso?.nome }}
         </a>
+        </ng-container>
         <mat-action-row>
           <button
             class="btn-large"
