@@ -27,7 +27,7 @@ export class Estudante implements CustomAbstractEntity {
   turma: Turma;
   inGruop: boolean;
   nivel: string;
-  ensinoNivel: EnsinoNivel
+  ensinoNivel: EnsinoNivel;
   classe: Classe;
   periodo: Periodo;
   anoLetivo: number;
