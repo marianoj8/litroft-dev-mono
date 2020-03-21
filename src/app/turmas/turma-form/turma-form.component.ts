@@ -46,7 +46,7 @@ export class TurmaFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.nivel = localStorage.getItem('nivel') === 'Ensino do II Ciculo';
+    this.nivel = localStorage.getItem('nivel') === 'Ensino do II Ciclo';
     this.turmaService.onChangeContext.emit(true);
     this.initForms();
 

@@ -25,6 +25,7 @@ import { TurmaService } from 'src/app/turmas/modules/turma.service';
 import { ProvinciaService } from 'src/app/provincia/modules/provincia.service';
 import { MunicipioService } from 'src/app/municipio/modules/municipio.service';
 import { CustomFilter } from '../../shared/model/support/custom-filter';
+import { ForbiddenErrorDialogComponent } from 'src/app/shared/forbidden-error-dialog/forbidden-error-dialog.component';
 
 @Component({
   selector: 'app-estudante-from',
@@ -70,7 +71,7 @@ export class EstudanteFromComponent implements OnInit {
     private municipioService: MunicipioService,
     private provinciaService: ProvinciaService,
     private notificationService: NotificationService,
-    private dialog: MatDialog,
+    private dialogService: MatDialog,
     private location: Location,
     public monografiaService: MonografiaService) {
     this.monografiaService.emitShowAddButton.emit(true);
@@ -81,7 +82,7 @@ export class EstudanteFromComponent implements OnInit {
     this.initForms();
     this.cursos$ = this.cursoSerice.list()
       .pipe(catchError(err => {
-        this.dialog.open(ErrorLoadingComponent);
+        this.dialogService.open(ErrorLoadingComponent);
         this.cursoError$.next(true);
         return of([]);
       }));
@@ -222,25 +223,33 @@ export class EstudanteFromComponent implements OnInit {
     this.estudante.municipio = this.municipio;
 
     this.estudanteService.save(this.estudante)
+      .pipe(catchError((err: HttpErrorResponse) => {
+        if (err.status === 403) {
+          this.dialogService.open(ForbiddenErrorDialogComponent);
+          return of(null);
+        }
+        this.showFailerMessage(err)
+      }))
       .subscribe(
         (data: Estudante) => {
-          if (!!state) {
-            if (this.router.url.match('/edit')) {
-              this.showUpdatedMessage();
+          if (data != null) {
+            if (!!state) {
+              if (this.router.url.match('/edit')) {
+                this.showUpdatedMessage();
+              } else {
+                this.showSavedMessage();
+              }
+              this.back();
             } else {
-              this.showSavedMessage();
+              if (this.router.url.match('/edit')) {
+                this.showUpdatedMessage();
+              } else {
+                this.showSavedMessage();
+              }
+              stepper.reset();
             }
-            this.back();
-          } else {
-            if (this.router.url.match('/edit')) {
-              this.showUpdatedMessage();
-            } else {
-              this.showSavedMessage();
-            }
-            stepper.reset();
           }
-        },
-        (err: HttpErrorResponse) => this.showFailerMessage(err)
+        }
       );
   }
 

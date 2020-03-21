@@ -3,13 +3,11 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatVerticalStepper } from '@angular/material/stepper';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EventEmitter } from 'events';
-import { element } from 'protractor';
 import { Observable, of, Subject, Subscription } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { CursoService } from 'src/app/cursos/modules/curso.service';
@@ -28,9 +26,10 @@ import { Turma } from 'src/app/shared/model/turma';
 import { NotificationService } from 'src/app/shared/services/notification/notification.service';
 import { MyErrorStateMatch } from 'src/app/shared/validators/field-validator';
 import { TurmaService } from 'src/app/turmas/modules/turma.service';
-
 import { GrupoService } from '../modules/grupo.service';
 import { SelectElementComponent } from './../select-element/select-element.component';
+import { ForbiddenErrorDialogComponent } from 'src/app/shared/forbidden-error-dialog/forbidden-error-dialog.component';
+
 
 @Component({
   selector: 'app-grupo-form',
@@ -89,7 +88,7 @@ export class GrupoFormComponent implements OnInit {
     private turmaService: TurmaService,
     private notificationService: NotificationService,
     private location: Location,
-    private dialog: MatDialog,
+    private dialogService: MatDialog,
     private monografiaService: MonografiaService) {
     this.monografiaService.emitShowAddButton.emit(true);
     this.position = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII'];
@@ -186,13 +185,13 @@ export class GrupoFormComponent implements OnInit {
 
   onRefrash(position?: string, curso?: number, grupo?: number) {
     this.sub = this.elementoService.listByParams(position, curso, grupo)
-      .pipe(
-        // catchError(err => {
-        //   this.dialogService.open(ErrorLoadingComponent);
-        //   this.error$.next(true);
-        //   return of(null);
-        // })
-      )
+    .pipe(catchError((err: HttpErrorResponse) => {
+      if (err.status === 403) {
+        this.dialogService.open(ForbiddenErrorDialogComponent);
+        return of(null);
+      }
+      this.showFailerMessage(err)
+    }))
       .subscribe(
         (value: Elemento[]) => this.relist(value));
   }
@@ -243,48 +242,55 @@ export class GrupoFormComponent implements OnInit {
     this.grupo.anoLetivo = this.formGroup01.controls.ano.value;
 
     this.grupoService.save(this.grupo)
+      .pipe(catchError((err: HttpErrorResponse) => {
+        if (err.status === 403) {
+          this.dialogService.open(ForbiddenErrorDialogComponent);
+          return of(null);
+        }
+        this.showFailerMessage(err);
+      }))
       .subscribe(
         (data: Grupo) => {
-          console.log('ADDING ELEMENTS ' + this.estudantes);
-          this.estudantesList.forEach(item => {
-            console.log(item);
-            this.elementosList.push(
-              new Elemento(null,
-                item,
-                data.orientador,
-                data,
-                data.curso,
-                data.posicao));
-          });
-
-          this.elementoService.saveMulty(this.elementosList)
-            .subscribe((d) => {
-              this.estudanteService.set(this.estudantesList).subscribe(() => { });
+          if (data != null) {
+            this.estudantesList.forEach(item => {
+              this.elementosList.push(
+                new Elemento(null,
+                  item,
+                  data.orientador,
+                  data,
+                  data.curso,
+                  data.posicao));
             });
 
-          if (!!state) {
-            if (this.router.url.match('/edit')) {
-              this.showUpdatedMessage();
-            } else {
-              this.showSavedMessage();
+            this.elementoService.saveMulty(this.elementosList)
+              .subscribe((d) => {
+                this.estudanteService.set(this.estudantesList).subscribe(() => { });
+              });
+
+            if (!!state) {
+              if (data != null) {
+                if (this.router.url.match('/edit')) {
+                  this.showUpdatedMessage();
+                } else {
+                  this.showSavedMessage();
+                }
+                this.back();
+              } else {
+                if (this.router.url.match('/edit')) {
+                  this.showUpdatedMessage();
+                } else {
+                  this.showSavedMessage();
+                }
+                stepper.reset();
+              }
             }
-            this.back();
-          } else {
-            if (this.router.url.match('/edit')) {
-              this.showUpdatedMessage();
-            } else {
-              this.showSavedMessage();
-            }
-            stepper.reset();
           }
-        },
-        (err: HttpErrorResponse) => this.showFailerMessage(err)
-      );
+        });
 
   }
 
   showElementSelector() {
-    const dialogRef = this.dialog.open(SelectElementComponent,
+    const dialogRef = this.dialogService.open(SelectElementComponent,
       {
         data: this.filtro,
         height: '510px',

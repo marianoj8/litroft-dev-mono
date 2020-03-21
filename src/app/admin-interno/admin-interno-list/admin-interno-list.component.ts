@@ -14,6 +14,8 @@ import { DeleteDialogComponent } from 'src/app/shared/delete-dialog/delete-dialo
 import { AdminInternoService } from '../modules/adminInterno.service';
 import { NotificationService } from 'src/app/shared/services/notification/notification.service';
 import { MonografiaService } from 'src/app/monografias/modules/monografia.service';
+import { ForbiddenErrorDialogComponent } from 'src/app/shared/forbidden-error-dialog/forbidden-error-dialog.component';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-admin-interno-list',
@@ -47,6 +49,7 @@ export class AdminInternoListComponent implements OnInit, OnDestroy {
     public adminInternoService: AdminInternoService,
     private notification: NotificationService,
     private dialogService: MatDialog,
+    private notificationService: NotificationService,
     private monografiaService: MonografiaService) {
     this.monografiaService.emitShowAddButton.emit(true);
   }
@@ -78,6 +81,13 @@ export class AdminInternoListComponent implements OnInit, OnDestroy {
 
   onFilterFromServer(data: CustomFilter) {
     this.sub = this.adminInternoService.filterByNomeSexo(data)
+      .pipe(catchError((err: HttpErrorResponse) => {
+        if (err) {
+          this.dialogService.open(ForbiddenErrorDialogComponent);
+          return of(null);
+        }
+        this.showFailerMessage(err)
+      }))
       .subscribe(next => this.adminInternosList = next);
   }
 
@@ -142,6 +152,12 @@ export class AdminInternoListComponent implements OnInit, OnDestroy {
 
     });
   }
+  private
+  private showFailerMessage(err: HttpErrorResponse): void {
+    this.notificationService
+      .componentErrorMessage(':: ' + err.error.message);
+  }
+
   openDeleteDialog(id: number) {
 
     const dialogRef = this.dialogService.open(

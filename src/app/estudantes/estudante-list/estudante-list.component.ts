@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
@@ -17,6 +18,7 @@ import { EstudanteService } from '../modules/estudante.service';
 import { DeleteDialogComponent } from './../../shared/delete-dialog/delete-dialog.component';
 import { CustomFilter } from './../../shared/model/support/custom-filter';
 import { MoreOptionsDialogComponent } from './../../shared/more-options-dialog/more-options-dialog.component';
+import { ForbiddenErrorDialogComponent } from 'src/app/shared/forbidden-error-dialog/forbidden-error-dialog.component';
 
 @Component({
   selector: 'app-estudante-list',
@@ -26,6 +28,7 @@ import { MoreOptionsDialogComponent } from './../../shared/more-options-dialog/m
 export class EstudanteListComponent implements OnInit, OnDestroy {
 
   public isPendente = false;
+  public nivel = localStorage.getItem('nivel') === 'Ensino do II Ciclo';
   pageEvent: PageEvent;
   dialogParam: MatDailogTypeParam = new MatDailogTypeParam();
   valueParam = '';
@@ -61,38 +64,47 @@ export class EstudanteListComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.service.onChangeContext.emit(false);
     if (!this.router.url.includes('pendentes')) {
-      this.sub = this.service.findValueParams
-        .subscribe(data => this.onFiltered(data));
-
-      this.sub = this.service.findValueParam
-        .subscribe(data => this.estudantes.filter = data);
-
-      this.onRefrash(this.filtro);
-
-      this.sub = this.service.emitOnDetalheButtonCliked.subscribe(
-        (next) => this.detalhe(next));
-
-      this.sub = this.service.emitOnEditButtonCliked.subscribe(
-        (next) => this.edit(next));
-
-      this.sub = this.service.emitOnDeleteButtonCliked.subscribe(
-        (next) => this.openDeleteDialog(next));
-
-      this.sub = this.service.findValueParamFromServer.subscribe(
-        (next: CustomFilter) => this.onFilterFromServer(next));
+      if (this.nivel) {
+        this.preparTableToList();
+      } else {
+        this.displaydColumns = [
+          'processo',
+          'nome',
+          'sexo',
+          'turma',
+          'detalhe',
+          'edit',
+          'delete'
+        ];
+        this.preparTableToList();
+      }
     }
     if (this.router.url.includes('pendentes')) {
       this.isPendente = true;
-      this.displaydColumns = [
-        'nome',
-        'sexo',
-        'data',
-        'classe',
-        'periodo',
-        'detalhe',
-        'comfirm',
-        'cancelar'
-      ];
+      if (this.nivel) {
+        this.displaydColumns = [
+          'nome',
+          'sexo',
+          'data',
+          'curso',
+          'classe',
+          'periodo',
+          'detalhe',
+          'comfirm',
+          'cancelar'
+        ];
+      } else {
+        this.displaydColumns = [
+          'nome',
+          'sexo',
+          'data',
+          'classe',
+          'periodo',
+          'detalhe',
+          'comfirm',
+          'cancelar'
+        ];
+      }
 
       this.sub = this.service.findValueParams
         .subscribe(data => this.onFiltered(data));
@@ -105,14 +117,56 @@ export class EstudanteListComponent implements OnInit, OnDestroy {
   }
 
   onFilterFromServer(data: CustomFilter) {
-    this.sub = this.service.filterByNomeSexoCurso(data).subscribe(
-      next => this.estudantesList = next);
+    this.sub = this.service.filterByNomeSexoCurso(data)
+      .pipe(catchError((err: HttpErrorResponse) => {
+        if (err.status === 403) {
+          this.dialogService.open(ForbiddenErrorDialogComponent);
+          return of(null);
+        }
+      }))
+      .subscribe(
+        next => this.estudantesList = next);
   }
 
   onRefrash(data?: CustomFilter) {
     this.sub = this.service.filterBySexoAndCurso(data.curso === undefined ? '' : data.curso, data.sexo === undefined ? '' : data.sexo)
       .pipe(
-        catchError(err => {
+        catchError((err: HttpErrorResponse) => {
+
+          if (err.status === 403) {
+            this.dialogService.open(ForbiddenErrorDialogComponent);
+            return of(null);
+          }
+
+          this.dialogService.open(ErrorLoadingComponent);
+          this.error$.next(true);
+          return of(null);
+        })
+      )
+      .subscribe(
+        next => {
+          const array = next.map((item: Estudante) => {
+            return {
+              ...item
+            };
+
+          });
+          this.estudantes = new MatTableDataSource(array);
+          this.estudantes.sort = this.sort;
+          this.estudantesList = this.estudantes.data;
+        });
+  }
+
+  onRefrashTurma(data?: CustomFilter) {
+    this.sub = this.service.filterByNomeSexoTurma(data)
+      .pipe(
+        catchError((err: HttpErrorResponse) => {
+
+          if (err.status === 403) {
+            this.dialogService.open(ForbiddenErrorDialogComponent);
+            return of(null);
+          }
+
           this.dialogService.open(ErrorLoadingComponent);
           this.error$.next(true);
           return of(null);
@@ -135,7 +189,13 @@ export class EstudanteListComponent implements OnInit, OnDestroy {
   onRefrashPendente(data?: CustomFilter) {
     this.sub = this.service.filterByNomeSexoPendenteNivel(data)
       .pipe(
-        catchError(err => {
+        catchError((err: HttpErrorResponse) => {
+
+          if (err.status === 403) {
+            this.dialogService.open(ForbiddenErrorDialogComponent);
+            return of(null);
+          }
+
           this.dialogService.open(ErrorLoadingComponent);
           this.error$.next(true);
           return of(null);
@@ -159,7 +219,13 @@ export class EstudanteListComponent implements OnInit, OnDestroy {
     if (data.anoletivoType === 1) {
       this.sub = this.service.filterByAllAtributsEntrada(data)
         .pipe(
-          catchError(err => {
+          catchError((err: HttpErrorResponse) => {
+
+            if (err.status === 403) {
+              this.dialogService.open(ForbiddenErrorDialogComponent);
+              return of(null);
+            }
+
             this.dialogService.open(ErrorLoadingComponent);
             this.error$.next(true);
             return of(null);
@@ -180,7 +246,13 @@ export class EstudanteListComponent implements OnInit, OnDestroy {
     } else if (data.anoletivoType === 2) {
       this.sub = this.service.filterByAllAtributsFinalista(data)
         .pipe(
-          catchError(err => {
+          catchError((err: HttpErrorResponse) => {
+
+            if (err.status === 403) {
+              this.dialogService.open(ForbiddenErrorDialogComponent);
+              return of(null);
+            }
+
             this.dialogService.open(ErrorLoadingComponent);
             this.error$.next(true);
             return of(null);
@@ -201,7 +273,13 @@ export class EstudanteListComponent implements OnInit, OnDestroy {
     } else {
       this.sub = this.service.filterByNomeSexoCurso(data)
         .pipe(
-          catchError(err => {
+          catchError((err: HttpErrorResponse) => {
+
+            if (err.status === 403) {
+              this.dialogService.open(ForbiddenErrorDialogComponent);
+              return of(null);
+            }
+
             this.dialogService.open(ErrorLoadingComponent);
             this.error$.next(true);
             return of(null);
@@ -282,6 +360,32 @@ export class EstudanteListComponent implements OnInit, OnDestroy {
       }
 
     });
+  }
+
+  private preparTableToList(): void {
+    this.sub = this.service.findValueParams
+      .subscribe(data => this.onFiltered(data));
+
+    this.sub = this.service.findValueParam
+      .subscribe(data => this.estudantes.filter = data);
+
+    if (this.nivel) {
+      this.onRefrash(this.filtro);
+    } else {
+      this.onRefrashTurma(this.filtro);
+    }
+
+    this.sub = this.service.emitOnDetalheButtonCliked.subscribe(
+      (next) => this.detalhe(next));
+
+    this.sub = this.service.emitOnEditButtonCliked.subscribe(
+      (next) => this.edit(next));
+
+    this.sub = this.service.emitOnDeleteButtonCliked.subscribe(
+      (next) => this.openDeleteDialog(next));
+
+    this.sub = this.service.findValueParamFromServer.subscribe(
+      (next: CustomFilter) => this.onFilterFromServer(next));
   }
 
   openDeleteDialog(id: number) {

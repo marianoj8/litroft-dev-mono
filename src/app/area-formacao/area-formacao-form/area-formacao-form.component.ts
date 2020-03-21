@@ -1,3 +1,4 @@
+import { MatDialog } from '@angular/material/dialog';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MyErrorStateMatch } from 'src/app/shared/validators/field-validator';
@@ -10,6 +11,9 @@ import { MatVerticalStepper } from '@angular/material/stepper';
 import { HttpErrorResponse } from '@angular/common/http';
 import { EventEmitter } from 'events';
 import { Location } from '@angular/common';
+import { catchError } from 'rxjs/operators';
+import { ForbiddenErrorDialogComponent } from 'src/app/shared/forbidden-error-dialog/forbidden-error-dialog.component';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-area-formacao-form',
@@ -30,6 +34,7 @@ export class AreaFormacaoFormComponent implements OnInit {
     private departamentoService: AreaFormacaoService,
     private monografiaService: MonografiaService,
     private notificationService: NotificationService,
+    private dialogService: MatDialog,
     private location: Location
   ) {
     this.monografiaService.emitShowAddButton.emit(true);
@@ -79,26 +84,34 @@ export class AreaFormacaoFormComponent implements OnInit {
     this.areaFormacao.descricao = this.formGroup01.controls.descricao.value;
 
     this.departamentoService.save(this.areaFormacao)
+      .pipe(catchError((err: HttpErrorResponse) => {
+        if (err.status === 403) {
+          this.dialogService.open(ForbiddenErrorDialogComponent);
+          return of(null);
+        }
+        this.showFailerMessage(err)
+      }))
       .subscribe(
         (data: AreaFormacao) => {
-          if (!!state) {
-            if (this.router.url.match('/edit')) {
-              this.showUpdatedMessage();
+          if (data != null) {
+
+            if (!!state) {
+              if (this.router.url.match('/edit')) {
+                this.showUpdatedMessage();
+              } else {
+                this.showSavedMessage();
+              }
+              this.back();
             } else {
-              this.showSavedMessage();
+              if (this.router.url.match('/edit')) {
+                this.showUpdatedMessage();
+              } else {
+                this.showSavedMessage();
+              }
+              stepper.reset();
             }
-            this.back();
-          } else {
-            if (this.router.url.match('/edit')) {
-              this.showUpdatedMessage();
-            } else {
-              this.showSavedMessage();
-            }
-            stepper.reset();
           }
-        },
-        (err: HttpErrorResponse) => this.showFailerMessage(err)
-      );
+        });
 
   }
 

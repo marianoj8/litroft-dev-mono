@@ -56,14 +56,14 @@ export class TurmaListComponent implements OnInit, OnDestroy {
         'curso',
         'detalhe',
         'edit',
-        'delete']
+        'delete'];
     } else {
       this.displaydColumns = [
         'sigla',
         'detalhe',
         'edit',
         'delete'
-      ]
+      ];
     }
 
   }

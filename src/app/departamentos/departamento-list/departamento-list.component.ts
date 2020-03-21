@@ -1,3 +1,5 @@
+import { HttpErrorResponse } from '@angular/common/http';
+import { ForbiddenErrorDialogComponent } from './../../shared/forbidden-error-dialog/forbidden-error-dialog.component';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
@@ -87,7 +89,13 @@ export class DepartamentoListComponent implements OnInit, OnDestroy {
   onRefrash(data?: CustomFilter) {
     this.sub = this.service.filterByNome(data)
       .pipe(
-        catchError(err => {
+        catchError((err: HttpErrorResponse) => {
+
+          if (err.status === 403) {
+            this.dialogService.open(ForbiddenErrorDialogComponent);
+            return of(null);
+          }
+
           this.dialogService.open(ErrorLoadingComponent);
           this.error$.next(true);
           return of(null);
@@ -167,12 +175,20 @@ export class DepartamentoListComponent implements OnInit, OnDestroy {
 
   deleteDepartamento(cursoId: number) {
     this.sub = this.service.deleteById(cursoId)
+      .pipe(catchError((err: HttpErrorResponse) => {
+        if (err) {
+          this.dialogService.open(ForbiddenErrorDialogComponent);
+          return of(null);
+        }
+
+        this.showErrorMessage()
+
+      }))
       .subscribe(
         () => {
           this.onRefrash(this.filtro);
           this.showDeletedMessage();
         },
-        err => this.showErrorMessage()
       );
   }
 

@@ -1,3 +1,5 @@
+import { Municipio } from './municipio';
+import { Provincia } from './provincia';
 import { CustomAbstractEntity } from './customEntity';
 import { Instituto } from './instituto';
 import { Admin } from './admin';
@@ -18,6 +20,8 @@ export class AdminInterno implements CustomAbstractEntity {
   endereco: string;
   instituto: Instituto;
   admin: Admin;
+  provincia: Provincia;
+  municipio: Municipio;
   numeroSerie: string;
 
   constructor(id?: number) {

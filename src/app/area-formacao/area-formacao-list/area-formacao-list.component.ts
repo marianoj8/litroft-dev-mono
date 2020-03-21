@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { MatDailogTypeParam } from 'src/app/shared/model/support/mat-dialog-type-param';
 import { CustomFilter } from 'src/app/shared/model/support/custom-filter';
@@ -14,6 +15,7 @@ import { AreaFormacaoService } from '../modules/area-formacao.service';
 import { MonografiaService } from 'src/app/monografias/modules/monografia.service';
 import { NotificationService } from 'src/app/shared/services/notification/notification.service';
 import { catchError } from 'rxjs/operators';
+import { ForbiddenErrorDialogComponent } from 'src/app/shared/forbidden-error-dialog/forbidden-error-dialog.component';
 
 @Component({
   selector: 'app-area-formacao-list',
@@ -83,7 +85,13 @@ export class AreaFormacaoListComponent implements OnInit, OnDestroy {
   onRefrash(data?: CustomFilter) {
     this.sub = this.areaFormacaoService.filterByDescription(data)
       .pipe(
-        catchError(err => {
+        catchError((err: HttpErrorResponse) => {
+
+          if (err.status === 403) {
+            this.dialogService.open(ForbiddenErrorDialogComponent);
+            return of(null);
+          }
+
           this.dialogService.open(ErrorLoadingComponent);
           this.error$.next(true);
           return of(null);

@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 
 import { GrupoService } from './../modules/grupo.service';
@@ -16,6 +17,7 @@ import { ErrorLoadingComponent } from 'src/app/shared/error-loading/error-loadin
 import { MoreOptionsDialogComponent } from 'src/app/shared/more-options-dialog/more-options-dialog.component';
 import { DeleteDialogComponent } from 'src/app/shared/delete-dialog/delete-dialog.component';
 import { MonografiaService } from 'src/app/monografias/modules/monografia.service';
+import { ForbiddenErrorDialogComponent } from 'src/app/shared/forbidden-error-dialog/forbidden-error-dialog.component';
 
 @Component({
   selector: 'app-grupo-list',
@@ -91,7 +93,13 @@ export class GrupoListComponent implements OnInit, OnDestroy {
   onRefrash(data?: CustomFilter) {
     this.sub = this.service.listByDescricao(data.descricao)
       .pipe(
-        catchError(err => {
+        catchError((err: HttpErrorResponse) => {
+
+          if (err.status === 403) {
+            this.dialogService.open(ForbiddenErrorDialogComponent);
+            return of(null);
+          }
+
           this.dialogService.open(ErrorLoadingComponent);
           this.error$.next(true);
           return of(null);
