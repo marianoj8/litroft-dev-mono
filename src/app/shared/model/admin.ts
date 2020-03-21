@@ -1,4 +1,6 @@
 import { CustomAbstractEntity } from './customEntity';
+import { Provincia } from './provincia';
+import { Municipio } from './municipio';
 
 export class Admin implements CustomAbstractEntity {
 
@@ -15,6 +17,8 @@ export class Admin implements CustomAbstractEntity {
   email: string;
   endereco: string;
   numeroSerie: string;
+  provincia: Provincia;
+  municipio: Municipio;
 
   constructor(id?: number) {
     this.id = id ? id : null;
