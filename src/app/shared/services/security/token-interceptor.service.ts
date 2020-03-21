@@ -7,7 +7,7 @@ import { AuthService } from 'src/app/shared/services/security/auth.service';
   providedIn: 'root'
 })
 export class TokenInterceptorService implements HttpInterceptor {
-  private XSRFTOKEN;
+  private XSRFTOKEN: string;
   constructor(private autService: AuthService) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -25,5 +25,7 @@ export class TokenInterceptorService implements HttpInterceptor {
     }
     return next.handle(request);
   }
+
+
 
 }
