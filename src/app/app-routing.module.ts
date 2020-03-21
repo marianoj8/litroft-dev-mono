@@ -142,7 +142,7 @@ const routes: Routes = [
   {
     path: 'users-account',
     canActivate: [AuthGuard],
-    canLoad:[AuthGuard],
+    canLoad: [AuthGuard],
     loadChildren: () => import('src/app/account-setting/modules/account-setting.module').then(m => m.AccountSettingModule),
   },
   {
@@ -158,7 +158,7 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes, {
     initialNavigation: 'enabled'
-})],
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
