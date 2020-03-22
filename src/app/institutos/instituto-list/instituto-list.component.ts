@@ -59,6 +59,7 @@ export class InstitutoListComponent implements OnInit {
 
   ngOnInit() {
     this.institutoService.onChangeContext.emit(false);
+    this.institutoService.emitShowSearchBar.emit(true);
     this.filter.nome = '';
     this.filter.sigla = '';
 
@@ -66,6 +67,7 @@ export class InstitutoListComponent implements OnInit {
       .subscribe((value: CustomFilter) => this.onRefrash(value));
 
     if (this.router.routerState.snapshot.url.includes('/institutos/primario/list')) {
+      this.institutoService.onChangeContextTitle.emit('Escolas do ensono primario');
       this.nivelEnsino = 0;
       this.filter.nivel = 'Ensino Primario';
       this.displaydColumns = [
@@ -78,6 +80,38 @@ export class InstitutoListComponent implements OnInit {
       ];
       this.onRefrash(this.filter);
     }
+
+    if (this.router.routerState.snapshot.url.includes('/institutos/ciclo1/list')) {
+      this.institutoService.onChangeContextTitle.emit('Escolas do I ciclo');
+      this.nivelEnsino = 1;
+      this.filter.nivel = 'Escolas do I ciclo';
+      this.displaydColumns = [
+        'numero',
+        'sigla',
+        'nome',
+        'localizacao',
+        'detalhe',
+        'info'
+      ];
+      this.onRefrash(this.filter);
+    }
+
+    if (this.router.routerState.snapshot.url.includes('/institutos/ciclo2/list')) {
+      this.institutoService.onChangeContextTitle.emit('Escolas do II ciclo');
+      this.nivelEnsino = 2;
+      this.filter.nivel = 'Ensino do II Ciclo';
+      this.displaydColumns = [
+        'numero',
+        'sigla',
+        'nome',
+        'areaformacao',
+        'localizacao',
+        'detalhe',
+        'info'
+      ];
+      this.onRefrash(this.filter);
+    }
+
   }
 
   onRefrash(data?: CustomFilter) {
