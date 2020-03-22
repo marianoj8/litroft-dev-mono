@@ -6,7 +6,6 @@ import { environment } from 'src/environments/environment';
 import { PublicService } from '../modules/public.service';
 import { MonografiaService } from 'src/app/monografias/modules/monografia.service';
 import { HttpClient, HttpRequest } from '@angular/common/http';
-import { url } from 'inspector';
 
 @Component({
   selector: 'app-read-mode',
