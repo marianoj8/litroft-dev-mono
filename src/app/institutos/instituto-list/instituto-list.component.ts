@@ -76,7 +76,6 @@ export class InstitutoListComponent implements OnInit {
         'detalhe',
         'info'
       ];
-      console.log(this.filter.nivel);
       this.onRefrash(this.filter);
     }
   }
