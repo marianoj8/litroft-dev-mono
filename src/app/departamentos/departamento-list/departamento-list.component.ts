@@ -181,7 +181,7 @@ export class DepartamentoListComponent implements OnInit, OnDestroy {
           return of(null);
         }
 
-        this.showErrorMessage()
+        this.showErrorMessage();
 
       }))
       .subscribe(

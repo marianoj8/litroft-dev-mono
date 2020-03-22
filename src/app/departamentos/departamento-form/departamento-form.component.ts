@@ -90,7 +90,7 @@ export class DepartamentoFormComponent implements OnInit {
           this.dialogService.open(ForbiddenErrorDialogComponent);
           return of(null);
         }
-        this.showFailerMessage(err)
+        this.showFailerMessage(err);
       }))
       .subscribe(
         (data: Departamento) => {

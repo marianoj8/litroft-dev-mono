@@ -86,7 +86,7 @@ export class AdminInternoListComponent implements OnInit, OnDestroy {
           this.dialogService.open(ForbiddenErrorDialogComponent);
           return of(null);
         }
-        this.showFailerMessage(err)
+        this.showFailerMessage(err);
       }))
       .subscribe(next => this.adminInternosList = next);
   }
@@ -152,7 +152,6 @@ export class AdminInternoListComponent implements OnInit, OnDestroy {
 
     });
   }
-  private
   private showFailerMessage(err: HttpErrorResponse): void {
     this.notificationService
       .componentErrorMessage(':: ' + err.error.message);
