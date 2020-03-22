@@ -13,6 +13,7 @@ import { CustomFilter } from 'src/app/shared/model/support/custom-filter';
 import { InstitutoService } from './../modules/instituto.service';
 import { MonografiaService } from 'src/app/monografias/modules/monografia.service';
 import { environment } from 'src/environments/environment';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-instituto-list',
@@ -28,13 +29,14 @@ export class InstitutoListComponent implements OnInit {
   filter = new CustomFilter();
   error$ = new Subject<boolean>();
   private sub: Subscription;
+  public nivelEnsino: number;
+
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   displaydColumns: string[] = [
+    'numero',
     'sigla',
     'nome',
-    'formacao',
-    'cursos',
     'localizacao',
     'detalhe',
     'info'
@@ -50,7 +52,8 @@ export class InstitutoListComponent implements OnInit {
   constructor(
     private breakpointObserver: BreakpointObserver,
     private institutoService: InstitutoService,
-    private monografiaService: MonografiaService) {
+    private monografiaService: MonografiaService,
+    private router: Router) {
     this.monografiaService.emitShowAddButton.emit(true);
   }
 
@@ -58,10 +61,24 @@ export class InstitutoListComponent implements OnInit {
     this.institutoService.onChangeContext.emit(false);
     this.filter.nome = '';
     this.filter.sigla = '';
-    this.onRefrash(this.filter);
 
     this.sub = this.institutoService.findValueParams
       .subscribe((value: CustomFilter) => this.onRefrash(value));
+
+    if (this.router.routerState.snapshot.url.includes('/institutos/primario/list')) {
+      this.nivelEnsino = 0;
+      this.filter.nivel = 'Ensino Primario';
+      this.displaydColumns = [
+        'numero',
+        'sigla',
+        'nome',
+        'localizacao',
+        'detalhe',
+        'info'
+      ];
+      console.log(this.filter.nivel);
+      this.onRefrash(this.filter);
+    }
   }
 
   onRefrash(data?: CustomFilter) {
