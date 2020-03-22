@@ -29,7 +29,7 @@
         <mat-icon left>person_pin</mat-icon>
         Estudantes
       </a>
-      <a routerLinkActive="active" [routerLink]="['institutos']" mat-button *ngIf="!showOrHideMenu">
+      <a routerLinkActive="active" [routerLink]="['directores']" [disabled]="true" mat-button *ngIf="!showOrHideMenu">
         <mat-icon left>school</mat-icon>
         Directores
       </a>
@@ -37,15 +37,15 @@
         <mat-icon left>school</mat-icon>
         Escolas
       </a>
-        <a routerLinkActive="active" [routerLink]="['institutos']" mat-button *ngIf="showOrHideMenu">
+        <a routerLinkActive="active" [disabled]="true" mat-button *ngIf="showOrHideMenu">
           <mat-icon>view_quilt</mat-icon>
           Pauta
         </a>
-        <a routerLinkActive="active" [routerLink]="['institutos']" mat-button>
+        <a routerLinkActive="active" [disabled]="true" mat-button>
           <mat-icon>view_quilt</mat-icon>
           Certificados
         </a>
-        <a routerLinkActive="active" [routerLink]="['institutos']" mat-button *ngIf="showOrHideMenu">
+        <a routerLinkActive="active" [disabled]="true" mat-button *ngIf="showOrHideMenu">
           <mat-icon>view_quilt</mat-icon>
           Vitrine
         </a>
@@ -74,7 +74,7 @@
         <mat-icon>assignment</mat-icon>
         Inscrições
       </a>
-      <a routerLinkActive="active" [routerLink]="['institutos']" mat-button>
+      <a routerLinkActive="active" [disabled]="true" mat-button>
         <mat-icon>view_quilt</mat-icon>
         Vitrine
       </a>
