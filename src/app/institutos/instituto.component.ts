@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { InstitutoService } from './modules/instituto.service';
@@ -19,6 +20,7 @@ export class InstitutoComponent implements OnInit, OnDestroy {
   private sub: Subscription;
 
   constructor(
+    private router: Router,
     private institutoService: InstitutoService,
     private cursoService: CursoService,
     private monografiaService: MonografiaService,
@@ -28,6 +30,7 @@ export class InstitutoComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.institutoService.onChangeContextTitle.emit('Escolas do ensono primario ao II ciclo');
     this.sub = this.institutoService.onChangeContext.subscribe(
       context => this.onChangeContext = context
     );
@@ -45,6 +48,15 @@ export class InstitutoComponent implements OnInit, OnDestroy {
   onFilterSearch(nome?: string) {
     this.filter.nome = nome === undefined ? '' : nome;
     this.filter.sigla = '';
+    if (this.router.routerState.snapshot.url.includes('/institutos/primario/list')) {
+      this.filter.nivel = 'Ensino Primario';
+    }
+    if (this.router.routerState.snapshot.url.includes('/institutos/ciclo1/list')) {
+      this.filter.nivel = 'Ensino do I Ciclo';
+    }
+    if (this.router.routerState.snapshot.url.includes('/institutos/ciclo2/list')) {
+      this.filter.nivel = 'Ensino do II Ciclo';
+    }
     this.institutoService.findValueParams.emit(this.filter);
   }
 
@@ -52,6 +64,7 @@ export class InstitutoComponent implements OnInit, OnDestroy {
 
   back() {
     this.location.back();
+    this.institutoService.onChangeContextTitle.emit('Escolas do ensono primario ao II ciclo');
     this.institutoService.emitShowSearchBar.emit(false);
   }
 
