@@ -1,3 +1,4 @@
+import { SearchAllComponent } from './../search-all/search-all.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -59,6 +60,10 @@ const routes: Routes = [
         path: 'add/ciclo2',
         canActivate: [AuthGuard],
         component: InstitutoFormComponent
+      },
+      {
+        path: 'search/all',
+        component: SearchAllComponent
       },
       {
         path: 'detalhe/:id',
