@@ -109,7 +109,7 @@ export class InstitutoPriveteListComponent implements OnInit {
     if (this.router.routerState.snapshot.url.includes('/institutos/private/ciclo1/list')) {
       this.institutoService.onChangeContextTitle.emit('Escolas do I Ciclo');
       this.nivelEnsino = 1;
-      this.filtro.nivel = 'Ensino do I Ciculo';
+      this.filtro.nivel = 'Ensino do I Ciclo';
       this.displaydColumns = [
         'sigla',
         'numero',
@@ -145,7 +145,7 @@ export class InstitutoPriveteListComponent implements OnInit {
     if (this.router.routerState.snapshot.url.includes('/institutos/private/ciclo2/list')) {
       this.institutoService.onChangeContextTitle.emit('Escolas do II Ciclo');
       this.nivelEnsino = 2;
-      this.filtro.nivel = 'Ensino do II Ciculo';
+      this.filtro.nivel = 'Ensino do II Ciclo';
       this.displaydColumns = [
         'sigla',
         'nome',
