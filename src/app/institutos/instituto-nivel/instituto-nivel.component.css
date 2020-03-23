@@ -135,14 +135,14 @@ nav {
 
 .contenido-header a {
   margin: 28px 0 0 0;
-  width: 130px;
+  width: 155px;
   display: inline-block;
   text-align: center;
   color: #fff;
   padding: 2px 0;
   text-decoration: none;
   font-weight: 400;
-  text-transform: uppercase;
+  text-transform: none;
   font-size: 14px;
   border-radius: 5px;
   box-shadow: 0 10px 20px rgba(17, 29, 48, 0.26);
