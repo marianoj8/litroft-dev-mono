@@ -48,13 +48,16 @@ export class InstitutoComponent implements OnInit, OnDestroy {
   onFilterSearch(nome?: string) {
     this.filter.nome = nome === undefined ? '' : nome;
     this.filter.sigla = '';
-    if (this.router.routerState.snapshot.url.includes('/institutos/primario/list')) {
+    if (this.router.routerState.snapshot.url.includes('/institutos/primario/list')
+      || this.router.routerState.snapshot.url.includes('/institutos/private/list')) {
       this.filter.nivel = 'Ensino Primario';
     }
-    if (this.router.routerState.snapshot.url.includes('/institutos/ciclo1/list')) {
+    if (this.router.routerState.snapshot.url.includes('/institutos/ciclo1/list')
+      || this.router.routerState.snapshot.url.includes('/institutos/private/ciclo1/list')) {
       this.filter.nivel = 'Ensino do I Ciclo';
     }
-    if (this.router.routerState.snapshot.url.includes('/institutos/ciclo2/list')) {
+    if (this.router.routerState.snapshot.url.includes('/institutos/ciclo2/list')
+      || this.router.routerState.snapshot.url.includes('/institutos/private/ciclo2/list')) {
       this.filter.nivel = 'Ensino do II Ciclo';
     }
     this.institutoService.findValueParams.emit(this.filter);
