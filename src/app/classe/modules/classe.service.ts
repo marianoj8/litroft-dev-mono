@@ -28,7 +28,7 @@ export class ClasseService {
   }
 
   listClasseByNivelId(id: number): Observable<Classe[]> {
-    return this.http.get<Classe[]>(`${this.url}/classe/${id}`);
+    return this.http.get<Classe[]>(`${this.url}/classe/nivelid?nivel=${id}`);
   }
 
   listFiltered(filterParam: CustomFilter): Observable<Classe[]> {
