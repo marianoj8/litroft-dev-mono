@@ -88,7 +88,7 @@ export class MatriculaFormComponent implements OnInit {
   public tituloP5 = '***';
   public tituloP6 = 'Documentos';
   public tituloP7 = '***';
-
+  isPassport: boolean;
   public showFields = true;
 
 
@@ -116,8 +116,8 @@ export class MatriculaFormComponent implements OnInit {
   ngOnInit() {
     this.inscricaoService.onChangeContext.emit(true);
     this.periodos$ = this.periodoService.list();
-    this.classe$ = this.classeService.list();
     if (this.router.routerState.snapshot.url.match('/matriculas/from/primario')) {
+      this.classe$ = this.classeService.listClasseByNivelId(1);
       this.nivelEnsino = 0;
       this.filter.nivel = 'Ensino Primario';
       this.initPrimaryForms();
@@ -127,15 +127,19 @@ export class MatriculaFormComponent implements OnInit {
           switch (onValue) {
             case 'Cédula':
               this.placeHolserP2C4 = 'Processo numero';
+              this.isPassport = false;
               break;
             case 'Acento de Nascimento':
               this.placeHolserP2C4 = 'Acento numero';
+              this.isPassport = false;
               break;
             case 'Bilhete de Identidade':
               this.placeHolserP2C4 = 'B.I numero';
+              this.isPassport = false;
               break;
             case 'Passaporte':
               this.placeHolserP2C4 = 'Passaporte numero';
+              this.isPassport = true;
               break;
           }
         });
@@ -184,12 +188,14 @@ export class MatriculaFormComponent implements OnInit {
     }
 
     if (this.router.routerState.snapshot.url.includes('/matriculas/from/ciculo1')) {
+      this.classe$ = this.classeService.listClasseByNivelId(2);
       this.nivelEnsino = 1;
       this.filter.nivel = 'Ensino do I Ciclo';
       this.initICicleForms();
     }
 
     if (this.router.routerState.snapshot.url.includes('/matriculas/from/ciculo2')) {
+      this.classe$ = this.classeService.listClasseByNivelId(3);
       this.nivelEnsino = 2;
       this.filter.nivel = 'Ensino do II Ciclo';
       this.initIICicleForms();
@@ -197,10 +203,10 @@ export class MatriculaFormComponent implements OnInit {
 
       this.formGroup06.controls.curso.valueChanges
         .subscribe((onValue: Curso) => {
-          this.turmaService.findByCursoPublic(onValue.id, onValue.adminInterno.instituto.id)
-            .subscribe(onValues => {
-              this.turmas = onValues;
-            });
+          // this.turmaService.findByCursoPublic(onValue.id, onValue.adminInterno.instituto.id)
+          //   .subscribe(onValues => {
+          //     this.turmas = onValues;
+          //   });
         });
 
       this.formGroup05.controls.instituto.valueChanges
@@ -301,7 +307,9 @@ export class MatriculaFormComponent implements OnInit {
         Validators.minLength(10),
         Validators.maxLength(10)]],
       optinDoc: [null, Validators.required],
-      bi: [null, Validators.required]
+      bi: [null, Validators.required],
+      pais: [null, Validators.required],
+      cidade: [null, Validators.required]
     });
 
     this.formGroup03 = this.formBuilder.group({
