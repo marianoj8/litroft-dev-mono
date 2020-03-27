@@ -1,3 +1,4 @@
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ClasseService } from './../../classe/modules/classe.service';
 import { Classe } from './../../shared/model/classe';
 import { Component, OnInit } from '@angular/core';
@@ -261,7 +262,8 @@ export class MatriculaFormComponent implements OnInit {
           console.log(this.formGroup02.controls.dataNascimento.value);
           this.estudanteIdade = this.currentYear - onValue.getFullYear();
           if (this.estudanteIdade < 5) {
-            console.log('Idade invalida!');
+            this.formGroup02.controls.dataNascimento.setErrors(Validators.nullValidator);
+            this.showFailerFiealdMessage('Estudante deve ter no minimo 5 anos.');
           }
 
           if (this.estudanteIdade >= 5 && this.estudanteIdade <= 8) {
@@ -308,8 +310,8 @@ export class MatriculaFormComponent implements OnInit {
         Validators.maxLength(10)]],
       optinDoc: [null, Validators.required],
       bi: [null, Validators.required],
-      pais: [null, Validators.required],
-      cidade: [null, Validators.required]
+      pais: [null],
+      cidade: [null]
     });
 
     this.formGroup03 = this.formBuilder.group({
@@ -454,17 +456,19 @@ export class MatriculaFormComponent implements OnInit {
       this.estudante.turma = this.turma;
 
     }
-    this.instituto = this.formGroup05.controls.instituto.value;
+    this.estudante.instituto = this.formGroup05.controls.instituto.value;
     this.provincia.id = this.formGroup04.controls.provincia.value as number;
     this.municipio.id = this.formGroup04.controls.municipio.value as number;
     this.estudante.provincia = this.provincia;
     this.estudante.municipio = this.municipio;
-    this.estudante.instituto = this.instituto;
     this.estudante.periodo = this.formGroup05.controls.periodo.value;
     this.classe = this.formGroup05.controls.classe.value;
     this.estudante.classe = this.classe;
     this.estudante.nivel = this.classe.ensinoNivel.descricao;
     this.estudante.ensinoNivel = this.classe.ensinoNivel;
+
+    console.log(this.estudante);
+
 
     this.matriculaService.matericular(this.estudante)
       .subscribe(
@@ -492,6 +496,11 @@ export class MatriculaFormComponent implements OnInit {
   private showFailerMessage(err: HttpErrorResponse): void {
     this.notificationService
       .componentErrorMessage(':: ' + err.error.message);
+  }
+
+  private showFailerFiealdMessage(err: string): void {
+    this.notificationService
+      .componentErrorMessage(':: ' + err);
   }
 
   private showSavedMessage(): void {
