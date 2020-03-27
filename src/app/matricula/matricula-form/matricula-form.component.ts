@@ -1,4 +1,3 @@
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { ClasseService } from './../../classe/modules/classe.service';
 import { Classe } from './../../shared/model/classe';
 import { Component, OnInit } from '@angular/core';
