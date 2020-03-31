@@ -1,3 +1,4 @@
+import { MatDialog } from '@angular/material/dialog';
 import { Location } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
@@ -10,6 +11,10 @@ import { Especialidade } from 'src/app/shared/model/especialidade';
 import { NotificationService } from 'src/app/shared/services/notification/notification.service';
 import { MyErrorStateMatch } from 'src/app/shared/validators/field-validator';
 import { EspecialidadeService } from '../modules/especialidade.service';
+import { catchError } from 'rxjs/operators';
+import { ForbiddenErrorDialogComponent } from 'src/app/shared/forbidden-error-dialog/forbidden-error-dialog.component';
+import { of, Subject } from 'rxjs';
+import { ErrorLoadingComponent } from 'src/app/shared/error-loading/error-loading.component';
 
 @Component({
   selector: 'app-especialidade-form',
@@ -21,6 +26,7 @@ export class EspecialidadeFormComponent implements OnInit {
   matcher = new MyErrorStateMatch();
   showAndHideView: EventEmitter = new EventEmitter();
   especialidade: Especialidade = new Especialidade();
+  private error$: Subject<boolean>;
   private id = 0;
 
   constructor(
@@ -29,7 +35,8 @@ export class EspecialidadeFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private especialidadeService: EspecialidadeService,
     private notificationService: NotificationService,
-    private location: Location
+    private location: Location,
+    private dialogService: MatDialog
   ) {
 
   }
@@ -80,25 +87,39 @@ export class EspecialidadeFormComponent implements OnInit {
     this.especialidade.descricao = this.formGroup01.controls.descricao.value;
 
     this.especialidadeService.save(this.especialidade)
+      .pipe(
+        catchError((err: HttpErrorResponse) => {
+
+          if (err.status === 403) {
+            this.dialogService.open(ForbiddenErrorDialogComponent);
+            return of(null);
+          }
+
+          this.dialogService.open(ErrorLoadingComponent);
+          this.error$.next(true);
+          return of(null);
+        })
+      )
       .subscribe(
         (data: Especialidade) => {
-          if (!!state) {
-            if (this.router.url.match('/edit')) {
-              this.showUpdatedMessage();
+          if (data != null) {
+            if (!!state) {
+              if (this.router.url.match('/edit')) {
+                this.showUpdatedMessage();
+              } else {
+                this.showSavedMessage();
+              }
+              this.back();
             } else {
-              this.showSavedMessage();
+              if (this.router.url.match('/edit')) {
+                this.showUpdatedMessage();
+              } else {
+                this.showSavedMessage();
+              }
+              stepper.reset();
             }
-            this.back();
-          } else {
-            if (this.router.url.match('/edit')) {
-              this.showUpdatedMessage();
-            } else {
-              this.showSavedMessage();
-            }
-            stepper.reset();
           }
-        },
-        (err: HttpErrorResponse) => this.showFailerMessage(err)
+        }
       );
 
   }
