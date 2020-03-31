@@ -16,6 +16,8 @@ import { MatDailogTypeParam } from 'src/app/shared/model/support/mat-dialog-type
 import { MoreOptionsDialogComponent } from 'src/app/shared/more-options-dialog/more-options-dialog.component';
 import { NotificationService } from 'src/app/shared/services/notification/notification.service';
 import { EspecialidadeService } from '../modules/especialidade.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { ForbiddenErrorDialogComponent } from 'src/app/shared/forbidden-error-dialog/forbidden-error-dialog.component';
 
 @Component({
   selector: 'app-especialidade-list',
@@ -84,13 +86,19 @@ export class EspecialidadeListComponent implements OnInit, OnDestroy {
 
   onRefrash(data?: CustomFilter) {
     this.sub = this.service.filterByNome(data)
-      .pipe(
-        catchError(err => {
-          this.dialogService.open(ErrorLoadingComponent);
-          this.error$.next(true);
+    .pipe(
+      catchError((err: HttpErrorResponse) => {
+
+        if (err.status === 403) {
+          this.dialogService.open(ForbiddenErrorDialogComponent);
           return of(null);
-        })
-      )
+        }
+
+        this.dialogService.open(ErrorLoadingComponent);
+        this.error$.next(true);
+        return of(null);
+      })
+    )
       .subscribe(
         next => {
           const array = next.map((item: Especialidade) => {
