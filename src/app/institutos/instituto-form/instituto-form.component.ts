@@ -18,6 +18,8 @@ import { AreaFormacao } from './../../shared/model/AreaFormacao';
 import { Periodo } from 'src/app/shared/model/periodo';
 import { PeriodoService } from 'src/app/periodos/modules/periodos.service';
 import { EnsinoNivel } from 'src/app/shared/model/ensinoNivel';
+import { ForbiddenErrorDialogComponent } from 'src/app/shared/forbidden-error-dialog/forbidden-error-dialog.component';
+import { ErrorLoadingComponent } from 'src/app/shared/error-loading/error-loading.component';
 
 @Component({
   selector: 'app-instituto-form',
@@ -42,6 +44,8 @@ export class InstitutoFormComponent implements OnInit {
   public nivelEnsino: number;
 
   private id = 0;
+  dialogService: any;
+  error$: any;
 
   constructor(
     private router: Router,
@@ -291,25 +295,39 @@ export class InstitutoFormComponent implements OnInit {
 
 
     this.institutoService.save(this.instituto)
+      .pipe(
+        catchError((err: HttpErrorResponse) => {
+
+          if (err.status === 403) {
+            this.dialogService.open(ForbiddenErrorDialogComponent);
+            return of(null);
+          }
+
+          this.dialogService.open(ErrorLoadingComponent);
+          this.error$.next(true);
+          return of(null);
+        })
+      )
       .subscribe(
         (data: Instituto) => {
-          if (!!state) {
-            if (this.router.url.match('/edit')) {
-              this.showUpdatedMessage();
+          if (data != null) {
+            if (!!state) {
+              if (this.router.url.match('/edit')) {
+                this.showUpdatedMessage();
+              } else {
+                this.showSavedMessage();
+              }
+              this.back();
             } else {
-              this.showSavedMessage();
+              if (this.router.url.match('/edit')) {
+                this.showUpdatedMessage();
+              } else {
+                this.showSavedMessage();
+              }
+              stepper.reset();
             }
-            this.back();
-          } else {
-            if (this.router.url.match('/edit')) {
-              this.showUpdatedMessage();
-            } else {
-              this.showSavedMessage();
-            }
-            stepper.reset();
           }
-        },
-        (err: HttpErrorResponse) => this.showFailerMessage(err)
+        }
       );
 
   }
