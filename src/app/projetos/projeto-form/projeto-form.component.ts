@@ -1,3 +1,4 @@
+import { MatDialog } from '@angular/material/dialog';
 import { Location } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
@@ -20,6 +21,8 @@ import { TurmaService } from 'src/app/turmas/modules/turma.service';
 
 import { ProjetoService } from '../modules/projeto.service';
 import { CustomFilter } from 'src/app/shared/model/support/custom-filter';
+import { ForbiddenErrorDialogComponent } from 'src/app/shared/forbidden-error-dialog/forbidden-error-dialog.component';
+import { ErrorLoadingComponent } from 'src/app/shared/error-loading/error-loading.component';
 
 @Component({
   selector: 'app-projeto-form',
@@ -33,6 +36,7 @@ export class ProjetoFormComponent implements OnInit {
   projetos$: Observable<Projeto[]>;
   grupos$: Observable<Grupo[]>;
   turmas$: Observable<Turma[]>;
+  error$: Subject<boolean>;
   matcher = new MyErrorStateMatch();
   showAndHideView: EventEmitter = new EventEmitter();
   projeto: Projeto = new Projeto();
@@ -52,6 +56,7 @@ export class ProjetoFormComponent implements OnInit {
     private departamentoService: DepartamentoService,
     private notificationService: NotificationService,
     private location: Location,
+    private dialogService: MatDialog,
     private monografiaService: MonografiaService) {
     this.monografiaService.emitShowAddButton.emit(true);
   }
@@ -173,25 +178,39 @@ export class ProjetoFormComponent implements OnInit {
     this.projeto.departamento = this.projeto.grupo.curso.departamento;
 
     this.projetoService.save(this.projeto)
+      .pipe(
+        catchError((err: HttpErrorResponse) => {
+
+          if (err.status === 403) {
+            this.dialogService.open(ForbiddenErrorDialogComponent);
+            return of(null);
+          }
+
+          this.dialogService.open(ErrorLoadingComponent);
+          this.error$.next(true);
+          return of(null);
+        })
+      )
       .subscribe(
         (data: Projeto) => {
-          if (!!state) {
-            if (this.router.url.match('/edit')) {
-              this.showUpdatedMessage();
+          if (data != null) {
+            if (!!state) {
+              if (this.router.url.match('/edit')) {
+                this.showUpdatedMessage();
+              } else {
+                this.showSavedMessage();
+              }
+              this.back();
             } else {
-              this.showSavedMessage();
+              if (this.router.url.match('/edit')) {
+                this.showUpdatedMessage();
+              } else {
+                this.showSavedMessage();
+              }
+              stepper.reset();
             }
-            this.back();
-          } else {
-            if (this.router.url.match('/edit')) {
-              this.showUpdatedMessage();
-            } else {
-              this.showSavedMessage();
-            }
-            stepper.reset();
           }
-        },
-        (err: HttpErrorResponse) => this.showFailerMessage(err)
+        }
       );
 
   }
