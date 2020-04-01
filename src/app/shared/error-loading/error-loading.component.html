@@ -1,6 +1,38 @@
+<section class="about-us">
+  <div class="contenedor1">
+    <div class="contenedor-articulo">
+      <div
+        class="articulo"
+        style="text-align: center;"
+        data-aos="zoom-in-right"
+      >
+        <img
+          src="../../../assets/img/somthing-went-wrong.svg"
+          style="width: 350px;"
+          alt=""
+        />
+        <h3 class="titulo">Falha na conexão</h3>
+        <p style="text-align: center;">
+          Ocorre um erro ao tentar carrgar informações do sevidor.<br />
+          por favor, tente novamente mais tarde...
+        </p>
+        <div style="text-align: start;">
+          <a mat-icon-button color="primary" mat-dialog-close>
+            <mat-icon>close</mat-icon>
+          </a>
+          <a mat-icon-button color="primary" mat-dialog-close (click)="refresh()">
+            <mat-icon>refresh</mat-icon>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--
 <h2 matDialogTitle>Erro!</h2>
-<mat-dialog-content>
-  <!-- <mat-icon>no_encryption</mat-icon><br /> -->
+<mat-dialog-content style="text-align: center; align-content: center; width: 50%;">
+ <img style="text-align: center; display: block; position: relative;" src="../../../assets/img/somthing-went-wrong.svg" width="60%" alt="">
   Ocorre um erro ao tentar carrgar informações do sevidor. por favor, tente
   novamente mais tarde...
 </mat-dialog-content>
@@ -9,4 +41,4 @@
   <button class="btn-large" mat-raised-button matDialogClose>
     OK
   </button>
-</mat-dialog-actions>
+</mat-dialog-actions> -->
