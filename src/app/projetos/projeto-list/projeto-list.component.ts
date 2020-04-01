@@ -14,6 +14,8 @@ import { ErrorLoadingComponent } from 'src/app/shared/error-loading/error-loadin
 import { MoreOptionsDialogComponent } from 'src/app/shared/more-options-dialog/more-options-dialog.component';
 import { DeleteDialogComponent } from 'src/app/shared/delete-dialog/delete-dialog.component';
 import { MonografiaService } from 'src/app/monografias/modules/monografia.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { ForbiddenErrorDialogComponent } from 'src/app/shared/forbidden-error-dialog/forbidden-error-dialog.component';
 
 @Component({
   selector: 'app-projeto-list',
@@ -92,8 +94,12 @@ export class ProjetoListComponent implements OnInit {
   onRefrash(data?: CustomFilter) {
     this.sub = this.service.filterByDuracao(data.duracao === undefined ? 1 : data.duracao)
       .pipe(
-        catchError(err => {
-          console.log(err);
+        catchError((err: HttpErrorResponse) => {
+
+          if (err.status === 403) {
+            this.dialogService.open(ForbiddenErrorDialogComponent);
+            return of(null);
+          }
 
           this.dialogService.open(ErrorLoadingComponent);
           this.error$.next(true);
