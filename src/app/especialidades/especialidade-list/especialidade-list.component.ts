@@ -86,19 +86,19 @@ export class EspecialidadeListComponent implements OnInit, OnDestroy {
 
   onRefrash(data?: CustomFilter) {
     this.sub = this.service.filterByNome(data)
-    .pipe(
-      catchError((err: HttpErrorResponse) => {
+      .pipe(
+        catchError((err: HttpErrorResponse) => {
 
-        if (err.status === 403) {
-          this.dialogService.open(ForbiddenErrorDialogComponent);
+          if (err.status === 403) {
+            this.dialogService.open(ForbiddenErrorDialogComponent);
+            return of(null);
+          }
+
+          this.dialogService.open(ErrorLoadingComponent);
+          this.error$.next(true);
           return of(null);
-        }
-
-        this.dialogService.open(ErrorLoadingComponent);
-        this.error$.next(true);
-        return of(null);
-      })
-    )
+        })
+      )
       .subscribe(
         next => {
           const array = next.map((item: Especialidade) => {
