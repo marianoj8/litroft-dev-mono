@@ -80,6 +80,12 @@ const routes: Routes = [
     loadChildren: () => import('src/app/orientadores/modules/orientador.module').then(m => m.OrientadorModule)
   },
   {
+    path: 'professores',
+    canActivate: [AuthGuard],
+    canLoad: [AuthGuard],
+    loadChildren: () => import('src/app/professores/modules/professor.module').then(m => m.ProfessorModule)
+  },
+  {
     path: 'turmas',
     canActivate: [AuthGuard],
     canLoad: [AuthGuard],
