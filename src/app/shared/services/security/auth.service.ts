@@ -1,12 +1,17 @@
-import { HttpClient } from '@angular/common/http';
+import { SerialNumberNotFoundDialogComponent } from './../../serial-number-not-found-dialog/serial-number-not-found-dialog.component';
+import { NotificationService } from './../notification/notification.service';
+import { MatDialog } from '@angular/material/dialog';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/internal/Observable';
-import { take } from 'rxjs/operators';
+import { take, catchError } from 'rxjs/operators';
 
 import { Token } from '../../model/support/token';
 import { UsernameAndPassword } from '../../model/support/username-password';
 import { environment } from 'src/environments/environment';
+import { of } from 'rxjs';
+import { ForbiddenErrorDialogComponent } from '../../forbidden-error-dialog/forbidden-error-dialog.component';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +19,11 @@ import { environment } from 'src/environments/environment';
 export class AuthService {
   public user: UsernameAndPassword;
 
-  constructor(private htp: HttpClient, public router: Router) { }
+  constructor(
+    private htp: HttpClient,
+    public router: Router,
+    private dialogService: MatDialog,
+    private notificationService: NotificationService) { }
 
   public login(user: UsernameAndPassword): Observable<Token> {
     const url = environment.API.replace('/litroft/api/v1/rm', '');
@@ -54,11 +63,23 @@ export class AuthService {
   }
 
   public activeAccount(user: UsernameAndPassword) {
-    this.active(user).subscribe((token: Token) => {
-      if (token !== undefined && token !== null) {
-        this.login({ username: user.username, password: user.password }).subscribe(data => this.addTokenToLocalStorage(data));
-      }
-    });
+    this.active(user)
+      .pipe(catchError((err: HttpErrorResponse) => {
+        if (err.status === 403) {
+          this.dialogService.open(ForbiddenErrorDialogComponent);
+          return of(null);
+        }
+        if (err.status === 404) {
+          this.dialogService.open(SerialNumberNotFoundDialogComponent);
+          return of(null);
+        }
+        this.showFailerMessage(err);
+      }))
+      .subscribe((token: Token) => {
+        if (token !== undefined && token !== null) {
+          this.login({ username: user.username, password: user.password }).subscribe(data => this.addTokenToLocalStorage(data));
+        }
+      });
   }
 
   public doLogOut() {
@@ -96,6 +117,11 @@ export class AuthService {
 
     this.doLogOut();
     return false;
+  }
+
+  private showFailerMessage(err: HttpErrorResponse): void {
+    this.notificationService
+      .componentErrorMessage(':: ' + err.error.message);
   }
 
 }
