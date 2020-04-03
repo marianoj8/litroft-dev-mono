@@ -1,0 +1,135 @@
+<div class="container mat-elevation-z8 table hide-on-med-and-down">
+  <button class="btn-large" mat-raised-button color="primary" (click)="add()">
+    <mat-icon>add</mat-icon>
+    Cadastrar Novo Professor
+  </button>
+  <table
+    *ngIf="professores; else loading"
+    mat-table
+    [dataSource]="professores"
+    matSort
+  >
+
+    <ng-container matColumnDef="nome">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Nome</th>
+      <td mat-cell *matCellDef="let professor">
+        {{ professor?.nome }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="sobrenome">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Sobrenome</th>
+      <td mat-cell *matCellDef="let professor">
+        {{ professor?.sobreNome }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="sexo">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Sexo</th>
+      <td mat-cell *matCellDef="let professor">
+        {{ professor?.sexo === "M" ? "Masculino" : "Femenino" }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="telefone">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Telefone</th>
+      <td mat-cell *matCellDef="let professor">
+        {{ professor?.fone }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
+      <td mat-cell *matCellDef="let professor">
+        {{ professor?.email }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="detalhe">
+      <th mat-header-cell *matHeaderCellDef>Detalhe</th>
+      <td mat-cell *matCellDef="let professor">
+        <button mat-raised-button [routerLink]="['detalhe', professor.id]">
+          <mat-icon color="primary">description</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="edit">
+      <th mat-header-cell *matHeaderCellDef>Editar</th>
+      <td mat-cell *matCellDef="let professor">
+        <button mat-raised-button (click)="edit(professor)">
+          <mat-icon color="primary">edit</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="delete">
+      <th mat-header-cell *matHeaderCellDef>Excluir</th>
+      <td mat-cell *matCellDef="let professor">
+        <button
+          mat-raised-button
+          matTooltipShowDelay="2000"
+          matTooltipHideDelay="2000"
+          matTooltip="Uma vez excluido não tem como reverter as alterações."
+          (click)="openDeleteDialog(professor.id)"
+        >
+          <mat-icon color="warn">delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="noData">
+      <th mat-footer-cell *matFooterCellDef>Lista vasia.</th>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displaydColumns; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: displaydColumns"></tr>
+    <tr
+      mat-footer-row
+      *matFooterRowDef="['noData']"
+      [ngClass]="{ hide: true }"
+    ></tr>
+  </table>
+
+  <ng-template #loading>
+    <div *ngIf="error$ | async as error; else showError">
+      <span>
+        Erro ao carregar professores. Tente novamente mais tarde.
+      </span>
+    </div>
+    <ng-template #showError>
+      <mat-progress-bar mode="indeterminate" color="warn"> </mat-progress-bar>
+    </ng-template>
+  </ng-template>
+</div>
+
+<!-- Modo Mobile inicializado  -->
+
+<div class="hide-on-large-only">
+  <mat-nav-list
+    class="mat-elevation-z8 container"
+    *ngIf="professores; else loadingOnList"
+  >
+    <button class="btn-large" mat-raised-button color="primary" (click)="add()">
+      <mat-icon>add</mat-icon>
+      Cadastrar Novo Professor
+    </button>
+    <a
+      mat-list-item
+      (click)="openMoreOptionDialog(item.id)"
+      *ngFor="let item of professoresList"
+    >
+      <mat-icon matListIcon class="mat-18">person</mat-icon>
+      <h5 matLine>{{ item?.nome }} {{ item?.sobreNome }}</h5>
+      <p matLine>{{ item?.fone }}</p>
+      <mat-divider></mat-divider>
+    </a>
+  </mat-nav-list>
+  <ng-template #loadingOnList>
+    <mat-progress-bar
+      mode="indeterminate"
+      color="warn"
+      class="hide-on-large-only"
+    ></mat-progress-bar>
+  </ng-template>
+</div>

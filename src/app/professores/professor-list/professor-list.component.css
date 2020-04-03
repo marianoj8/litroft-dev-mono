@@ -1,0 +1,8 @@
+.table {
+  height: 465px;
+  overflow: auto;
+}
+
+mat-nav-list a p, h5{
+  text-align: start;
+}
