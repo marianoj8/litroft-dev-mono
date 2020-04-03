@@ -1,0 +1,250 @@
+<mat-vertical-stepper
+  [linear]="professor.id"
+  #stepper
+  class="container mat-elevation-z6"
+>
+<mat-step [stepControl]="formGroup01">
+  <form [formGroup]="formGroup01">
+    <div class="field">
+      <ng-template matStepLabel>
+        Nome do estudante
+      </ng-template>
+      <mat-form-field class="field field-padding">
+        <input matInput autocomplete="false" formControlName="nome" required placeholder="Nome" />
+        <mat-error *ngIf="
+            formGroup01.controls['nome'].hasError('minlength') &&
+            !formGroup01.controls['nome'].hasError('required')
+          ">
+          Nome deve ter no minimo <strong>3 caraters</strong>
+        </mat-error>
+
+        <mat-error *ngIf="formGroup01.controls['nome'].hasError('maxlength')">
+          Nome não deve ter acima de <strong>24 caraters</strong>
+        </mat-error>
+
+        <mat-error *ngIf="formGroup01.controls['nome'].hasError('required')">
+          Nome é <strong>obrigatorio</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="field field-padding">
+        <input matInput formControlName="sobrenome" autocomplete="false" required placeholder="Sobrenome" />
+        <mat-error *ngIf="
+            formGroup01.controls['sobrenome'].hasError('minlength') &&
+            !formGroup01.controls['sobrenome'].hasError('required')
+          ">
+          Sobrenome deve ter no minimo <strong>3 caraters</strong>
+        </mat-error>
+
+        <mat-error *ngIf="formGroup01.controls['sobrenome'].hasError('maxlength')">
+          Sobrenome não deve ter acima de <strong>24 caraters</strong>
+        </mat-error>
+
+        <mat-error *ngIf="formGroup01.controls['sobrenome'].hasError('required')">
+          Sobrenome é <strong>obrigatorio</strong>
+        </mat-error>
+      </mat-form-field>
+      <div class="spaced">
+        <button color="primary" class="large" mat-raised-button matStepperNext>
+          <mat-icon>arrow_downward</mat-icon>
+          Avançar
+        </button>
+      </div>
+    </div>
+  </form>
+</mat-step>
+<mat-step [stepControl]="formGroup02">
+  <form [formGroup]="formGroup02">
+    <div class="field">
+      <ng-template matStepLabel>
+        Genero, Data de nascimento & BI/Port
+      </ng-template>
+      <mat-form-field class="field-min-2 field-padding">
+        <mat-select matInput formControlName="sexo" placeholder="Sexo">
+          <mat-option checked value="M">Masculino</mat-option>
+          <mat-option value="F">Femenino</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="field-min-1 field-padding">
+        <input matInput formControlName="dataNascimento" [matDatepicker]="picker" required se
+          placeholder="Data de Nasciemnto" />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="
+            formGroup02.controls['dataNascimento'].hasError('minlenght') ||
+            (formGroup02.controls['dataNascimento'].hasError('maxlenght') &&
+              !formGroup02.controls['dataNascimento'].hasError('required'))
+          ">
+          Formato de data <strong>invalido</strong>
+        </mat-error>
+        <mat-error *ngIf="formGroup02.controls['dataNascimento'].hasError('required')">
+          Data de Nascimento é <strong>obrigatorio</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="field field-padding">
+        <input matInput formControlName="bi" autocomplete="false" required placeholder="B.I ou passaport" />
+        <mat-error *ngIf="formGroup02.controls['bi'].hasError('required')">
+          B.I ou passaporte é <strong>obrigatorio</strong>
+        </mat-error>
+      </mat-form-field>
+      <div class="spaced">
+        <button mat-raised-button class="large" matStepperPrevious>
+          <mat-icon>arrow_upward</mat-icon>
+          Anterior
+        </button>
+        <button color="primary" class="large" mat-raised-button matStepperNext>
+          <mat-icon>arrow_downward</mat-icon>
+          Avancar
+        </button>
+      </div>
+    </div>
+  </form>
+</mat-step>
+
+<mat-step [stepControl]="formGroup03">
+  <form [formGroup]="formGroup03">
+    <div class="field">
+      <ng-template matStepLabel>
+        Telefone & Email
+      </ng-template>
+
+      <mat-form-field class="field field-padding">
+        <input matInput formControlName="fone" type="text" required placeholder="Telefone" />
+        <mat-error *ngIf="formGroup03.controls['fone'].hasError('required')">
+          Contacto é <strong>obrigatorio</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="field field-padding">
+        <input matInput formControlName="email" [errorStateMatcher]="matcher" autocomplete="false" required
+          placeholder="Email" />
+        <mat-error *ngIf="
+            formGroup03.controls['email'].hasError('email') &&
+            !formGroup03.controls['email'].hasError('required')
+          ">
+          Por favor, insira um email valido
+        </mat-error>
+
+        <mat-error *ngIf="formGroup03.controls['email'].hasError('required')">
+          Email é <strong>obrigatorio</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <div class="spaced">
+        <button mat-raised-button matStepperPrevious class="large">
+          <mat-icon>arrow_upward</mat-icon>
+          Anterior
+        </button>
+        <button color="primary" mat-raised-button matStepperNext class="large">
+          <mat-icon>arrow_downward</mat-icon>
+          Avancar
+        </button>
+      </div>
+    </div>
+  </form>
+</mat-step>
+
+<mat-step [stepControl]="formGroup04">
+  <form [formGroup]="formGroup04">
+    <div class="field">
+      <ng-template matStepLabel>
+        Endereço
+      </ng-template>
+      <mat-form-field class="field-min-2 field-padding">
+        <mat-select
+            matInput
+            formControlName="provincia"
+            required
+            placeholder="Provincia">
+          <mat-option *ngIf="provinciaError$ | async">
+            Ocorreu um erro ao carregar provincias...
+          </mat-option>
+          <ng-container *ngFor="let provincia of provincias$ | async">
+            <mat-option *ngIf="!provincia">
+              lista vasia
+            </mat-option>
+            <mat-option [value]="provincia.id">
+              {{ provincia.nome }}
+            </mat-option>
+          </ng-container>
+        </mat-select>
+        <mat-error *ngIf="formGroup04.controls['provincia'].hasError('required')">
+          Provincia é <strong>obrigatorio</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="field-min-1 field-padding">
+        <mat-select
+            matInput
+            formControlName="municipio"
+            required
+            placeholder="Municipio">
+          <mat-option *ngIf="municipioError$ | async">
+            Ocorreu um erro ao carregar municipios...
+          </mat-option>
+
+          <ng-container *ngFor="let municipio of municipios$ | async as municipios">
+            <mat-option *ngIf="!municipios">lista vasia</mat-option>
+            <mat-option [value]="municipio.id">
+              {{ municipio.nome }}
+            </mat-option>
+          </ng-container>
+        </mat-select>
+        <mat-error *ngIf="formGroup04.controls['municipio'].hasError('required')">
+          Municipio é <strong>obrigatorio</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="field field-padding">
+        <input matInput formControlName="endereco" autocomplete="false" required
+          placeholder="Distrito, bairro, rua, N/casa" />
+      </mat-form-field>
+      <div class="spaced">
+        <button mat-raised-button matStepperPrevious class="large">
+          <mat-icon>arrow_upward</mat-icon>
+          Anterior
+        </button>
+        <button color="primary" mat-raised-button matStepperNext class="large">
+          <mat-icon>arrow_downward</mat-icon>
+          Avancar
+        </button>
+      </div>
+    </div>
+  </form>
+</mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel
+      >Concluir com processo de
+      {{ !professor.id ? "cadastro" : "alteração" }} de professor</ng-template
+    >
+    <div class="spaced">
+      <button mat-stroked-button matStepperPrevious class="large">
+        <mat-icon>arrow_upward</mat-icon>
+        Anterior
+      </button>
+      <button
+        class="mat-elevation-z8"
+        *ngIf="!professor.id"
+        color="primary"
+        mat-raised-button
+        class="large"
+        (click)="onSaveButton(stepper)"
+      >
+        <mat-icon>save</mat-icon>
+        Salvar
+      </button>
+      <button
+        color="primary"
+        class="large"
+        mat-raised-button
+        (click)="onSaveButtonAndList(stepper)"
+      >
+        <mat-icon>save</mat-icon>
+        {{ !professor.id ? "Salvar e listar" : "Salvar" }}
+      </button>
+    </div>
+  </mat-step>
+</mat-vertical-stepper>
+<ng-template #loading>
+  <mat-progress-bar mode="indeterminate" color="warn"></mat-progress-bar>
+</ng-template>
