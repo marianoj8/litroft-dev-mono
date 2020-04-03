@@ -1,3 +1,4 @@
+import { SerialNumberNotFoundDialogComponent } from './shared/serial-number-not-found-dialog/serial-number-not-found-dialog.component';
 import { ForbiddenErrorDialogComponent } from './shared/forbidden-error-dialog/forbidden-error-dialog.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
@@ -48,7 +49,8 @@ import { CustomPipesModule } from './shared/custom-pipes/module/custom-pipes.mod
     LoadingUploadComponent,
     CustomErrorPageComponent,
     AcessDenaidComponent,
-    ForbiddenErrorDialogComponent
+    ForbiddenErrorDialogComponent,
+    SerialNumberNotFoundDialogComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
