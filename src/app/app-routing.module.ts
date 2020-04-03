@@ -86,6 +86,12 @@ const routes: Routes = [
     loadChildren: () => import('src/app/professores/modules/professor.module').then(m => m.ProfessorModule)
   },
   {
+    path: 'mini-pauta',
+    canActivate: [AuthGuard],
+    canLoad: [AuthGuard],
+    loadChildren: () => import('src/app/mini-pauta/modules/mini-pauta.module').then(m => m.MiniPautaModule)
+  },
+  {
     path: 'turmas',
     canActivate: [AuthGuard],
     canLoad: [AuthGuard],
