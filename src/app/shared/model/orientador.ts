@@ -1,6 +1,8 @@
 import { AdminInterno } from './adminInterno';
 import { CustomAbstractEntity } from './customEntity';
 import { Especialidade } from './especialidade';
+import { Provincia } from './provincia';
+import { Municipio } from './municipio';
 
 export class Orientador implements CustomAbstractEntity {
   id: number;
@@ -18,6 +20,9 @@ export class Orientador implements CustomAbstractEntity {
   especialidade: Especialidade;
   adminInterno: AdminInterno;
   numeroSerie: string;
+  provincia: Provincia;
+  municipio: Municipio;
+
 
   constructor(id?: number) {
     this.id = id ? id : null;
