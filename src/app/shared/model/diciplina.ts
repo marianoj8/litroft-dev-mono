@@ -1,6 +1,4 @@
-import { Admin } from './admin';
 import { CustomAbstractEntity } from './customEntity';
-import { EnsinoNivel } from './ensinoNivel';
 import { Classe } from './classe';
 export class Diciplina implements CustomAbstractEntity {
   id: number;
@@ -9,4 +7,8 @@ export class Diciplina implements CustomAbstractEntity {
   totalModified: number;
   nome: string;
   classe: Classe;
+
+  constructor(id?: number) {
+    this.id = id ? id : null;
+  }
 }
