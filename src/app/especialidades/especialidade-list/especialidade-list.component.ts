@@ -26,7 +26,6 @@ import { ForbiddenErrorDialogComponent } from 'src/app/shared/forbidden-error-di
 })
 export class EspecialidadeListComponent implements OnInit, OnDestroy {
 
-  pageEvent: PageEvent;
   dialogParam: MatDailogTypeParam = new MatDailogTypeParam();
   valueParam = '';
   filtro: CustomFilter = new CustomFilter();
