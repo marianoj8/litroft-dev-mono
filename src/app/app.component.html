@@ -37,7 +37,7 @@
         <mat-icon left>school</mat-icon>
         Escolas
       </a>
-        <a routerLinkActive="active" mat-button *ngIf="showOrHideMenu">
+        <a routerLinkActive="active" [routerLink]="['mini-pauta']" mat-button *ngIf="showOrHideMenu">
           <mat-icon>view_quilt</mat-icon>
           Pauta
         </a>
