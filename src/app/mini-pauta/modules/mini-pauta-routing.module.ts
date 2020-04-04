@@ -1,13 +1,17 @@
 import { MiniPautaComponent } from './../mini-pauta.component';
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { MiniPautaListComponent } from '../mini-pauta-list/mini-pauta-list.component';
 
 const routes: Routes = [
   {
     path: '',
     component: MiniPautaComponent,
     children: [
+      {
+        path: '',
+        component: MiniPautaListComponent
+      }
     ]
   }
 ];
