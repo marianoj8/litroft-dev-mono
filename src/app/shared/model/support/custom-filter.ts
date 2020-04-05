@@ -13,6 +13,7 @@ export class CustomFilter {
   finalista: number;
   anoletivoType: number;
   nivelId: number;
+  institutoId: number;
   nivel: string;
   numero: string;
 }
