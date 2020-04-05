@@ -6,11 +6,13 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MiniPautaRoutingModule } from './mini-pauta-routing.module';
 import { MiniPautaListComponent } from '../mini-pauta-list/mini-pauta-list.component';
+import { MiniPautaFormComponent } from '../mini-pauta-form/mini-pauta-form.component';
 
 @NgModule({
   declarations: [
     MiniPautaComponent,
-    MiniPautaListComponent
+    MiniPautaListComponent,
+    MiniPautaFormComponent
   ],
   imports: [
     CommonModule,
