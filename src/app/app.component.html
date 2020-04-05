@@ -195,7 +195,14 @@
                 Professores
               </a>
             </mat-panel-description>
+            <mat-panel-description>
+              <a mat-list-item routerLinkActive="active" [routerLink]="['diciplinas']">
+                <mat-icon color="primary">recent_actors</mat-icon>
+                Diciplinas
+              </a>
+            </mat-panel-description>
             <ng-container *ngIf="showOrHideMenuByNivel === 'Ensino do II Ciclo'">
+              <mat-divider></mat-divider>
               <a mat-list-item routerLinkActive="active" [routerLink]="['orientadores']">
                 <mat-icon color="primary">recent_actors</mat-icon>
                 Orientadores
