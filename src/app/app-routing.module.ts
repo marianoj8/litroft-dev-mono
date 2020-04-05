@@ -101,7 +101,7 @@ const routes: Routes = [
     path: 'diciplinas',
     canActivate: [AuthGuard],
     canLoad: [AuthGuard],
-    loadChildren: () => import('src/app/diciplinas/modules/disiplina.module').then(m => m.DiciplinaModule)
+    loadChildren: () => import('src/app/diciplinas/modules/diciplina.module').then(m => m.DiciplinaModule)
   },
   {
     path: 'especialidades',
