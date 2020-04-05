@@ -1,3 +1,4 @@
+import { MiniPautaFormComponent } from './../mini-pauta-form/mini-pauta-form.component';
 import { MiniPautaComponent } from './../mini-pauta.component';
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
@@ -11,6 +12,14 @@ const routes: Routes = [
       {
         path: '',
         component: MiniPautaListComponent
+      },
+      {
+        path:'add',
+        component:MiniPautaFormComponent
+      },
+      {
+        path:'edit/:id',
+        component:MiniPautaFormComponent
       }
     ]
   }
