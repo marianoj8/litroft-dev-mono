@@ -1,0 +1,391 @@
+import { Periodo } from './../../shared/model/periodo';
+import { log } from 'util';
+import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Observable, Subject, of } from 'rxjs';
+import { Curso } from 'src/app/shared/model/curso';
+import { Turma } from 'src/app/shared/model/turma';
+import { MyErrorStateMatch } from 'src/app/shared/validators/field-validator';
+import { Estudante } from 'src/app/shared/model/estudante';
+import { Provincia } from 'src/app/shared/model/provincia';
+import { Municipio } from 'src/app/shared/model/municipio';
+import { CustomFilter } from 'src/app/shared/model/support/custom-filter';
+import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { EstudanteService } from 'src/app/estudantes/modules/estudante.service';
+import { CursoService } from 'src/app/cursos/modules/curso.service';
+import { TurmaService } from 'src/app/turmas/modules/turma.service';
+import { MunicipioService } from 'src/app/municipio/modules/municipio.service';
+import { ProvinciaService } from 'src/app/provincia/modules/provincia.service';
+import { NotificationService } from 'src/app/shared/services/notification/notification.service';
+import { MatDialog, MatVerticalStepper } from '@angular/material';
+import { MonografiaService } from 'src/app/monografias/modules/monografia.service';
+import { catchError } from 'rxjs/operators';
+import { ErrorLoadingComponent } from 'src/app/shared/error-loading/error-loading.component';
+import { HttpErrorResponse } from '@angular/common/http';
+import { ForbiddenErrorDialogComponent } from 'src/app/shared/forbidden-error-dialog/forbidden-error-dialog.component';
+import { EventEmitter } from 'events';
+import { PeriodoService } from 'src/app/periodos/modules/periodos.service';
+import { ClasseService } from 'src/app/classe/modules/classe.service';
+import { Classe } from 'src/app/shared/model/classe';
+import { Diciplina } from 'src/app/shared/model/diciplina';
+import { DiciplinaService } from 'src/app/diciplinas/modules/diciplina.service';
+
+@Component({
+  selector: 'app-mini-pauta-form',
+  templateUrl: './mini-pauta-form.component.html',
+  styleUrls: ['./mini-pauta-form.component.css']
+})
+export class MiniPautaFormComponent implements OnInit {
+  formGroup01: FormGroup;
+  formGroup02: FormGroup;
+  formGroup03: FormGroup;
+  formGroup04: FormGroup;
+  formGroup05: FormGroup;
+  cursos$: Observable<Curso[]>;
+  turmas$: Observable<Turma[]>;
+  cursoError$ = new Subject<boolean>();
+  turmaError$ = new Subject<boolean>();
+  periodos$: Observable<Periodo[]>;
+  classes$: Observable<Classe[]>;
+  diciplinas$: Observable<Diciplina[]>;
+  estudanteError$ = new Subject<boolean>();
+
+  matcher = new MyErrorStateMatch();
+  showAndHideView: EventEmitter = new EventEmitter();
+  estudante: Estudante = new Estudante();
+  estudante$: Observable<Estudante[]>;
+  private curso: Curso = new Curso();
+  private turma: Turma = new Turma();
+  private provincia: Provincia = new Provincia();
+  private municipio: Municipio = new Municipio();
+  filter = new CustomFilter();
+  private id = 0;
+
+  private valor1: number = 0;
+  private valor2: number = 0;
+  private valorMedia1: number;
+
+  private valor3: number = 0;
+  private valor4: number = 0;
+  private valorMedia2: number;
+
+  private valor5: number = 0;
+  private valor6: number = 0;
+  private valorMedia3: number;
+
+  constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private formBuilder: FormBuilder,
+    private estudanteService: EstudanteService,
+    private cursoSerice: CursoService,
+    private periodoService: PeriodoService,
+    private classeService: ClasseService,
+    private turmaService: TurmaService,
+    private diciplinaService: DiciplinaService,
+    private notificationService: NotificationService,
+    private dialogService: MatDialog,
+    private location: Location,
+    public monografiaService: MonografiaService) {
+    this.monografiaService.emitShowAddButton.emit(true);
+  }
+
+  ngOnInit() {
+    this.estudanteService.onChangeContext.emit(true);
+    this.initForms();
+
+    this.periodos$ = this.periodoService.list();
+    this.classes$ = this.classeService.list();
+    this.turmas$ = this.turmaService.list();
+
+
+    if (false) {
+      this.estudante$ = this.estudanteService.filterBySexoAndCurso(this.filter.curso === undefined ? '' : this.filter.curso, this.filter.sexo === undefined ? '' : this.filter.sexo)
+        .pipe(
+          catchError((err: HttpErrorResponse) => {
+
+            if (err.status === 403) {
+              this.dialogService.open(ForbiddenErrorDialogComponent);
+              return of(null);
+            }
+          })
+        );
+
+    } else {
+      this.estudante$ = this.estudanteService.filterByNomeSexoTurma(this.filter)
+        .pipe(
+          catchError((err: HttpErrorResponse) => {
+
+            if (err.status === 403) {
+              this.dialogService.open(ForbiddenErrorDialogComponent);
+              return of(null);
+            }
+          })
+        );
+
+      this.formGroup02.controls.estudante.valueChanges
+        .subscribe((onValue) => this.estudanteService.getById(onValue)
+          .subscribe((onNewValue: Estudante) => {
+            this.filter.institutoId = onNewValue.adminInterno.instituto.id;
+            this.filter.nome = '';
+            this.diciplinas$ = this.diciplinaService.list(this.filter);
+
+          }));
+
+    }
+
+    this.cursos$ = this.cursoSerice.list()
+      .pipe(catchError(err => {
+        this.dialogService.open(ErrorLoadingComponent);
+        this.cursoError$.next(true);
+        return of([]);
+      }));
+
+    // this.provincias$ = this.provinciaService.list()
+    //   .pipe(catchError(err => {
+    //     this.provinciaError$.next(true);
+    //     return of(null);
+    //   }));
+
+    this.formGroup03.controls.p1.valueChanges
+      .subscribe((onValue: number) => {
+        this.valor1 = onValue;
+        this.formGroup03.patchValue({
+          media: this.mediaCalc1()
+        })
+      });
+
+    this.formGroup03.controls.p2.valueChanges
+      .subscribe((onValue: number) => {
+        this.valor2 = onValue;
+        this.formGroup03.patchValue({
+          media: this.mediaCalc1()
+        })
+      });
+
+    this.formGroup04.controls.p1.valueChanges
+      .subscribe((onValue: number) => {
+        this.valor3 = onValue;
+        this.formGroup04.patchValue({
+          media: this.mediaCalc2()
+        })
+      });
+
+    this.formGroup04.controls.p2.valueChanges
+      .subscribe((onValue: number) => {
+        this.valor4 = onValue;
+        this.formGroup04.patchValue({
+          media: this.mediaCalc2()
+        })
+      });
+
+    this.formGroup05.controls.p1.valueChanges
+      .subscribe((onValue: number) => {
+        this.valor5 = onValue;
+        this.formGroup05.patchValue({
+          media: this.mediaCalc3()
+        })
+      });
+
+    this.formGroup05.controls.p2.valueChanges
+      .subscribe((onValue: number) => {
+        this.valor6 = onValue;
+        this.formGroup05.patchValue({
+          media: this.mediaCalc3()
+        })
+      });
+
+    // this.formGroup05.controls.curso.valueChanges
+    //   .subscribe((onValue) => {
+    //     this.turmaService.findAllByCurso(onValue)
+    //       .subscribe(onValues => this.turmas = onValues);
+    //   });
+
+    if (this.router.url.match('/edit')) {
+      this.activatedRoute.params
+        .subscribe(data => {
+          this.id = data.id;
+        });
+
+      this.estudanteService.getById(this.id)
+        .subscribe(data => {
+          this.estudante = data;
+          this.formGroup01.patchValue({
+            nome: this.estudante.nome,
+            sobrenome: this.estudante.sobreNome
+          });
+
+          this.formGroup02.patchValue({
+            sexo: this.estudante.sexo,
+            dataNascimento: this.estudante.dataNascimento,
+            bi: this.estudante.bi
+          });
+
+          this.formGroup03.patchValue({
+            fone: this.estudante.fone,
+            email: this.estudante.email
+          });
+
+          this.formGroup04.patchValue({
+            provincia: this.estudante.provincia.id,
+            municipio: this.estudante.municipio.id,
+            endereco: this.estudante.endereco
+          });
+
+          this.formGroup05.patchValue({
+            numeroProcesso: this.estudante.numeroProcesso,
+            curso: this.estudante.curso.id,
+            turma: this.estudante.turma.id
+          });
+
+        });
+    }
+  }
+
+  initForms() {
+
+    this.formGroup01 = this.formBuilder.group({
+      periodo: [null, Validators.required],
+      classe: [null, Validators.required],
+      turma: [null, Validators.required]
+    });
+
+    this.formGroup02 = this.formBuilder.group({
+      estudante: [null, Validators.required],
+      diciplina: [null, Validators.required]
+    });
+
+    this.formGroup03 = this.formBuilder.group({
+      p1: [null, [Validators.min(0), Validators.max(20)]],
+      p2: [null, [Validators.min(0), Validators.max(20)]],
+      media: [null, [Validators.min(0), Validators.max(20)]]
+    });
+
+    this.formGroup04 = this.formBuilder.group({
+      p1: [null, [Validators.min(0), Validators.max(20)]],
+      p2: [null, [Validators.min(0), Validators.max(20)]],
+      media: [null, [Validators.min(0), Validators.max(20)]]
+    });
+
+    this.formGroup05 = this.formBuilder.group({
+      p1: [null, [Validators.min(0), Validators.max(20)]],
+      p2: [null, [Validators.min(0), Validators.max(20)]],
+      media: [null, [Validators.min(0), Validators.max(20)]]
+    });
+  }
+
+  onSaveButton(stepper: MatVerticalStepper) {
+    this.save(stepper, false);
+  }
+
+  onSaveButtonAndList(stepper: MatVerticalStepper) {
+    this.save(stepper, true);
+  }
+
+
+  private mediaCalc1(): number {
+    this.valorMedia1 = Math.round((this.valor1 + this.valor2) / 2);
+    return this.valorMedia1;
+  }
+
+  private mediaCalc2(): number {
+    this.valorMedia2 = Math.round((this.valor3 + this.valor4) / 2);
+    return this.valorMedia2;
+  }
+
+  private mediaCalc3(): number {
+    this.valorMedia3 = Math.round((this.valor5 + this.valor6) / 2);
+    return this.valorMedia3;
+  }
+
+  private save(stepper: MatVerticalStepper, state): void {
+
+    this.estudante.nome = this.formGroup01.controls.nome.value;
+    this.estudante.sobreNome = this.formGroup01.controls.sobrenome.value;
+    this.estudante.sexo = this.formGroup02.controls.sexo.value;
+    this.estudante.dataNascimento = this.resolveDateFormat();
+    this.estudante.bi = this.formGroup02.controls.bi.value;
+    this.estudante.fone = this.formGroup03.controls.fone.value;
+    this.estudante.email = this.formGroup03.controls.email.value;
+    this.estudante.endereco = this.formGroup04.controls.endereco.value;
+    this.estudante.numeroProcesso = this.formGroup05.controls.numeroProcesso.value;
+
+    this.curso.id = this.formGroup05.controls.curso.value as number;
+    this.turma.id = this.formGroup05.controls.turma.value as number;
+    this.provincia.id = this.formGroup04.controls.provincia.value as number;
+    this.municipio.id = this.formGroup04.controls.municipio.value as number;
+    this.estudante.curso = this.curso;
+    this.estudante.turma = this.turma;
+    this.estudante.provincia = this.provincia;
+    this.estudante.municipio = this.municipio;
+
+    this.estudanteService.save(this.estudante)
+      .pipe(catchError((err: HttpErrorResponse) => {
+        if (err.status === 403) {
+          this.dialogService.open(ForbiddenErrorDialogComponent);
+          return of(null);
+        }
+        this.showFailerMessage(err);
+      }))
+      .subscribe(
+        (data: Estudante) => {
+          if (data != null) {
+            if (!!state) {
+              if (this.router.url.match('/edit')) {
+                this.showUpdatedMessage();
+              } else {
+                this.showSavedMessage();
+              }
+              this.back();
+            } else {
+              if (this.router.url.match('/edit')) {
+                this.showUpdatedMessage();
+              } else {
+                this.showSavedMessage();
+              }
+              stepper.reset();
+            }
+          }
+        }
+      );
+  }
+
+  private showFailerMessage(err: HttpErrorResponse): void {
+    this.notificationService
+      .componentErrorMessage(':: ' + err.error.message);
+  }
+
+  private showSavedMessage(): void {
+    this.notificationService.componentSavedSuccessfulMessage();
+  }
+
+  private showUpdatedMessage(): void {
+    this.notificationService.componentUpdatedSuccessfulMessage();
+  }
+
+  private resolveDateFormat(): string {
+    // tslint:disable-next-line: prefer-const
+    let date = new Date(this.formGroup02.controls.dataNascimento.value).toISOString().slice(0, 10);
+    // tslint:disable-next-line: prefer-const
+    let ano: number = Number(date.substring(-1, 4));
+    // tslint:disable-next-line: prefer-const
+    let mes: number = Number(date.substring(5, 7));
+    // tslint:disable-next-line: prefer-const
+    let dia: number = Number(date.substring(8, 10));
+    let finalDate = '';
+
+    if (dia >= 0 && dia < 31) {
+      finalDate = `${ano}-${mes}-${dia + 1}`;
+    } else if (dia === 31) {
+      finalDate = `${ano}-${mes + 1}-${1}`;
+    }
+
+    return finalDate;
+  }
+
+  back() {
+    this.location.back();
+  }
+}

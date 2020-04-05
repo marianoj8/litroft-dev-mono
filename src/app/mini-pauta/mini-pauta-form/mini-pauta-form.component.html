@@ -1,0 +1,348 @@
+<mat-vertical-stepper
+  *ngIf="cursos$ | async as cursos; else loading"
+  [linear]="!estudante.id"
+  #stepper
+  class="container mat-elevation-z6"
+>
+  <mat-step [stepControl]="formGroup01">
+    <form [formGroup]="formGroup01">
+      <div class="field">
+        <ng-template matStepLabel>
+          Periodo, Classe & Turma
+        </ng-template>
+        <mat-form-field class="field-min-1 field-padding">
+          <mat-select
+            matInput
+            autocomplete="false"
+            formControlName="periodo"
+            required
+            placeholder="Periodo"
+          >
+            <mat-option
+              *ngFor="let periodo of periodos$ | async"
+              value="periodo.id"
+            >
+              {{ periodo?.descricao }}
+            </mat-option>
+          </mat-select>
+          <mat-error
+            *ngIf="formGroup01.controls['periodo'].hasError('required')"
+          >
+            Periodo é <strong>obrigatorio</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="field-min-1 field-padding">
+          <mat-select
+            matInput
+            autocomplete="false"
+            formControlName="classe"
+            required
+            placeholder="Classe"
+          >
+            <mat-option
+              *ngFor="let classe of classes$ | async"
+              value="classe.id"
+            >
+              {{ classe?.descricao }}
+            </mat-option>
+          </mat-select>
+          <mat-error
+            *ngIf="formGroup01.controls['classe'].hasError('required')"
+          >
+            Classe é <strong>obrigatorio</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="field-min-1 field-padding">
+          <mat-select
+            matInput
+            autocomplete="false"
+            formControlName="turma"
+            required
+            placeholder="Turma"
+          >
+            <mat-option *ngFor="let turma of turmas$ | async" value="turma.id">
+              {{ turma?.sigla }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="formGroup01.controls['turma'].hasError('required')">
+            Turma é <strong>obrigatorio</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <div class="spaced">
+          <button
+            color="primary"
+            class="large"
+            mat-raised-button
+            matStepperNext
+          >
+            <mat-icon>arrow_downward</mat-icon>
+            Avançar
+          </button>
+        </div>
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step [stepControl]="formGroup02">
+    <form [formGroup]="formGroup02">
+      <div class="field">
+        <ng-template matStepLabel>
+          Nome do estudante & Diciplina
+        </ng-template>
+        <mat-form-field class="field field-padding">
+          <mat-select
+            matInput
+            autocomplete="false"
+            formControlName="estudante"
+            required
+            placeholder="Estudante"
+          >
+            <mat-option
+              *ngFor="let estudante of estudante$ | async"
+              [value]="estudante.id"
+            >
+              {{ estudante.numeroProcesso }} | {{ estudante?.nome }}
+              {{ estudante?.sobreNome }}
+            </mat-option>
+          </mat-select>
+          <mat-error
+            *ngIf="formGroup02.controls['estudante'].hasError('required')"
+          >
+            Estudante é <strong>obrigatorio</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="field field-padding">
+          <mat-select
+            matInput
+            autocomplete="false"
+            formControlName="diciplina"
+            required
+            placeholder="Diciplina"
+          >
+            <mat-option
+              *ngFor="let diciplina of diciplinas$ | async"
+              value="diciplina.id"
+            >
+              {{ diciplina?.nome }}
+            </mat-option>
+          </mat-select>
+          <mat-error
+            *ngIf="formGroup02.controls['diciplina'].hasError('required')"
+          >
+            Diciplina é <strong>obrigatorio</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <div class="spaced">
+          <button
+            color="primary"
+            class="large"
+            mat-raised-button
+            matStepperNext
+          >
+            <mat-icon>arrow_downward</mat-icon>
+            Avançar
+          </button>
+        </div>
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step [stepControl]="formGroup03">
+    <form [formGroup]="formGroup03">
+      <div class="field">
+        <ng-template matStepLabel>
+          Iº trimestre
+        </ng-template>
+
+        <mat-form-field class="field-min-2 field-padding">
+          <input
+            matInput
+            type="number"
+            formControlName="p1"
+            placeholder="Primeira prova"
+          />
+        </mat-form-field>
+
+        <mat-form-field class="field-min-1 field-padding">
+          <input
+            matInput
+            type="number"
+            formControlName="p2"
+            placeholder="Segunda prova"
+          />
+        </mat-form-field>
+
+        <mat-form-field class="field-min-1 field-padding">
+          <input
+            matInput
+            formControlName="media"
+            placeholder="Média do Iº trimestre"
+          />
+        </mat-form-field>
+
+        <div class="spaced">
+          <button mat-raised-button class="large" matStepperPrevious>
+            <mat-icon>arrow_upward</mat-icon>
+            Anterior
+          </button>
+          <button
+            color="primary"
+            class="large"
+            mat-raised-button
+            matStepperNext
+          >
+            <mat-icon>arrow_downward</mat-icon>
+            Avancar
+          </button>
+        </div>
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step [stepControl]="formGroup04">
+    <form [formGroup]="formGroup04">
+      <div class="field">
+        <ng-template matStepLabel>
+          IIº trimestre
+        </ng-template>
+
+        <mat-form-field class="field-min-2 field-padding">
+          <input
+            matInput
+            type="number"
+            formControlName="p1"
+            placeholder="Primeira prova"
+          />
+        </mat-form-field>
+
+        <mat-form-field class="field-min-1 field-padding">
+          <input
+            matInput
+            type="number"
+            formControlName="p2"
+            placeholder="Segunda prova"
+          />
+        </mat-form-field>
+
+        <mat-form-field class="field-min-1 field-padding">
+          <input
+            matInput
+            formControlName="media"
+            placeholder="Média do IIº trimestre"
+          />
+        </mat-form-field>
+
+        <div class="spaced">
+          <button mat-raised-button matStepperPrevious class="large">
+            <mat-icon>arrow_upward</mat-icon>
+            Anterior
+          </button>
+          <button
+            color="primary"
+            mat-raised-button
+            matStepperNext
+            class="large"
+          >
+            <mat-icon>arrow_downward</mat-icon>
+            Avancar
+          </button>
+        </div>
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step [stepControl]="formGroup05">
+    <form [formGroup]="formGroup05">
+      <div class="field">
+        <ng-template matStepLabel>
+          IIIº trimestre
+        </ng-template>
+
+        <mat-form-field class="field-min-2 field-padding">
+          <input
+            matInput
+            type="number"
+            formControlName="p1"
+            placeholder="Primeira prova"
+          />
+        </mat-form-field>
+
+        <mat-form-field class="field-min-1 field-padding">
+          <input
+            matInput
+            type="number"
+            formControlName="p2"
+            placeholder="Segunda prova"
+          />
+        </mat-form-field>
+
+        <mat-form-field class="field-min-1 field-padding">
+          <input
+            matInput
+            formControlName="media"
+            placeholder="Média do Iº trimestre"
+          />
+        </mat-form-field>
+
+        <div class="spaced">
+          <button mat-raised-button matStepperPrevious class="large">
+            <mat-icon>arrow_upward</mat-icon>
+            Anterior
+          </button>
+          <button
+            color="primary"
+            mat-raised-button
+            matStepperNext
+            class="large"
+          >
+            <mat-icon>arrow_downward</mat-icon>
+            Avancar
+          </button>
+        </div>
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel
+      >Concluir com processo de
+      {{ !estudante.id ? "cadastro" : "alteração" }} de estudante
+    </ng-template>
+    <div class="spaced">
+      <button mat-stroked-button matStepperPrevious class="large">
+        <mat-icon>arrow_upward</mat-icon>
+        Anterior
+      </button>
+      <button
+        class="mat-elevation-z8 btn1"
+        *ngIf="!estudante.id"
+        color="primary"
+        mat-raised-button
+        class="large"
+        (click)="onSaveButton(stepper)"
+      >
+        <mat-icon>save</mat-icon>
+        Salvar
+      </button>
+      <button
+        color="primary"
+        class="large"
+        mat-raised-button
+        (click)="onSaveButtonAndList(stepper)"
+      >
+        <mat-icon>save</mat-icon>
+        {{ !estudante.id ? "Salvar e listar" : "Salvar" }}
+      </button>
+    </div>
+  </mat-step>
+</mat-vertical-stepper>
+<ng-template #loading>
+  <mat-progress-bar mode="indeterminate" color="warn"></mat-progress-bar>
+</ng-template>
+
+<ul class="squares"></ul>
