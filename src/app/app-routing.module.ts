@@ -98,6 +98,12 @@ const routes: Routes = [
     loadChildren: () => import('src/app/turmas/modules/turma.module').then(m => m.TurmaModule)
   },
   {
+    path: 'diciplinas',
+    canActivate: [AuthGuard],
+    canLoad: [AuthGuard],
+    loadChildren: () => import('src/app/diciplinas/modules/disiplina.module').then(m => m.DiciplinaModule)
+  },
+  {
     path: 'especialidades',
     canActivate: [AuthGuard],
     canLoad: [AuthGuard],
