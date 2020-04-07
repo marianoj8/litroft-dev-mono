@@ -45,6 +45,6 @@ export class InstitutoNivelComponent implements OnInit {
   }
 
   public openSearchCOmponent(): void {
-    this.router.navigate(['search/all'], {relativeTo: this.activatedRoute})
+    this.router.navigate(['search/all'], {relativeTo: this.activatedRoute});
   }
 }

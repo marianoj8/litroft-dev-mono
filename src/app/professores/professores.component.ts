@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CustomFilter } from '../shared/model/support/custom-filter';
 import { Subject, Observable, Subscription, of } from 'rxjs';
 import { ProfessorService } from './modules/professor.service';
@@ -10,7 +10,7 @@ import { Location } from '@angular/common';
   templateUrl: './professores.component.html',
   styleUrls: ['./professores.component.css']
 })
-export class ProfessoresComponent implements OnInit {
+export class ProfessoresComponent implements OnInit, OnDestroy {
   state = false;
   public onChangeContext = false;
   filtro: CustomFilter = new CustomFilter();

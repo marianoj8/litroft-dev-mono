@@ -25,13 +25,13 @@ export class InstitutoDetalheComponent implements OnInit {
 
   ngOnInit() {
     this.institutoService.onChangeContext.emit(true);
-    this.institutoService.emitShowSearchBar.emit(false)
+    this.institutoService.emitShowSearchBar.emit(false);
     this.institutoService.getById(this.activedRoute.snapshot.params.id)
       .subscribe(onValue => {
-        this.instituto = onValue
+        this.instituto = onValue;
         this.institutoService.onChangeContextTitle.emit(this.instituto.nome);
 
-        if(onValue.nome.split(' ').length === 1){
+        if (onValue.nome.split(' ').length === 1) {
           this.instituto.nome = `Escola do ${onValue.nivel.descricao} ${onValue.nome}`;
         }
 

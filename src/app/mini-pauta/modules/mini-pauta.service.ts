@@ -20,7 +20,7 @@ export class MiniPautaService {
   emitOnEditButtonCliked = new EventEmitter<number>();
   emitOnDeleteButtonCliked = new EventEmitter<number>();
 
-  public getMiniPauta(institutoId: Number): Observable<MiniPauta[]> {
+  public getMiniPauta(institutoId: number): Observable<MiniPauta[]> {
     return this.http.get<MiniPauta[]>(`${this.url}/pauta/${institutoId}`)
       .pipe(
         take(1)

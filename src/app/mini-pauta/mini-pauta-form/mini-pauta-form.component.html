@@ -20,7 +20,7 @@
           >
             <mat-option
               *ngFor="let periodo of periodos$ | async"
-              value="periodo.id"
+              [value]="periodo.id"
             >
               {{ periodo?.descricao }}
             </mat-option>
@@ -42,7 +42,7 @@
           >
             <mat-option
               *ngFor="let classe of classes$ | async"
-              value="classe.id"
+              [value]="classe.id"
             >
               {{ classe?.descricao }}
             </mat-option>
@@ -62,7 +62,10 @@
             required
             placeholder="Turma"
           >
-            <mat-option *ngFor="let turma of turmas$ | async" value="turma.id">
+            <mat-option
+              *ngFor="let turma of turmas$ | async"
+              [value]="turma.id"
+            >
               {{ turma?.sigla }}
             </mat-option>
           </mat-select>
@@ -125,7 +128,7 @@
           >
             <mat-option
               *ngFor="let diciplina of diciplinas$ | async"
-              value="diciplina.id"
+              [value]="diciplina.id"
             >
               {{ diciplina?.nome }}
             </mat-option>

@@ -14,12 +14,12 @@ const routes: Routes = [
         component: MiniPautaListComponent
       },
       {
-        path:'add',
-        component:MiniPautaFormComponent
+        path: 'add',
+        component: MiniPautaFormComponent
       },
       {
-        path:'edit/:id',
-        component:MiniPautaFormComponent
+        path: 'edit/:id',
+        component: MiniPautaFormComponent
       }
     ]
   }

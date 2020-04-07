@@ -1,3 +1,5 @@
+import { MiniPautaService } from './../modules/mini-pauta.service';
+import { MiniPauta } from 'src/app/shared/model/miniPauta';
 import { Periodo } from './../../shared/model/periodo';
 import { log } from 'util';
 import { Component, OnInit } from '@angular/core';
@@ -54,6 +56,7 @@ export class MiniPautaFormComponent implements OnInit {
 
   matcher = new MyErrorStateMatch();
   showAndHideView: EventEmitter = new EventEmitter();
+  miniPauta: MiniPauta = new MiniPauta();
   estudante: Estudante = new Estudante();
   estudante$: Observable<Estudante[]>;
   private curso: Curso = new Curso();
@@ -63,22 +66,23 @@ export class MiniPautaFormComponent implements OnInit {
   filter = new CustomFilter();
   private id = 0;
 
-  private valor1: number = 0;
-  private valor2: number = 0;
+  private valor1 = 0;
+  private valor2 = 0;
   private valorMedia1: number;
 
-  private valor3: number = 0;
-  private valor4: number = 0;
+  private valor3 = 0;
+  private valor4 = 0;
   private valorMedia2: number;
 
-  private valor5: number = 0;
-  private valor6: number = 0;
+  private valor5 = 0;
+  private valor6  = 0;
   private valorMedia3: number;
 
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
+    private miniPautaService: MiniPautaService,
     private estudanteService: EstudanteService,
     private cursoSerice: CursoService,
     private periodoService: PeriodoService,
@@ -128,6 +132,7 @@ export class MiniPautaFormComponent implements OnInit {
       this.formGroup02.controls.estudante.valueChanges
         .subscribe((onValue) => this.estudanteService.getById(onValue)
           .subscribe((onNewValue: Estudante) => {
+            this.estudante = onNewValue;
             this.filter.institutoId = onNewValue.adminInterno.instituto.id;
             this.filter.nome = '';
             this.diciplinas$ = this.diciplinaService.list(this.filter);
@@ -154,7 +159,7 @@ export class MiniPautaFormComponent implements OnInit {
         this.valor1 = onValue;
         this.formGroup03.patchValue({
           media: this.mediaCalc1()
-        })
+        });
       });
 
     this.formGroup03.controls.p2.valueChanges
@@ -162,7 +167,7 @@ export class MiniPautaFormComponent implements OnInit {
         this.valor2 = onValue;
         this.formGroup03.patchValue({
           media: this.mediaCalc1()
-        })
+        });
       });
 
     this.formGroup04.controls.p1.valueChanges
@@ -170,7 +175,7 @@ export class MiniPautaFormComponent implements OnInit {
         this.valor3 = onValue;
         this.formGroup04.patchValue({
           media: this.mediaCalc2()
-        })
+        });
       });
 
     this.formGroup04.controls.p2.valueChanges
@@ -178,7 +183,7 @@ export class MiniPautaFormComponent implements OnInit {
         this.valor4 = onValue;
         this.formGroup04.patchValue({
           media: this.mediaCalc2()
-        })
+        });
       });
 
     this.formGroup05.controls.p1.valueChanges
@@ -186,7 +191,7 @@ export class MiniPautaFormComponent implements OnInit {
         this.valor5 = onValue;
         this.formGroup05.patchValue({
           media: this.mediaCalc3()
-        })
+        });
       });
 
     this.formGroup05.controls.p2.valueChanges
@@ -194,7 +199,7 @@ export class MiniPautaFormComponent implements OnInit {
         this.valor6 = onValue;
         this.formGroup05.patchValue({
           media: this.mediaCalc3()
-        })
+        });
       });
 
     // this.formGroup05.controls.curso.valueChanges
@@ -302,26 +307,31 @@ export class MiniPautaFormComponent implements OnInit {
 
   private save(stepper: MatVerticalStepper, state): void {
 
-    this.estudante.nome = this.formGroup01.controls.nome.value;
-    this.estudante.sobreNome = this.formGroup01.controls.sobrenome.value;
-    this.estudante.sexo = this.formGroup02.controls.sexo.value;
-    this.estudante.dataNascimento = this.resolveDateFormat();
-    this.estudante.bi = this.formGroup02.controls.bi.value;
-    this.estudante.fone = this.formGroup03.controls.fone.value;
-    this.estudante.email = this.formGroup03.controls.email.value;
-    this.estudante.endereco = this.formGroup04.controls.endereco.value;
-    this.estudante.numeroProcesso = this.formGroup05.controls.numeroProcesso.value;
+    this.miniPauta.periodo.id = this.formGroup01.controls.periodo.value;
+    this.miniPauta.classe.id = this.formGroup01.controls.classe.value;
+    this.miniPauta.turma.id = this.formGroup01.controls.turma.value;
 
-    this.curso.id = this.formGroup05.controls.curso.value as number;
-    this.turma.id = this.formGroup05.controls.turma.value as number;
-    this.provincia.id = this.formGroup04.controls.provincia.value as number;
-    this.municipio.id = this.formGroup04.controls.municipio.value as number;
-    this.estudante.curso = this.curso;
-    this.estudante.turma = this.turma;
-    this.estudante.provincia = this.provincia;
-    this.estudante.municipio = this.municipio;
+    this.miniPauta.estudante.id = this.estudante.id;
+    this.miniPauta.diciplina.id = this.formGroup02.controls.diciplina.value;
 
-    this.estudanteService.save(this.estudante)
+    this.miniPauta.p1 = this.formGroup03.controls.p1.value;
+    this.miniPauta.p2 = this.formGroup03.controls.p2.value;
+    this.miniPauta.m1 = this.formGroup03.controls.media.value;
+
+    this.miniPauta.p1 = this.formGroup03.controls.p1.value;
+    this.miniPauta.p2 = this.formGroup03.controls.p2.value;
+    this.miniPauta.m2 = this.formGroup03.controls.media.value;
+
+    this.miniPauta.p1 = this.formGroup03.controls.p1.value;
+    this.miniPauta.p2 = this.formGroup03.controls.p2.value;
+    this.miniPauta.m3 = this.formGroup03.controls.media.value;
+
+    this.miniPauta.instituto.id = this.estudante.adminInterno.instituto.id;
+    if (this.estudante.curso) {
+      this.miniPauta.curso.id = this.estudante.curso.id;
+    }
+
+    this.miniPautaService.save(this.miniPauta)
       .pipe(catchError((err: HttpErrorResponse) => {
         if (err.status === 403) {
           this.dialogService.open(ForbiddenErrorDialogComponent);
@@ -330,7 +340,7 @@ export class MiniPautaFormComponent implements OnInit {
         this.showFailerMessage(err);
       }))
       .subscribe(
-        (data: Estudante) => {
+        (data: MiniPauta) => {
           if (data != null) {
             if (!!state) {
               if (this.router.url.match('/edit')) {
