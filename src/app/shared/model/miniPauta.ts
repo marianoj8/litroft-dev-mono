@@ -1,3 +1,4 @@
+import { Periodo } from 'src/app/shared/model/periodo';
 import { Instituto } from './instituto';
 import { Professor } from './professor';
 import { CustomAbstractEntity } from 'src/app/shared/model/customEntity';
@@ -15,6 +16,7 @@ export class MiniPauta implements CustomAbstractEntity {
   totalModified: number;
   estudante: Estudante;
   curso: Curso;
+  periodo: Periodo;
   turma: Turma;
   classe: Classe;
   diciplina: Diciplina;
