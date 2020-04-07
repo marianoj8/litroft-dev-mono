@@ -26,4 +26,13 @@ export class MiniPautaService {
         take(1)
       );
   }
+
+  public save(miniPauta: MiniPauta): Observable<MiniPauta> {
+    if (miniPauta.id) {
+      return this.http.put<MiniPauta>(`${this.url}/miniPauta`, miniPauta)
+        .pipe(take(1));
+    }
+    return this.http.post<MiniPauta>(`${this.url}/miniPauta`, miniPauta)
+      .pipe(take(1));
+  }
 }
