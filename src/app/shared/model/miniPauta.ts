@@ -20,18 +20,18 @@ export class MiniPauta implements CustomAbstractEntity {
   turma: Turma;
   classe: Classe;
   diciplina: Diciplina;
-  anoLetivo: Number;
+  anoLetivo: number;
   professor: Professor;
   instituto: Instituto;
-  p1: Number;
-  p2: Number;
-  m1: Number;
-  p3: Number;
-  p4: Number;
-  m2: Number;
-  p5: Number;
-  p6: Number;
-  m3: Number;
+  p1: number;
+  p2: number;
+  m1: number;
+  p3: number;
+  p4: number;
+  m2: number;
+  p5: number;
+  p6: number;
+  m3: number;
 
 
   constructor(id?: number) {
