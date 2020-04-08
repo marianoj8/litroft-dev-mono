@@ -12,6 +12,7 @@ import { ProfessorService } from '../modules/professor.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Professor } from 'src/app/shared/model/professor';
 import { MatDailogTypeParam } from 'src/app/shared/model/support/mat-dialog-type-param';
+import { ForbiddenErrorDialogComponent } from 'src/app/shared/forbidden-error-dialog/forbidden-error-dialog.component';
 
 @Component({
   selector: 'app-professor-list',
@@ -85,6 +86,12 @@ export class ProfessorListComponent implements OnInit, OnDestroy {
     this.sub = this.service.filterBySexoAndEspecialidade(data)
       .pipe(
         catchError(err => {
+
+          if (err.status === 403) {
+            this.dialogService.open(ForbiddenErrorDialogComponent);
+            return of(null);
+          }
+
           this.dialogService.open(ErrorLoadingComponent);
           this.error$.next(true);
           return of(null);
