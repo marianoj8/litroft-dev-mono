@@ -33,6 +33,7 @@ import { ClasseService } from 'src/app/classe/modules/classe.service';
 import { Classe } from 'src/app/shared/model/classe';
 import { Diciplina } from 'src/app/shared/model/diciplina';
 import { DiciplinaService } from 'src/app/diciplinas/modules/diciplina.service';
+import { Instituto } from 'src/app/shared/model/instituto';
 
 @Component({
   selector: 'app-mini-pauta-form',
@@ -40,6 +41,7 @@ import { DiciplinaService } from 'src/app/diciplinas/modules/diciplina.service';
   styleUrls: ['./mini-pauta-form.component.css']
 })
 export class MiniPautaFormComponent implements OnInit {
+
   formGroup01: FormGroup;
   formGroup02: FormGroup;
   formGroup03: FormGroup;
@@ -56,7 +58,7 @@ export class MiniPautaFormComponent implements OnInit {
 
   matcher = new MyErrorStateMatch();
   showAndHideView: EventEmitter = new EventEmitter();
-  miniPauta: MiniPauta = new MiniPauta();
+  private miniPauta: MiniPauta;
   estudante: Estudante = new Estudante();
   estudante$: Observable<Estudante[]>;
   private curso: Curso = new Curso();
@@ -75,7 +77,7 @@ export class MiniPautaFormComponent implements OnInit {
   private valorMedia2: number;
 
   private valor5 = 0;
-  private valor6  = 0;
+  private valor6 = 0;
   private valorMedia3: number;
 
   constructor(
@@ -103,6 +105,7 @@ export class MiniPautaFormComponent implements OnInit {
     this.periodos$ = this.periodoService.list();
     this.classes$ = this.classeService.list();
     this.turmas$ = this.turmaService.list();
+    this.miniPauta = new MiniPauta();
 
 
     if (false) {
@@ -307,12 +310,12 @@ export class MiniPautaFormComponent implements OnInit {
 
   private save(stepper: MatVerticalStepper, state): void {
 
-    this.miniPauta.periodo.id = this.formGroup01.controls.periodo.value;
-    this.miniPauta.classe.id = this.formGroup01.controls.classe.value;
-    this.miniPauta.turma.id = this.formGroup01.controls.turma.value;
+    this.miniPauta.periodo = new Periodo(this.formGroup01.controls.periodo.value);
+    this.miniPauta.classe = new Classe(this.formGroup01.controls.classe.value);
+    this.miniPauta.turma = new Turma(this.formGroup01.controls.turma.value);
 
-    this.miniPauta.estudante.id = this.estudante.id;
-    this.miniPauta.diciplina.id = this.formGroup02.controls.diciplina.value;
+    this.miniPauta.estudante = new Estudante(this.estudante.id);
+    this.miniPauta.diciplina = new Diciplina(this.formGroup02.controls.diciplina.value);
 
     this.miniPauta.p1 = this.formGroup03.controls.p1.value;
     this.miniPauta.p2 = this.formGroup03.controls.p2.value;
@@ -326,9 +329,11 @@ export class MiniPautaFormComponent implements OnInit {
     this.miniPauta.p2 = this.formGroup03.controls.p2.value;
     this.miniPauta.m3 = this.formGroup03.controls.media.value;
 
-    this.miniPauta.instituto.id = this.estudante.adminInterno.instituto.id;
+    console.log(this.miniPauta);
+
+    this.miniPauta.instituto = new Instituto(this.estudante.adminInterno.instituto.id);
     if (this.estudante.curso) {
-      this.miniPauta.curso.id = this.estudante.curso.id;
+      this.miniPauta.curso = this.estudante.curso;
     }
 
     this.miniPautaService.save(this.miniPauta)
