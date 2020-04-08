@@ -1,4 +1,5 @@
-export class Periodo {
+import { CustomAbstractEntity } from './customEntity';
+export class Periodo implements CustomAbstractEntity {
 
   id: number;
   createdAt: string;
