@@ -39,7 +39,7 @@ export class ProfessorService {
   filterBySexoAndEspecialidade(q: CustomFilter): Observable<Professor[]> {
     q = this.filterResolve(q);
     return this.http
-      .get<Professor[]>(`${this.url}/interno/professor/l?sexo=${q.sexo}&especialidade=${q.descricao}`);
+      .get<Professor[]>(`${this.url}/interno/professor/l?sexo=${q.sexo}`);
   }
 
   save(t: Professor): Observable<Professor> {
@@ -57,6 +57,7 @@ export class ProfessorService {
   filterResolve(filterParam: CustomFilter): CustomFilter {
     filterParam.sexo = filterParam.sexo === undefined ? '' : filterParam.sexo;
     filterParam.descricao = filterParam.descricao === undefined ? '' : filterParam.descricao;
+    filterParam.institutoId = filterParam.institutoId === undefined ? 1 : filterParam.institutoId;
     return filterParam;
   }
 
