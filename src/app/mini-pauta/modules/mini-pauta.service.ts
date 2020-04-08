@@ -21,7 +21,7 @@ export class MiniPautaService {
   emitOnDeleteButtonCliked = new EventEmitter<number>();
 
   public getMiniPauta(institutoId: number): Observable<MiniPauta[]> {
-    return this.http.get<MiniPauta[]>(`${this.url}/pauta/${institutoId}`)
+    return this.http.get<MiniPauta[]>(`${this.url}/interno/miniPauta/${institutoId}`)
       .pipe(
         take(1)
       );
@@ -29,10 +29,10 @@ export class MiniPautaService {
 
   public save(miniPauta: MiniPauta): Observable<MiniPauta> {
     if (miniPauta.id) {
-      return this.http.put<MiniPauta>(`${this.url}/miniPauta`, miniPauta)
+      return this.http.put<MiniPauta>(`${this.url}/interno/miniPauta`, miniPauta)
         .pipe(take(1));
     }
-    return this.http.post<MiniPauta>(`${this.url}/miniPauta`, miniPauta)
+    return this.http.post<MiniPauta>(`${this.url}/interno/miniPauta`, miniPauta)
       .pipe(take(1));
   }
 }
