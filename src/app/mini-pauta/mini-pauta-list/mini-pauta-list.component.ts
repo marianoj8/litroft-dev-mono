@@ -85,12 +85,12 @@ export class MiniPautaListComponent implements OnInit, OnDestroy {
   }
 
   onFilterFromServer(data: CustomFilter) {
-    this.sub = this.service.getMiniPauta(1).subscribe(
+    this.sub = this.service.getMiniPauta(2).subscribe(
       next => this.miniPautasList = next);
   }
 
   onRefrash(data?: CustomFilter) {
-    this.sub = this.service.getMiniPauta(1)
+    this.sub = this.service.getMiniPauta(2)
       .pipe(
         catchError((err: HttpErrorResponse) => {
 
