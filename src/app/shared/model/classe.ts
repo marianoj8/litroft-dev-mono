@@ -10,4 +10,8 @@ export class Classe implements CustomAbstractEntity {
   nivel: string;
   ensinoNivel: EnsinoNivel;
   adminEntity: Admin;
+
+  constructor(id?: number) {
+    this.id = id ? id : null;
+  }
 }
