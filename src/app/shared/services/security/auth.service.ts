@@ -18,6 +18,7 @@ import { ForbiddenErrorDialogComponent } from '../../forbidden-error-dialog/forb
 })
 export class AuthService {
   public user: UsernameAndPassword;
+  private gloabalAcessType: string;
 
   constructor(
     private htp: HttpClient,
@@ -50,6 +51,13 @@ export class AuthService {
       localStorage.setItem('entity', data.user.entity);
       localStorage.setItem('nivel', data.user.nivel);
       localStorage.setItem('entityLogoUri', data.user.entityLogoUri);
+
+      this.gloabalAcessType = localStorage.getItem('acessType');
+
+      if (this.gloabalAcessType !== 'Admin') {
+        localStorage.setItem('entityId', `${data.user.entityId}`);
+      }
+
       this.doLogIn(data.user.entity);
     }
   }
@@ -84,6 +92,7 @@ export class AuthService {
 
   public doLogOut() {
     localStorage.removeItem('username');
+    localStorage.removeItem('entityId');
     localStorage.removeItem('entity');
     localStorage.removeItem('entityLogoUri');
     localStorage.removeItem('nome');
@@ -92,7 +101,7 @@ export class AuthService {
     localStorage.removeItem('acessType');
     localStorage.removeItem('token');
     localStorage.removeItem('expirationTime');
-
+    // localStorage.clear();
     this.router.navigate(['/public']);
   }
 

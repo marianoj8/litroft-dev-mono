@@ -8,14 +8,13 @@
     <ng-container matColumnDef="nome">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Nome</th>
       <td mat-cell *matCellDef="let pauta">
-        {{ pauta?.descricao }}
-      </td>
+        {{ pauta?.estudante.nome +' '+ pauta?.estudante.sobreNome}}
     </ng-container>
 
- <ng-container matColumnDef="disciplina">
+ <ng-container matColumnDef="diciplina">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Dsiciplina</th>
       <td mat-cell *matCellDef="let pauta">
-        {{ pauta?.disciplina.nome }}
+        {{ pauta?.diciplina.nome }}
       </td>
     </ng-container>
 
@@ -157,7 +156,7 @@
       *ngFor="let item of miniPautasList"
     >
       <mat-icon matListIcon class="mat-18">beenhere</mat-icon>
-      <h5 matLine>{{ item?.descricao }}</h5>
+      <h5 matLine>{{ item?.estudante.nome }}</h5>
       <mat-divider></mat-divider>
     </a>
   </mat-nav-list>

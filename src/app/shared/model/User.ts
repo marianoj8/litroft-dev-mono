@@ -6,6 +6,7 @@ export class User {
   fone: string;
   email: string;
   endereco: string;
+  entityId: string;
   entity: string;
   nivel: string;
   entityLogoUri: string;

@@ -85,7 +85,7 @@ export class ProfessorFormComponent implements OnInit {
           this.institutoId = data.institutoId;
         });
 
-      this.professorService.getById(this.id, this.institutoId)
+      this.professorService.getById(this.id)
         .subscribe(data => {
           this.professor = data;
 

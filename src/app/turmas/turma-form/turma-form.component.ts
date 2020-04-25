@@ -1,7 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
 import { MatVerticalStepper } from '@angular/material/stepper';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EventEmitter } from 'events';
@@ -16,6 +15,8 @@ import { MyErrorStateMatch } from 'src/app/shared/validators/field-validator';
 
 import { TurmaService } from '../modules/turma.service';
 import { CursoService } from './../../cursos/modules/curso.service';
+import { MatDialog } from '@angular/material';
+import { ForbiddenErrorDialogComponent } from 'src/app/shared/forbidden-error-dialog/forbidden-error-dialog.component';
 
 @Component({
   selector: 'app-turma-form',
@@ -26,6 +27,7 @@ export class TurmaFormComponent implements OnInit {
   formGroup01: FormGroup;
   cursos$: Observable<Curso[]>;
   cursoError$ = new Subject<boolean>();
+  error$ = new Subject<boolean>();
   matcher = new MyErrorStateMatch();
   showAndHideView: EventEmitter = new EventEmitter();
   turma: Turma = new Turma();
@@ -40,7 +42,7 @@ export class TurmaFormComponent implements OnInit {
     private turmaService: TurmaService,
     private cursoService: CursoService,
     private notificationService: NotificationService,
-    private dialog: MatDialog,
+    private dialogService: MatDialog,
     private monografiaService: MonografiaService) {
     this.monografiaService.emitShowAddButton.emit(true);
   }
@@ -52,7 +54,7 @@ export class TurmaFormComponent implements OnInit {
 
     this.cursos$ = this.cursoService.list()
       .pipe(catchError(err => {
-        this.dialog.open(ErrorLoadingComponent);
+        this.dialogService.open(ErrorLoadingComponent);
         this.cursoError$.next(true);
         return of([]);
       }));
@@ -111,27 +113,40 @@ export class TurmaFormComponent implements OnInit {
     }
 
     this.turmaService.save(this.turma)
+      .pipe(
+        catchError((err: HttpErrorResponse) => {
+
+          if (err.status === 403) {
+            this.dialogService.open(ForbiddenErrorDialogComponent);
+            return of(null);
+          }
+
+          this.dialogService.open(ErrorLoadingComponent);
+          this.error$.next(true);
+          return of(null);
+        })
+      )
       .subscribe(
         (data: Turma) => {
-          if (!!state) {
-            if (this.router.url.match('/edit')) {
-              this.showUpdatedMessage();
+          if (data !== null) {
+            if (!!state) {
+              if (this.router.url.match('/edit')) {
+                this.showUpdatedMessage();
+              } else {
+                this.showSavedMessage();
+                this.router.navigate(['turmas/add']);
+              }
+              this.router.navigate(['/turmas']);
             } else {
-              this.showSavedMessage();
-              this.router.navigate(['turmas/add']);
+              if (this.router.url.match('/edit')) {
+                this.showUpdatedMessage();
+              } else {
+                this.showSavedMessage();
+              }
+              stepper.reset();
             }
-            this.router.navigate(['/turmas']);
-          } else {
-            if (this.router.url.match('/edit')) {
-              this.showUpdatedMessage();
-            } else {
-              this.showSavedMessage();
-            }
-            stepper.reset();
           }
-        },
-        (err: HttpErrorResponse) => this.showFailerMessage(err)
-      );
+        });
 
   }
 

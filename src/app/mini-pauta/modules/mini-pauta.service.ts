@@ -8,7 +8,6 @@ import { take } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class MiniPautaService {
-  constructor(public http: HttpClient) { }
 
   url = environment.API;
   findValueParam = new EventEmitter<string>();
@@ -19,9 +18,15 @@ export class MiniPautaService {
   emitOnDetalheButtonCliked = new EventEmitter<number>();
   emitOnEditButtonCliked = new EventEmitter<number>();
   emitOnDeleteButtonCliked = new EventEmitter<number>();
+  private entityId = localStorage.getItem('entityId');
 
-  public getMiniPauta(institutoId: number): Observable<MiniPauta[]> {
-    return this.http.get<MiniPauta[]>(`${this.url}/interno/miniPauta/${institutoId}`)
+  constructor(public http: HttpClient) {
+    this.entityId = localStorage.getItem('entityId');
+  }
+
+  public getMiniPautaByProfessor(diciplina: string): Observable<MiniPauta[]> {
+    this.entityId = localStorage.getItem('entityId');
+    return this.http.get<MiniPauta[]>(`${this.url}/interno/miniPauta?institutoId=${this.entityId}&diciplinaNome=${diciplina}`)
       .pipe(
         take(1)
       );

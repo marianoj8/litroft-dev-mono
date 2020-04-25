@@ -18,28 +18,33 @@ export class ProfessorService {
   emitOnDetalheButtonCliked = new EventEmitter<number>();
   emitOnEditButtonCliked = new EventEmitter<number>();
   emitOnDeleteButtonCliked = new EventEmitter<number>();
+  private entityId: string;
 
   ProfessorTable: MatTableDataSource<Professor[]>;
   constructor(private http: HttpClient) { }
 
-  getById(id: number, institutoId: number): Observable<Professor> {
-    return this.http.get<Professor>(`${this.url}/interno/professor/${id}?institutoId=${institutoId}`);
+  getById(id: number): Observable<Professor> {
+    this.entityId = localStorage.getItem('entityId');
+    return this.http.get<Professor>(`${this.url}/interno/professor/${id}?institutoId=${this.entityId}`);
   }
 
   list(): Observable<Professor[]> {
-    return this.http.get<Professor[]>(`${this.url}/interno/professor/l`);
+    this.entityId = localStorage.getItem('entityId');
+    return this.http.get<Professor[]>(`${this.url}/interno/professor/l?institutoId=${this.entityId}`);
   }
 
   filterByNomeSexoEspecialidade(q: CustomFilter): Observable<Professor[]> {
+    this.entityId = localStorage.getItem('entityId');
     q = this.filterResolve(q);
     return this.http
-      .get<Professor[]>(`${this.url}/interno/professor/l?nome=${q.nome}&sexo=${q.sexo}`);
+      .get<Professor[]>(`${this.url}/interno/professor/l?nome=${q.nome}&sexo=${q.sexo}&institutoId=${this.entityId}`);
   }
 
   filterBySexoAndEspecialidade(q: CustomFilter): Observable<Professor[]> {
+    this.entityId = localStorage.getItem('entityId');
     q = this.filterResolve(q);
     return this.http
-      .get<Professor[]>(`${this.url}/interno/professor/l?sexo=${q.sexo}`);
+      .get<Professor[]>(`${this.url}/interno/professor/l?sexo=${q.sexo}&institutoId=${this.entityId}`);
   }
 
   save(t: Professor): Observable<Professor> {

@@ -21,74 +21,88 @@ export class EstudanteService {
   emitOnDetalheButtonCliked = new EventEmitter<number>();
   emitOnEditButtonCliked = new EventEmitter<number>();
   emitOnDeleteButtonCliked = new EventEmitter<number>();
+  private entityId;
 
   estudanteTable: MatTableDataSource<Estudante[]>;
   constructor(private http: HttpClient) {
+    this.entityId = localStorage.getItem('entityId');
   }
 
   getById(id: number): Observable<Estudante> {
-    return this.http.get<Estudante>(`${this.url}/interno/estudante/${id}`);
+    this.entityId = localStorage.getItem('entityId');
+    return this.http.get<Estudante>(`${this.url}/interno/estudante/${id}?institutoId=${this.entityId}`);
   }
 
   list(): Observable<Estudante[]> {
-    return this.http.get<Estudante[]>(`${this.url}/interno/estudante/l`);
+    this.entityId = localStorage.getItem('entityId');
+    return this.http.get<Estudante[]>(`${this.url}/interno/estudante/l?institutoId=${this.entityId}`);
   }
 
   filterByNomeSexoCurso(query: CustomFilter): Observable<Estudante[]> {
+    this.entityId = localStorage.getItem('entityId');
     query = this.filterResolve(query);
     return this.http
-      .get<Estudante[]>(`${this.url}/interno/estudante/l?nome=${query.nome}&curso=${query.curso}&sexo=${query.sexo}&turma=${query.turma}`);
+      .get<Estudante[]>(`${this.url}/interno/estudante/l?nome=${query.nome}&curso=${query.curso}&sexo=${query.sexo}&turma=${query.turma}&institutoId=${this.entityId}`);
   }
 
   filterByNomeSexoTurma(query: CustomFilter): Observable<Estudante[]> {
+    this.entityId = localStorage.getItem('entityId');
     query = this.filterResolve(query);
     return this.http
-      .get<Estudante[]>(`${this.url}/interno/estudante?nome=${query.nome}&sexo=${query.sexo}&turma=${query.turma}`);
+      .get<Estudante[]>(`${this.url}/interno/estudante?nome=${query.nome}&sexo=${query.sexo}&turma=${query.turma}&institutoId=${this.entityId}`);
   }
-   filterByNomeSexoCursoPendente(query: CustomFilter): Observable<Estudante[]> {
+  filterByNomeSexoCursoPendente(query: CustomFilter): Observable<Estudante[]> {
+    this.entityId = localStorage.getItem('entityId');
     query = this.filterResolve(query);
     return this.http
-      .get<Estudante[]>(`${this.url}/interno/estudante/pendente?nome=${query.nome}&curso=${query.curso}&sexo=${query.sexo}`);
+      .get<Estudante[]>(`${this.url}/interno/estudante/pendente?nome=${query.nome}&curso=${query.curso}&sexo=${query.sexo}&institutoId=${this.entityId}`);
   }
 
   filterByNomeSexoPendenteNivel(query: CustomFilter): Observable<Estudante[]> {
+    this.entityId = localStorage.getItem('entityId');
     query = this.filterResolve(query);
     return this.http
-      .get<Estudante[]>(`${this.url}/interno/estudante/pendente/nivelId?nome=${query.nome}&nivelId=${query.nivelId}&sexo=${query.sexo}`);
+      .get<Estudante[]>(`${this.url}/interno/estudante/pendente/nivelId?nome=${query.nome}&nivelId=${query.nivelId}&sexo=${query.sexo}&institutoId=${this.entityId}`);
   }
 
   filterBySexoAndCurso(curso: string, sexo: string): Observable<Estudante[]> {
+    this.entityId = localStorage.getItem('entityId');
     return this.http
-      .get<Estudante[]>(`${this.url}/interno/estudante/l?curso=${!!curso ? curso : ''}&sexo=${!!sexo ? sexo : ''}`);
+      .get<Estudante[]>(`${this.url}/interno/estudante/l?curso=${!!curso ? curso : ''}&sexo=${!!sexo ? sexo : ''}&institutoId=${this.entityId}`);
   }
 
   filterByAllAtributsEntrada(query: CustomFilter): Observable<Estudante[]> {
+    this.entityId = localStorage.getItem('entityId');
     query = this.filterResolve(query);
     return this.http
-      .get<Estudante[]>(`${this.url}/interno/estudante/l/entrada?curso=${query.curso}&turma=${query.turma}&sexo=${query.sexo}&entrada=${query.entrada}`);
+      .get<Estudante[]>(`${this.url}/interno/estudante/l/entrada?curso=${query.curso}&turma=${query.turma}&sexo=${query.sexo}&entrada=${query.entrada}&institutoId=${this.entityId}`);
   }
 
   filterByAllAtributsFinalista(query: CustomFilter): Observable<Estudante[]> {
+    this.entityId = localStorage.getItem('entityId');
     query = this.filterResolve(query);
     return this.http
-      .get<Estudante[]>(`${this.url}/interno/estudante/l/finalista?curso=${query.curso}&turma=${query.turma}&sexo=${query.sexo}&finalista=${query.finalista}`);
+      .get<Estudante[]>(`${this.url}/interno/estudante/l/finalista?curso=${query.curso}&turma=${query.turma}&sexo=${query.sexo}&finalista=${query.finalista}&institutoId=${this.entityId}`);
   }
 
   filterByNotGrupo(query: CustomFilter): Observable<Estudante[]> {
+    this.entityId = localStorage.getItem('entityId');
     query = this.filterResolve(query);
     return this.http
-      .get<Estudante[]>(`${this.url}/interno/estudante/l/notgrup?nome=${query.nome}&curso=${query.curso}&turma=${query.turma}&sexo=${query.sexo}`);
+      .get<Estudante[]>(`${this.url}/interno/estudante/l/notgrup?nome=${query.nome}&curso=${query.curso}&turma=${query.turma}&sexo=${query.sexo}&institutoId=${this.entityId}`);
   }
 
   filterBySexoAndCursoAndPosition(curso: string, sexo: string, p: string): Observable<Estudante[]> {
+    this.entityId = localStorage.getItem('entityId');
     return this.http
-      .get<Estudante[]>(`${this.url}/interno/estudante/l?curso=${!!curso ? curso : ''}&sexo=${!!sexo ? sexo : ''}&posicao=${!!p ? p : ''}`);
+      .get<Estudante[]>(`${this.url}/interno/estudante/l?curso=${!!curso ? curso : ''}&sexo=${!!sexo ? sexo : ''}&posicao=${!!p ? p : ''}&institutoId=${this.entityId}`);
   }
 
   filterBySexoAndCursoAngGroup(q: CustomFilter): Observable<Estudante[]> {
+    this.entityId = localStorage.getItem('entityId');
     q = this.filterResolve(q);
     return this.http
-      .get<Estudante[]>(`${this.url}/interno/estudante/l/g?curso=${q.curso}&sexo=${q.sexo}&isGroup=${q.isGroup}`);
+      .get<Estudante[]>(`${this.url}/interno/estudante/l/g?curso=${q.curso}&sexo=${q.sexo}&isGroup=${q.isGroup}&institutoId=${this.entityId}`);
   }
 
   save(t: Estudante): Observable<Estudante> {

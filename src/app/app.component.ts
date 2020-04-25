@@ -327,6 +327,7 @@ export class AppComponent implements OnInit, AfterContentChecked, OnDestroy {
       this.selectedInstLogo = `${environment.API}/mono/downloadLogo/${localStorage.getItem('entityLogoUri')}`;
       this.showOrHideMenu = true;
       this.showOrHideMenuByNivel = localStorage.getItem('nivel');
+      localStorage.setItem('entityId', localStorage.getItem('entityId'));
     } else {
       this.showOrHideMenu = false;
     }

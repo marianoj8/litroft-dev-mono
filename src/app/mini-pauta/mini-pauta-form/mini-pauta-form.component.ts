@@ -321,15 +321,13 @@ export class MiniPautaFormComponent implements OnInit {
     this.miniPauta.p2 = this.formGroup03.controls.p2.value;
     this.miniPauta.m1 = this.formGroup03.controls.media.value;
 
-    this.miniPauta.p1 = this.formGroup03.controls.p1.value;
-    this.miniPauta.p2 = this.formGroup03.controls.p2.value;
-    this.miniPauta.m2 = this.formGroup03.controls.media.value;
+    this.miniPauta.p1 = this.formGroup04.controls.p1.value;
+    this.miniPauta.p2 = this.formGroup04.controls.p2.value;
+    this.miniPauta.m2 = this.formGroup04.controls.media.value;
 
-    this.miniPauta.p1 = this.formGroup03.controls.p1.value;
-    this.miniPauta.p2 = this.formGroup03.controls.p2.value;
-    this.miniPauta.m3 = this.formGroup03.controls.media.value;
-
-    console.log(this.miniPauta);
+    this.miniPauta.p1 = this.formGroup05.controls.p1.value;
+    this.miniPauta.p2 = this.formGroup05.controls.p2.value;
+    this.miniPauta.m3 = this.formGroup05.controls.media.value;
 
     this.miniPauta.instituto = new Instituto(this.estudante.adminInterno.instituto.id);
     if (this.estudante.curso) {
