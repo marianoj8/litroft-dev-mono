@@ -4,7 +4,6 @@ import { Grupo } from 'src/app/shared/model/grupo';
 
 import { PublicService } from '../modules/public.service';
 import { MonografiaService } from './../../monografias/modules/monografia.service';
-import { Instituto } from 'src/app/shared/model/instituto';
 import { CustomFilter } from '../../shared/model/support/custom-filter';
 import { GrupoService } from 'src/app/grupos/modules/grupo.service';
 
@@ -36,25 +35,25 @@ export class ListAllComponent implements OnInit {
     this.grupos = [];
     this.fetchAllMonografiaByGrups('');
 
-    this.publicService.emitSelectedSchool.subscribe((resp: Instituto) => {
+    // this.publicService.emitSelectedSchool.subscribe((resp: Instituto) => {
 
-      if (resp.id !== null) {
+    //   if (resp.id !== null) {
 
-        this.publicService.listByInstitutoId(resp.id)
-          .subscribe((values) => {
-            this.grupos = [];
-            values.forEach((v: Grupo) => {
-              if (v.monografiaID !== null) {
-                this.grupos.push(v);
-              }
-            });
-          });
+    //     this.publicService.listByInstitutoId(resp.id)
+    //       .subscribe((values) => {
+    //         this.grupos = [];
+    //         values.forEach((v: Grupo) => {
+    //           if (v.monografiaID !== null) {
+    //             this.grupos.push(v);
+    //           }
+    //         });
+    //       });
 
-      } else {
-        this.fetchAllMonografiaByGrups('');
-      }
+    //   } else {
+    //     this.fetchAllMonografiaByGrups('');
+    //   }
 
-    });
+    // });
 
     this.publicService.inFilterMonografias
       .subscribe((value: CustomFilter) => {

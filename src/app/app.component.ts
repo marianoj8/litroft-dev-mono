@@ -12,23 +12,16 @@ import { EspecialidadeService } from './especialidades/modules/especialidade.ser
 import { EstudanteService } from './estudantes/modules/estudante.service';
 import { GrupoService } from './grupos/modules/grupo.service';
 import { HomeService } from './home/modules/home.service';
-import { InstitutoService } from './institutos/modules/instituto.service';
 import { LoginService } from './login/modules/login.service';
 import { MonografiaService } from './monografias/modules/monografia.service';
 import { OrientadorService } from './orientadores/modules/OrientadorService.service';
 import { ProjetoService } from './projetos/modules/projeto.service';
 import { PublicService } from './public/modules/public.service';
-import { Instituto } from './shared/model/instituto';
 import { AuthService } from './shared/services/security/auth.service';
 import { TurmaService } from './turmas/modules/turma.service';
 import { AdminService } from './admin/modules/admin.service';
 import { environment } from 'src/environments/environment';
-import { LocalService } from './locals/modules/local.service';
-import { AreaFormacaoService } from './area-formacao/modules/area-formacao.service';
-import { AdminInternoService } from './admin-interno/modules/adminInterno.service';
 import { CustomFilter } from './shared/model/support/custom-filter';
-import { ProvinciaService } from './provincia/modules/provincia.service';
-import { MunicipioService } from './municipio/modules/municipio.service';
 
 @Component({
   selector: 'app-root',
@@ -48,7 +41,7 @@ export class AppComponent implements OnInit, AfterContentChecked, OnDestroy {
   formGroup01: FormGroup;
   enableReadMode: boolean;
   years = [];
-  public institutos: Instituto[];
+  // public institutos: Instituto[];
   btnMonografiaText = 'Monografias Internas';
   private sub: Subscription;
   customFilter = new CustomFilter();
@@ -78,32 +71,24 @@ export class AppComponent implements OnInit, AfterContentChecked, OnDestroy {
     private loginService: LoginService,
     private cursoService: CursoService,
     private departamentoService: DepartamentoService,
-    private adminInternoService: AdminInternoService,
     private especialidadeService: EspecialidadeService,
     private monografiaService: MonografiaService,
     private estudanteService: EstudanteService,
     private orientadorService: OrientadorService,
     private turmaService: TurmaService,
     private grupoService: GrupoService,
-    private municipioService: MunicipioService,
-    private provinciaService: ProvinciaService,
-    private areaFormacaoService: AreaFormacaoService,
     private projetoService: ProjetoService,
-    private localService: LocalService,
     private publicService: PublicService,
-    public institutoService: InstitutoService,
     private formBuilder: FormBuilder,
   ) {
   }
 
   ngOnInit(): void {
 
-    this.institutos = [];
     for (let i = 2008; i <= new Date().getFullYear(); i++) {
       this.years.push(i);
     }
 
-    this.institutoService.list().subscribe(resp => this.institutos = resp);
 
     this.monografiaService.emitShowAddButton
       .subscribe(resp => this.emitShowAddButton = resp);
@@ -139,13 +124,13 @@ export class AppComponent implements OnInit, AfterContentChecked, OnDestroy {
         this.onChangeContext = true;
       }
     );
-    this.sub = this.adminInternoService.onChangeContextTitle.subscribe(
-      value => {
-        this.contextMenu = value;
-        this.showDateSelect = false;
-        this.onChangeContext = true;
-      }
-    );
+    // this.sub = this.adminInternoService.onChangeContextTitle.subscribe(
+    //   value => {
+    //     this.contextMenu = value;
+    //     this.showDateSelect = false;
+    //     this.onChangeContext = true;
+    //   }
+    // );
     this.sub = this.orientadorService.onChangeContextTitle.subscribe(
       value => {
         this.contextMenu = value;
@@ -189,21 +174,21 @@ export class AppComponent implements OnInit, AfterContentChecked, OnDestroy {
       }
     );
 
-    this.sub = this.municipioService.onChangeContextTitle.subscribe(
-      value => {
-        this.contextMenu = value;
-        this.showDateSelect = false;
-        this.onChangeContext = true;
-      }
-    );
+    // this.sub = this.municipioService.onChangeContextTitle.subscribe(
+    //   value => {
+    //     this.contextMenu = value;
+    //     this.showDateSelect = false;
+    //     this.onChangeContext = true;
+    //   }
+    // );
 
-    this.sub = this.provinciaService.onChangeContextTitle.subscribe(
-      value => {
-        this.contextMenu = value;
-        this.showDateSelect = false;
-        this.onChangeContext = true;
-      }
-    );
+    // this.sub = this.provinciaService.onChangeContextTitle.subscribe(
+    //   value => {
+    //     this.contextMenu = value;
+    //     this.showDateSelect = false;
+    //     this.onChangeContext = true;
+    //   }
+    // );
 
     this.sub = this.especialidadeService.onChangeContextTitle.subscribe(
       value => {
@@ -213,21 +198,21 @@ export class AppComponent implements OnInit, AfterContentChecked, OnDestroy {
       }
     );
 
-    this.sub = this.localService.onChangeContextTitle.subscribe(
-      value => {
-        this.contextMenu = value;
-        this.showDateSelect = false;
-        this.onChangeContext = true;
-      }
-    );
+    // this.sub = this.localService.onChangeContextTitle.subscribe(
+    //   value => {
+    //     this.contextMenu = value;
+    //     this.showDateSelect = false;
+    //     this.onChangeContext = true;
+    //   }
+    // );
 
-    this.sub = this.areaFormacaoService.onChangeContextTitle.subscribe(
-      value => {
-        this.contextMenu = value;
-        this.showDateSelect = false;
-        this.onChangeContext = true;
-      }
-    );
+    // this.sub = this.areaFormacaoService.onChangeContextTitle.subscribe(
+    //   value => {
+    //     this.contextMenu = value;
+    //     this.showDateSelect = false;
+    //     this.onChangeContext = true;
+    //   }
+    // );
 
     this.sub = this.publicService.onChangeContextTitle.subscribe(
       value => {
@@ -237,13 +222,13 @@ export class AppComponent implements OnInit, AfterContentChecked, OnDestroy {
       }
     );
 
-    this.sub = this.institutoService.onChangeContextTitle.subscribe(
-      value => {
-        this.contextMenu = value;
-        this.showDateSelect = false;
-        this.onChangeContext = true;
-      }
-    );
+    // this.sub = this.institutoService.onChangeContextTitle.subscribe(
+    //   value => {
+    //     this.contextMenu = value;
+    //     this.showDateSelect = false;
+    //     this.onChangeContext = true;
+    //   }
+    // );
 
     this.sub = this.publicService.enableReadMode.subscribe(
       value => {
@@ -266,11 +251,11 @@ export class AppComponent implements OnInit, AfterContentChecked, OnDestroy {
         () => this.homeService.onDataChanged.emit(this.formGroup01.controls.ano.value)
       );
 
-    this.publicService.emitSelectedSchool.subscribe((resp: Instituto) => {
+    // this.publicService.emitSelectedSchool.subscribe((resp: Instituto) => {
 
-      this.contextMenu = (resp.id !== null) ? `Monografias do departamento de ${resp.nome}` : 'Todas as monografias';
+    //   this.contextMenu = (resp.id !== null) ? `Monografias do departamento de ${resp.nome}` : 'Todas as monografias';
 
-    });
+    // });
   }
 
   switchBetweenPages() {
@@ -283,11 +268,11 @@ export class AppComponent implements OnInit, AfterContentChecked, OnDestroy {
     }
   }
 
-  findInstituto() {
-    this.institutoService.listFiltered(this.customFilter).subscribe(
-      (resp) => this.institutos = resp
-    );
-  }
+  // findInstituto() {
+  //   this.institutoService.listFiltered(this.customFilter).subscribe(
+  //     (resp) => this.institutos = resp
+  //   );
+  // }
 
   logOut(drawer: MatDrawer) {
     if (drawer) {
@@ -297,14 +282,14 @@ export class AppComponent implements OnInit, AfterContentChecked, OnDestroy {
     this.authService.doLogOut();
   }
 
-  schoolClicked(instituto: Instituto) {
-    this.router.navigate(['/public']);
-    this.publicService.emitSelectedSchool.emit(instituto);
-  }
+  // schoolClicked(instituto: Instituto) {
+  //   this.router.navigate(['/public']);
+  //   this.publicService.emitSelectedSchool.emit(instituto);
+  // }
 
   clearSelectedSchool() {
     this.router.navigate(['/public']);
-    this.publicService.emitSelectedSchool.emit(new Instituto());
+    // this.publicService.emitSelectedSchool.emit(new Instituto());
   }
 
   ngAfterContentChecked(): void {

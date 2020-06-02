@@ -1,4 +1,4 @@
-import { AdminInterno } from './adminInterno';
+// import { AdminInterno } from './adminInterno';
 import { Curso } from './curso';
 import { CustomAbstractEntity } from './customEntity';
 import { Estudante } from './estudante';
@@ -22,8 +22,7 @@ export class Elemento implements CustomAbstractEntity {
     orientador?: Orientador,
     grupo?: Grupo,
     curso?: Curso,
-    posicao?: string,
-    adminInterno?: AdminInterno) {
+    posicao?: string) {
 
     this.id = id ? id : null;
     this.estudante = estudante ? estudante : null;
@@ -31,6 +30,6 @@ export class Elemento implements CustomAbstractEntity {
     this.grupo = grupo ? grupo : null;
     this.curso = curso ? curso : null;
     this.posicao = posicao ? posicao : null;
-    this.adminInterno = this.adminInterno ? this.adminInterno : null;
+    // this.adminInterno = this.adminInterno ? this.adminInterno : null;
   }
 }

@@ -6,7 +6,6 @@ import { Grupo } from 'src/app/shared/model/grupo';
 import { environment } from 'src/environments/environment';
 
 import { CustomFilter } from '../../shared/model/support/custom-filter';
-import { Instituto } from './../../shared/model/instituto';
 
 @Injectable({ providedIn: 'root' })
 export class PublicService {
@@ -17,9 +16,7 @@ export class PublicService {
   onChangeContext = new EventEmitter<boolean>();
   emitMonoLink = new EventEmitter<string>();
   enableReadMode = new EventEmitter<boolean>();
-  emitInstitutoList = new EventEmitter<Instituto[]>();
   inFilterMonografias = new EventEmitter<CustomFilter>();
-  public emitSelectedSchool = new EventEmitter<Instituto>();
   constructor(
     private http: HttpClient,
   ) {
