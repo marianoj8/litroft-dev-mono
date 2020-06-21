@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EstudanteService } from '../modules/estudante.service';
 import { ActivatedRoute } from '@angular/router';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { MonografiaService } from 'src/app/monografias/modules/monografia.service';
 
 @Component({

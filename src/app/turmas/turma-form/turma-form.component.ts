@@ -15,7 +15,7 @@ import { MyErrorStateMatch } from 'src/app/shared/validators/field-validator';
 
 import { TurmaService } from '../modules/turma.service';
 import { CursoService } from './../../cursos/modules/curso.service';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { ForbiddenErrorDialogComponent } from 'src/app/shared/forbidden-error-dialog/forbidden-error-dialog.component';
 
 @Component({

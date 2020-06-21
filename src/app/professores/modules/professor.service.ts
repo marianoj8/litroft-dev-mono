@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { CustomFilter } from 'src/app/shared/model/support/custom-filter';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource } from '@angular/material/table';
 import { Professor } from 'src/app/shared/model/professor';
 
 @Injectable({ providedIn: 'root' })
