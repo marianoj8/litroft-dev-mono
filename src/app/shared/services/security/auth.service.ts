@@ -27,8 +27,7 @@ export class AuthService {
     private notificationService: NotificationService) { }
 
   public login(user: UsernameAndPassword): Observable<Token> {
-    const url = environment.API.replace('/litroft/api/v1/rm', '');
-    return this.htp.post<Token>(`${url}/login`, user)
+    return this.htp.post<Token>(`${environment.LOGIN}`, user)
       .pipe(
         take(1)
       );
