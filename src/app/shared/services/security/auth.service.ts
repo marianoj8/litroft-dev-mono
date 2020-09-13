@@ -27,7 +27,7 @@ export class AuthService {
     private notificationService: NotificationService) { }
 
   public login(user: UsernameAndPassword): Observable<Token> {
-    return this.htp.post<Token>(`${environment.LOGIN}`, user)
+    return this.htp.post<Token>('/apiv1/login', user)
       .pipe(
         take(1)
       );

@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { ChartsModule } from 'ng2-charts';
 import { MaterialModule } from 'src/app/material/material.module';
 
 import { BarchartComponent } from '../barchart/barchart.component';
@@ -20,7 +19,7 @@ import { HomeRoutingModlue } from './home-routing.module';
     CommonModule,
     MaterialModule,
     HomeRoutingModlue,
-    ChartsModule,
+    // ChartsModule,
   ]
 })
 export class HomeModule { }
