@@ -5,6 +5,7 @@ import { AuthGuard } from './shared/guard/auth.guard';
 import { CustomErrorPageComponent } from './custom-error-page/custom-error-page.component';
 import { AcessDenaidComponent } from './shared/acess-denaid/acess-denaid.component';
 import { AdminInternoGuard } from './admin-interno/guard/admin-interno.guard';
+import {LogoutGuard } from './shared/guard/logout.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'public', pathMatch: 'full' },
@@ -141,6 +142,7 @@ const routes: Routes = [
   },
   {
     path: 'login',
+    canLoad: [LogoutGuard],
     loadChildren: () => import('src/app/login/modules/login.module').then(m => m.LoginModule)
   },
   {
