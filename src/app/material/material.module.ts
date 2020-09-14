@@ -1,7 +1,6 @@
 import { LayoutModule } from '@angular/cdk/layout';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-// import * as material from '@angular/material';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -27,7 +26,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatStepperModule } from '@angular/material/stepper';
-// import {MatNativeDateModule} from '@angular/material/nativedate';
+import {MatNativeDateModule, MatRippleModule} from '@angular/material/core';
 
 @NgModule({
   imports: [
@@ -52,7 +51,7 @@ import { MatStepperModule } from '@angular/material/stepper';
     MatProgressBarModule,
     MatSnackBarModule,
     MatStepperModule,
-    // MatNativeDateModule,
+    MatNativeDateModule,
     MatPaginatorModule,
     MatSortModule,
     MatTooltipModule,
@@ -84,7 +83,7 @@ import { MatStepperModule } from '@angular/material/stepper';
     MatProgressBarModule,
     MatSnackBarModule,
     MatStepperModule,
-    // MatNativeDateModule,
+    MatNativeDateModule,
     MatPaginatorModule,
     MatSortModule,
     MatTooltipModule,
