@@ -1,20 +1,20 @@
-import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { PageEvent } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
-import { MatDailogTypeParam } from 'src/app/shared/model/support/mat-dialog-type-param';
-import { CustomFilter } from 'src/app/shared/model/support/custom-filter';
-import { Subscription, Subject, of } from 'rxjs';
-import { Turma } from 'src/app/shared/model/turma';
-import { Router, ActivatedRoute } from '@angular/router';
-import { TurmaService } from '../modules/turma.service';
-import { NotificationService } from 'src/app/shared/services/notification/notification.service';
-import { catchError } from 'rxjs/operators';
-import { ErrorLoadingComponent } from 'src/app/shared/error-loading/error-loading.component';
-import { MoreOptionsDialogComponent } from 'src/app/shared/more-options-dialog/more-options-dialog.component';
-import { DeleteDialogComponent } from 'src/app/shared/delete-dialog/delete-dialog.component';
-import { MonografiaService } from 'src/app/monografias/modules/monografia.service';
+import {Component, OnInit, ViewChild, OnDestroy} from '@angular/core';
+import {MatDialog} from '@angular/material/dialog';
+import {PageEvent} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
+import {MatTableDataSource} from '@angular/material/table';
+import {MatDailogTypeParam} from 'src/app/shared/model/support/mat-dialog-type-param';
+import {CustomFilter} from 'src/app/shared/model/support/custom-filter';
+import {Subscription, Subject, of} from 'rxjs';
+import {Turma} from 'src/app/shared/model/turma';
+import {Router, ActivatedRoute} from '@angular/router';
+import {TurmaService} from '../modules/turma.service';
+import {NotificationService} from 'src/app/shared/services/notification/notification.service';
+import {catchError} from 'rxjs/operators';
+import {ErrorLoadingComponent} from 'src/app/shared/error-loading/error-loading.component';
+import {MoreOptionsDialogComponent} from 'src/app/shared/more-options-dialog/more-options-dialog.component';
+import {DeleteDialogComponent} from 'src/app/shared/delete-dialog/delete-dialog.component';
+import {MonografiaService} from 'src/app/monografias/modules/monografia.service';
 
 @Component({
   selector: 'app-turma-list',
@@ -35,7 +35,7 @@ export class TurmaListComponent implements OnInit, OnDestroy {
 
 
 
-  @ViewChild(MatSort, { static: true }) sort: MatSort;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   displaydColumns: string[] = [];
 
@@ -48,7 +48,7 @@ export class TurmaListComponent implements OnInit, OnDestroy {
     private monografiaService: MonografiaService) {
     this.monografiaService.emitShowAddButton.emit(true);
 
-    this.nivel = localStorage.getItem('nivel') === 'Ensino do II Ciculo';
+    this.nivel = localStorage.getItem('nivel') === 'Ensino do II Ciculo' ? true : false;
 
     if (this.nivel) {
       this.displaydColumns = [
@@ -79,23 +79,23 @@ export class TurmaListComponent implements OnInit, OnDestroy {
 
     this.onRefrash(this.filtro);
 
-    this.sub = this.service.emitOnDetalheButtonCliked.subscribe(
-      (next) => this.detalhe(next)
-    );
+    this.sub = this.service.emitOnDetalheButtonCliked
+      .subscribe((next) => this.detalhe(next)
+      );
 
-    this.sub = this.service.emitOnEditButtonCliked.subscribe(
-      (next) => this.edit(next));
+    this.sub = this.service.emitOnEditButtonCliked
+      .subscribe((next) => this.edit(next));
 
-    this.sub = this.service.emitOnDeleteButtonCliked.subscribe(
-      (next) => this.openDeleteDialog(next));
+    this.sub = this.service.emitOnDeleteButtonCliked
+      .subscribe((next) => this.openDeleteDialog(next));
 
-    this.sub = this.service.findValueParamFromServer.subscribe(
-      (next: CustomFilter) => this.onFilterFromServer(next));
+    this.sub = this.service.findValueParamFromServer
+      .subscribe((next: CustomFilter) => this.onFilterFromServer(next));
   }
 
   onFilterFromServer(data: CustomFilter) {
-    this.sub = this.service.filterByNome(data).subscribe(
-      next => this.turmasList = next);
+    this.sub = this.service.filterByNome(data)
+      .subscribe(next => this.turmasList = next);
   }
 
   onRefrash(data?: CustomFilter) {
@@ -107,18 +107,17 @@ export class TurmaListComponent implements OnInit, OnDestroy {
           return of(null);
         })
       )
-      .subscribe(
-        next => {
-          const array = next.map((item: Turma) => {
-            return {
-              ...item
-            };
+      .subscribe(next => {
+        const array = next.map((item: Turma) => {
+          return {
+            ...item
+          };
 
-          });
-          this.turmas = new MatTableDataSource(array);
-          this.turmas.sort = this.sort;
-          this.turmasList = this.turmas.data;
         });
+        this.turmas = new MatTableDataSource(array);
+        this.turmas.sort = this.sort;
+        this.turmasList = this.turmas.data;
+      });
   }
 
   private showErrorMessage() {
@@ -129,14 +128,14 @@ export class TurmaListComponent implements OnInit, OnDestroy {
   }
 
   add() {
-    this.router.navigate(['add'], { relativeTo: this.activatedRoute });
+    this.router.navigate(['add'], {relativeTo: this.activatedRoute});
   }
 
   detalhe(id: number) {
-    this.router.navigate(['detalhe', id], { relativeTo: this.activatedRoute });
+    this.router.navigate(['detalhe', id], {relativeTo: this.activatedRoute});
   }
   edit(id: number) {
-    this.router.navigate(['edit', id], { relativeTo: this.activatedRoute });
+    this.router.navigate(['edit', id], {relativeTo: this.activatedRoute});
   }
 
   openMoreOptionDialog(id: number) {
@@ -168,21 +167,21 @@ export class TurmaListComponent implements OnInit, OnDestroy {
         width: '360px'
       });
 
-    dialogRef.afterClosed().subscribe((result: boolean) => {
-      if (result) {
-        this.deleteTurma(id);
-      }
+    dialogRef.afterClosed()
+      .subscribe((result: boolean) => {
+        if (result) {
+          this.deleteTurma(id);
+        }
 
-    });
+      });
   }
 
   deleteTurma(cursoId: number) {
     this.service.deleteById(cursoId)
-      .subscribe(
-        () => {
-          this.onRefrash(this.filtro);
-          this.showDeletedMessage();
-        },
+      .subscribe(() => {
+        this.onRefrash(this.filtro);
+        this.showDeletedMessage();
+      },
         err => this.showErrorMessage()
       );
   }
