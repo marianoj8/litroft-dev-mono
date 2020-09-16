@@ -41,7 +41,7 @@ export class AuthService {
   }
 
   addTokenToLocalStorage(data: Token): void {
-    if (data.accountId) {
+    // if (data.accountId) {
       localStorage.setItem('token', data.token);
       localStorage.setItem('expirationTime', data.expiration);
       localStorage.setItem('acessType', data.accessType);
@@ -49,16 +49,16 @@ export class AuthService {
       localStorage.setItem('sobrenome', data.user.sobrenome);
       localStorage.setItem('entity', data.user.entity);
       localStorage.setItem('nivel', data.user.nivel);
+      localStorage.setItem('entityId', `${data.user.entityId}`);
       localStorage.setItem('entityLogoUri', data.user.entityLogoUri);
 
-      this.gloabalAcessType = localStorage.getItem('acessType');
-
-      if (this.gloabalAcessType !== 'Admin') {
-        localStorage.setItem('entityId', `${data.user.entityId}`);
-      }
+      // if (localStorage.getItem('acessType') !== 'Admin') {
+      // }else{
+      //   localStorage.setItem('entityId', `${data.user.entityId}`);
+      // }
 
       this.doLogIn(data.user.entity);
-    }
+    // }
   }
 
   private doLogIn(to: string) {
