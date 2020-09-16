@@ -1,15 +1,16 @@
-import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute, Router } from '@angular/router';
-import { of, Subject } from 'rxjs';
-import { catchError } from 'rxjs/operators';
-import { Token } from 'src/app/shared/model/support/token';
-import { AuthService } from 'src/app/shared/services/security/auth.service';
+import {log} from 'util';
+import {HttpErrorResponse} from '@angular/common/http';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {MatDialog} from '@angular/material/dialog';
+import {ActivatedRoute, Router} from '@angular/router';
+import {of, Subject} from 'rxjs';
+import {catchError} from 'rxjs/operators';
+import {Token} from 'src/app/shared/model/support/token';
+import {AuthService} from 'src/app/shared/services/security/auth.service';
 
-import { UsernameAndPassword } from './../../shared/model/support/username-password';
-import { NotificationService } from 'src/app/shared/services/notification/notification.service';
+import {UsernameAndPassword} from './../../shared/model/support/username-password';
+import {NotificationService} from 'src/app/shared/services/notification/notification.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -31,7 +32,7 @@ export class SignInComponent implements OnInit {
     private authService: AuthService,
     private dialogService: MatDialog,
     private notificationService: NotificationService
-  ) { }
+  ) {}
 
   ngOnInit() {
 
@@ -61,9 +62,8 @@ export class SignInComponent implements OnInit {
           return of([]);
         })
       )
-      .subscribe(
-        (data: Token) => this.authService.addTokenToLocalStorage(data),
-      );
+      .subscribe((data: Token) => this.authService.addTokenToLocalStorage(data),
+    );
   }
 
 
