@@ -10,6 +10,24 @@ mat-toolbar {
   width: 300px;
 }
 
+.profile-container {
+  margin-top: 10px;
+  margin-bottom: 0px;
+}
+
+.mat-toolbar-row,
+.mat-toolbar-single-row {
+  white-space: normal;
+}
+
+.sidenav mat-toolbar mat-toolbar-row p {
+  color: rgba(0, 0, 0, 0.7);
+  text-align: center;
+  font-weight: 200;
+  width: 100%;
+  font-size: medium;
+}
+
 .sidenav .mat-toolbar {
   background: inherit;
 }
