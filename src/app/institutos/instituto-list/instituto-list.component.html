@@ -34,14 +34,18 @@
         <mat-icon>arrow_back</mat-icon>
       </a>
     </div>
-    <mat-divider style="margin-top: 20px;"> </mat-divider>
-    <mat-toolbar>
-      <h2
-        style="text-align: center; width: 90%; font-size: medium; font-weight: 500;"
-      >
-        {{ selectedInst }}
-      </h2>
-    </mat-toolbar>
+    <div class="profile-container">
+      <mat-toolbar>
+        <mat-toolbar-row>
+
+          <p>
+            <!-- <mat-divider style="padding-top: 15px;"></mat-divider> -->
+            {{ selectedInst }}
+          </p>
+
+        </mat-toolbar-row>
+      </mat-toolbar>
+    </div>
     <mat-divider> </mat-divider>
 
     <mat-nav-list>
@@ -92,10 +96,10 @@
 
         <ng-container matColumnDef="areaformacao">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>
-            Nome da escola
+            Area de formação
           </th>
           <td mat-cell *matCellDef="let instituto">
-            {{ instituto?.nome }}
+            {{ instituto?.areaFormacao.descricao }}
           </td>
         </ng-container>
 
