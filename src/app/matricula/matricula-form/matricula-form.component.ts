@@ -1,37 +1,37 @@
-import { ClasseService } from './../../classe/modules/classe.service';
-import { Classe } from './../../shared/model/classe';
-import { Component, OnInit } from '@angular/core';
-import { Location } from '@angular/common';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Observable, Subject, of } from 'rxjs';
-import { Curso } from 'src/app/shared/model/curso';
-import { Instituto } from 'src/app/shared/model/instituto';
-import { Turma } from 'src/app/shared/model/turma';
-import { MyErrorStateMatch } from 'src/app/shared/validators/field-validator';
-import { Estudante } from 'src/app/shared/model/estudante';
-import { Provincia } from 'src/app/shared/model/provincia';
-import { Municipio } from 'src/app/shared/model/municipio';
-import { CustomFilter } from 'src/app/shared/model/support/custom-filter';
-import { Router, ActivatedRoute } from '@angular/router';
-import { EstudanteService } from 'src/app/estudantes/modules/estudante.service';
-import { InscricaoService } from 'src/app/inscricao/modules/inscricao.service';
-import { CursoService } from 'src/app/cursos/modules/curso.service';
-import { InstitutoService } from 'src/app/institutos/modules/instituto.service';
-import { TurmaService } from 'src/app/turmas/modules/turma.service';
-import { MunicipioService } from 'src/app/municipio/modules/municipio.service';
-import { ProvinciaService } from 'src/app/provincia/modules/provincia.service';
-import { NotificationService } from 'src/app/shared/services/notification/notification.service';
-import { MatDialog } from '@angular/material/dialog';
-import { MatVerticalStepper } from '@angular/material/stepper';
-import { MonografiaService } from 'src/app/monografias/modules/monografia.service';
-import { catchError } from 'rxjs/operators';
-import { ErrorLoadingComponent } from 'src/app/shared/error-loading/error-loading.component';
-import { HttpErrorResponse } from '@angular/common/http';
-import { LoadingUploadComponent } from 'src/app/shared/loading-upload/loading-upload.component';
-import { EventEmitter } from 'events';
-import { MatriculaService } from '../modules/matricula.service';
-import { Periodo } from 'src/app/shared/model/periodo';
-import { PeriodoService } from 'src/app/periodos/modules/periodos.service';
+import {ClasseService} from './../../classe/modules/classe.service';
+import {Classe} from './../../shared/model/classe';
+import {Component, OnInit} from '@angular/core';
+import {Location} from '@angular/common';
+import {FormGroup, FormBuilder, Validators} from '@angular/forms';
+import {Observable, Subject, of} from 'rxjs';
+import {Curso} from 'src/app/shared/model/curso';
+import {Instituto} from 'src/app/shared/model/instituto';
+import {Turma} from 'src/app/shared/model/turma';
+import {MyErrorStateMatch} from 'src/app/shared/validators/field-validator';
+import {Estudante} from 'src/app/shared/model/estudante';
+import {Provincia} from 'src/app/shared/model/provincia';
+import {Municipio} from 'src/app/shared/model/municipio';
+import {CustomFilter} from 'src/app/shared/model/support/custom-filter';
+import {Router, ActivatedRoute} from '@angular/router';
+import {EstudanteService} from 'src/app/estudantes/modules/estudante.service';
+import {InscricaoService} from 'src/app/inscricao/modules/inscricao.service';
+import {CursoService} from 'src/app/cursos/modules/curso.service';
+import {InstitutoService} from 'src/app/institutos/modules/instituto.service';
+import {TurmaService} from 'src/app/turmas/modules/turma.service';
+import {MunicipioService} from 'src/app/municipio/modules/municipio.service';
+import {ProvinciaService} from 'src/app/provincia/modules/provincia.service';
+import {NotificationService} from 'src/app/shared/services/notification/notification.service';
+import {MatDialog} from '@angular/material/dialog';
+import {MatVerticalStepper} from '@angular/material/stepper';
+import {MonografiaService} from 'src/app/monografias/modules/monografia.service';
+import {catchError} from 'rxjs/operators';
+import {ErrorLoadingComponent} from 'src/app/shared/error-loading/error-loading.component';
+import {HttpErrorResponse} from '@angular/common/http';
+import {LoadingUploadComponent} from 'src/app/shared/loading-upload/loading-upload.component';
+import {EventEmitter} from 'events';
+import {MatriculaService} from '../modules/matricula.service';
+import {Periodo} from 'src/app/shared/model/periodo';
+import {PeriodoService} from 'src/app/periodos/modules/periodos.service';
 
 @Component({
   selector: 'app-matricula-form',
@@ -126,19 +126,20 @@ export class MatriculaFormComponent implements OnInit {
         .subscribe(onValue => {
           switch (onValue) {
             case 'Cédula':
-              this.placeHolserP2C4 = 'Processo numero';
+              this.placeHolserP2C4 = 'Numero do Processo';
               this.isPassport = false;
               break;
             case 'Acento de Nascimento':
-              this.placeHolserP2C4 = 'Acento numero';
+              this.placeHolserP2C4 = 'Numero do Acento';
               this.isPassport = false;
               break;
             case 'Bilhete de Identidade':
-              this.placeHolserP2C4 = 'B.I numero';
+              this.placeHolserP2C4 = 'Numro do B.I';
               this.isPassport = false;
+              console.log(this.placeHolserP2C4);
               break;
             case 'Passaporte':
-              this.placeHolserP2C4 = 'Passaporte numero';
+              this.placeHolserP2C4 = 'Numero do Passaporte';
               this.isPassport = true;
               break;
           }
@@ -192,6 +193,51 @@ export class MatriculaFormComponent implements OnInit {
       this.nivelEnsino = 1;
       this.filter.nivel = 'Ensino do I Ciclo';
       this.initICicleForms();
+
+      this.formGroup02.controls.optinDoc.valueChanges
+        .subscribe(onValue => {
+          switch (onValue) {
+            case 'Cédula':
+              this.placeHolserP2C4 = 'Numero do Processo';
+              this.isPassport = false;
+              break;
+            case 'Acento de Nascimento':
+              this.placeHolserP2C4 = 'Numero do Acento';
+              this.isPassport = false;
+              break;
+            case 'Bilhete de Identidade':
+              this.placeHolserP2C4 = 'Numro do B.I';
+              this.isPassport = false;
+              console.log(this.placeHolserP2C4);
+              break;
+            case 'Passaporte':
+              this.placeHolserP2C4 = 'Numero do Passaporte';
+              this.isPassport = true;
+              break;
+          }
+        });
+
+      this.formGroup02.controls.dataNascimento.valueChanges
+        .subscribe((onValue: Date) => {
+          if (this.formGroup02.controls.dataNascimento.value) {
+            console.log(this.formGroup02.controls.dataNascimento.value);
+            this.estudanteIdade = this.currentYear - onValue.getFullYear();
+            if (this.estudanteIdade < 5) {
+              this.formGroup02.controls.dataNascimento.setErrors(Validators.nullValidator);
+              this.showFailerFiealdMessage('Estudante deve ter no minimo 5 anos.');
+            }
+
+            if (this.estudanteIdade >= 5 && this.estudanteIdade <= 8) {
+              this.showFields = false;
+            }
+
+            if (this.estudanteIdade >= 5 && this.estudanteIdade < 18) {
+              this.periodos$ = this.periodoService.listForStudant();
+              this.showFields = false;
+            }
+
+          }
+        });
     }
 
     if (this.router.routerState.snapshot.url.includes('/matriculas/from/ciculo2')) {
@@ -200,6 +246,22 @@ export class MatriculaFormComponent implements OnInit {
       this.filter.nivel = 'Ensino do II Ciclo';
       this.initIICicleForms();
       this.optionDocs = ['Bilhete de Identidade', 'Passaporte'];
+
+      this.formGroup02.controls.optinDoc.valueChanges
+        .subscribe(onValue => {
+          switch (onValue) {
+            case 'Bilhete de Identidade':
+              this.placeHolserP2C4 = 'Numro do B.I';
+              this.isPassport = false;
+              console.log(this.placeHolserP2C4);
+              break;
+            case 'Passaporte':
+              this.placeHolserP2C4 = 'Numero do Passaporte';
+              this.isPassport = true;
+              console.log(this.placeHolserP2C4);
+              break;
+          }
+        });
 
       this.formGroup06.controls.curso.valueChanges
         .subscribe((onValue: Curso) => {
@@ -224,6 +286,28 @@ export class MatriculaFormComponent implements OnInit {
               this.cursoError$.next(true);
               return of([]);
             }));
+        });
+
+      this.formGroup02.controls.dataNascimento.valueChanges
+        .subscribe((onValue: Date) => {
+          if (this.formGroup02.controls.dataNascimento.value) {
+            console.log(this.formGroup02.controls.dataNascimento.value);
+            this.estudanteIdade = this.currentYear - onValue.getFullYear();
+            if (this.estudanteIdade < 15) {
+              this.formGroup02.controls.dataNascimento.setErrors(Validators.nullValidator);
+              this.showFailerFiealdMessage('Estudante deve ter no minimo 15 anos.');
+            }
+
+            if (this.estudanteIdade >= 5 && this.estudanteIdade <= 15) {
+              this.showFields = false;
+            }
+
+            if (this.estudanteIdade >= 5 && this.estudanteIdade < 18) {
+              this.periodos$ = this.periodoService.listForStudant();
+              this.showFields = false;
+            }
+
+          }
         });
 
     }
@@ -252,37 +336,12 @@ export class MatriculaFormComponent implements OnInit {
             return of(null);
           }));
       });
-
-
-
-    this.formGroup02.controls.dataNascimento.valueChanges
-      .subscribe((onValue: Date) => {
-        if (this.formGroup02.controls.dataNascimento.value) {
-          console.log(this.formGroup02.controls.dataNascimento.value);
-          this.estudanteIdade = this.currentYear - onValue.getFullYear();
-          if (this.estudanteIdade < 5) {
-            this.formGroup02.controls.dataNascimento.setErrors(Validators.nullValidator);
-            this.showFailerFiealdMessage('Estudante deve ter no minimo 5 anos.');
-          }
-
-          if (this.estudanteIdade >= 5 && this.estudanteIdade <= 8) {
-            this.showFields = false;
-          }
-
-          if (this.estudanteIdade >= 5 && this.estudanteIdade < 18) {
-            this.periodos$ = this.periodoService.listForStudant();
-            this.showFields = false;
-          }
-
-        }
-      });
-
   }
 
   public initPrimaryForms(): void {
 
     // this.tituloP2 = 'Genero, Data de nascimento & Cédula';
-    // this.tituloP3 = 'Telefone & Email do encarregado';
+    this.tituloP3 = 'Telefone & Email do encarregado';
     // this.tituloP5 = 'Escolas do Ensino Primario';
     // this.tituloP6 = 'Escolas do Ensino Primario';
     // this.tituloP7 = 'Cédula';
@@ -335,6 +394,7 @@ export class MatriculaFormComponent implements OnInit {
   }
 
   private initICicleForms(): void {
+    this.tituloP3 = 'Telefone & Email do encarregado';
     this.formGroup01 = this.formBuilder.group({
       nome: ['', [
         Validators.required,
@@ -352,7 +412,10 @@ export class MatriculaFormComponent implements OnInit {
         Validators.required,
         Validators.minLength(10),
         Validators.maxLength(10)]],
-      bi: [null, Validators.required]
+      optinDoc: [null, Validators.required],
+      bi: [null, Validators.required],
+      pais: [null],
+      cidade: [null]
     });
 
     this.formGroup03 = this.formBuilder.group({
@@ -398,7 +461,9 @@ export class MatriculaFormComponent implements OnInit {
         Validators.minLength(10),
         Validators.maxLength(10)]],
       optinDoc: [null, Validators.required],
-      bi: [null, Validators.required]
+      bi: [null, Validators.required],
+      pais: [null],
+      cidade: [null]
     });
 
     this.formGroup03 = this.formBuilder.group({
@@ -444,8 +509,8 @@ export class MatriculaFormComponent implements OnInit {
     this.estudante.fone = this.formGroup03.controls.fone.value;
     this.estudante.email = this.formGroup03.controls.email.value;
     this.estudante.endereco = this.formGroup04.controls.endereco.value;
-    if (this.nivelEnsino === 0) { }
-    if (this.nivelEnsino === 1) { }
+    if (this.nivelEnsino === 0) {}
+    if (this.nivelEnsino === 1) {}
     if (this.nivelEnsino === 2) {
       console.log(this.nivelEnsino);
       this.estudante.numeroProcesso = this.formGroup05.controls.numeroProcesso.value;
