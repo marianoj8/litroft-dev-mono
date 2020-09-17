@@ -418,13 +418,14 @@
         </div>
       </form>
     </mat-step>
+
     <mat-step [stepControl]="formGroup02">
       <form [formGroup]="formGroup02">
         <div class="field">
           <ng-template matStepLabel>
-            {{tituloP2}}
+            Genero, Data de nascimento & identificação
           </ng-template>
-          <mat-form-field class="field-min-2 field-padding">
+          <mat-form-field class="field-min-2">
             <mat-select matInput formControlName="sexo" placeholder="Sexo">
               <mat-option checked value="M">Masculino</mat-option>
               <mat-option value="F">Femenino</mat-option>
@@ -436,22 +437,57 @@
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
             <mat-error *ngIf="
-              formGroup02.controls['dataNascimento'].hasError('minlenght') ||
-              (formGroup02.controls['dataNascimento'].hasError('maxlenght') &&
-                !formGroup02.controls['dataNascimento'].hasError('required'))
-            ">
+        formGroup02.controls['dataNascimento'].hasError('minlenght') ||
+        (formGroup02.controls['dataNascimento'].hasError('maxlenght') &&
+        !formGroup02.controls['dataNascimento'].hasError('required'))
+        ">
               Formato de data <strong>invalido</strong>
             </mat-error>
             <mat-error *ngIf="formGroup02.controls['dataNascimento'].hasError('required')">
               Data de Nascimento é <strong>obrigatorio</strong>
             </mat-error>
           </mat-form-field>
+
           <mat-form-field class="field-bi-passport field-padding">
-            <input matInput formControlName="bi" autocomplete="false" required [placeholder]="placeHolserP2C3" />
+            <mat-select matInput formControlName="optinDoc" required [placeholder]="placeHolserP2C3">
+              <ng-container
+                *ngFor="let optionDoc of optionDocs">
+                <mat-option [value]="optionDoc"> {{ optionDoc }} </mat-option>
+              </ng-container>
+            </mat-select>
+            <mat-error *ngIf="formGroup02.controls['optinDoc'].hasError('required')">
+              Documento é <strong>obrigatorio</strong>
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field *ngIf="!isPassport" class="field-max">
+            <input matInput formControlName="bi" autocomplete="false" required [placeholder]="placeHolserP2C4" />
             <mat-error *ngIf="formGroup02.controls['bi'].hasError('required')">
               Este campo é <strong>obrigatorio</strong>
             </mat-error>
           </mat-form-field>
+
+          <mat-form-field *ngIf="isPassport" class="field-min-2">
+            <input matInput formControlName="bi" autocomplete="false" required [placeholder]="placeHolserP2C4" />
+            <mat-error *ngIf="formGroup02.controls['bi'].hasError('required')">
+              Este campo é <strong>obrigatorio</strong>
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field *ngIf="isPassport" class="field-min-2 field-padding">
+            <input matInput formControlName="pais" autocomplete="false" required placeholder="País" />
+            <mat-error *ngIf="formGroup02.controls['pais'].hasError('required')">
+              Este campo é <strong>obrigatorio</strong>
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field *ngIf="isPassport" class="field-min-2 field-padding">
+            <input matInput formControlName="cidade" autocomplete="false" required placeholder="Cidade" />
+            <mat-error *ngIf="formGroup02.controls['cidade'].hasError('required')">
+              Este campo é <strong>obrigatorio</strong>
+            </mat-error>
+          </mat-form-field>
+
           <div class="spaced">
             <button mat-raised-button class="large" matStepperPrevious>
               <mat-icon>arrow_upward</mat-icon>
@@ -812,22 +848,29 @@
             </mat-error>
           </mat-form-field>
 
-          <mat-form-field class="field-max">
+            <mat-form-field *ngIf="!isPassport" class="field-max">
             <input matInput formControlName="bi" autocomplete="false" required [placeholder]="placeHolserP2C4" />
             <mat-error *ngIf="formGroup02.controls['bi'].hasError('required')">
               Este campo é <strong>obrigatorio</strong>
             </mat-error>
           </mat-form-field>
 
-          <mat-form-field *ngIf="isPassport" class="field-max">
-            <input matInput formControlName="pais" autocomplete="false" required [placeholder]="placeHolserP2C4" />
+          <mat-form-field *ngIf="isPassport" class="field-min-2">
+            <input matInput formControlName="bi" autocomplete="false" required [placeholder]="placeHolserP2C4" />
+            <mat-error *ngIf="formGroup02.controls['bi'].hasError('required')">
+              Este campo é <strong>obrigatorio</strong>
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field *ngIf="isPassport" class="field-min-2 field-padding">
+            <input matInput formControlName="pais" autocomplete="false" required placeholder="País" />
             <mat-error *ngIf="formGroup02.controls['pais'].hasError('required')">
               Este campo é <strong>obrigatorio</strong>
             </mat-error>
           </mat-form-field>
 
-          <mat-form-field *ngIf="isPassport" class="field-max">
-            <input matInput formControlName="cidade" autocomplete="false" required [placeholder]="placeHolserP2C4" />
+          <mat-form-field *ngIf="isPassport" class="field-min-2 field-padding">
+            <input matInput formControlName="cidade" autocomplete="false" required placeholder="Cidade" />
             <mat-error *ngIf="formGroup02.controls['cidade'].hasError('required')">
               Este campo é <strong>obrigatorio</strong>
             </mat-error>
