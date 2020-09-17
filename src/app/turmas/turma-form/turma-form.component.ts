@@ -1,3 +1,5 @@
+import {AdminInterno} from './../../shared/model/adminInterno';
+import {Instituto} from './../../shared/model/instituto';
 import {HttpErrorResponse} from '@angular/common/http';
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
@@ -110,7 +112,10 @@ export class TurmaFormComponent implements OnInit {
     if (this.nivel) {
       this.curso.id = this.formGroup01.controls.curso.value;
       this.turma.curso = this.curso;
-      this.curso.adminInterno.instituto.id = Number.parseInt(localStorage.getItem('entityId'), 10);
+      const adminInterno = new AdminInterno();
+      adminInterno.instituto = new Instituto(Number.parseInt(localStorage.getItem('entityId'), 10));
+      this.curso.adminInterno = adminInterno;
+      this.turma.adminInterno = adminInterno;
     }
 
     this.turmaService.save(this.turma)
