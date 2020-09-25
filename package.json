@@ -37,7 +37,7 @@
     "material-icons": "^0.3.1",
     "moment": "^2.28.0",
     "ng2-charts": "^2.4.2",
-    "ng2-pdf-viewer": "^6.3.2",
+    "ng2-pdf-viewer": "^5.3.4",
     "rxjs": "^6.6.3",
     "tslib": "^2.0.0",
     "web-animations-js": "^2.3.2",
