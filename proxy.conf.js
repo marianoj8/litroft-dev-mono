@@ -1,4 +1,3 @@
-// Removendo o CORS
 const PROXY_CONFIG = [
   {
     context: ["/apiv1"],
@@ -6,7 +5,8 @@ const PROXY_CONFIG = [
     secure: false,
     logLeval: "debug",
     pathRewrite: { "^/apiv1": "" },
-  },
+    changeOrigin: true
+  }
 ];
 
 module.exports = PROXY_CONFIG;

@@ -1144,7 +1144,7 @@
           <mat-icon>arrow_upward</mat-icon>
           Anterior
         </button>
-        <button class="mat-elevation-z8 btn1" *ngIf="!estudante.id" color="primary" mat-raised-button class="large">
+        <button class="mat-elevation-z8 btn1" *ngIf="!estudante.id" color="primary" (click)="onSaveButtonAndList(stepper)" mat-raised-button class="large">
           Concluir matrícula
           <mat-icon>send</mat-icon>
         </button>

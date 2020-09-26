@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { delay } from 'rxjs/internal/operators/delay';
+import {delay} from 'rxjs/operators';
 
 import { Monografia } from 'src/app/shared/model/monografia';
 import { CustomFilter } from 'src/app/shared/model/support/custom-filter';

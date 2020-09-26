@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import * as Chart from 'chart.js';
 import { HomeService } from '../modules/home.service';
 
 @Component({
@@ -30,6 +31,51 @@ export class PieChartComponent implements OnInit {
       'Novembro',
       'Dezembro'
     ];
+
+    const barChart = new Chart('pieChart', {
+      type: 'pie',
+      data: {
+        labels: [
+          'Janeiro', 'Fevereiro',
+          'Março', 'Abril',
+          'Maio', 'Junho',
+          'Julho', 'Agosto',
+          'Setembro', 'Outubro',
+          'Novembro', 'Dezembro'],
+          datasets: [{
+            label: '# of Votes',
+            data: [12, 19, 3, 5, 2, 3, 12, 19, 3, 5, 2, 3],
+            backgroundColor: [
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(255, 162, 235, 0.2)',
+              'rgba(255, 206, 86, 0.2)',
+              'rgba(75, 192, 192, 0.2)',
+              'rgba(153, 102, 255, 0.2)',
+              'rgba(255, 159, 64, 0.2)',
+            ],
+            borderColor: [
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(255, 162, 235, 0.2)',
+              'rgba(255, 206, 86, 0.2)',
+              'rgba(75, 192, 192, 0.2)',
+              'rgba(153, 102, 255, 0.2)',
+              'rgba(255, 159, 64, 0.2)',
+            ],
+            steppedLine: true,
+            borderCapStyle: 'round',
+            borderWidth: 2
+          }]
+      },
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        }
+      }
+    });
 
     this.homeSerice.onDataChanged.subscribe(
       (data) => this.loadDateFrom(data)

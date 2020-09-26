@@ -62,13 +62,17 @@ export class SignInComponent implements OnInit {
           return of([]);
         })
       )
-      .subscribe((data: Token) => this.authService.addTokenToLocalStorage(data),
+      .subscribe((data: Token) => {
+        if (data !== null){
+          this.authService.addTokenToLocalStorage(data);
+        }
+      }
     );
   }
 
 
   onErrorFromToken(err: HttpErrorResponse) {
-    if ((err.error.message === 'Unauthorized') && (err.status === 401)) {
+    if ((err.error.message === 'Unauthorized') || (err.status === 401)) {
       this.showErrorMessage();
     } else {
       console.log(err.status);

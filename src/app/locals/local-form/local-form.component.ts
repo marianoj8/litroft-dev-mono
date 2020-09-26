@@ -6,7 +6,6 @@ import { MatVerticalStepper } from '@angular/material/stepper';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EventEmitter } from 'events';
 import { Observable } from 'rxjs/internal/Observable';
-import { Subject } from 'rxjs/internal/Subject';
 import { LocalService } from 'src/app/locals/modules/local.service';
 import { Local } from 'src/app/shared/model/local';
 import { Provincia } from 'src/app/shared/model/provincia';
@@ -14,10 +13,10 @@ import { NotificationService } from 'src/app/shared/services/notification/notifi
 import { MyErrorStateMatch } from 'src/app/shared/validators/field-validator';
 import { ProvinciaService } from 'src/app/provincia/modules/provincia.service';
 import { catchError } from 'rxjs/operators';
-import { of } from 'rxjs/internal/observable/of';
 import { Municipio } from '../../shared/model/municipio';
 import { MunicipioService } from 'src/app/municipio/modules/municipio.service';
 import { CustomFilter } from '../../shared/model/support/custom-filter';
+import { Subject, of } from 'rxjs';
 
 @Component({
   selector: 'app-local-form',

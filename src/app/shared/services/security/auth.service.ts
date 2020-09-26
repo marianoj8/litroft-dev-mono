@@ -41,7 +41,7 @@ export class AuthService {
   }
 
   addTokenToLocalStorage(data: Token): void {
-    // if (data.accountId) {
+    if (data.accountId) {
       localStorage.setItem('token', data.token);
       localStorage.setItem('expirationTime', data.expiration);
       localStorage.setItem('acessType', data.accessType);
@@ -58,7 +58,7 @@ export class AuthService {
       // }
 
       this.doLogIn(data.user.entity);
-    // }
+    }
   }
 
   private doLogIn(to: string) {

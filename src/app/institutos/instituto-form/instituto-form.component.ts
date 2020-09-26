@@ -5,7 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatVerticalStepper } from '@angular/material/stepper';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of, Subject } from 'rxjs';
-import { catchError } from 'rxjs/internal/operators/catchError';
+import { catchError } from 'rxjs/operators';
 import { AreaFormacaoService } from 'src/app/area-formacao/modules/area-formacao.service';
 import { LocalService } from 'src/app/locals/modules/local.service';
 import { MonografiaService } from 'src/app/monografias/modules/monografia.service';

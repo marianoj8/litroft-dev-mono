@@ -491,11 +491,11 @@ export class MatriculaFormComponent implements OnInit {
     });
   }
 
-  onSaveButton(stepper: MatVerticalStepper) {
+  public onSaveButton(stepper: MatVerticalStepper): void {
     this.save(stepper, false);
   }
 
-  onSaveButtonAndList(stepper: MatVerticalStepper) {
+  public onSaveButtonAndList(stepper: MatVerticalStepper): void {
     this.save(stepper, true);
   }
 
