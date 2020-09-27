@@ -19,6 +19,7 @@ export class TurmaDetalheComponent implements OnInit {
 
   turma$: Observable<Turma>;
   // turmaError$: Subject<boolean>;
+  private entityId = Number.parseInt(localStorage.getItem('entityId'), 10);
 
   constructor(
     private service: TurmaService,
@@ -32,7 +33,7 @@ export class TurmaDetalheComponent implements OnInit {
   ngOnInit() {
     this.service.onChangeContext.emit(true);
     this.turma$ = this.service
-      .getById(this.activatedRoute.snapshot.params.id as number)
+      .getById(this.activatedRoute.snapshot.params.id as number, this.entityId)
       .pipe(catchError(err => {
         this.dialog.open(ErrorLoadingComponent);
         return of(null);
