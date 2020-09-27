@@ -1,20 +1,20 @@
-import {Component, OnInit, ViewChild, OnDestroy} from '@angular/core';
-import {MatDialog} from '@angular/material/dialog';
-import {PageEvent} from '@angular/material/paginator';
-import {MatSort} from '@angular/material/sort';
-import {MatTableDataSource} from '@angular/material/table';
-import {MatDailogTypeParam} from 'src/app/shared/model/support/mat-dialog-type-param';
-import {CustomFilter} from 'src/app/shared/model/support/custom-filter';
-import {Subscription, Subject, of} from 'rxjs';
-import {Turma} from 'src/app/shared/model/turma';
-import {Router, ActivatedRoute} from '@angular/router';
-import {TurmaService} from '../modules/turma.service';
-import {NotificationService} from 'src/app/shared/services/notification/notification.service';
-import {catchError} from 'rxjs/operators';
-import {ErrorLoadingComponent} from 'src/app/shared/error-loading/error-loading.component';
-import {MoreOptionsDialogComponent} from 'src/app/shared/more-options-dialog/more-options-dialog.component';
-import {DeleteDialogComponent} from 'src/app/shared/delete-dialog/delete-dialog.component';
-import {MonografiaService} from 'src/app/monografias/modules/monografia.service';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { PageEvent } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatDailogTypeParam } from 'src/app/shared/model/support/mat-dialog-type-param';
+import { CustomFilter } from 'src/app/shared/model/support/custom-filter';
+import { Subscription, Subject, of } from 'rxjs';
+import { Turma } from 'src/app/shared/model/turma';
+import { Router, ActivatedRoute } from '@angular/router';
+import { TurmaService } from '../modules/turma.service';
+import { NotificationService } from 'src/app/shared/services/notification/notification.service';
+import { catchError } from 'rxjs/operators';
+import { ErrorLoadingComponent } from 'src/app/shared/error-loading/error-loading.component';
+import { MoreOptionsDialogComponent } from 'src/app/shared/more-options-dialog/more-options-dialog.component';
+import { DeleteDialogComponent } from 'src/app/shared/delete-dialog/delete-dialog.component';
+import { MonografiaService } from 'src/app/monografias/modules/monografia.service';
 
 @Component({
   selector: 'app-turma-list',
@@ -32,10 +32,11 @@ export class TurmaListComponent implements OnInit, OnDestroy {
   error$ = new Subject<boolean>();
   private sub: Subscription;
   nivel: boolean;
+  private institutoId = Number.parseInt(localStorage.getItem('entityId'), 10);
 
 
 
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   displaydColumns: string[] = [];
 
@@ -94,12 +95,12 @@ export class TurmaListComponent implements OnInit, OnDestroy {
   }
 
   onFilterFromServer(data: CustomFilter) {
-    this.sub = this.service.filterByNome(data)
+    this.sub = this.service.filterByNome(data, this.institutoId)
       .subscribe(next => this.turmasList = next);
   }
 
   onRefrash(data?: CustomFilter) {
-    this.sub = this.service.filterByNome(data)
+    this.sub = this.service.filterByNome(data, this.institutoId)
       .pipe(
         catchError(err => {
           this.dialogService.open(ErrorLoadingComponent);
@@ -128,14 +129,14 @@ export class TurmaListComponent implements OnInit, OnDestroy {
   }
 
   add() {
-    this.router.navigate(['add'], {relativeTo: this.activatedRoute});
+    this.router.navigate(['add'], { relativeTo: this.activatedRoute });
   }
 
   detalhe(id: number) {
-    this.router.navigate(['detalhe', id], {relativeTo: this.activatedRoute});
+    this.router.navigate(['detalhe', id], { relativeTo: this.activatedRoute });
   }
   edit(id: number) {
-    this.router.navigate(['edit', id], {relativeTo: this.activatedRoute});
+    this.router.navigate(['edit', id], { relativeTo: this.activatedRoute });
   }
 
   openMoreOptionDialog(id: number) {
