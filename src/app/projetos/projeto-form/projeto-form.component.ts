@@ -70,9 +70,9 @@ export class ProjetoFormComponent implements OnInit {
       }));
     this.initForms();
 
-
+    const entityId = Number(localStorage.getItem('entityId'));
     this.grupoService.list().subscribe(resp => this.grupos = resp);
-    this.turmas$ = this.turmaService.list();
+    this.turmas$ = this.turmaService.list(entityId);
 
     this.formGroup01.controls.turma.valueChanges
       .subscribe(
