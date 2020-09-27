@@ -1,24 +1,24 @@
-import {AdminInterno} from './../../shared/model/adminInterno';
-import {Instituto} from './../../shared/model/instituto';
-import {HttpErrorResponse} from '@angular/common/http';
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {MatVerticalStepper} from '@angular/material/stepper';
-import {ActivatedRoute, Router} from '@angular/router';
-import {EventEmitter} from 'events';
-import {Observable, of, Subject} from 'rxjs';
-import {catchError} from 'rxjs/operators';
-import {MonografiaService} from 'src/app/monografias/modules/monografia.service';
-import {ErrorLoadingComponent} from 'src/app/shared/error-loading/error-loading.component';
-import {Curso} from 'src/app/shared/model/curso';
-import {Turma} from 'src/app/shared/model/turma';
-import {NotificationService} from 'src/app/shared/services/notification/notification.service';
-import {MyErrorStateMatch} from 'src/app/shared/validators/field-validator';
+import { AdminInterno } from './../../shared/model/adminInterno';
+import { Instituto } from './../../shared/model/instituto';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatVerticalStepper } from '@angular/material/stepper';
+import { ActivatedRoute, Router } from '@angular/router';
+import { EventEmitter } from 'events';
+import { Observable, of, Subject } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { MonografiaService } from 'src/app/monografias/modules/monografia.service';
+import { ErrorLoadingComponent } from 'src/app/shared/error-loading/error-loading.component';
+import { Curso } from 'src/app/shared/model/curso';
+import { Turma } from 'src/app/shared/model/turma';
+import { NotificationService } from 'src/app/shared/services/notification/notification.service';
+import { MyErrorStateMatch } from 'src/app/shared/validators/field-validator';
 
-import {TurmaService} from '../modules/turma.service';
-import {CursoService} from './../../cursos/modules/curso.service';
-import {MatDialog} from '@angular/material/dialog';
-import {ForbiddenErrorDialogComponent} from 'src/app/shared/forbidden-error-dialog/forbidden-error-dialog.component';
+import { TurmaService } from '../modules/turma.service';
+import { CursoService } from './../../cursos/modules/curso.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ForbiddenErrorDialogComponent } from 'src/app/shared/forbidden-error-dialog/forbidden-error-dialog.component';
 
 @Component({
   selector: 'app-turma-form',
@@ -67,7 +67,8 @@ export class TurmaFormComponent implements OnInit {
           this.id = data.id;
         });
 
-      this.turmaService.getById(this.id)
+      const entityId = Number(localStorage.getItem('entityId'));
+      this.turmaService.getById(this.id, entityId)
         .subscribe(data => {
           this.turma = data;
 
