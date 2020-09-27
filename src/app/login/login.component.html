@@ -4,6 +4,9 @@
     <mat-accordion class="headers-align mat-elevation-z8">
 
       <mat-expansion-panel
+        #firstChild
+        [expanded]="'true'"
+        (afterCollapse)="secondChild.open()"
         hideToggle
       >
         <mat-expansion-panel-header>
@@ -15,6 +18,9 @@
       </mat-expansion-panel>
 
       <mat-expansion-panel
+        #secondChild
+        [expanded]="false"
+        (afterCollapse)="firstChild.open()"
         hideToggle
       >
         <mat-expansion-panel-header>
