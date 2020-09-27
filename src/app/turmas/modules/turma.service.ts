@@ -20,40 +20,28 @@ export class TurmaService {
   emitOnDetalheButtonCliked = new EventEmitter<number>();
   emitOnEditButtonCliked = new EventEmitter<number>();
   emitOnDeleteButtonCliked = new EventEmitter<number>();
-  private entityId = localStorage.getItem('entityId');
 
   constructor(private http: HttpClient) {
-    this.entityId = localStorage.getItem('entityId');
   }
 
-  getById(id: number): Observable<Turma> {
-    this.entityId = localStorage.getItem('entityId');
-    return this.http.get<Turma>(`${this.url}/interno/turma/${id}?institutoId=${this.entityId}`);
+  getById(id: number, institutoId: number): Observable<Turma> {
+    return this.http.get<Turma>(`${this.url}/interno/turma/${id}?institutoId=${institutoId}`);
   }
 
-  list(): Observable<Turma[]> {
-    this.entityId = localStorage.getItem('entityId');
-    return this.http.get<Turma[]>(`${this.url}/interno/turma/l?institutoId=${this.entityId}`);
+  list(institutoId: number): Observable<Turma[]> {
+    return this.http.get<Turma[]>(`${this.url}/interno/turma/l?institutoId=${institutoId}`);
   }
 
-  filterByNome(filter: CustomFilter): Observable<Turma[]> {
-    this.entityId = localStorage.getItem('entityId');
-    return this.http.get<Turma[]>(`${this.url}/interno/turma/l?sigla=${!!filter.sigla ? filter.sigla : ''}&institutoId=${this.entityId}`);
+  filterByNome(filter: CustomFilter, institutoId: number): Observable<Turma[]> {
+    return this.http.get<Turma[]>(`${this.url}/interno/turma/l?sigla=${!!filter.sigla ? filter.sigla : ''}&institutoId=${institutoId}`);
   }
 
-  findByCurso(id: number): Observable<Turma[]> {
-    this.entityId = localStorage.getItem('entityId');
-    return this.http.get<Turma[]>(`${this.url}/interno/turma/l/c?curso=${!!id ? id : ''}&nome=13&institutoId=${this.entityId}`);
+  findByCursoPublic(id: number, institutoId: number): Observable<Turma[]> {
+    return this.http.get<Turma[]>(`${this.url}/turma/l/curso/instituto?curso=${!!id ? id : ''}&nome=10&institutoId=${institutoId}`);
   }
 
-  findByCursoPublic(id: number, instituto: number): Observable<Turma[]> {
-    this.entityId = localStorage.getItem('entityId');
-    return this.http.get<Turma[]>(`${this.url}/turma/l/curso/instituto?curso=${!!id ? id : ''}&nome=10&institutoId=${this.entityId}`);
-  }
-
-  findAllByCurso(id: number): Observable<Turma[]> {
-    this.entityId = localStorage.getItem('entityId');
-    return this.http.get<Turma[]>(`${this.url}/interno/turma/l/c?curso=${!!id ? id : ''}&institutoId=${this.entityId}`);
+  findAllByCurso(id: number, institutoId: number): Observable<Turma[]> {
+    return this.http.get<Turma[]>(`${this.url}/interno/turma/l/c?cursoId=${!!id ? id : ''}&institutoId=${institutoId}`);
   }
 
   save(t: Turma): Observable<Turma> {
