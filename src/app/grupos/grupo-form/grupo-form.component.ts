@@ -64,6 +64,7 @@ export class GrupoFormComponent implements OnInit {
   indexCounter = 0;
   indexElements: number[];
   private sub: Subscription;
+  private entityId = Number.parseInt(localStorage.getItem('entityId'), 10);
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
@@ -115,8 +116,7 @@ export class GrupoFormComponent implements OnInit {
 
     this.sub = this.formGroup01.controls.curso.statusChanges.subscribe(
       () => {
-
-        this.turmas$ = this.turmaService.findByCurso(this.formGroup01.controls.curso.value)
+        this.turmas$ = this.turmaService.findAllByCurso(this.formGroup01.controls.curso.value, this.entityId)
           .pipe(
             catchError(error => {
               this.turmaError$.next(error);
@@ -174,8 +174,9 @@ export class GrupoFormComponent implements OnInit {
         });
     }
 
+
     this.formGroup02.controls.turma.valueChanges
-      .subscribe(onValue => this.turmaService.getById(onValue)
+      .subscribe(onValue => this.turmaService.getById(onValue, this.entityId)
         .subscribe((newValue: Turma) => {
           this.filtro.curso = newValue.curso.nome;
           this.filtro.turma = newValue.sigla;
@@ -185,13 +186,13 @@ export class GrupoFormComponent implements OnInit {
 
   onRefrash(position?: string, curso?: number, grupo?: number) {
     this.sub = this.elementoService.listByParams(position, curso, grupo)
-    .pipe(catchError((err: HttpErrorResponse) => {
-      if (err.status === 403) {
-        this.dialogService.open(ForbiddenErrorDialogComponent);
-        return of(null);
-      }
-      this.showFailerMessage(err);
-    }))
+      .pipe(catchError((err: HttpErrorResponse) => {
+        if (err.status === 403) {
+          this.dialogService.open(ForbiddenErrorDialogComponent);
+          return of(null);
+        }
+        this.showFailerMessage(err);
+      }))
       .subscribe(
         (value: Elemento[]) => this.relist(value));
   }
