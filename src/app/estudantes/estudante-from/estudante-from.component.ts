@@ -60,6 +60,7 @@ export class EstudanteFromComponent implements OnInit {
   municipios$: Observable<Municipio[]>;
   filter = new CustomFilter();
   private id = 0;
+  private entityId = Number.parseInt(localStorage.getItem('entityId'), 10);
 
   constructor(
     private router: Router,
@@ -107,7 +108,7 @@ export class EstudanteFromComponent implements OnInit {
 
     this.formGroup05.controls.curso.valueChanges
       .subscribe((onValue) => {
-        this.turmaService.findAllByCurso(onValue)
+        this.turmaService.findAllByCurso(onValue, this.entityId)
           .subscribe(onValues => this.turmas = onValues);
       });
 
