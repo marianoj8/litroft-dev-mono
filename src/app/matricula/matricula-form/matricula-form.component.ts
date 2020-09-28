@@ -64,6 +64,7 @@ export class MatriculaFormComponent implements OnInit {
   private turma: Turma = new Turma();
   private provincia: Provincia = new Provincia();
   private municipio: Municipio = new Municipio();
+  private periodo: Periodo = new Periodo();
   provinciaError$ = new Subject<boolean>();
   provincias$: Observable<Provincia[]>;
   municipioError$ = new Subject<boolean>();
@@ -513,11 +514,13 @@ export class MatriculaFormComponent implements OnInit {
     if (this.nivelEnsino === 1) {}
     if (this.nivelEnsino === 2) {
       console.log(this.nivelEnsino);
-      this.estudante.numeroProcesso = this.formGroup05.controls.numeroProcesso.value;
-      this.curso.id = this.formGroup05.controls.curso.value as number;
-      this.turma.id = this.formGroup05.controls.turma.value as number;
+      // this.estudante.numeroProcesso = this.formGroup05.controls.numeroProcesso.value;
+      this.curso = this.formGroup06.controls.curso.value;
+      // this.turma.id = this.formGroup06.controls.turma.value as number;
+      this.periodo.id = this.formGroup06.controls.periodo.value;
       this.estudante.curso = this.curso;
       this.estudante.turma = this.turma;
+      this.estudante.periodo = this.periodo;
 
     }
     this.estudante.instituto = this.formGroup05.controls.instituto.value;
@@ -525,8 +528,9 @@ export class MatriculaFormComponent implements OnInit {
     this.municipio.id = this.formGroup04.controls.municipio.value as number;
     this.estudante.provincia = this.provincia;
     this.estudante.municipio = this.municipio;
-    this.estudante.periodo = this.formGroup05.controls.periodo.value;
-    this.classe = this.formGroup05.controls.classe.value;
+    // this.estudante.periodo = this.formGroup05.controls.periodo.value;
+    this.classe = this.formGroup06.controls.classe.value;
+    console.log(this.classe);
     this.estudante.classe = this.classe;
     this.estudante.nivel = this.classe.ensinoNivel.descricao;
     this.estudante.ensinoNivel = this.classe.ensinoNivel;
