@@ -68,6 +68,7 @@ export class MiniPautaFormComponent implements OnInit {
   private municipio: Municipio = new Municipio();
   filter = new CustomFilter();
   private id = 0;
+  private entityId = Number.parseInt(localStorage.getItem('entityId'), 10);
 
   private valor1 = 0;
   private valor2 = 0;
@@ -102,10 +103,9 @@ export class MiniPautaFormComponent implements OnInit {
   ngOnInit() {
     this.estudanteService.onChangeContext.emit(true);
     this.initForms();
-
     this.periodos$ = this.periodoService.list();
     this.classes$ = this.classeService.list();
-    this.turmas$ = this.turmaService.list();
+    this.turmas$ = this.turmaService.list(this.entityId);
     this.miniPauta = new MiniPauta();
 
 
