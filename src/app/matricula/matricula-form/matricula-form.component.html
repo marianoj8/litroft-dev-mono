@@ -1089,7 +1089,7 @@
           <mat-form-field class="field-periodo-classe-numero field-padding">
             <mat-select matInput formControlName="periodo" required placeholder="Selecione um perido">
               <ng-container *ngFor="let periodo of periodos$ | async">
-                <mat-option [value]="periodo"> {{ periodo?.descricao }} </mat-option>
+                <mat-option [value]="periodo.id"> {{ periodo?.descricao }} </mat-option>
               </ng-container>
             </mat-select>
             <mat-error *ngIf="formGroup06.controls['periodo'].hasError('required')">
