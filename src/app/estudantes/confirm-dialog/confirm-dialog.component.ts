@@ -21,6 +21,7 @@ export class ConfirmDialogComponent implements OnInit {
 
   turmas$: Observable<Turma[]>;
   private estudante$: Observable<Estudante>;
+  private entityId = Number.parseInt(localStorage.getItem('entityId'), 10);
 
   constructor(
     @Inject(MAT_DIALOG_DATA)
@@ -35,7 +36,7 @@ export class ConfirmDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.turmas$ = this.turmaService.list();
+    this.turmas$ = this.turmaService.list(this.entityId);
     this.estudante$ = this.estudanteService.getById(this.data.id);
   }
 
