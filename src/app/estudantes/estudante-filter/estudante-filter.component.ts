@@ -24,6 +24,7 @@ export class EstudanteFilterComponent implements OnInit {
   years: number[];
   formGroup: FormGroup;
   isAllYears: boolean;
+  private entityId = Number.parseInt(localStorage.getItem('entityId'), 10);
 
   constructor(
     private turmaService: TurmaService,
@@ -51,7 +52,7 @@ export class EstudanteFilterComponent implements OnInit {
 
     this.formGroup.controls.curso.valueChanges
       .subscribe((onValue) => {
-        this.turmaService.findAllByCurso(onValue)
+        this.turmaService.findAllByCurso(onValue, this.entityId)
           .subscribe(onValues => {
             this.turmas = onValues;
             if (this.turmas.length > 0) {
