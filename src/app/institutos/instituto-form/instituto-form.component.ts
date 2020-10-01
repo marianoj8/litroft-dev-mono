@@ -20,6 +20,7 @@ import { PeriodoService } from 'src/app/periodos/modules/periodos.service';
 import { EnsinoNivel } from 'src/app/shared/model/ensinoNivel';
 import { ForbiddenErrorDialogComponent } from 'src/app/shared/forbidden-error-dialog/forbidden-error-dialog.component';
 import { ErrorLoadingComponent } from 'src/app/shared/error-loading/error-loading.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-instituto-form',
@@ -44,7 +45,6 @@ export class InstitutoFormComponent implements OnInit {
   public nivelEnsino: number;
 
   private id = 0;
-  dialogService: any;
   error$: any;
 
   constructor(
@@ -57,6 +57,7 @@ export class InstitutoFormComponent implements OnInit {
     private localService: LocalService,
     private notificationService: NotificationService,
     private formBuilder: FormBuilder,
+    private dialogService: MatDialog,
     private location: Location) {
     this.monografiaService.emitShowAddButton.emit(true);
   }
