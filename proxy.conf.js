@@ -4,8 +4,7 @@ const PROXY_CONFIG = [
     target: "http://localhost:8080",
     secure: false,
     logLeval: "debug",
-    pathRewrite: { "^/apiv1": "" },
-    changeOrigin: true
+    pathRewrite: { "^/apiv1": "" }
   }
 ];
 
