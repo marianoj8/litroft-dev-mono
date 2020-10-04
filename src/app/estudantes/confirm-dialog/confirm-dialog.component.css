@@ -37,95 +37,7 @@ h1 {
   font-size: 32px;
 }
 
-/* Header */
-header::before {
-  content: "";
-  display: block;
-  margin-bottom: 80px;
-}
 
-nav {
-  width: 100%;
-  height: 80px;
-  background: #fff;
-  border-bottom: 1px solid transparent;
-  box-shadow: 1px 1px 10px 0 rgba(0, 0, 0, 0.2);
-  position: fixed;
-  top: 0;
-  z-index: 8;
-  transition: ease-in-out 0.5s;
-}
-
-.nav {
-  display: flex;
-  justify-content: space-between;
-  height: 80px;
-  width: 100%;
-  align-items: center;
-  padding: 0 40px;
-}
-
-.nav .logo {
-  height: 80px;
-}
-
-.nav .logo img {
-  height: 100%;
-  vertical-align: top;
-}
-
-.enlaces-header {
-  font-weight: 300;
-  transition: ease-in-out 0.5s;
-}
-
-.nav .enlaces-header a {
-  color: #5d6678;
-  text-decoration: none;
-  margin-left: 20px;
-}
-
-.hamburguer {
-  width: 80px;
-  height: 80px;
-  display: none;
-  text-align: center;
-  z-index: 100;
-  cursor: pointer;
-  transition: color 0.5s ease-in;
-}
-
-.hamburguer > i {
-  font-size: 25px;
-  line-height: 80px;
-}
-
-.contenido-header {
-  width: 100%;
-  height: 450px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.contenido-header > img {
-  width: 550px;
-  animation: ease-in animat 1s;
-}
-
-@keyframes animat {
-  0% {
-    transform: scale(0);
-  }
-
-  100% {
-    transform: scale(1);
-  }
-}
-
-.textos-header {
-  margin: 0 0 0 30px;
-}
 
 .contenido-header p {
   font-weight: 100;
@@ -172,7 +84,7 @@ nav {
   background: #fff;
   margin-bottom: 30px;
   border-radius: 10px;
-  padding: 45px 30px 60px 30px;
+  padding: 10px 10px 10px 10px;
   transition: all 0.8s;
 }
 
@@ -187,21 +99,28 @@ nav {
   height: 80px;
   padding-left: 65px;
   text-align: center;
-  padding-top: 20px;
+  padding-top: 10px;
   border-radius: 50%;
   font-size: 50pt;
 }
 
-.articulo > h3 {
+.articulo > h4 {
   font-size: 24px;
-  margin-top: 30px;
+  margin-top: 8px;
+  text-align: center;
+}
+
+.articulo > h5 {
+  font-size: 14px;
+  text-align: center;
+  margin-top: -15px;
 }
 
 .articulo > p {
   font-weight: 100;
   color: #5d6678;
   margin-top: 15px;
-  padding-bottom: 20px;
+  /* padding-bottom: 20px; */
 }
 
 .articulo a {
@@ -532,4 +451,13 @@ nav {
     border-radius: 50%;
     font-size: 50pt;
   }
+}
+
+mat-form-field {
+  width: 98%;
+  padding-top: 10px;
+  padding-left: 10px;
+}
+input {
+  width: 100%;
 }
