@@ -1,21 +1,39 @@
 <h2>Turma</h2>
 <p>Selecione uma turam para confirmar a matricula</p>
+<mat-form-field>
+  <input type="text" #key placeholder="Procurar turma" matInput />
+  <span matSuffix *ngIf="!(key.value.length != 0)">
+    <mat-icon class="mat-1" color="primary">search</mat-icon>
+  </span>
+
+  <span matSuffix *ngIf="key.value.length != 0">
+    <button mat-icon-button (click)="key.value = null;">
+      <mat-icon color="primary">close</mat-icon>
+    </button>
+  </span>
+</mat-form-field>
 <section class="about-us">
   <div class="contenedor1">
     <div class="contenedor-articulo">
-      <div
-        class="articulo"
-        data-aos="zoom-in-right"
-        *ngFor="let item of turmas$ | async"
-      >
-        <mat-icon color="primary">group_work</mat-icon>
-        <h4>{{item?.sigla}}</h4>
-        <p></p>
-        <a mat-raised-button color="primary" (click)="confirm(item)">
-          <mat-icon>done</mat-icon>
-          Confirmar turma
-        </a>
-      </div>
+      <ng-container *ngIf="showProgress">
+        <mat-progress-bar mode="indeterminate" color="warn" style="margin-top: -26px;"> </mat-progress-bar>
+      </ng-container>
+      <ng-container *ngIf="!showProgress">
+        <div class="articulo" data-aos="zoom-in-right" *ngFor="let turma of customTurmas">
+          <mat-icon color="primary">group_work</mat-icon>
+          <h4>{{turma?.sigla}}</h4>
+          <mat-divider></mat-divider>
+
+          <h4>{{turma.totalAlunos}}</h4>
+          <h5>
+            {{'Alunos'}}
+          </h5>
+          <a mat-raised-button matDialogClose="true" color="primary" (click)="confirm(turma)">
+            <mat-icon>done</mat-icon>
+            Confirmar turma
+          </a>
+        </div>
+      </ng-container>
     </div>
   </div>
 </section>
