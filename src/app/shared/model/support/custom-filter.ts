@@ -2,8 +2,11 @@ export class CustomFilter {
   sigla: string;
   nome: string;
   descricao: string;
+  cursoId: number;
+  classeId: number;
   curso: string;
   sexo: string;
+  turmaId: number;
   turma: string;
   duracao: number;
   anoletivo: number;
