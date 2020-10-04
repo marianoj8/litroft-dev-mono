@@ -519,7 +519,7 @@ export class MatriculaFormComponent implements OnInit {
       // this.turma.id = this.formGroup06.controls.turma.value as number;
       this.periodo.id = this.formGroup06.controls.periodo.value;
       this.estudante.curso = this.curso;
-      this.estudante.turma = this.turma;
+      // this.estudante.turma = this.turma;
       this.estudante.periodo = this.periodo;
 
     }
