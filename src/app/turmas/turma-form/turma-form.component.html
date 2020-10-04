@@ -59,6 +59,28 @@
       </mat-form-field>
     </ng-container>
 
+    <ng-container *ngIf="nivel">
+      <mat-form-field class="field field-padding">
+        <mat-select
+        matInput
+        formControlName="classe"
+        required
+        placeholder="Classe"
+        >
+        <mat-option *ngIf="cursoError$ | async"
+        >Ocorreu um erro ao carregar classes...
+      </mat-option>
+      <ng-container *ngFor="let classe of classes$ | async">
+        <mat-option *ngIf="!classe">lista vasia</mat-option>
+        <mat-option [value]="classe.id"> {{ classe.descricao }} </mat-option>
+      </ng-container>
+    </mat-select>
+    <mat-error *ngIf="formGroup01.controls['classe'].hasError('required')">
+      Classe é <strong>obrigatorio</strong>
+    </mat-error>
+  </mat-form-field>
+</ng-container>
+
         <div class="spaced">
           <button
             color="primary"
