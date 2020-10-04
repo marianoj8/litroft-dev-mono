@@ -18,6 +18,7 @@ import { EstudanteService } from './../modules/estudante.service';
 export class EstudanteDetalheComponent implements OnInit {
 
   estudante$: Observable<Estudante>;
+  private entityId = Number.parseInt(localStorage.getItem('entity'), 10);
   // estudanteError$: Subject<boolean>;
 
   constructor(
@@ -32,7 +33,7 @@ export class EstudanteDetalheComponent implements OnInit {
   ngOnInit() {
     this.service.onChangeContext.emit(true);
     this.estudante$ = this.service
-      .getById(this.activatedRoute.snapshot.params.id as number)
+      .getById(this.activatedRoute.snapshot.params.id as number, this.entityId)
       .pipe(catchError(err => {
         this.dialog.open(ErrorLoadingComponent);
         return of(null);
