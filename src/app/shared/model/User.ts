@@ -8,6 +8,7 @@ export class User {
   endereco: string;
   entityId: string;
   entity: string;
+  nivelId: string;
   nivel: string;
   entityLogoUri: string;
 }
