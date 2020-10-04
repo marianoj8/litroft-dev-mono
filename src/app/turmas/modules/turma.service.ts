@@ -36,6 +36,10 @@ export class TurmaService {
     return this.http.get<Turma[]>(`${this.url}/interno/turma/l?sigla=${!!filter.sigla ? filter.sigla : ''}&institutoId=${institutoId}`);
   }
 
+  filterByCursoAndClasse(filter: CustomFilter, institutoId: number): Observable<Turma[]> {
+    return this.http.get<Turma[]>(`${this.url}/interno/turma/l/curso/classe?sigla=${!!filter.sigla ? filter.sigla : ''}&cursoId=${filter.cursoId}&classeId=${filter.classeId}&institutoId=${institutoId}`);
+  }
+
   findByCursoPublic(id: number, institutoId: number): Observable<Turma[]> {
     return this.http.get<Turma[]>(`${this.url}/turma/l/curso/instituto?curso=${!!id ? id : ''}&nome=10&institutoId=${institutoId}`);
   }
