@@ -29,6 +29,7 @@ export class SelectElementComponent implements OnInit {
   selectedElementes: Estudante[] = [];
   error$ = new Subject<boolean>();
   private sub: Subscription;
+  private entityId = Number.parseInt(localStorage.getItem('entityId'), 10);
   selection = new SelectionModel<Estudante>(true, []);
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
@@ -86,13 +87,13 @@ export class SelectElementComponent implements OnInit {
   }
 
   onFilterFromServer(data: CustomFilter) {
-    this.sub = this.service.filterByNomeSexoCurso(data).subscribe(
+    this.sub = this.service.filterByNomeSexoCurso(data, this.entityId).subscribe(
       next => this.estudantesList = next);
   }
 
   onRefrash(data?: CustomFilter) {
     console.log(data);
-    this.sub = this.service.filterByNotGrupo(data)
+    this.sub = this.service.filterByNotGrupo(data, this.entityId)
       .pipe(
         catchError(err => {
           // this.dialogService.open(ErrorLoadingComponent);
