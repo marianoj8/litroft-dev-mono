@@ -48,6 +48,7 @@ export class AuthService {
       localStorage.setItem('nome', data.user.nome);
       localStorage.setItem('sobrenome', data.user.sobrenome);
       localStorage.setItem('entity', data.user.entity);
+      localStorage.setItem('nivelId', data.user.nivelId);
       localStorage.setItem('nivel', data.user.nivel);
       localStorage.setItem('entityId', `${data.user.entityId}`);
       localStorage.setItem('entityLogoUri', data.user.entityLogoUri);
@@ -96,6 +97,7 @@ export class AuthService {
     localStorage.removeItem('entityLogoUri');
     localStorage.removeItem('nome');
     localStorage.removeItem('sobrenome');
+    localStorage.removeItem('nivelId');
     localStorage.removeItem('nivel');
     localStorage.removeItem('acessType');
     localStorage.removeItem('token');
