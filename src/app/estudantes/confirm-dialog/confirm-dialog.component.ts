@@ -11,6 +11,8 @@ import { Turma } from 'src/app/shared/model/turma';
 import { MatriculaService } from 'src/app/matricula/modules/matricula.service';
 import { ForbiddenErrorDialogComponent } from 'src/app/shared/forbidden-error-dialog/forbidden-error-dialog.component';
 import { HttpErrorResponse } from '@angular/common/http';
+import { CustomFilter } from 'src/app/shared/model/support/custom-filter';
+import { MatDailogParamEstudante } from 'src/app/shared/model/support/mat-dialog-param-estudante';
 
 @Component({
   selector: 'app-confirm-dialog',
@@ -19,40 +21,70 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class ConfirmDialogComponent implements OnInit {
 
-  turmas$: Observable<Turma[]>;
-  private estudante$: Observable<Estudante>;
+  private filter: CustomFilter = new CustomFilter();
+  turmas: Turma[];
+  customTurmas: Turma[];
+  totalAlunos: number[];
+  totalAluno: number;
+  private estudante: Estudante;
   private entityId = Number.parseInt(localStorage.getItem('entityId'), 10);
+  public showProgress = true;
 
   constructor(
     @Inject(MAT_DIALOG_DATA)
-    public data: MatDailogTypeParam,
+    public data: MatDailogParamEstudante,
     private dialogService: MatDialog,
     private turmaService: TurmaService,
     private estudanteService: EstudanteService,
     private matriculaService: MatriculaService,
     private notificationService: NotificationService
   ) {
-
   }
 
   ngOnInit(): void {
-    this.turmas$ = this.turmaService.list(this.entityId);
-    this.estudante$ = this.estudanteService.getById(this.data.id);
+    this.customTurmas = [];
+    this.init();
+  }
+
+  init() {
+    this.filter.cursoId = this.data.curso.id;
+    this.filter.classeId = this.data.classe.id;
+    this.turmaService.filterByCursoAndClasse(this.filter, this.entityId)
+      .subscribe((onValue: Turma[]) => {
+        this.turmas = onValue;
+        this.countEstudante(this.turmas);
+      });
+
+
+    this.estudanteService.getById(this.data.id, this.entityId)
+      .subscribe((onValue) => this.estudante = onValue);
   }
 
   public confirm(turma: Turma): void {
-    this.estudante$.subscribe((onValue: Estudante) => {
-      onValue.turma = turma;
-      this.matriculaService.matericularConfirm(onValue)
-        .pipe(catchError((err: HttpErrorResponse) => {
-          if (err.status === 403) {
-            this.dialogService.open(ForbiddenErrorDialogComponent);
-            return of(null);
-          }
-          this.showFailerMessage(err);
-        }))
-        .subscribe(d => {
-          console.log(d);
+    this.estudante.turma = turma;
+    this.matriculaService.matericularConfirm(this.estudante)
+      .pipe(catchError((err: HttpErrorResponse) => {
+        if (err.status === 403) {
+          this.dialogService.open(ForbiddenErrorDialogComponent);
+          return of(null);
+        }
+        this.showFailerMessage(err);
+      }))
+      .subscribe(d => {
+      });
+  }
+
+  public countEstudante(turmas: Turma[]) {
+    turmas.forEach((e) => {
+      this.filter.cursoId = e.curso.id;
+      this.filter.classeId = e.classe.id;
+      this.filter.turmaId = e.id;
+      this.filter.anoletivo = 2020;
+      this.estudanteService.countByCursoAndTurma(this.filter, this.entityId)
+        .subscribe((onValue: number) => {
+          e.totalAlunos = onValue;
+          this.customTurmas.push(e);
+          this.showProgress = false;
         });
     });
   }
