@@ -1,12 +1,11 @@
 import { NotificationService } from 'src/app/shared/services/notification/notification.service';
 import { EstudanteService } from './../modules/estudante.service';
 import { Estudante } from './../../shared/model/estudante';
-import { MatDailogTypeParam } from './../../shared/model/support/mat-dialog-type-param';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { catchError } from 'rxjs/operators';
 import { TurmaService } from './../../turmas/modules/turma.service';
 import { Component, OnInit, Inject } from '@angular/core';
-import { Observable, Subject, of } from 'rxjs';
+import { of } from 'rxjs';
 import { Turma } from 'src/app/shared/model/turma';
 import { MatriculaService } from 'src/app/matricula/modules/matricula.service';
 import { ForbiddenErrorDialogComponent } from 'src/app/shared/forbidden-error-dialog/forbidden-error-dialog.component';
