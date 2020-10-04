@@ -1,7 +1,7 @@
 <h2>Turma</h2>
 <p>Selecione uma turam para confirmar a matricula</p>
 <mat-form-field>
-  <input type="text" #key placeholder="Procurar turma" matInput />
+  <input type="text" (keyup)="seach(key.value)" #key placeholder="Procurar turma" matInput autocomplete="false" />
   <span matSuffix *ngIf="!(key.value.length != 0)">
     <mat-icon class="mat-1" color="primary">search</mat-icon>
   </span>
@@ -19,12 +19,15 @@
         <mat-progress-bar mode="indeterminate" color="warn" style="margin-top: -26px;"> </mat-progress-bar>
       </ng-container>
       <ng-container *ngIf="!showProgress">
-        <div class="articulo" data-aos="zoom-in-right" *ngFor="let turma of customTurmas">
+        <div class="articulo" data-aos="zoom-in-right" *ngFor="let turma of turmas">
           <mat-icon color="primary">group_work</mat-icon>
           <h4>{{turma?.sigla}}</h4>
           <mat-divider></mat-divider>
 
-          <h4>{{turma.totalAlunos}}</h4>
+          <div style="padding: 14px;" *ngIf="turma.totalAlunos === undefined">
+            <mat-progress-bar mode="indeterminate" color="warn"> </mat-progress-bar>
+          </div>
+          <h4 *ngIf="turma.totalAlunos !== null">{{turma.totalAlunos}}</h4>
           <h5>
             {{'Alunos'}}
           </h5>
