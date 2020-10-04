@@ -110,7 +110,7 @@ export class MiniPautaFormComponent implements OnInit {
 
 
     if (false) {
-      this.estudante$ = this.estudanteService.filterBySexoAndCurso(this.filter.curso === undefined ? '' : this.filter.curso, this.filter.sexo === undefined ? '' : this.filter.sexo)
+      this.estudante$ = this.estudanteService.filterBySexoAndCurso(this.filter.curso === undefined ? '' : this.filter.curso, this.filter.sexo === undefined ? '' : this.filter.sexo, this.entityId)
         .pipe(
           catchError((err: HttpErrorResponse) => {
 
@@ -122,7 +122,7 @@ export class MiniPautaFormComponent implements OnInit {
         );
 
     } else {
-      this.estudante$ = this.estudanteService.filterByNomeSexoTurma(this.filter)
+      this.estudante$ = this.estudanteService.filterByNomeSexoTurma(this.filter, this.entityId)
         .pipe(
           catchError((err: HttpErrorResponse) => {
 
@@ -134,7 +134,7 @@ export class MiniPautaFormComponent implements OnInit {
         );
 
       this.formGroup02.controls.estudante.valueChanges
-        .subscribe((onValue) => this.estudanteService.getById(onValue)
+        .subscribe((onValue) => this.estudanteService.getById(onValue, this.entityId)
           .subscribe((onNewValue: Estudante) => {
             this.estudante = onNewValue;
             this.filter.institutoId = onNewValue.adminInterno.instituto.id;
@@ -218,7 +218,7 @@ export class MiniPautaFormComponent implements OnInit {
           this.id = data.id;
         });
 
-      this.estudanteService.getById(this.id)
+      this.estudanteService.getById(this.id, this.entityId)
         .subscribe(data => {
           this.estudante = data;
           this.formGroup01.patchValue({
