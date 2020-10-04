@@ -19,6 +19,8 @@ import { TurmaService } from '../modules/turma.service';
 import { CursoService } from './../../cursos/modules/curso.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ForbiddenErrorDialogComponent } from 'src/app/shared/forbidden-error-dialog/forbidden-error-dialog.component';
+import { Classe } from 'src/app/shared/model/classe';
+import { ClasseService } from 'src/app/classe/modules/classe.service';
 
 @Component({
   selector: 'app-turma-form',
@@ -28,6 +30,7 @@ import { ForbiddenErrorDialogComponent } from 'src/app/shared/forbidden-error-di
 export class TurmaFormComponent implements OnInit {
   formGroup01: FormGroup;
   cursos$: Observable<Curso[]>;
+  classes$: Observable<Classe[]>;
   cursoError$ = new Subject<boolean>();
   error$ = new Subject<boolean>();
   matcher = new MyErrorStateMatch();
@@ -35,6 +38,7 @@ export class TurmaFormComponent implements OnInit {
   turma: Turma = new Turma();
   private id = 0;
   private curso: Curso = new Curso();
+  private classe: Classe = new Classe();
   nivel: boolean;
 
   constructor(
@@ -43,6 +47,7 @@ export class TurmaFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private turmaService: TurmaService,
     private cursoService: CursoService,
+    private classeService: ClasseService,
     private notificationService: NotificationService,
     private dialogService: MatDialog,
     private monografiaService: MonografiaService) {
@@ -55,6 +60,13 @@ export class TurmaFormComponent implements OnInit {
     this.initForms();
 
     this.cursos$ = this.cursoService.list()
+      .pipe(catchError(err => {
+        this.dialogService.open(ErrorLoadingComponent);
+        this.cursoError$.next(true);
+        return of([]);
+      }));
+
+    this.classes$ = this.classeService.list()
       .pipe(catchError(err => {
         this.dialogService.open(ErrorLoadingComponent);
         this.cursoError$.next(true);
@@ -88,6 +100,7 @@ export class TurmaFormComponent implements OnInit {
           Validators.minLength(3),
           Validators.maxLength(30)]],
         curso: [null, Validators.required],
+        classe: [null, Validators.required],
       });
     } else {
       this.formGroup01 = this.formBuilder.group({
@@ -112,7 +125,9 @@ export class TurmaFormComponent implements OnInit {
     this.turma.sigla = this.formGroup01.controls.sigla.value;
     if (this.nivel) {
       this.curso.id = this.formGroup01.controls.curso.value;
+      this.classe.id = this.formGroup01.controls.classe.value;
       this.turma.curso = this.curso;
+      this.turma.classe = this.classe;
       const adminInterno = new AdminInterno();
       adminInterno.instituto = new Instituto(Number.parseInt(localStorage.getItem('entityId'), 10));
       this.curso.adminInterno = adminInterno;
