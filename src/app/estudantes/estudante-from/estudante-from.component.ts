@@ -118,7 +118,7 @@ export class EstudanteFromComponent implements OnInit {
           this.id = data.id;
         });
 
-      this.estudanteService.getById(this.id)
+      this.estudanteService.getById(this.id, this.entityId)
         .subscribe(data => {
           this.estudante = data;
           this.formGroup01.patchValue({
