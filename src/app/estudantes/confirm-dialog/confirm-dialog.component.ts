@@ -1,3 +1,4 @@
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { NotificationService } from 'src/app/shared/services/notification/notification.service';
 import { EstudanteService } from './../modules/estudante.service';
 import { Estudante } from './../../shared/model/estudante';
@@ -29,6 +30,7 @@ export class ConfirmDialogComponent implements OnInit {
   private entityId = Number.parseInt(localStorage.getItem('entityId'), 10);
   public showProgress = true;
   public searchTurma = '';
+  formAnoLetivo: FormGroup;
 
   constructor(
     @Inject(MAT_DIALOG_DATA)
@@ -37,7 +39,8 @@ export class ConfirmDialogComponent implements OnInit {
     private turmaService: TurmaService,
     private estudanteService: EstudanteService,
     private matriculaService: MatriculaService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private formBuilder: FormBuilder
   ) {
   }
 
@@ -46,6 +49,11 @@ export class ConfirmDialogComponent implements OnInit {
     for (let i = 2008; i <= new Date().getFullYear(); i++) {
       this.years.push(i);
     }
+
+    this.formAnoLetivo = this.formBuilder.group({
+      ano: [new Date().getFullYear()],
+      textSearch: ['']
+    });
   }
 
   init() {
