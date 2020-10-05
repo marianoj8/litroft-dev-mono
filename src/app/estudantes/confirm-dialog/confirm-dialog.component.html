@@ -12,7 +12,8 @@
       </mat-select>
     </mat-form-field>
     <mat-form-field style="width: 85%;">
-      <input type="text" style="width: 40%;" (keyup)="seach(key.value)" formControlName="textSearch" #key placeholder="Procurar turma" matInput autocomplete="false" />
+      <input type="text" style="width: 40%;" formControlName="textSearch" #key placeholder="Procurar turma" matInput
+        autocomplete="false" />
       <span matSuffix *ngIf="!(key.value.length != 0)">
         <mat-icon class="mat-1" color="primary">search</mat-icon>
       </span>
@@ -33,7 +34,10 @@
       </ng-container>
       <ng-container *ngIf="!showProgress">
         <div class="articulo" data-aos="zoom-in-right" *ngFor="let turma of turmas">
-          <mat-icon color="primary">group_work</mat-icon>
+            <mat-icon *ngIf="turma.totalAlunos === config.turmaLimite; else confirmIcon" color="warn">group_work</mat-icon>
+          <ng-template #confirmIcon>
+            <mat-icon color="primary">group_work</mat-icon>
+          </ng-template>
           <h4>{{turma?.sigla}}</h4>
           <mat-divider></mat-divider>
 
@@ -44,10 +48,21 @@
           <h5>
             {{'Alunos'}}
           </h5>
-          <a mat-raised-button matDialogClose="true" color="primary" (click)="confirm(turma)">
-            <mat-icon>done</mat-icon>
-            Confirmar turma
+          <a *ngIf="turma.totalAlunos === config.turmaLimite; else waitButton" mat-raised-button color="warn">
+            <mat-icon>done_all</mat-icon>
+            Limite atingido
           </a>
+          <ng-template #waitButton>
+            <a  *ngIf="turma.totalAlunos === undefined; else confirmButton" mat-raised-button color="primary">
+              carregando...
+            </a>
+            <ng-template #confirmButton>
+              <a mat-raised-button matDialogClose="true" color="primary" (click)="confirm(turma)">
+                <mat-icon>done</mat-icon>
+                Confirmar turma
+              </a>
+            </ng-template>
+          </ng-template>
         </div>
       </ng-container>
     </div>
