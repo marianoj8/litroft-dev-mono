@@ -22,6 +22,8 @@ export class ConfirmDialogComponent implements OnInit {
 
   private filter: CustomFilter = new CustomFilter();
   turmas: Turma[];
+  years = [];
+  currentYear = 2020;
   totalAluno: number;
   private estudante: Estudante;
   private entityId = Number.parseInt(localStorage.getItem('entityId'), 10);
@@ -41,6 +43,9 @@ export class ConfirmDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.init();
+    for (let i = 2008; i <= new Date().getFullYear(); i++) {
+      this.years.push(i);
+    }
   }
 
   init() {

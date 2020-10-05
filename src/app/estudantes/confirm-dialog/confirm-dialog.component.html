@@ -1,17 +1,28 @@
 <h2>Turma</h2>
 <p>Selecione uma turam para confirmar a matricula</p>
-<mat-form-field>
-  <input type="text" (keyup)="seach(key.value)" #key placeholder="Procurar turma" matInput autocomplete="false" />
-  <span matSuffix *ngIf="!(key.value.length != 0)">
-    <mat-icon class="mat-1" color="primary">search</mat-icon>
-  </span>
+<span style="display: inline;">
+  <mat-form-field style="width: 15%; padding-left: 10px;">
+    <mat-select matInput placeholder="Ano letivo">
+      <ng-container *ngFor="let year of years">
+        <mat-option [(ngModel)]="currentYear" style="padding-left: 20px;" [value]="year">
+          {{ year }}
+        </mat-option>
+      </ng-container>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field style="width: 80%;">
+    <input type="text" (keyup)="seach(key.value)" #key placeholder="Procurar turma" matInput autocomplete="false" />
+    <span matSuffix *ngIf="!(key.value.length != 0)">
+      <mat-icon class="mat-1" color="primary">search</mat-icon>
+    </span>
 
-  <span matSuffix *ngIf="key.value.length != 0">
-    <button mat-icon-button (click)="key.value = null;">
-      <mat-icon color="primary">close</mat-icon>
-    </button>
-  </span>
-</mat-form-field>
+    <span matSuffix *ngIf="key.value.length != 0">
+      <button mat-icon-button (click)="key.value = null;">
+        <mat-icon color="primary">close</mat-icon>
+      </button>
+    </span>
+  </mat-form-field>
+</span>
 <section class="about-us">
   <div class="contenedor1">
     <div class="contenedor-articulo">
