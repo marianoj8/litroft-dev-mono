@@ -30,6 +30,7 @@ import { CustomFilter } from './shared/model/support/custom-filter';
 import { ProvinciaService } from './provincia/modules/provincia.service';
 import { MunicipioService } from './municipio/modules/municipio.service';
 import { InscricaoService } from './inscricao/modules/inscricao.service';
+import { DiciplinaService } from './diciplinas/modules/diciplina.service';
 
 @Component({
   selector: 'app-root',
@@ -92,6 +93,7 @@ export class AppComponent implements OnInit, AfterContentChecked, OnDestroy {
     private areaFormacaoService: AreaFormacaoService,
     private projetoService: ProjetoService,
     private localService: LocalService,
+    private diciplinaService: DiciplinaService,
     private publicService: PublicService,
     public institutoService: InstitutoService,
     public inscricaoService: InscricaoService,
@@ -125,6 +127,7 @@ export class AppComponent implements OnInit, AfterContentChecked, OnDestroy {
       value => {
         this.contextMenu = value;
       });
+
     this.sub = this.loginService.onChangeContext.subscribe(
       value => {
         this.emitShowAddButton = true;
@@ -138,6 +141,15 @@ export class AppComponent implements OnInit, AfterContentChecked, OnDestroy {
         this.onChangeContext = true;
       }
     );
+
+    this.sub = this.diciplinaService.onChangeContextTitle.subscribe(
+      value => {
+        this.contextMenu = value;
+        this.showDateSelect = false;
+        this.onChangeContext = true;
+      }
+    );
+
     this.sub = this.departamentoService.onChangeContextTitle.subscribe(
       value => {
         this.contextMenu = value;
