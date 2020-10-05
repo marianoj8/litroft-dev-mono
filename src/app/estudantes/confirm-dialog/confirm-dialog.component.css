@@ -30,7 +30,7 @@ h6 {
   max-width: 1000px;
   margin: auto;
   overflow: hidden;
-  padding: 5px 0;
+  padding: 5px 10px;
 }
 
 h1 {
@@ -75,7 +75,7 @@ h1 {
 .contenedor-articulo {
   display: flex;
   flex-wrap: wrap;
-  margin-top: 50px;
+  margin-top: 24px;
   justify-content: space-around;
 }
 
