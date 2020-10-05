@@ -69,6 +69,12 @@ export class EstudanteListComponent implements OnInit, OnDestroy {
 
     this.service.onChangeContext.emit(false);
     this.initTables();
+
+    this.service.emitOnConfirmButtonCliked.subscribe((e) => {
+      if (e) {
+        this.initTables();
+      }
+    });
   }
 
   private initTables() {
@@ -365,15 +371,6 @@ export class EstudanteListComponent implements OnInit, OnDestroy {
         height: '500px',
         width: '900px'
       });
-
-    dialogRef.beforeClosed().subscribe((result: boolean) => {
-      this.initTables();
-    });
-
-    dialogRef.afterClosed().subscribe((result: boolean) => {
-      this.initTables();
-    });
-
   }
 
   private preparTableToList(): void {
