@@ -1,3 +1,4 @@
+import { ConfigTable } from './../../shared/model/configtable';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { NotificationService } from 'src/app/shared/services/notification/notification.service';
 import { EstudanteService } from './../modules/estudante.service';
@@ -13,6 +14,7 @@ import { ForbiddenErrorDialogComponent } from 'src/app/shared/forbidden-error-di
 import { HttpErrorResponse } from '@angular/common/http';
 import { CustomFilter } from 'src/app/shared/model/support/custom-filter';
 import { MatDailogParamEstudante } from 'src/app/shared/model/support/mat-dialog-param-estudante';
+import { ConfigService } from 'src/app/shared/config/modules/config.service';
 
 @Component({
   selector: 'app-confirm-dialog',
@@ -30,6 +32,7 @@ export class ConfirmDialogComponent implements OnInit {
   private entityId = Number.parseInt(localStorage.getItem('entityId'), 10);
   public showProgress = true;
   public searchTurma = '';
+  public config: ConfigTable = new ConfigTable();
   formAnoLetivo: FormGroup;
 
   constructor(
@@ -39,6 +42,7 @@ export class ConfirmDialogComponent implements OnInit {
     private turmaService: TurmaService,
     private estudanteService: EstudanteService,
     private matriculaService: MatriculaService,
+    private configService: ConfigService,
     private notificationService: NotificationService,
     private formBuilder: FormBuilder
   ) {
@@ -54,9 +58,49 @@ export class ConfirmDialogComponent implements OnInit {
       ano: [new Date().getFullYear()],
       textSearch: ['']
     });
+
+    this.formAnoLetivo.controls.ano.valueChanges
+      .pipe(debounceTime(650))
+      .subscribe((value) => {
+
+        this.configService.getConfigByInstituto(this.entityId)
+        .subscribe((onVlaue) => this.config = onVlaue);
+
+        this.filter.anoletivo = value;
+        this.filter.cursoId = this.data.curso.id;
+        this.filter.classeId = this.data.classe.id;
+        this.turmaService.filterByCursoAndClasse(this.filter, this.entityId)
+
+          .subscribe((onValue) => {
+            this.turmas = onValue;
+            this.countEstudante(this.turmas);
+          });
+      });
+
+    this.formAnoLetivo.controls.textSearch.valueChanges
+      .pipe(debounceTime(650))
+      .subscribe((value) => {
+
+        this.configService.getConfigByInstituto(this.entityId)
+        .subscribe((onVlaue) => this.config = onVlaue);
+
+        this.filter.sigla = value;
+        this.filter.cursoId = this.data.curso.id;
+        this.filter.classeId = this.data.classe.id;
+        this.turmaService.filterByCursoAndClasse(this.filter, this.entityId)
+
+          .subscribe((onValue) => {
+            this.turmas = onValue;
+            this.countEstudante(this.turmas);
+          });
+      });
   }
 
   init() {
+
+    this.configService.getConfigByInstituto(this.entityId)
+      .subscribe((onVlaue) => this.config = onVlaue);
+
     this.filter.cursoId = this.data.curso.id;
     this.filter.classeId = this.data.classe.id;
     this.turmaService.filterByCursoAndClasse(this.filter, this.entityId)
@@ -69,18 +113,7 @@ export class ConfirmDialogComponent implements OnInit {
 
     this.estudanteService.getById(this.data.id, this.entityId)
       .subscribe((onValue) => this.estudante = onValue);
-  }
 
-  public seach(key: string) {
-    this.filter.sigla = key;
-    this.filter.cursoId = this.data.curso.id;
-    this.filter.classeId = this.data.classe.id;
-    this.turmaService.filterByCursoAndClasse(this.filter, this.entityId)
-      .pipe(debounceTime(650))
-      .subscribe((onValue) => {
-        this.turmas = onValue;
-        this.countEstudante(this.turmas);
-      });
   }
 
   public confirm(turma: Turma): void {
@@ -94,6 +127,8 @@ export class ConfirmDialogComponent implements OnInit {
         this.showFailerMessage(err);
       }))
       .subscribe(d => {
+        this.showSavedMessage();
+        this.estudanteService.emitOnConfirmButtonCliked.emit(true);
       });
   }
 
@@ -102,7 +137,7 @@ export class ConfirmDialogComponent implements OnInit {
       this.filter.cursoId = e.curso.id;
       this.filter.classeId = e.classe.id;
       this.filter.turmaId = e.id;
-      this.filter.anoletivo = 2020;
+      this.filter.anoletivo = this.filter.anoletivo;
       this.estudanteService.countByCursoAndTurma(this.filter, this.entityId)
         .pipe(catchError((err: HttpErrorResponse) => {
           if (err.status === 403) {
@@ -123,5 +158,7 @@ export class ConfirmDialogComponent implements OnInit {
     this.notificationService
       .componentErrorMessage(':: ' + err.error.message);
   }
-
+  private showSavedMessage(): void {
+    this.notificationService.componentSavedSuccessfulMessage();
+  }
 }
