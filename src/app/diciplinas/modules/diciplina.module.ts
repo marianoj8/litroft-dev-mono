@@ -5,11 +5,15 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { DiciplinaRoutingModule } from './diciplina-routing.module';
+import { DicipliasListComponent } from '../diciplias-list/diciplias-list.component';
+import { DiciplinaFormComponent } from '../diciplina-form/diciplina-form.component';
 
 
 @NgModule({
   declarations: [
-    DiciplinasComponent
+    DiciplinasComponent,
+    DicipliasListComponent,
+    DiciplinaFormComponent
   ],
   imports: [
     CommonModule,
