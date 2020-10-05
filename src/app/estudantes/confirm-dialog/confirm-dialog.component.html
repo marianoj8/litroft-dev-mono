@@ -1,28 +1,30 @@
 <h2>Turma</h2>
-<p>Selecione uma turam para confirmar a matricula</p>
-<span style="display: inline;">
-  <mat-form-field style="width: 15%; padding-left: 10px;">
-    <mat-select matInput placeholder="Ano letivo">
-      <ng-container *ngFor="let year of years">
-        <mat-option [(ngModel)]="currentYear" style="padding-left: 20px;" [value]="year">
-          {{ year }}
-        </mat-option>
-      </ng-container>
-    </mat-select>
-  </mat-form-field>
-  <mat-form-field style="width: 80%;">
-    <input type="text" (keyup)="seach(key.value)" #key placeholder="Procurar turma" matInput autocomplete="false" />
-    <span matSuffix *ngIf="!(key.value.length != 0)">
-      <mat-icon class="mat-1" color="primary">search</mat-icon>
-    </span>
+<p style="padding-left:20px">Selecione uma turam para confirmar a matricula</p>
+<div style="display: block;">
+  <form [formGroup]="formAnoLetivo" style="width: 90%; padding-left: 10px;">
+    <mat-form-field style="width: 15%; padding-left: 10px;">
+      <mat-select matInput formControlName="ano" placeholder="Ano letivo">
+        <ng-container *ngFor="let year of years">
+          <mat-option style="padding-left: 20px;" [value]="year">
+            {{ year }}
+          </mat-option>
+        </ng-container>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field style="width: 85%;">
+      <input type="text" style="width: 40%;" (keyup)="seach(key.value)" formControlName="textSearch" #key placeholder="Procurar turma" matInput autocomplete="false" />
+      <span matSuffix *ngIf="!(key.value.length != 0)">
+        <mat-icon class="mat-1" color="primary">search</mat-icon>
+      </span>
 
-    <span matSuffix *ngIf="key.value.length != 0">
-      <button mat-icon-button (click)="key.value = null;">
-        <mat-icon color="primary">close</mat-icon>
-      </button>
-    </span>
-  </mat-form-field>
-</span>
+      <span matSuffix *ngIf="key.value.length != 0">
+        <button mat-icon-button (click)="key.value = null;">
+          <mat-icon color="primary">close</mat-icon>
+        </button>
+      </span>
+    </mat-form-field>
+  </form>
+</div>
 <section class="about-us">
   <div class="contenedor1">
     <div class="contenedor-articulo">
