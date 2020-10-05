@@ -1,5 +1,5 @@
 <mat-vertical-stepper
-  *ngIf="cursos$ | async as cursos; else loading"
+  *ngIf="cursos; else loading"
   [linear]="!estudante.id"
   #stepper
   class="container mat-elevation-z6"
@@ -8,27 +8,27 @@
     <form [formGroup]="formGroup01">
       <div class="field">
         <ng-template matStepLabel>
-          Periodo, Classe & Turma
+          Curso, Classe & Turma
         </ng-template>
         <mat-form-field class="field-min-1 field-padding">
           <mat-select
             matInput
             autocomplete="'false'"
-            formControlName="periodo"
+            formControlName="curso"
             required
-            placeholder="Periodo"
+            placeholder="Curso"
           >
             <mat-option
-              *ngFor="let periodo of periodos$ | async"
-              [value]="periodo.id"
+              *ngFor="let curso of cursos"
+              [value]="curso.id"
             >
-              {{ periodo?.descricao }}
+              {{ curso?.nome }}
             </mat-option>
           </mat-select>
           <mat-error
-            *ngIf="formGroup01.controls['periodo'].hasError('required')"
+            *ngIf="formGroup01.controls['curso'].hasError('required')"
           >
-            Periodo é <strong>obrigatorio</strong>
+            Curso é <strong>obrigatorio</strong>
           </mat-error>
         </mat-form-field>
 
@@ -41,7 +41,7 @@
             placeholder="Classe"
           >
             <mat-option
-              *ngFor="let classe of classes$ | async"
+              *ngFor="let classe of classes | async"
               [value]="classe.id"
             >
               {{ classe?.descricao }}

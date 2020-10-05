@@ -1,7 +1,6 @@
 import { MiniPautaService } from './../modules/mini-pauta.service';
 import { MiniPauta } from 'src/app/shared/model/miniPauta';
 import { Periodo } from './../../shared/model/periodo';
-import { log } from 'util';
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -18,8 +17,6 @@ import { ActivatedRoute } from '@angular/router';
 import { EstudanteService } from 'src/app/estudantes/modules/estudante.service';
 import { CursoService } from 'src/app/cursos/modules/curso.service';
 import { TurmaService } from 'src/app/turmas/modules/turma.service';
-import { MunicipioService } from 'src/app/municipio/modules/municipio.service';
-import { ProvinciaService } from 'src/app/provincia/modules/provincia.service';
 import { NotificationService } from 'src/app/shared/services/notification/notification.service';
 import { MatDialog } from '@angular/material/dialog';
 import { MatVerticalStepper } from '@angular/material/stepper';
@@ -48,12 +45,12 @@ export class MiniPautaFormComponent implements OnInit {
   formGroup03: FormGroup;
   formGroup04: FormGroup;
   formGroup05: FormGroup;
-  cursos$: Observable<Curso[]>;
+  cursos: Curso[];
   turmas$: Observable<Turma[]>;
   cursoError$ = new Subject<boolean>();
   turmaError$ = new Subject<boolean>();
   periodos$: Observable<Periodo[]>;
-  classes$: Observable<Classe[]>;
+  classes: Classe[];
   diciplinas$: Observable<Diciplina[]>;
   estudanteError$ = new Subject<boolean>();
 
@@ -89,7 +86,7 @@ export class MiniPautaFormComponent implements OnInit {
     private miniPautaService: MiniPautaService,
     private estudanteService: EstudanteService,
     private cursoSerice: CursoService,
-    private periodoService: PeriodoService,
+    private cursoService: CursoService,
     private classeService: ClasseService,
     private turmaService: TurmaService,
     private diciplinaService: DiciplinaService,
@@ -103,8 +100,12 @@ export class MiniPautaFormComponent implements OnInit {
   ngOnInit() {
     this.estudanteService.onChangeContext.emit(true);
     this.initForms();
-    this.periodos$ = this.periodoService.list();
-    this.classes$ = this.classeService.list();
+    this.cursoService.list().subscribe((onValue) => {
+      this.cursos = onValue;
+    });
+    this.classeService.list().subscribe((onValue) => {
+      this.classes = onValue;
+    });
     this.turmas$ = this.turmaService.list(this.entityId);
     this.miniPauta = new MiniPauta();
 
@@ -139,24 +140,20 @@ export class MiniPautaFormComponent implements OnInit {
             this.estudante = onNewValue;
             this.filter.institutoId = onNewValue.adminInterno.instituto.id;
             this.filter.nome = '';
-            this.diciplinas$ = this.diciplinaService.list(this.filter);
+            this.diciplinas$ = this.diciplinaService.list(this.filter, this.entityId);
 
           }));
 
     }
 
-    this.cursos$ = this.cursoSerice.list()
+    this.cursoSerice.list()
       .pipe(catchError(err => {
         this.dialogService.open(ErrorLoadingComponent);
         this.cursoError$.next(true);
         return of([]);
-      }));
-
-    // this.provincias$ = this.provinciaService.list()
-    //   .pipe(catchError(err => {
-    //     this.provinciaError$.next(true);
-    //     return of(null);
-    //   }));
+      })).subscribe((onValue) => {
+        this.cursos = onValue;
+      });
 
     this.formGroup03.controls.p1.valueChanges
       .subscribe((onValue: number) => {
@@ -256,7 +253,7 @@ export class MiniPautaFormComponent implements OnInit {
   initForms() {
 
     this.formGroup01 = this.formBuilder.group({
-      periodo: [null, Validators.required],
+      curso: [null, Validators.required],
       classe: [null, Validators.required],
       turma: [null, Validators.required]
     });
