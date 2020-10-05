@@ -1,0 +1,101 @@
+<div class="container mat-elevation-z8 table hide-on-med-and-down">
+  <button class="btn-large" mat-raised-button color="primary" (click)="add()">
+    <mat-icon>add</mat-icon>
+    Cadastrar Nova Diciplina
+  </button>
+  <table *ngIf="diciplinas; else loading" mat-table [dataSource]="diciplinas" matSort>
+
+    <ng-container matColumnDef="nome">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Nome</th>
+      <td mat-cell *matCellDef="let diciplina">
+        {{ diciplina?.nome }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="detalhe">
+      <th mat-header-cell *matHeaderCellDef>Detalhe</th>
+      <td mat-cell *matCellDef="let diciplina">
+        <button mat-raised-button [routerLink]="['detalhe', diciplina.id]">
+          <mat-icon color="primary">description</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="edit">
+      <th mat-header-cell *matHeaderCellDef>Editar</th>
+      <td mat-cell *matCellDef="let diciplina">
+        <button mat-raised-button (click)="edit(diciplina.id)">
+          <mat-icon color="primary">edit</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="delete">
+      <th mat-header-cell *matHeaderCellDef>Excluir</th>
+      <td mat-cell *matCellDef="let diciplina">
+        <button
+          mat-raised-button
+          matTooltipShowDelay="2000"
+          matTooltipHideDelay="2000"
+          matTooltip="Uma vez excluido não tem como reverter as alterações."
+          (click)="openDeleteDialog(diciplina.id)"
+        >
+          <mat-icon color="warn">delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="noData">
+      <th mat-footer-cell *matFooterCellDef>Lista vasia.</th>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displaydColumns; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: displaydColumns"></tr>
+    <tr
+      mat-footer-row
+      *matFooterRowDef="['noData']"
+      [ngClass]="{ hide: true }"
+    ></tr>
+  </table>
+
+  <ng-template #loading>
+    <div *ngIf="error$ | async as error; else showError">
+      <span>
+        Erro ao carregar diciplina. Tente novamente mais tarde.
+      </span>
+    </div>
+    <ng-template #showError>
+      <mat-progress-bar mode="indeterminate" color="warn"> </mat-progress-bar>
+    </ng-template>
+  </ng-template>
+</div>
+
+<!-- Modo Mobile inicializado  -->
+
+<div class="hide-on-large-only">
+  <mat-nav-list
+    class="mat-elevation-z8 container"
+    *ngIf="diciplinas; else loadingOnList"
+  >
+    <button class="btn-large" mat-raised-button color="primary" (click)="add()">
+      <mat-icon>add</mat-icon>
+      Cadastrar Nova Diciplina
+    </button>
+    <a
+      mat-list-item
+      (click)="openMoreOptionDialog(item.id)"
+      *ngFor="let item of diciplinasList"
+    >
+      <mat-icon matListIcon class="mat-18">beenhere</mat-icon>
+      <h5 matLine>{{ item?.nome }}</h5>
+      <mat-divider></mat-divider>
+    </a>
+  </mat-nav-list>
+  <ng-template #loadingOnList>
+    <mat-progress-bar
+      mode="indeterminate"
+      color="warn"
+      class="hide-on-large-only"
+    ></mat-progress-bar>
+  </ng-template>
+</div>
