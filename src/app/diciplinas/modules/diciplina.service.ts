@@ -20,21 +20,21 @@ export class DiciplinaService {
 
   constructor(private http: HttpClient) { }
 
-  getById(id: number): Observable<Diciplina> {
-    return this.http.get<Diciplina>(`${this.url}/diciplina/${id}`);
+  getById(id: number, institutoId: number): Observable<Diciplina> {
+    return this.http.get<Diciplina>(`${this.url}/diciplina/${id}&institutoId=${institutoId}`);
   }
 
-  getAllByInstitutoId(id: number): Observable<Diciplina[]> {
-    return this.http.get<Diciplina[]>(`${this.url}/diciplina/institito/${id}`);
+  getAllByInstitutoId(id: number, institutoId: number): Observable<Diciplina[]> {
+    return this.http.get<Diciplina[]>(`${this.url}/diciplina/institito/${id}&institutoId=${institutoId}`);
   }
 
-  list(filter: CustomFilter): Observable<Diciplina[]> {
+  list(filter: CustomFilter, institutoId: number): Observable<Diciplina[]> {
     filter = this.filterResolve(filter);
     return this.http.get<Diciplina[]>(`${this.url}/diciplina?nome=${filter.nome}&institutoId=${filter.institutoId}`);
   }
 
-  filterByNome(filter: CustomFilter): Observable<Diciplina[]> {
-    return this.http.get<Diciplina[]>(`${this.url}/diciplina/?nome=${!!filter.nome ? filter.nome : ''}`);
+  filterByNome(filter: CustomFilter, institutoId: number): Observable<Diciplina[]> {
+    return this.http.get<Diciplina[]>(`${this.url}/diciplina/?nome=${!!filter.nome ? filter.nome : ''}&institutoId=${institutoId}`);
   }
 
   save(t: Diciplina): Observable<Diciplina> {
