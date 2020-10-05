@@ -22,6 +22,7 @@ export class EstudanteService {
   emitOnDetalheButtonCliked = new EventEmitter<number>();
   emitOnEditButtonCliked = new EventEmitter<number>();
   emitOnDeleteButtonCliked = new EventEmitter<number>();
+  emitOnConfirmButtonCliked = new EventEmitter<boolean>();
 
   estudanteTable: MatTableDataSource<Estudante[]>;
   constructor(private http: HttpClient) {
