@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { LocalFormComponent } from './local-form.component';
 
@@ -6,7 +6,7 @@ describe('LocalFormComponent', () => {
   let component: LocalFormComponent;
   let fixture: ComponentFixture<LocalFormComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ LocalFormComponent ]
     })

@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { TurmaDetalheComponent } from './turma-detalhe.component';
 
@@ -6,7 +6,7 @@ describe('TurmaDetalheComponent', () => {
   let component: TurmaDetalheComponent;
   let fixture: ComponentFixture<TurmaDetalheComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ TurmaDetalheComponent ]
     })

@@ -1,14 +1,14 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { AcessDinaidComponent } from './acess-denaid.component';
+import { AcessDenaidComponent } from './acess-denaid.component';
 
 describe('AcessDinaidComponent', () => {
-  let component: AcessDinaidComponent;
-  let fixture: ComponentFixture<AcessDinaidComponent>;
+  let component: AcessDenaidComponent;
+  let fixture: ComponentFixture<AcessDenaidComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ AcessDinaidComponent ]
+      declarations: [ AcessDenaidComponent ]
     })
     .compileComponents();
   }));

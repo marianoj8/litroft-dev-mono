@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { SerialNumberNotFoundDialogComponent } from './serial-number-not-found-dialog.component';
 
@@ -6,7 +6,7 @@ describe('SerialNumberNotFoundDialogComponent', () => {
   let component: SerialNumberNotFoundDialogComponent;
   let fixture: ComponentFixture<SerialNumberNotFoundDialogComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ SerialNumberNotFoundDialogComponent ]
     })

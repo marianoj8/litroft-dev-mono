@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { MonoListComponent } from './mono-list.component';
 
@@ -6,7 +6,7 @@ describe('MonoListComponent', () => {
   let component: MonoListComponent;
   let fixture: ComponentFixture<MonoListComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ MonoListComponent ]
     })

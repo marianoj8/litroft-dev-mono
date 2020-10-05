@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { LocalListComponent } from './local-list.component';
 
@@ -6,7 +6,7 @@ describe('LocalListComponent', () => {
   let component: LocalListComponent;
   let fixture: ComponentFixture<LocalListComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ LocalListComponent ]
     })

@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { MonoFormComponent } from './mono-form.component';
 
@@ -6,7 +6,7 @@ describe('MonoFormComponent', () => {
   let component: MonoFormComponent;
   let fixture: ComponentFixture<MonoFormComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ MonoFormComponent ]
     })

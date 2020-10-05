@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { AdminInternoFormComponent } from './admin-interno-form.component';
 
@@ -6,7 +6,7 @@ describe('AdminInternoFormComponent', () => {
   let component: AdminInternoFormComponent;
   let fixture: ComponentFixture<AdminInternoFormComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ AdminInternoFormComponent ]
     })

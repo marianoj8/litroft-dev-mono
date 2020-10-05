@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { OrientadorDetalheComponent } from './orientador-detalhe.component';
 
@@ -6,7 +6,7 @@ describe('OrientadorDetalheComponent', () => {
   let component: OrientadorDetalheComponent;
   let fixture: ComponentFixture<OrientadorDetalheComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ OrientadorDetalheComponent ]
     })

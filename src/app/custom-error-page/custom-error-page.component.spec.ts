@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { CustomErrorPageComponent } from './custom-error-page.component';
 
@@ -6,7 +6,7 @@ describe('CustomErrorPageComponent', () => {
   let component: CustomErrorPageComponent;
   let fixture: ComponentFixture<CustomErrorPageComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ CustomErrorPageComponent ]
     })

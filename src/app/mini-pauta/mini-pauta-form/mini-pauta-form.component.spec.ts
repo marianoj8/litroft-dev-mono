@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { MiniPautaFormComponent } from './mini-pauta-form.component';
 
@@ -6,7 +6,7 @@ describe('MiniPautaFormComponent', () => {
   let component: MiniPautaFormComponent;
   let fixture: ComponentFixture<MiniPautaFormComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ MiniPautaFormComponent ]
     })

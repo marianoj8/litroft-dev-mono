@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { MiniPautaListComponent } from './mini-pauta-list.component';
 
@@ -6,7 +6,7 @@ describe('MiniPautaListComponent', () => {
   let component: MiniPautaListComponent;
   let fixture: ComponentFixture<MiniPautaListComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ MiniPautaListComponent ]
     })
