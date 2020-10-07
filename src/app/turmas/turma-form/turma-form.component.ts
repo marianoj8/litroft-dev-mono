@@ -40,6 +40,7 @@ export class TurmaFormComponent implements OnInit {
   private curso: Curso = new Curso();
   private classe: Classe = new Classe();
   nivel: boolean;
+  private entityId = Number.parseInt(localStorage.getItem('entityId'), 10);
 
   constructor(
     private router: Router,
@@ -59,7 +60,7 @@ export class TurmaFormComponent implements OnInit {
     this.turmaService.onChangeContext.emit(true);
     this.initForms();
 
-    this.cursos$ = this.cursoService.list()
+    this.cursos$ = this.cursoService.list(this.entityId)
       .pipe(catchError(err => {
         this.dialogService.open(ErrorLoadingComponent);
         this.cursoError$.next(true);
