@@ -30,7 +30,7 @@ export class DiciplinaService {
 
   list(filter: CustomFilter, institutoId: number): Observable<Diciplina[]> {
     filter = this.filterResolve(filter);
-    return this.http.get<Diciplina[]>(`${this.url}/diciplina?nome=${filter.nome}&institutoId=${filter.institutoId}`);
+    return this.http.get<Diciplina[]>(`${this.url}/diciplina?nome=${filter.nome}&institutoId=${institutoId}`);
   }
 
   filterByNome(filter: CustomFilter, institutoId: number): Observable<Diciplina[]> {
