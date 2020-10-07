@@ -28,15 +28,15 @@ export class CursoService {
     return this.http.get<Curso>(`${this.url}/interno/curso/${id}`);
   }
 
-  list(): Observable<Curso[]> {
-    return this.http.get<Curso[]>(`${this.url}/interno/curso/l`);
+  list(institutoId: number): Observable<Curso[]> {
+    return this.http.get<Curso[]>(`${this.url}/interno/curso/l?institutoId=${institutoId}`);
   }
 
   publicList(institutoId: number): Observable<Curso[]> {
     return this.http.get<Curso[]>(`${this.url}/curso/public/instituto/${institutoId}`);
   }
 
-  filterByNomeDuracao(q: CustomFilter): Observable<Curso[]> {
+  filterByNomeDuracao(q: CustomFilter, instituoId: number): Observable<Curso[]> {
     return this.http.get<Curso[]>(`${this.url}/interno/curso/l?nome=${!!q.nome ? q.nome : ''}&duracao=${!!q.duracao ? q.duracao : 1}`)
       ;
   }
