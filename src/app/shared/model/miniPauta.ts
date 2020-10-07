@@ -16,7 +16,6 @@ export class MiniPauta implements CustomAbstractEntity {
   totalModified: number;
   estudante: Estudante;
   curso: Curso;
-  periodo: Periodo;
   turma: Turma;
   classe: Classe;
   diciplina: Diciplina;
