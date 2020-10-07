@@ -24,7 +24,7 @@ export class CursosComponent implements OnInit, OnDestroy {
   cursosError$ = new Subject<boolean>();
   filtro: CustomFilter = new CustomFilter();
   private sub: Subscription;
-
+  private entityId = Number.parseInt(localStorage.getItem('entityId'), 10);
   anos: number[] = [1, 2, 3, 4, 5, 6];
 
   constructor(
@@ -42,7 +42,7 @@ export class CursosComponent implements OnInit, OnDestroy {
       context => this.onChangeContext = context
     );
 
-    this.cursos$ = this.cursoService.list()
+    this.cursos$ = this.cursoService.list(this.entityId)
       .pipe(catchError(err => {
         this.cursosError$.next(true);
         return of([]);

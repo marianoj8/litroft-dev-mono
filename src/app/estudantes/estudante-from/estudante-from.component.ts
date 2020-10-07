@@ -81,7 +81,7 @@ export class EstudanteFromComponent implements OnInit {
   ngOnInit() {
     this.estudanteService.onChangeContext.emit(true);
     this.initForms();
-    this.cursos$ = this.cursoSerice.list()
+    this.cursos$ = this.cursoSerice.list(this.entityId)
       .pipe(catchError(err => {
         this.dialogService.open(ErrorLoadingComponent);
         this.cursoError$.next(true);

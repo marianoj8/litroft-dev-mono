@@ -47,7 +47,7 @@ export class EstudanteFilterComponent implements OnInit {
     this.cursos = [];
     this.years = [];
 
-    this.cursoSerice.list()
+    this.cursoSerice.list(this.entityId)
       .subscribe(onValue => this.cursos = onValue);
 
     this.formGroup.controls.curso.valueChanges

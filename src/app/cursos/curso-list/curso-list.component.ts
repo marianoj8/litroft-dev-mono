@@ -30,6 +30,7 @@ export class CursoListComponent implements OnInit {
   cursos: MatTableDataSource<Curso>;
   cursosList: Curso[] = [];
   error$ = new Subject<boolean>();
+  private entityId = Number.parseInt(localStorage.getItem('entityId'), 10);
 
 
 
@@ -83,7 +84,7 @@ export class CursoListComponent implements OnInit {
   }
 
   onFilterFromServer(data: CustomFilter) {
-    this.sub = this.cursoService.filterByNomeDuracao(data).subscribe(
+    this.sub = this.cursoService.filterByNomeDuracao(data, this.entityId).subscribe(
       (next: Curso[]) => this.cursosList = next
     );
   }

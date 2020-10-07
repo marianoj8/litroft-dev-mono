@@ -23,6 +23,7 @@ export class EstudantesComponent implements OnInit, OnDestroy {
   cursos$: Observable<Curso[]>;
   cursosError$ = new Subject<boolean>();
   filtro: CustomFilter = new CustomFilter();
+  private entityId = Number.parseInt(localStorage.getItem('entityId'), 10);
 
   constructor(
     public estudanteService: EstudanteService,
@@ -37,7 +38,7 @@ export class EstudantesComponent implements OnInit, OnDestroy {
       context => this.onChangeContext = context
     );
 
-    this.cursos$ = this.cursoSerice.list()
+    this.cursos$ = this.cursoSerice.list(this.entityId)
       .pipe(catchError(err => {
         this.cursosError$.next(true);
         return of([]);

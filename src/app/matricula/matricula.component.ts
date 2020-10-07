@@ -24,6 +24,7 @@ export class MatriculaComponent implements OnInit, OnDestroy {
   cursos$: Observable<Curso[]>;
   cursosError$ = new Subject<boolean>();
   filtro: CustomFilter = new CustomFilter();
+  private entityId = Number.parseInt(localStorage.getItem('entityId'), 10);
 
   constructor(
     public inscricaoService: InscricaoService,
@@ -38,7 +39,7 @@ export class MatriculaComponent implements OnInit, OnDestroy {
       context => this.onChangeContext = context
     );
 
-    this.cursos$ = this.cursoSerice.list()
+    this.cursos$ = this.cursoSerice.list(this.entityId)
       .pipe(catchError((err: HttpErrorResponse) => {
         if (err.status === 403) {
           this.dialogService.open(ForbiddenErrorDialogComponent);

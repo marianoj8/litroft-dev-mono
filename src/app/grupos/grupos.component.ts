@@ -21,6 +21,7 @@ export class GruposComponent implements OnInit, OnDestroy {
   cursosError$ = new Subject<boolean>();
   filter = new CustomFilter();
   private sub: Subscription;
+  private entityId = Number.parseInt(localStorage.getItem('entityId'), 10);
 
   constructor(
     public grupoService: GrupoService,
@@ -34,7 +35,7 @@ export class GruposComponent implements OnInit, OnDestroy {
     this.sub = this.grupoService.onChangeContext.subscribe(
       context => this.onChangeContext = context);
 
-    this.cursos$ = this.cursoSerice.list()
+    this.cursos$ = this.cursoSerice.list(this.entityId)
       .pipe(catchError(err => {
         this.cursosError$.next(true);
         return of([]);

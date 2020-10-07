@@ -110,7 +110,7 @@ export class GrupoFormComponent implements OnInit {
 
     this.creatYears();
 
-    this.cursos$ = this.cursoService.list();
+    this.cursos$ = this.cursoService.list(this.entityId);
     this.orientadores$ = this.orientadorService.list();
     this.showprogressBar = false;
 
