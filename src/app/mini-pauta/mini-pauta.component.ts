@@ -71,6 +71,7 @@ export class MiniPautaComponent implements OnInit, OnDestroy {
   }
 
   private initFiealds() {
+    this.filter.institutoId = this.entityId;
     this.formGroupSearch.controls.anoLetivo.valueChanges
       .subscribe((value) => {
         this.filter.anoletivo = value;
