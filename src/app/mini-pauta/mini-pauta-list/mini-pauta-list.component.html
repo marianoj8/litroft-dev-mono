@@ -8,76 +8,89 @@
     <ng-container matColumnDef="nome">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Nome</th>
       <td mat-cell *matCellDef="let pauta">
-        {{ pauta?.estudante.nome +' '+ pauta?.estudante.sobreNome}}
+        <label>
+          {{ pauta?.estudante.nome +' '+ pauta?.estudante.sobreNome}}
+        </label>
     </ng-container>
 
- <ng-container matColumnDef="diciplina">
+    <ng-container matColumnDef="diciplina">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Dsiciplina</th>
       <td mat-cell *matCellDef="let pauta">
-        {{ pauta?.diciplina.nome }}
+        <label>
+          {{ pauta?.diciplina.nome }}
+        </label>
       </td>
     </ng-container>
 
     <ng-container matColumnDef="p1">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>P1</th>
       <td mat-cell *matCellDef="let pauta">
-        {{ pauta?.p1 }}
+        <label *ngIf="pauta?.p1 <= 9" style="color: red;">{{ pauta?.p1 }}</label>
+        <label *ngIf="pauta?.p1 > 9" style="color: blue;">{{ pauta?.p1 }}</label>
       </td>
     </ng-container>
 
     <ng-container matColumnDef="p2">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>P2</th>
       <td mat-cell *matCellDef="let pauta">
-        {{ pauta?.p2 }}
+        <label *ngIf="pauta?.p2 <= 9" style="color: red;">{{ pauta?.p2 }}</label>
+        <label *ngIf="pauta?.p2 > 9" style="color: blue;">{{ pauta?.p2 }}</label>
       </td>
     </ng-container>
 
     <ng-container matColumnDef="m1">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>I Trimestre</th>
       <td mat-cell *matCellDef="let pauta">
-        {{ pauta?.m1 }}
+        <label *ngIf="pauta?.m1 <= 9" style="color: red;">{{ pauta?.m1 }}</label>
+        <label *ngIf="pauta?.m1 > 9" style="color: blue;">{{ pauta?.m1 }}</label>
       </td>
     </ng-container>
 
     <ng-container matColumnDef="p3">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>P1</th>
       <td mat-cell *matCellDef="let pauta">
-        {{ pauta?.p3 }}
+        <label *ngIf="pauta?.p3 <= 9" style="color: red;">{{ pauta?.p3 }}</label>
+        <label *ngIf="pauta?.p3 > 9" style="color: blue;">{{ pauta?.p3 }}</label>
       </td>
     </ng-container>
 
     <ng-container matColumnDef="p4">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>P2</th>
       <td mat-cell *matCellDef="let pauta">
-        {{ pauta?.p4 }}
+        <label *ngIf="pauta.p4 <= 9" style="color: red;">{{ pauta?.p4 }}</label>
+        <label *ngIf="pauta.p4 > 9" style="color: blue;"></label>
       </td>
     </ng-container>
 
     <ng-container matColumnDef="m2">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>II Trimestre</th>
       <td mat-cell *matCellDef="let pauta">
-        {{ pauta?.m2 }}
+        <label *ngIf="pauta.m2 <= 9" style="color: red;">{{ pauta?.m2 }}</label>
+        <label *ngIf="pauta.m2 > 9" style="color: blue;">{{ pauta?.m2 }}</label>
       </td>
     </ng-container>
 
     <ng-container matColumnDef="p5">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>P1</th>
       <td mat-cell *matCellDef="let pauta">
-        {{ pauta?.p5 }}
+        <label *ngIf="pauta.p5 <= 9" style="color: red;">{{ pauta?.p5 }}</label>
+        <label *ngIf="pauta.p5 > 9" style="color: blue;">{{ pauta?.p5 }}</label>
       </td>
     </ng-container>
 
     <ng-container matColumnDef="p6">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>P2</th>
       <td mat-cell *matCellDef="let pauta">
-        {{ pauta?.p5 }}
+        <label *ngIf="pauta.p6 <= 9" style="color: red;">{{ pauta?.p6 }}</label>
+        <label *ngIf="pauta.p6 > 9" style="color: blue;">{{ pauta?.p6 }}</label>
       </td>
     </ng-container>
 
     <ng-container matColumnDef="m3">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>III Trimestre</th>
       <td mat-cell *matCellDef="let pauta">
-        {{ pauta?.m3 }}
+        <label *ngIf="pauta.m3 <= 9" style="color: red;">{{ pauta?.m3 }}</label>
+        <label *ngIf="pauta.m3 > 9" style="color: blue;">{{ pauta?.m3 }}</label>
       </td>
     </ng-container>
 
@@ -102,13 +115,8 @@
     <ng-container matColumnDef="delete">
       <th mat-header-cell *matHeaderCellDef>Excluir</th>
       <td mat-cell *matCellDef="let pauta">
-        <button
-          mat-raised-button
-          matTooltipShowDelay="2000"
-          matTooltipHideDelay="2000"
-          matTooltip="Uma vez excluido não tem como reverter as alterações."
-          (click)="openDeleteDialog(pauta.id)"
-        >
+        <button mat-raised-button matTooltipShowDelay="2000" matTooltipHideDelay="2000"
+          matTooltip="Uma vez excluido não tem como reverter as alterações." (click)="openDeleteDialog(pauta.id)">
           <mat-icon color="warn">delete</mat-icon>
         </button>
       </td>
@@ -120,11 +128,7 @@
 
     <tr mat-header-row *matHeaderRowDef="displaydColumns; sticky: true"></tr>
     <tr mat-row *matRowDef="let row; columns: displaydColumns"></tr>
-    <tr
-      mat-footer-row
-      *matFooterRowDef="['noData']"
-      [ngClass]="{ hide: true }"
-    ></tr>
+    <tr mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{ hide: true }"></tr>
   </table>
 
   <ng-template #loading>
@@ -142,29 +146,18 @@
 <!-- Modo Mobile inicializado  -->
 
 <div class="hide-on-large-only">
-  <mat-nav-list
-    class="mat-elevation-z8 container"
-    *ngIf="miniPautas; else loadingOnList"
-  >
+  <mat-nav-list class="mat-elevation-z8 container" *ngIf="miniPautas; else loadingOnList">
     <button class="btn-large" mat-raised-button color="primary" (click)="add()">
       <mat-icon>add</mat-icon>
       Cadastrar Nova Especialidade
     </button>
-    <a
-      mat-list-item
-      (click)="openMoreOptionDialog(item.id)"
-      *ngFor="let item of miniPautasList"
-    >
+    <a mat-list-item (click)="openMoreOptionDialog(item.id)" *ngFor="let item of miniPautasList">
       <mat-icon matListIcon class="mat-18">beenhere</mat-icon>
       <h5 matLine>{{ item?.estudante.nome }}</h5>
       <mat-divider></mat-divider>
     </a>
   </mat-nav-list>
   <ng-template #loadingOnList>
-    <mat-progress-bar
-      mode="indeterminate"
-      color="warn"
-      class="hide-on-large-only"
-    ></mat-progress-bar>
+    <mat-progress-bar mode="indeterminate" color="warn" class="hide-on-large-only"></mat-progress-bar>
   </ng-template>
 </div>
