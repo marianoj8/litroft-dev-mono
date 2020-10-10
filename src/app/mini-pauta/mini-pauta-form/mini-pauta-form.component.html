@@ -41,7 +41,7 @@
             placeholder="Classe"
           >
             <mat-option
-              *ngFor="let classe of classes | async"
+              *ngFor="let classe of classes"
               [value]="classe.id"
             >
               {{ classe?.descricao }}
@@ -63,7 +63,7 @@
             placeholder="Turma"
           >
             <mat-option
-              *ngFor="let turma of turmas$ | async"
+              *ngFor="let turma of turmas"
               [value]="turma.id"
             >
               {{ turma?.sigla }}
