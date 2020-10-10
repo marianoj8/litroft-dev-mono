@@ -46,7 +46,7 @@ export class MiniPautaFormComponent implements OnInit {
   formGroup04: FormGroup;
   formGroup05: FormGroup;
   cursos: Curso[];
-  turmas$: Observable<Turma[]>;
+  turmas: Turma[];
   cursoError$ = new Subject<boolean>();
   turmaError$ = new Subject<boolean>();
   periodos$: Observable<Periodo[]>;
@@ -98,15 +98,15 @@ export class MiniPautaFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.estudanteService.onChangeContext.emit(true);
+    this.miniPautaService.onChangeContext.emit(true);
     this.initForms();
-    this.cursoService.list().subscribe((onValue) => {
+    this.cursoService.list(this.entityId).subscribe((onValue) => {
       this.cursos = onValue;
     });
     this.classeService.list().subscribe((onValue) => {
       this.classes = onValue;
     });
-    this.turmas$ = this.turmaService.list(this.entityId);
+    this.turmaService.list(this.entityId).subscribe((value) => this.turmas = value);
     this.miniPauta = new MiniPauta();
 
 
@@ -146,7 +146,7 @@ export class MiniPautaFormComponent implements OnInit {
 
     }
 
-    this.cursoSerice.list()
+    this.cursoSerice.list(this.entityId)
       .pipe(catchError(err => {
         this.dialogService.open(ErrorLoadingComponent);
         this.cursoError$.next(true);
@@ -158,6 +158,7 @@ export class MiniPautaFormComponent implements OnInit {
     this.formGroup03.controls.p1.valueChanges
       .subscribe((onValue: number) => {
         this.valor1 = onValue;
+        this.miniPauta.p1 = onValue;
         this.formGroup03.patchValue({
           media: this.mediaCalc1()
         });
@@ -166,6 +167,7 @@ export class MiniPautaFormComponent implements OnInit {
     this.formGroup03.controls.p2.valueChanges
       .subscribe((onValue: number) => {
         this.valor2 = onValue;
+        this.miniPauta.p2 = onValue;
         this.formGroup03.patchValue({
           media: this.mediaCalc1()
         });
@@ -203,11 +205,20 @@ export class MiniPautaFormComponent implements OnInit {
         });
       });
 
-    // this.formGroup05.controls.curso.valueChanges
-    //   .subscribe((onValue) => {
-    //     this.turmaService.findAllByCurso(onValue)
-    //       .subscribe(onValues => this.turmas = onValues);
-    //   });
+    this.formGroup01.controls.curso.valueChanges
+      .subscribe((onValue: number) => {
+        this.filter.cursoId = onValue;
+        this.filter.classeId = onValue;
+        this.turmaService.filterByCursoAndClasse(this.filter, this.entityId)
+          .subscribe();
+      });
+
+    this.formGroup01.controls.classe.valueChanges
+      .subscribe((onValue: number) => {
+        this.filter.classeId = onValue;
+        this.turmaService.filterByCursoAndClasse(this.filter, this.entityId)
+          .subscribe((value) => this.turmas = value);
+      });
 
     if (this.router.url.match('/edit')) {
       this.activatedRoute.params
@@ -308,7 +319,7 @@ export class MiniPautaFormComponent implements OnInit {
 
   private save(stepper: MatVerticalStepper, state): void {
 
-    this.miniPauta.periodo = new Periodo(this.formGroup01.controls.periodo.value);
+    this.miniPauta.curso = new Curso(this.formGroup01.controls.curso.value);
     this.miniPauta.classe = new Classe(this.formGroup01.controls.classe.value);
     this.miniPauta.turma = new Turma(this.formGroup01.controls.turma.value);
 
@@ -319,13 +330,16 @@ export class MiniPautaFormComponent implements OnInit {
     this.miniPauta.p2 = this.formGroup03.controls.p2.value;
     this.miniPauta.m1 = this.formGroup03.controls.media.value;
 
-    this.miniPauta.p1 = this.formGroup04.controls.p1.value;
-    this.miniPauta.p2 = this.formGroup04.controls.p2.value;
+    this.miniPauta.p3 = this.formGroup04.controls.p1.value;
+    this.miniPauta.p4 = this.formGroup04.controls.p2.value;
     this.miniPauta.m2 = this.formGroup04.controls.media.value;
 
-    this.miniPauta.p1 = this.formGroup05.controls.p1.value;
-    this.miniPauta.p2 = this.formGroup05.controls.p2.value;
+    this.miniPauta.p5 = this.formGroup05.controls.p1.value;
+    this.miniPauta.p6 = this.formGroup05.controls.p2.value;
     this.miniPauta.m3 = this.formGroup05.controls.media.value;
+
+    console.log(this.miniPauta);
+
 
     this.miniPauta.instituto = new Instituto(this.estudante.adminInterno.instituto.id);
     if (this.estudante.curso) {
