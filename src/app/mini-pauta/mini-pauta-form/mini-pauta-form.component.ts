@@ -226,37 +226,38 @@ export class MiniPautaFormComponent implements OnInit {
           this.id = data.id;
         });
 
-      this.estudanteService.getById(this.id, this.entityId)
+      this.miniPautaService.getMiniPautaById(this.id, this.entityId)
         .subscribe(data => {
-          this.estudante = data;
+          this.miniPauta = data;
+
           this.formGroup01.patchValue({
-            nome: this.estudante.nome,
-            sobrenome: this.estudante.sobreNome
+            curso: this.miniPauta.curso.id,
+            classe: this.miniPauta.classe.id,
+            turma: this.miniPauta.turma.id
           });
 
           this.formGroup02.patchValue({
-            sexo: this.estudante.sexo,
-            dataNascimento: this.estudante.dataNascimento,
-            bi: this.estudante.bi
+            estudante: this.miniPauta.estudante.id,
+            diciplina: this.miniPauta.diciplina.id
           });
 
           this.formGroup03.patchValue({
-            fone: this.estudante.fone,
-            email: this.estudante.email
+            p1: this.miniPauta.p1,
+            p2: this.miniPauta.p2,
+            media: this.miniPauta.m1
           });
 
           this.formGroup04.patchValue({
-            provincia: this.estudante.provincia.id,
-            municipio: this.estudante.municipio.id,
-            endereco: this.estudante.endereco
+            p1: this.miniPauta.p3,
+            p2: this.miniPauta.p4,
+            media: this.miniPauta.m2
           });
 
           this.formGroup05.patchValue({
-            numeroProcesso: this.estudante.numeroProcesso,
-            curso: this.estudante.curso.id,
-            turma: this.estudante.turma.id
+            p1: this.miniPauta.p5,
+            p2: this.miniPauta.p6,
+            media: this.miniPauta.m3
           });
-
         });
     }
   }
