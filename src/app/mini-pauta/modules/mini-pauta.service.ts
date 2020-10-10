@@ -22,6 +22,13 @@ export class MiniPautaService {
   constructor(public http: HttpClient) {
   }
 
+  public getMiniPautaById(id: number, entityId: number): Observable<MiniPauta> {
+    return this.http.get<MiniPauta>(`${this.url}/interno/miniPauta/${id}?institutoId=${entityId}`)
+      .pipe(
+        take(1)
+      );
+  }
+
   public getMiniPautaByProfessor(filter: CustomFilter, entityId: number): Observable<MiniPauta[]> {
     return this.http.get<MiniPauta[]>(`${this.url}/interno/miniPauta?institutoId=${entityId}&classeId=${filter.classeId}&turmaId=${filter.turmaId}&diciplinaId=${filter.diciplinaId}`)
       .pipe(
