@@ -18,15 +18,12 @@ export class MiniPautaService {
   emitOnDetalheButtonCliked = new EventEmitter<number>();
   emitOnEditButtonCliked = new EventEmitter<number>();
   emitOnDeleteButtonCliked = new EventEmitter<number>();
-  private entityId = localStorage.getItem('entityId');
 
   constructor(public http: HttpClient) {
-    this.entityId = localStorage.getItem('entityId');
   }
 
-  public getMiniPautaByProfessor(diciplina: string): Observable<MiniPauta[]> {
-    this.entityId = localStorage.getItem('entityId');
-    return this.http.get<MiniPauta[]>(`${this.url}/interno/miniPauta?institutoId=${this.entityId}&diciplinaNome=${diciplina}`)
+  public getMiniPautaByProfessor(filter: CustomFilter, entityId: number): Observable<MiniPauta[]> {
+    return this.http.get<MiniPauta[]>(`${this.url}/interno/miniPauta?institutoId=${entityId}&classeId=${filter.classeId}&turmaId=${filter.turmaId}&diciplinaId=${filter.diciplinaId}`)
       .pipe(
         take(1)
       );
