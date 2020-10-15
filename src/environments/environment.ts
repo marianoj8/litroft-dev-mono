@@ -4,7 +4,6 @@
 
 export const environment = {
   production: false,
-  // API: '/apiv1/litroft/api/v1/rm',
   LOGIN: '/apiv1/login',
   API: '/apiv1/litroft/api/v1/rm'
 };
