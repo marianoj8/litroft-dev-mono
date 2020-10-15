@@ -31,8 +31,7 @@ export class MiniPautaListComponent implements OnInit, OnDestroy {
   miniPautasList: MiniPauta[] = [];
   error$ = new Subject<boolean>();
   private sub: Subscription;
-
-
+  private entityId = Number.parseInt(localStorage.getItem('entityId'), 10);
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
@@ -64,9 +63,14 @@ export class MiniPautaListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.filtro.anoletivo = 2020;
+    this.filtro.cursoId = 1;
+    this.filtro.classeId = 11;
+    this.filtro.turmaId = 1;
+    this.filtro.diciplinaId = 1;
     this.service.onChangeContext.emit(false);
-    this.sub = this.service.findValueParams
-      .subscribe(next => this.onRefrash(next));
+    this.sub = this.service.findValueParamFromServer
+      .subscribe((next: CustomFilter) => this.onRefrash(next));
 
     this.sub = this.service.findValueParam
       .subscribe(next => this.miniPautas.filter = next);
@@ -87,12 +91,12 @@ export class MiniPautaListComponent implements OnInit, OnDestroy {
   }
 
   onFilterFromServer(data: CustomFilter) {
-    this.sub = this.service.getMiniPautaByProfessor('').subscribe(
+    this.sub = this.service.getMiniPautaByProfessor(data, this.entityId).subscribe(
       next => this.miniPautasList = next);
   }
 
   onRefrash(data?: CustomFilter) {
-    this.sub = this.service.getMiniPautaByProfessor('')
+    this.sub = this.service.getMiniPautaByProfessor(data, this.entityId)
       .pipe(
         catchError((err: HttpErrorResponse) => {
 
