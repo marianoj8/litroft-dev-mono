@@ -13,7 +13,7 @@ export class Grupo implements CustomAbstractEntity {
   descricao: string;
   posicao: string;
   turma: Turma;
-  anoLetivo: number;
+  anoLetivo: string;
   monoViewsCount: number;
   orientador: Orientador;
   curso: Curso;

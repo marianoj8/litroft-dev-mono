@@ -11,7 +11,7 @@ export class CustomFilter {
   diciplinaId: number;
   turma: string;
   duracao: number;
-  anoletivo: number;
+  anoLetivo: string;
   isGroup: boolean;
   provinciaId: number;
   entrada: number;

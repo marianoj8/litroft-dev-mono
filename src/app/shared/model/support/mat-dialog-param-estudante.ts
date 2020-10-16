@@ -26,7 +26,7 @@ export class MatDailogParamEstudante {
   ensinoNivel: EnsinoNivel;
   classe: Classe;
   periodo: Periodo;
-  anoLetivo: number;
+  anoLetivo: string;
   adminInterno: AdminInterno;
   instituto: Instituto;
   numeroSerie: string;
