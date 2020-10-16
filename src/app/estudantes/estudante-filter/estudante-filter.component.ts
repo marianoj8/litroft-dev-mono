@@ -38,8 +38,8 @@ export class EstudanteFilterComponent implements OnInit {
     this.formGroup = this.formBuilder.group({
       curso: [null],
       turma: [null],
-      anoletivoType: [3],
-      anoletivo: [new Date().getFullYear()],
+      anoLetivoType: [3],
+      anoLetivo: [new Date().getFullYear()],
       sexo: 'Todos'
     });
 
@@ -70,17 +70,17 @@ export class EstudanteFilterComponent implements OnInit {
       .subscribe((onValue) => this.onSelectedSexo(onValue)
       );
 
-    this.formGroup.controls.anoletivoType.valueChanges
+    this.formGroup.controls.anoLetivoType.valueChanges
       .subscribe((onValue) => {
         if (onValue === 3) {
           this.isAllYears = false;
         } else {
           this.isAllYears = true;
         }
-        this.filter.anoletivoType = onValue;
+        this.filter.anoLetivoType = onValue;
       });
 
-    this.formGroup.controls.anoletivo.valueChanges
+    this.formGroup.controls.anoLetivo.valueChanges
       .subscribe((onValue) => {
         this.filter.entrada = onValue;
         this.filter.finalista = onValue;

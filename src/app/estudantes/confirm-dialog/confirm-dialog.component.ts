@@ -33,7 +33,7 @@ export class ConfirmDialogComponent implements OnInit {
   public showProgress = true;
   public searchTurma = '';
   public config: ConfigTable = new ConfigTable();
-  formAnoLetivo: FormGroup;
+  formanoLetivo: FormGroup;
 
   constructor(
     @Inject(MAT_DIALOG_DATA)
@@ -54,19 +54,19 @@ export class ConfirmDialogComponent implements OnInit {
       this.years.push(i);
     }
 
-    this.formAnoLetivo = this.formBuilder.group({
+    this.formanoLetivo = this.formBuilder.group({
       ano: [new Date().getFullYear()],
       textSearch: ['']
     });
 
-    this.formAnoLetivo.controls.ano.valueChanges
+    this.formanoLetivo.controls.ano.valueChanges
       .pipe(debounceTime(650))
       .subscribe((value) => {
 
         this.configService.getConfigByInstituto(this.entityId)
         .subscribe((onVlaue) => this.config = onVlaue);
 
-        this.filter.anoletivo = value;
+        this.filter.anoLetivo = value;
         this.filter.cursoId = this.data.curso.id;
         this.filter.classeId = this.data.classe.id;
         this.turmaService.filterByCursoAndClasse(this.filter, this.entityId)
@@ -77,7 +77,7 @@ export class ConfirmDialogComponent implements OnInit {
           });
       });
 
-    this.formAnoLetivo.controls.textSearch.valueChanges
+    this.formanoLetivo.controls.textSearch.valueChanges
       .pipe(debounceTime(650))
       .subscribe((value) => {
 
@@ -137,7 +137,7 @@ export class ConfirmDialogComponent implements OnInit {
       this.filter.cursoId = e.curso.id;
       this.filter.classeId = e.classe.id;
       this.filter.turmaId = e.id;
-      this.filter.anoletivo = this.filter.anoletivo;
+      this.filter.anoLetivo = this.filter.anoLetivo;
       this.estudanteService.countByCursoAndTurma(this.filter, this.entityId)
         .pipe(catchError((err: HttpErrorResponse) => {
           if (err.status === 403) {

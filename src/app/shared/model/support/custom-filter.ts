@@ -16,7 +16,7 @@ export class CustomFilter {
   provinciaId: number;
   entrada: number;
   finalista: number;
-  anoletivoType: number;
+  anoLetivoType: number;
   nivelId: number;
   institutoId: number;
   nivel: string;

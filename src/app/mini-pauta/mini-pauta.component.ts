@@ -63,7 +63,7 @@ export class MiniPautaComponent implements OnInit, OnDestroy {
     }
 
     this.initFiealds();
-    this.filter.anoletivo = this.formGroupSearch.controls.anoLetivo.value;
+    this.filter.anoLetivo = this.formGroupSearch.controls.anoLetivo.value;
     this.formGroupSearch.controls.estudanteNome.valueChanges
       .subscribe((value) => {
         this.findFromServer(value);
@@ -74,7 +74,7 @@ export class MiniPautaComponent implements OnInit, OnDestroy {
     this.filter.institutoId = this.entityId;
     this.formGroupSearch.controls.anoLetivo.valueChanges
       .subscribe((value) => {
-        this.filter.anoletivo = value;
+        this.filter.anoLetivo = value;
       });
     this.fillSelectCurso();
     this.formGroupSearch.controls.curso.valueChanges

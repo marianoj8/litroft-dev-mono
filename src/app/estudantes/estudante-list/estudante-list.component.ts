@@ -232,7 +232,7 @@ export class EstudanteListComponent implements OnInit, OnDestroy {
   }
 
   onFiltered(data?: CustomFilter) {
-    if (data.anoletivoType === 1) {
+    if (data.anoLetivoType === 1) {
       this.sub.push(this.service.filterByAllAtributsEntrada(data, this.entityId)
         .pipe(
           catchError((err: HttpErrorResponse) => {
@@ -259,7 +259,7 @@ export class EstudanteListComponent implements OnInit, OnDestroy {
             this.estudantes.sort = this.sort;
             this.estudantesList = this.estudantes.data;
           }));
-    } else if (data.anoletivoType === 2) {
+    } else if (data.anoLetivoType === 2) {
       this.sub.push(this.service.filterByAllAtributsFinalista(data, this.entityId)
         .pipe(
           catchError((err: HttpErrorResponse) => {

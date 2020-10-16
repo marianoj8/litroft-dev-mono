@@ -63,7 +63,7 @@ export class MiniPautaListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.filtro.anoletivo = 2020;
+    this.filtro.anoLetivo = '2020';
     this.filtro.cursoId = 1;
     this.filtro.classeId = 11;
     this.filtro.turmaId = 1;

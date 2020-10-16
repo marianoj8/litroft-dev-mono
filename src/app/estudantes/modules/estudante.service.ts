@@ -51,7 +51,7 @@ export class EstudanteService {
   countByCursoAndTurma(query: CustomFilter, entityId: number) {
     query = this.filterResolve(query);
     return this.http
-      .get(`${this.url}/interno/estudante/count?cursoId=${query.cursoId}&classeId=${query.classeId}&turmaId=${query.turmaId}&anoLetivo=${query.anoletivo}&institutoId=${entityId}`)
+      .get(`${this.url}/interno/estudante/count?cursoId=${query.cursoId}&classeId=${query.classeId}&turmaId=${query.turmaId}&anoLetivo=${query.anoLetivo}&institutoId=${entityId}`)
       .pipe(delay(1000));
   }
 
@@ -124,7 +124,7 @@ export class EstudanteService {
     query.turma = query.turma === undefined ? '' : query.turma;
     query.sexo = query.sexo === undefined ? '' : query.sexo;
     query.isGroup = query.isGroup === undefined ? false : query.isGroup;
-    query.anoletivo = query.anoletivo === undefined ? new Date().getFullYear() : query.anoletivo;
+    query.anoLetivo = query.anoLetivo === undefined ? new Date().getFullYear().toString() : query.anoLetivo;
     query.entrada = query.entrada === undefined ? new Date().getFullYear() : query.entrada;
     query.finalista = query.finalista === undefined ? new Date().getFullYear() : query.finalista;
     return query;

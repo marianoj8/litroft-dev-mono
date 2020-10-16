@@ -95,7 +95,7 @@ export class InscricaoService {
     query.turma = query.turma === undefined ? '' : query.turma;
     query.sexo = query.sexo === undefined ? '' : query.sexo;
     query.isGroup = query.isGroup === undefined ? false : query.isGroup;
-    query.anoletivo = query.anoletivo === undefined ? new Date().getFullYear() : query.anoletivo;
+    query.anoLetivo = query.anoLetivo === undefined ? new Date().getFullYear().toString() : query.anoLetivo;
     query.entrada = query.entrada === undefined ? new Date().getFullYear() : query.entrada;
     query.finalista = query.finalista === undefined ? new Date().getFullYear() : query.finalista;
     return query;
