@@ -108,15 +108,17 @@ export class ProjetoListComponent implements OnInit {
       )
       .subscribe(
         next => {
-          const array = next.map((item: Projeto) => {
-            return {
-              ...item
-            };
+          if (next !== null) {
+            const array = next.map((item: Projeto) => {
+              return {
+                ...item
+              };
 
-          });
-          this.projetos = new MatTableDataSource(array);
-          this.projetos.sort = this.sort;
-          this.projetosList = this.projetos.data;
+            });
+            this.projetos = new MatTableDataSource(array);
+            this.projetos.sort = this.sort;
+            this.projetosList = this.projetos.data;
+          }
         });
   }
 

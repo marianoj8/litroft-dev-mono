@@ -107,15 +107,18 @@ export class GrupoListComponent implements OnInit, OnDestroy {
       )
       .subscribe(
         next => {
-          const array = next.map((item: Grupo) => {
-            return {
-              ...item
-            };
+          if (next !== null) {
 
-          });
-          this.grupos = new MatTableDataSource(array);
-          this.grupos.sort = this.sort;
-          this.gruposList = this.grupos.data;
+            const array = next.map((item: Grupo) => {
+              return {
+                ...item
+              };
+
+            });
+            this.grupos = new MatTableDataSource(array);
+            this.grupos.sort = this.sort;
+            this.gruposList = this.grupos.data;
+          }
         });
   }
 

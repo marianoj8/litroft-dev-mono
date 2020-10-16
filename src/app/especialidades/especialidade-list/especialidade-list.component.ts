@@ -100,15 +100,17 @@ export class EspecialidadeListComponent implements OnInit, OnDestroy {
       )
       .subscribe(
         next => {
-          const array = next.map((item: Especialidade) => {
-            return {
-              ...item
-            };
+          if (next !== null) {
+            const array = next.map((item: Especialidade) => {
+              return {
+                ...item
+              };
 
-          });
-          this.especialidades = new MatTableDataSource(array);
-          this.especialidades.sort = this.sort;
-          this.especialidadesList = this.especialidades.data;
+            });
+            this.especialidades = new MatTableDataSource(array);
+            this.especialidades.sort = this.sort;
+            this.especialidadesList = this.especialidades.data;
+          }
         });
   }
 
