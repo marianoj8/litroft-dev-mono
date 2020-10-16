@@ -1,6 +1,7 @@
 import { CoordenacaoComponent } from './../coordenacao.component';
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
+import { CoordenacaoListComponent } from '../coordenacao-list/coordenacao-list.component';
 
 const routes: Routes = [
   {
@@ -9,7 +10,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: null
+        component: CoordenacaoListComponent
       }
     ]
   }
