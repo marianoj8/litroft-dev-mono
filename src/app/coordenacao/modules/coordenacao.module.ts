@@ -1,3 +1,4 @@
+import { MaterialModule } from './../../material/material.module';
 import { CoordernacaoRoutingModule } from './coordenacao-routing.module';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
@@ -12,7 +13,8 @@ import { CoordenacaoListComponent } from '../coordenacao-list/coordenacao-list.c
   ],
   imports: [
     CommonModule,
-    CoordernacaoRoutingModule
+    CoordernacaoRoutingModule,
+    MaterialModule
   ],
   exports: []
 })
