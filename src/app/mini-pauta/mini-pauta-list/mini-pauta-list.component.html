@@ -58,7 +58,7 @@
       <th mat-header-cell *matHeaderCellDef mat-sort-header>P2</th>
       <td mat-cell *matCellDef="let pauta">
         <label *ngIf="pauta.p4 <= 9" style="color: red;">{{ pauta?.p4 }}</label>
-        <label *ngIf="pauta.p4 > 9" style="color: blue;"></label>
+        <label *ngIf="pauta.p4 > 9" style="color: blue;">{{pauta?.p4}}</label>
       </td>
     </ng-container>
 
