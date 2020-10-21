@@ -1,3 +1,4 @@
+import { CursoGuard } from './cursos/guard/curso.guard';
 import { PublicModule } from './public/modules/public.module';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';

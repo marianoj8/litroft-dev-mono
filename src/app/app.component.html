@@ -130,7 +130,7 @@
           </a>
           <mat-divider></mat-divider>
           <mat-expansion-panel>
-            <mat-expansion-panel-header *ngIf="showOrHideMenu">
+            <mat-expansion-panel-header >
               <mat-panel-title>
                 <mat-icon color="primary">person_pin</mat-icon>
               </mat-panel-title>
@@ -145,10 +145,6 @@
             <a mat-list-item routerLinkActive="active" [routerLink]="['cursos']">
               <mat-icon color="primary">school</mat-icon>
               Cursos
-            </a>
-            <a mat-list-item routerLinkActive="active" [routerLink]="['turmas']">
-              <mat-icon color="primary">group_work</mat-icon>
-              Turmas
             </a>
           </mat-expansion-panel>
           <!-- <mat-divider></mat-divider> -->
