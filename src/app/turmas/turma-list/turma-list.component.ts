@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
-import { PageEvent, MatTableDataSource, MatSort, MatDialog } from '@angular/material';
 import { MatDailogTypeParam } from 'src/app/shared/model/support/mat-dialog-type-param';
 import { CustomFilter } from 'src/app/shared/model/support/custom-filter';
 import { Subscription, Subject, of } from 'rxjs';
@@ -8,10 +7,14 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { TurmaService } from '../modules/turma.service';
 import { NotificationService } from 'src/app/shared/services/notification/notification.service';
 import { catchError } from 'rxjs/operators';
+import { MatTableDataSource } from '@angular/material/table';
 import { ErrorLoadingComponent } from 'src/app/shared/error-loading/error-loading.component';
 import { MoreOptionsDialogComponent } from 'src/app/shared/more-options-dialog/more-options-dialog.component';
 import { DeleteDialogComponent } from 'src/app/shared/delete-dialog/delete-dialog.component';
 import { MonografiaService } from 'src/app/monografias/modules/monografia.service';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSort } from '@angular/material/sort';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-turma-list',

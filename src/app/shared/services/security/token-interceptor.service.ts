@@ -8,10 +8,10 @@ import { AuthService } from 'src/app/shared/services/security/auth.service';
 })
 export class TokenInterceptorService implements HttpInterceptor {
 
-  constructor(private autService: AuthService) { }
+  constructor(private authService: AuthService) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const currentUser = this.autService.getToken();
+    const currentUser = this.authService.getToken();
     if (currentUser) {
 
       request = request.clone({

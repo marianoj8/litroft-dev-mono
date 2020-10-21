@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { CustomFilter } from 'src/app/shared/model/support/custom-filter';
 import { Subscription, Subject, of } from 'rxjs';
-import { MatTableDataSource, PageEvent, MatSort, MatDialog } from '@angular/material';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
+import { MatDialog } from '@angular/material/dialog';
 import { Orientador } from 'src/app/shared/model/orientador';
 import { Router, ActivatedRoute } from '@angular/router';
 import { catchError } from 'rxjs/operators';
@@ -13,6 +15,7 @@ import { ErrorLoadingComponent } from 'src/app/shared/error-loading/error-loadin
 import { MoreOptionsDialogComponent } from 'src/app/shared/more-options-dialog/more-options-dialog.component';
 import { DeleteDialogComponent } from 'src/app/shared/delete-dialog/delete-dialog.component';
 import { MonografiaService } from 'src/app/monografias/modules/monografia.service';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-orientador-list',

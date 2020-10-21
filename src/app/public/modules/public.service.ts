@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { take } from 'rxjs/internal/operators/take';
+import { take } from 'rxjs/operators';
 import { Grupo } from 'src/app/shared/model/grupo';
 import { environment } from 'src/environments/environment';
 

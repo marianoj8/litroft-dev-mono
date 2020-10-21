@@ -1,6 +1,10 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { Component, OnInit, ViewChild, Inject } from '@angular/core';
-import { MatSort, MatTableDataSource, PageEvent, MAT_DIALOG_DATA } from '@angular/material';
+import { MatSort, } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { MAT_DIALOG_DATA} from '@angular/material/dialog';
+
+
 import { of, Subject, Subscription } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { EstudanteService } from 'src/app/estudantes/modules/estudante.service';
@@ -9,6 +13,7 @@ import { CustomFilter } from 'src/app/shared/model/support/custom-filter';
 import { MatDailogTypeParam } from 'src/app/shared/model/support/mat-dialog-type-param';
 
 import { GrupoService } from '../modules/grupo.service';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-select-element',

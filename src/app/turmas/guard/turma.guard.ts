@@ -1,1 +1,4 @@
-export class TurmaGuard {}
+import { Injectable } from '@angular/core';
+
+@Injectable({ providedIn: 'root'})
+export class TurmaGuard { }
