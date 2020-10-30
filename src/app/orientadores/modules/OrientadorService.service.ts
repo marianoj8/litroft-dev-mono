@@ -24,17 +24,17 @@ export class OrientadorService {
   constructor(private http: HttpClient) { }
 
   getById(id: number): Observable<Orientador> {
-    return this.http.get<Orientador>(`${this.url}/interno/orientador/${id}`);
+    return this.http.get<Orientador>(`${this.url}/orientador/${id}`);
   }
 
   list(): Observable<Orientador[]> {
-    return this.http.get<Orientador[]>(`${this.url}/interno/orientador/l`);
+    return this.http.get<Orientador[]>(`${this.url}/orientador/l`);
   }
 
   filterByNomeSexoEspecialidade(q: CustomFilter): Observable<Orientador[]> {
     q = this.filterResolve(q);
     return this.http
-      .get<Orientador[]>(`${this.url}/interno/orientador/l?nome=${q.nome}&sexo=${q.sexo}&especialidade=${q.descricao}`);
+      .get<Orientador[]>(`${this.url}/orientador/l?nome=${q.nome}&sexo=${q.sexo}&especialidade=${q.descricao}`);
   }
 
   filterBySexoAndEspecialidade(q: CustomFilter): Observable<Orientador[]> {
