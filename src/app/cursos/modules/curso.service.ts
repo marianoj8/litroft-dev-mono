@@ -25,21 +25,20 @@ export class CursoService {
   constructor(private http: HttpClient) { }
 
   getById(id: number): Observable<Curso> {
-    return this.http.get<Curso>(`${this.url}/interno/curso/${id}`);
+    return this.http.get<Curso>(`${this.url}/curso/${id}`);
   }
 
   list(): Observable<Curso[]> {
-    return this.http.get<Curso[]>(`${this.url}/interno/curso/l`);
+    return this.http.get<Curso[]>(`${this.url}/curso/l`);
   }
 
   filterByNomeDuracao(q: CustomFilter): Observable<Curso[]> {
-    return this.http.get<Curso[]>(`${this.url}/interno/curso/l?nome=${!!q.nome ? q.nome : ''}&duracao=${!!q.duracao ? q.duracao : 1}`)
-      ;
+    return this.http.get<Curso[]>(`${this.url}/curso/l?nome=${!!q.nome ? q.nome : ''}&duracao=${!!q.duracao ? q.duracao : 1}`);
   }
 
   filterByDuracao(duracao: number): Observable<Curso[]> {
     return this.http
-      .get<Curso[]>(`${this.url}/interno/curso/l?duracao=${!!duracao ? duracao : 1}`);
+      .get<Curso[]>(`${this.url}/curso/l?duracao=${!!duracao ? duracao : 1}`);
   }
 
   save(t: Curso): Observable<Curso> {
