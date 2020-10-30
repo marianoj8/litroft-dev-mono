@@ -28,11 +28,11 @@ export class TurmaService {
   }
 
   list(): Observable<Turma[]> {
-    return this.http.get<Turma[]>(`${this.url}/interno/turma/l`);
+    return this.http.get<Turma[]>(`${this.url}/interno/turma/l/c`);
   }
 
   filterByNome(filter: CustomFilter): Observable<Turma[]> {
-    return this.http.get<Turma[]>(`${this.url}/interno/turma/l?sigla=${!!filter.sigla ? filter.sigla : ''}`);
+    return this.http.get<Turma[]>(`${this.url}/interno/turma/l?nome=${!!filter.sigla ? filter.sigla : ''}`);
   }
 
   findByCurso(id: number): Observable<Turma[]> {
