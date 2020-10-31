@@ -2,14 +2,14 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Location } from '@angular/common';
 import { AdminService } from './modules/admin.service';
 import { Observable, Subject, Subscription, of } from 'rxjs';
-import { Curso } from '../shared/model/curso';
+import { Admin } from '../shared/model/admin';
 import { CustomFilter } from '../shared/model/support/custom-filter';
-import { CursoService } from '../cursos/modules/curso.service';
 import { PublicService } from '../public/modules/public.service';
 import { MonografiaService } from '../monografias/modules/monografia.service';
 import { MatDialog } from '@angular/material/dialog';
 import { catchError } from 'rxjs/operators';
 import { CursoSearchComponent } from '../cursos/curso-search/curso-search.component';
+// import { CursoSearchComponent } from '../cursos/admin-search/admin-search.component';
 
 @Component({
   selector: 'app-admin',
@@ -21,7 +21,7 @@ export class AdminComponent implements OnInit, OnDestroy {
 
   state = false;
   public onChangeContext = false;
-  cursos$: Observable<Curso[]>;
+  cursos$: Observable<Admin[]>;
   cursosError$ = new Subject<boolean>();
   filtro: CustomFilter = new CustomFilter();
   private sub: Subscription;
@@ -29,21 +29,21 @@ export class AdminComponent implements OnInit, OnDestroy {
   anos: number[] = [1, 2, 3, 4, 5, 6];
 
   constructor(
-    private cursoService: CursoService,
+    private adminService: AdminService,
     private publicService: PublicService,
     private monografiaService: MonografiaService,
     private dialogService: MatDialog,
     private location: Location) {
-    this.cursoService.onChangeContextTitle.emit('Curso');
+    this.adminService.onChangeContextTitle.emit('Director');
     this.monografiaService.emitShowAddButton.emit(true);
   }
 
   ngOnInit() {
-    this.sub = this.cursoService.onChangeContext.subscribe(
+    this.sub = this.adminService.onChangeContext.subscribe(
       context => this.onChangeContext = context
     );
 
-    this.cursos$ = this.cursoService.list()
+    this.cursos$ = this.adminService.list()
       .pipe(catchError(err => {
         this.cursosError$.next(true);
         return of([]);
@@ -58,23 +58,23 @@ export class AdminComponent implements OnInit, OnDestroy {
     if (event.key === 'Enter') {
       this.findFromServer(value);
     }
-    this.cursoService.findValueParam.emit(value.trim());
+    this.adminService.findValueParam.emit(value.trim());
   }
 
   findFromServer(value: string) {
     this.filtro.nome = value.trim();
-    this.cursoService.findValueParamFromServer.emit(this.filtro);
+    this.adminService.findValueParamFromServer.emit(this.filtro);
   }
 
   filterByDuracao(duracao: number) {
     this.filtro.duracao = duracao;
-    this.cursoService.findValueParams.emit(this.filtro);
+    this.adminService.findValueParams.emit(this.filtro);
   }
 
   showAll() {
     this.filtro.nome = '';
     this.filtro.duracao = 1;
-    this.cursoService.findValueParams.emit(this.filtro);
+    this.adminService.findValueParams.emit(this.filtro);
   }
 
   cleanSearchField() {
