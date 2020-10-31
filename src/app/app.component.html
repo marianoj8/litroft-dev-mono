@@ -29,7 +29,7 @@
         <mat-icon left>person_pin</mat-icon>
         Estudantes
       </a>
-      <a routerLinkActive="active" [routerLink]="['institutos/private-list']" mat-button *ngIf="!showOrHideMenu">
+      <a routerLinkActive="active" [routerLink]="['departamentos']" mat-button *ngIf="!showOrHideMenu">
         <mat-icon left>school</mat-icon>
         Departamentos
       </a>
@@ -142,14 +142,22 @@
               <mat-icon color="primary">person_pin</mat-icon>
               Estudantes
             </a>
-            <a mat-list-item routerLinkActive="active" [routerLink]="['cursos']">
-              <mat-icon color="primary">school</mat-icon>
-              Cursos
+            <a mat-list-item routerLinkActive="active" [routerLink]="['grupos']">
+              <mat-icon color="primary">group</mat-icon>
+              Grupos
+            </a>
+            <a mat-list-item routerLinkActive="active" [routerLink]="['projetos']">
+              <mat-icon color="primary">widgets</mat-icon>
+              Projectos
+            </a>
+            <a mat-list-item routerLinkActive="active" [routerLink]="['monografias']">
+              <mat-icon color="primary">collections_bookmark</mat-icon>
+              Monografias
             </a>
           </mat-expansion-panel>
           <!-- <mat-divider></mat-divider> -->
           <mat-expansion-panel>
-            <mat-expansion-panel-header *ngIf="showOrHideMenu">
+            <mat-expansion-panel-header *ngIf="!showOrHideMenu">
               <mat-panel-title>
                 <mat-icon color="primary">recent_actors</mat-icon>
               </mat-panel-title>
@@ -167,29 +175,6 @@
             </a>
           </mat-expansion-panel>
           <!-- <mat-divider></mat-divider> -->
-          <mat-expansion-panel *ngIf="showOrHideMenu">
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                <mat-icon color="primary">collections_bookmark</mat-icon>
-              </mat-panel-title>
-              <mat-panel-description>
-                Monografias
-              </mat-panel-description>
-            </mat-expansion-panel-header>
-            <a mat-list-item routerLinkActive="active" [routerLink]="['grupos']">
-              <mat-icon color="primary">group</mat-icon>
-              Grupos
-            </a>
-            <a mat-list-item routerLinkActive="active" [routerLink]="['projetos']">
-              <mat-icon color="primary">widgets</mat-icon>
-              Projectos
-            </a>
-            <a mat-list-item routerLinkActive="active" [routerLink]="['monografias']">
-              <mat-icon color="primary">collections_bookmark</mat-icon>
-              Monografias
-            </a>
-          </mat-expansion-panel>
-          <!-- <mat-divider></mat-divider> -->
           <mat-expansion-panel *ngIf="!showOrHideMenu" [expanded]="true">
             <mat-expansion-panel-header>
               <mat-panel-title>
@@ -199,17 +184,17 @@
                 Departamentos
               </mat-panel-description>
             </mat-expansion-panel-header>
-            <a mat-list-item routerLinkActive="active" [routerLink]="['institutos/private-list']">
+            <a mat-list-item routerLinkActive="active" [routerLink]="['departamentos']">
               <mat-icon color="primary">school</mat-icon>
               Departamentos
             </a>
-            <a mat-list-item routerLinkActive="active" [routerLink]="['area-formacao']">
-              <mat-icon color="primary">domain</mat-icon>
-              Area de Formação
+            <a mat-list-item routerLinkActive="active" [routerLink]="['cursos']">
+              <mat-icon color="primary">school</mat-icon>
+              Cursos
             </a>
-            <a mat-list-item [routerLink]="['locais']" routerLinkActive="router-link-active">
-              <mat-icon color="primary">location_on</mat-icon>
-              Locais
+            <a mat-list-item routerLinkActive="active" [routerLink]="['turmas']">
+              <mat-icon color="primary">group_work</mat-icon>
+              Turmas
             </a>
           </mat-expansion-panel>
           <mat-expansion-panel *ngIf="showOrHideMenu">
@@ -236,18 +221,6 @@
                 Configurações
               </mat-panel-description>
             </mat-expansion-panel-header>
-
-            <div *ngIf="!showOrHideMenu">
-              <a mat-list-item routerLinkActive="active" [routerLink]="['municipios']">
-                <mat-icon color="primary">location_city</mat-icon>
-                Municipio
-              </a>
-
-              <a mat-list-item routerLinkActive="active" [routerLink]="['provincias']">
-                <mat-icon color="primary">location_city</mat-icon>
-                Provincia
-              </a>
-            </div>
 
             <a mat-list-item routerLinkActive="active" [routerLink]="['sobre']">
               <mat-icon color="primary">info</mat-icon>
