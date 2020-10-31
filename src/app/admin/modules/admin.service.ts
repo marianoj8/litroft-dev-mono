@@ -1,8 +1,10 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
+import { Admin } from 'src/app/shared/model/admin';
+import { CustomFilter } from 'src/app/shared/model/support/custom-filter';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -10,8 +12,18 @@ import { environment } from 'src/environments/environment';
 })
 export class AdminService {
 
-
   url = environment.API;
+  findValueParam = new EventEmitter<string>();
+  onChangeContextTitle = new EventEmitter<string>();
+  findValueParamFromServer = new EventEmitter<CustomFilter>();
+  findValueParams = new EventEmitter<CustomFilter>();
+  onChangeContext = new EventEmitter<boolean>();
+  isPortable = new EventEmitter<boolean>();
+  emitOnDetalheButtonCliked = new EventEmitter<number>();
+  emitOnEditButtonCliked = new EventEmitter<number>();
+  emitOnDeleteButtonCliked = new EventEmitter<number>();
+
+
   constructor(
     private http: HttpClient,
     public router: Router) { }
@@ -23,15 +35,15 @@ export class AdminService {
         take(1),
         //  catchError((err: HttpErrorResponse) => this.errorHandler(err))
       );
-  }
+  };
 
   // getById(id: number): Observable<Admin> {
   //   return this.http.getById('admin/admin', id);
   // }
 
-  // list(): Observable<Admin[]> {
-  //   return this.http.list('interno/admin/l?duracao=1');
-  // }
+  list(): Observable<Admin[]> {
+    return this.http.get<Admin[]>('interno/admin/l?duracao=1');
+  }
 
   // filterByNomeDuracao(filter: CustomFilter): Observable<Admin[]> {
   //   return this.http.list(`interno/admin/l?nome=${!!filter.nome ? filter.nome : ''}&duracao=${!!filter.duracao ? filter.duracao : 1}`)
