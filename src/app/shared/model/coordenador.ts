@@ -1,16 +1,20 @@
 import { CustomAbstractEntity } from 'src/app/shared/model/customEntity';
 import { AdminInterno } from './adminInterno';
+import { Classe } from './classe';
+import { Curso } from './curso';
 import { Departamento } from './departamento';
+import { Professor } from './professor';
 
-export class Coordenacao implements CustomAbstractEntity {
+export class Coordenador implements CustomAbstractEntity {
 
   id: number;
   createdAt: string;
   lastModifiedAt: string;
   totalModified: number;
-  nome: string;
-  duracao: number;
-  departamento: Departamento;
+  professor: Professor;
+  curso: Curso;
+  classe: Classe;
+  anoletivo: string;
   adminInterno: AdminInterno;
 
   constructor(id?: number) {
