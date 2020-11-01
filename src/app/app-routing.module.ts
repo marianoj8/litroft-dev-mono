@@ -1,4 +1,3 @@
-import { CoordenacaoModule } from './coordenacao/modules/coordenacao.module';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -59,9 +58,9 @@ const routes: Routes = [
     loadChildren: () => import('src/app/projetos/modules/projeto.module').then(m => m.ProjetoModule)
   },
   {
-    path: 'coordenacao',
+    path: 'coordenador',
     canActivate: [AuthGuard],
-    loadChildren: () => import('src/app/coordenacao/modules/coordenacao.module').then(m => m.CoordenacaoModule)
+    loadChildren: () => import('src/app/coordenador/modules/coordenador.module').then(m => m.CoordenadorModule)
   },
   {
     path: 'departamentos',
