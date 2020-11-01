@@ -14,7 +14,7 @@ describe('AcessDinaidComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AcessDinaidComponent);
+    fixture = TestBed.createComponent(AcessDenaidComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
