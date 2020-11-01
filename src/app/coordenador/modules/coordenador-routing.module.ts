@@ -1,16 +1,16 @@
-import { CoordenacaoComponent } from './../coordenacao.component';
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { CoordenacaoListComponent } from '../coordenacao-list/coordenacao-list.component';
+import { CoordenadorListComponent } from '../coordernador-list/coordenador-list.component';
+import { CoordenadorComponent } from '../coordenador.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: CoordenacaoComponent,
+    component: CoordenadorComponent,
     children: [
       {
         path: '',
-        component: CoordenacaoListComponent
+        component: CoordenadorListComponent
       }
     ]
   }
@@ -20,4 +20,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class CoordernacaoRoutingModule { }
+export class CoordernadorRoutingModule { }

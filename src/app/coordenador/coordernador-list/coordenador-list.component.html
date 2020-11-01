@@ -4,44 +4,44 @@
     Cadastrar Novo Coordenador
   </button>
   <table
-    *ngIf="professores; else loading"
+    *ngIf="coordenadores; else loading"
     mat-table
-    [dataSource]="professores"
+    [dataSource]="coordenadores"
     matSort
   >
 
-    <ng-container matColumnDef="nome">
+    <ng-container matColumnDef="coordenador">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Nome</th>
-      <td mat-cell *matCellDef="let professor" (mouseenter)="showPerfil()">
-        {{ professor?.nome +' '+ professor?.sobreNome }}
+      <td mat-cell *matCellDef="let coordenador" (mouseenter)="showPerfil()">
+        {{ coordenador?.nome +' '+ coordenador?.sobreNome }}
       </td>
     </ng-container>
 
     <ng-container matColumnDef="curso">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Sexo</th>
-      <td mat-cell *matCellDef="let professor">
-        {{ professor?.sexo === "M" ? "Masculino" : "Femenino" }}
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Curso</th>
+      <td mat-cell *matCellDef="let coordenador">
+        {{ coordenador?.sexo === "M" ? "Masculino" : "Femenino" }}
       </td>
     </ng-container>
 
     <ng-container matColumnDef="classe">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Telefone</th>
-      <td mat-cell *matCellDef="let professor">
-        {{ professor?.fone }}
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Classe</th>
+      <td mat-cell *matCellDef="let coordenador">
+        {{ coordenador?.fone }}
       </td>
     </ng-container>
 
-    <ng-container matColumnDef="periodo">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
-      <td mat-cell *matCellDef="let professor">
-        {{ professor?.email }}
+    <ng-container matColumnDef="anoletivo">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Ano Letivo</th>
+      <td mat-cell *matCellDef="let coordenador">
+        {{ coordenador?.email }}
       </td>
     </ng-container>
 
     <ng-container matColumnDef="detalhe">
       <th mat-header-cell *matHeaderCellDef>Detalhe</th>
-      <td mat-cell *matCellDef="let professor">
-        <button mat-raised-button [routerLink]="['detalhe', professor.id]">
+      <td mat-cell *matCellDef="let coordenador">
+        <button mat-raised-button [routerLink]="['detalhe', coordenador.id]">
           <mat-icon color="primary">description</mat-icon>
         </button>
       </td>
@@ -49,8 +49,8 @@
 
     <ng-container matColumnDef="edit">
       <th mat-header-cell *matHeaderCellDef>Editar</th>
-      <td mat-cell *matCellDef="let professor">
-        <button mat-raised-button (click)="edit(professor)">
+      <td mat-cell *matCellDef="let coordenador">
+        <button mat-raised-button (click)="edit(coordenador)">
           <mat-icon color="primary">edit</mat-icon>
         </button>
       </td>
@@ -58,13 +58,13 @@
 
     <ng-container matColumnDef="delete">
       <th mat-header-cell *matHeaderCellDef>Excluir</th>
-      <td mat-cell *matCellDef="let professor">
+      <td mat-cell *matCellDef="let coordenador">
         <button
           mat-raised-button
           matTooltipShowDelay="2000"
           matTooltipHideDelay="2000"
           matTooltip="Uma vez excluido não tem como reverter as alterações."
-          (click)="openDeleteDialog(professor.id)"
+          (click)="openDeleteDialog(coordenador.id)"
         >
           <mat-icon color="warn">delete</mat-icon>
         </button>
@@ -87,7 +87,7 @@
   <ng-template #loading>
     <div *ngIf="error$ | async as error; else showError">
       <span>
-        Erro ao carregar professores. Tente novamente mais tarde.
+        Erro ao carregar coordenadores. Tente novamente mais tarde.
       </span>
     </div>
     <ng-template #showError>
@@ -101,7 +101,7 @@
 <div class="hide-on-large-only">
   <mat-nav-list
     class="mat-elevation-z8 container"
-    *ngIf="professores; else loadingOnList"
+    *ngIf="coordenadores; else loadingOnList"
   >
     <button class="btn-large" mat-raised-button color="primary" (click)="add()">
       <mat-icon>add</mat-icon>
@@ -110,11 +110,11 @@
     <a
       mat-list-item
       (click)="openMoreOptionDialog(item.id)"
-      *ngFor="let item of professoresList"
+      *ngFor="let item of coordenadoresList"
     >
       <mat-icon matListIcon class="mat-18">person</mat-icon>
-      <h5 matLine>{{ item?.nome }} {{ item?.sobreNome }}</h5>
-      <p matLine>{{ item?.fone }}</p>
+      <!-- <h5 matLine>{{ item?.nome }} {{ item?.sobreNome }}</h5> -->
+      <!-- <p matLine>{{ item?.fone }}</p> -->
       <mat-divider></mat-divider>
     </a>
   </mat-nav-list>

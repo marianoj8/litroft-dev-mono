@@ -2,14 +2,14 @@ import { Location } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CustomFilter } from '../shared/model/support/custom-filter';
-import { CoordenacaoService } from './modules/coordenacao.service';
+import { CoordenadorService } from './modules/coordenador.service';
 
 @Component({
-  selector: 'app-coordenacao',
-  templateUrl: './coordenacao.component.html',
-  styleUrls: ['./coordenacao.component.css']
+  selector: 'app-coordendor',
+  templateUrl: './coordenador.component.html',
+  styleUrls: ['./coordenador.component.css']
 })
-export class CoordenacaoComponent implements OnInit, OnDestroy {
+export class CoordenadorComponent implements OnInit, OnDestroy {
 
   state = false;
   public onChangeContext = false;
@@ -17,7 +17,7 @@ export class CoordenacaoComponent implements OnInit, OnDestroy {
   private sub: Subscription;
 
   constructor(
-    private especialidadeService: CoordenacaoService,
+    private especialidadeService: CoordenadorService,
     private location: Location) {
     this.especialidadeService.onChangeContextTitle.emit('Coordenacaos');
   }

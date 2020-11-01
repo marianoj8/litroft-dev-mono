@@ -1,3 +1,4 @@
+import { CoordenadorService } from '../modules/coordenador.service';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
@@ -7,38 +8,38 @@ import { Router } from '@angular/router';
 import { Subject, Subscription, of, Subscriber, Observable } from 'rxjs';
 import { catchError, delay } from 'rxjs/operators';
 import { MonografiaService } from 'src/app/monografias/modules/monografia.service';
-import { ProfessorService } from 'src/app/professores/modules/professor.service';
 import { DeleteDialogComponent } from 'src/app/shared/delete-dialog/delete-dialog.component';
 import { ErrorLoadingComponent } from 'src/app/shared/error-loading/error-loading.component';
 import { ForbiddenErrorDialogComponent } from 'src/app/shared/forbidden-error-dialog/forbidden-error-dialog.component';
-import { Professor } from 'src/app/shared/model/professor';
+import { Coordenador } from 'src/app/shared/model/coordenador';
 import { CustomFilter } from 'src/app/shared/model/support/custom-filter';
 import { MatDailogTypeParam } from 'src/app/shared/model/support/mat-dialog-type-param';
 import { MoreOptionsDialogComponent } from 'src/app/shared/more-options-dialog/more-options-dialog.component';
 import { NotificationService } from 'src/app/shared/services/notification/notification.service';
 
 @Component({
-  selector: 'app-coordenacao-list',
-  templateUrl: './coordenacao-list.component.html',
-  styleUrls: ['./coordenacao-list.component.css']
+  selector: 'app-coordenador-list',
+  templateUrl: './coordenador-list.component.html',
+  styleUrls: ['./coordenador-list.component.css']
 })
-export class CoordenacaoListComponent implements OnInit, OnDestroy {
+export class CoordenadorListComponent implements OnInit, OnDestroy {
 
   dialogParam: MatDailogTypeParam = new MatDailogTypeParam();
   valueParam = '';
   filtro: CustomFilter = new CustomFilter();
-  professores: MatTableDataSource<Professor>;
-  professoresList: Professor[] = [];
+  coordenadores: MatTableDataSource<Coordenador>;
+  coordenadoresList: Coordenador[] = [];
   error$ = new Subject<boolean>();
   private sub: Subscription;
+  private institutoId = Number.parseInt(localStorage.getItem('entityId'), 10);
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   displaydColumns: string[] = [
-    'nome',
+    'coordenador',
     'curso',
     'classe',
-    'periodo',
+    'anoletivo',
     'detalhe',
     'edit',
     'delete'
@@ -47,7 +48,7 @@ export class CoordenacaoListComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    public service: ProfessorService,
+    public service: CoordenadorService,
     private notification: NotificationService,
     private dialogService: MatDialog,
     private monografiaService: MonografiaService) {
@@ -57,11 +58,16 @@ export class CoordenacaoListComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.service.onChangeContext.emit(false);
 
+    this.filtro.anoLetivo = '2020';
+    this.filtro.classeId = 1;
+    this.filtro.cursoId = 1;
+
+
     this.sub = this.service.findValueParams
       .subscribe(next => this.onRefrash(next));
 
     this.sub = this.service.findValueParam
-      .subscribe(next => this.professores.filter = next);
+      .subscribe(next => this.coordenadores.filter = next);
 
     this.onRefrash(this.filtro);
 
@@ -74,18 +80,17 @@ export class CoordenacaoListComponent implements OnInit, OnDestroy {
     this.sub = this.service.emitOnDeleteButtonCliked.subscribe(
       (next) => this.openDeleteDialog(next));
 
-    this.sub = this.service.findValueParamFromServer.subscribe(
-      (next: CustomFilter) => this.onFilterFromServer(next));
-
+    // this.sub = this.service.findValueParamFromServer.subscribe(
+    //   (next: CustomFilter) => this.onFilterFromServer(next));
   }
 
-  onFilterFromServer(data: CustomFilter) {
-    this.sub = this.service.filterByNomeSexoEspecialidade(data)
-      .subscribe(next => this.professoresList = next);
-  }
+  // onFilterFromServer(data: CustomFilter) {
+  //   this.sub = this.service.filterByNomeSexoEspecialidade(data)
+  //     .subscribe(next => this.coordenadoresList = next);
+  // }
 
   onRefrash(data?: CustomFilter) {
-    this.sub = this.service.filterBySexoAndEspecialidade(data)
+    this.sub = this.service.list(data, this.institutoId)
       .pipe(
         catchError(err => {
 
@@ -101,14 +106,14 @@ export class CoordenacaoListComponent implements OnInit, OnDestroy {
       )
       .subscribe(
         next => {
-          const array = next.map((item: Professor) => {
+          const array = next.map((item: Coordenador) => {
             return {
               ...item
             };
           });
-          this.professores = new MatTableDataSource(array);
-          this.professores.sort = this.sort;
-          this.professoresList = this.professores.data;
+          this.coordenadores = new MatTableDataSource(array);
+          this.coordenadores.sort = this.sort;
+          this.coordenadoresList = this.coordenadores.data;
         });
   }
 
@@ -126,15 +131,15 @@ export class CoordenacaoListComponent implements OnInit, OnDestroy {
   detalhe(id: number) {
     this.router.navigate(['detalhe', id], { relativeTo: this.activatedRoute });
   }
-  edit(professor: Professor) {
-    this.router.navigate(['edit', professor.id, 'instituto', professor.adminInterno.instituto.id], { relativeTo: this.activatedRoute });
+  edit(coordenador: Coordenador) {
+    this.router.navigate(['edit', coordenador.id, 'instituto', coordenador.adminInterno.instituto.id], { relativeTo: this.activatedRoute });
   }
 
 
   openMoreOptionDialog(id: number) {
 
     this.dialogParam.id = id;
-    this.dialogParam.entityName = 'professor';
+    this.dialogParam.entityName = 'coordenador';
 
     const dialogRef = this.dialogService.open(
       MoreOptionsDialogComponent,
@@ -146,7 +151,7 @@ export class CoordenacaoListComponent implements OnInit, OnDestroy {
 
     dialogRef.afterClosed().subscribe((result: boolean) => {
       if (result) {
-        // this.deleteprofessor(orientador);
+        // this.deletecoordenador(orientador);
       }
 
     });
@@ -163,17 +168,17 @@ export class CoordenacaoListComponent implements OnInit, OnDestroy {
 
     dialogRef.afterClosed().subscribe((result: boolean) => {
       if (result) {
-        this.deleteprofessor(id);
+        this.deletecoordenador(id);
       }
 
     });
   }
 
-  deleteprofessor(orientadorId: number) {
+  deletecoordenador(orientadorId: number) {
     this.service.deleteById(orientadorId)
       .subscribe(
         () => {
-          this.onRefrash(this.filtro);
+          //   this.onRefrash(this.filtro);
           this.showDeletedMessage();
         },
         err => this.showErrorMessage()
