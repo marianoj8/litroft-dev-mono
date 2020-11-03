@@ -1,1 +1,106 @@
-<p>coordenador-form works!</p>
+<mat-vertical-stepper *ngIf="cursos$ | async as cursos; else loading" [linear]="!coordenador.id" #stepper
+  class="container mat-elevation-z6">
+  <mat-step [stepControl]="formGroup01">
+    <form [formGroup]="formGroup01">
+      <div class="field">
+        <ng-template matStepLabel>
+          Nome do professor
+        </ng-template>
+        <mat-form-field class="field field-padding">
+          <mat-select matInput formControlName="professor" placeholder="Professor">
+            <mat-option *ngFor="let professor of professores$ | async" [value]="professor.id"> {{professor.nome +' '+ professor.nome}} </mat-option>
+          </mat-select>
+
+          <mat-error *ngIf="formGroup01.controls['professor'].hasError('required')">
+            Professor é <strong>obrigatorio</strong>
+          </mat-error>
+
+        </mat-form-field>
+
+        <mat-form-field class="field field-padding">
+          <mat-select matInput formControlName="curso" placeholder="Curso">
+            <mat-option *ngFor="let curso of cursos$ | async" [value]="curso.id"> {{curso.nome}} </mat-option>
+          </mat-select>
+
+          <mat-error *ngIf="formGroup01.controls['curso'].hasError('required')">
+            Curso é <strong>obrigatorio</strong>
+          </mat-error>
+
+        </mat-form-field>
+
+        <div class="spaced">
+          <button color="primary" class="large" mat-raised-button matStepperNext>
+            <mat-icon>arrow_downward</mat-icon>
+            Avançar
+          </button>
+        </div>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="formGroup02">
+    <form [formGroup]="formGroup02">
+      <div class="field">
+        <ng-template matStepLabel>
+          Genero e data de nascimento
+        </ng-template>
+
+        <mat-form-field class="field field-padding">
+          <mat-select matInput formControlName="classe" placeholder="Classe">
+            <mat-option *ngFor="let classe of classes$ | async" [value]="classe.id"> {{classe.descricao}} </mat-option>
+          </mat-select>
+
+          <mat-error *ngIf="formGroup02.controls['classe'].hasError('required')">
+            Classe é <strong>obrigatorio</strong>
+          </mat-error>
+
+        </mat-form-field>
+
+        <mat-form-field class="field field-padding">
+          <mat-select matInput formControlName="classe" placeholder="Classe">
+            <mat-option *ngFor="let classe of classes$ | async" [value]="classe.id"> {{classe.descricao}} </mat-option>
+          </mat-select>
+
+          <mat-error *ngIf="formGroup02.controls['classe'].hasError('required')">
+            Classe é <strong>obrigatorio</strong>
+          </mat-error>
+
+        </mat-form-field>
+
+
+        <div class="spaced">
+          <button mat-raised-button class="large" matStepperPrevious>
+            <mat-icon>arrow_upward</mat-icon>
+            Anterior
+          </button>
+          <button color="primary" class="large" mat-raised-button matStepperNext>
+            <mat-icon>arrow_downward</mat-icon>
+            Avancar
+          </button>
+        </div>
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel>Concluir com processo de
+      {{ !coordenador.id ? "cadastro" : "alteração" }} de coordenador</ng-template>
+    <div class="spaced">
+      <button mat-stroked-button matStepperPrevious class="large">
+        <mat-icon>arrow_upward</mat-icon>
+        Anterior
+      </button>
+      <button class="mat-elevation-z8" *ngIf="!coordenador.id" color="primary" mat-raised-button class="large"
+        (click)="onSaveButton(stepper)">
+        <mat-icon>save</mat-icon>
+        Salvar
+      </button>
+      <button color="primary" class="large" mat-raised-button (click)="onSaveButtonAndList(stepper)">
+        <mat-icon>save</mat-icon>
+        {{ !coordenador.id ? "Salvar e listar" : "Salvar" }}
+      </button>
+    </div>
+  </mat-step>
+</mat-vertical-stepper>
+<ng-template #loading>
+  <mat-progress-bar mode="indeterminate" color="warn"></mat-progress-bar>
+</ng-template>
