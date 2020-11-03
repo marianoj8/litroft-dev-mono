@@ -32,6 +32,7 @@ import { MunicipioService } from './municipio/modules/municipio.service';
 import { InscricaoService } from './inscricao/modules/inscricao.service';
 import { DiciplinaService } from './diciplinas/modules/diciplina.service';
 import { CoordenadorService } from './coordenador/modules/coordenador.service';
+import { ProfessorService } from './professores/modules/professor.service';
 
 @Component({
   selector: 'app-root',
@@ -53,7 +54,7 @@ export class AppComponent implements OnInit, AfterContentChecked, OnDestroy {
   years = [];
   public institutos: Instituto[];
   btnMonografiaText = 'Monografias Internas';
-  private sub: Subscription;
+  private sub: Subscription[];
   customFilter = new CustomFilter();
   acessType = '';
   nome = '';
@@ -97,10 +98,12 @@ export class AppComponent implements OnInit, AfterContentChecked, OnDestroy {
     private diciplinaService: DiciplinaService,
     private publicService: PublicService,
     private coordenadorService: CoordenadorService,
+    private professorService: ProfessorService,
     public institutoService: InstitutoService,
     public inscricaoService: InscricaoService,
     private formBuilder: FormBuilder,
   ) {
+    this.sub = [];
     this.monografiaService.emitShowAddButton
       .subscribe(resp => this.emitShowAddButton = resp);
   }
@@ -117,173 +120,189 @@ export class AppComponent implements OnInit, AfterContentChecked, OnDestroy {
     this.monografiaService.emitShowAddButton
       .subscribe(resp => this.emitShowAddButton = resp);
 
-    this.sub = this.homeService.onChangeContextTitle.subscribe(
+    this.sub.push(this.homeService.onChangeContextTitle.subscribe(
       value => {
         this.contextMenu = value;
         this.showDateSelect = true;
         this.onChangeContext = true;
       }
-    );
+    ));
 
-    this.sub = this.loginService.onChangeContextTitle.subscribe(
+    this.sub.push(this.loginService.onChangeContextTitle.subscribe(
       value => {
         this.contextMenu = value;
-      });
+      }));
 
-    this.sub = this.loginService.onChangeContext.subscribe(
+    this.sub.push(this.loginService.onChangeContext.subscribe(
       value => {
         this.emitShowAddButton = true;
         this.onChangeContext = value;
-      });
+      }));
 
-    this.sub = this.cursoService.onChangeContextTitle.subscribe(
+    this.sub.push(this.cursoService.onChangeContextTitle.subscribe(
       value => {
         this.contextMenu = value;
         this.showDateSelect = false;
         this.onChangeContext = true;
       }
-    );
+    ));
 
-    this.sub = this.coordenadorService.onChangeContextTitle.subscribe(
+    this.sub.push(this.coordenadorService.onChangeContextTitle.subscribe(
       value => {
         this.contextMenu = value;
         this.showDateSelect = false;
         this.onChangeContext = true;
       }
-    );
+    ));
 
-    this.sub = this.diciplinaService.onChangeContextTitle.subscribe(
+    this.sub.push(this.professorService.onChangeContextTitle.subscribe(
       value => {
         this.contextMenu = value;
         this.showDateSelect = false;
         this.onChangeContext = true;
       }
-    );
+    ));
 
-    this.sub = this.departamentoService.onChangeContextTitle.subscribe(
+    this.sub.push(this.diciplinaService.onChangeContextTitle.subscribe(
       value => {
         this.contextMenu = value;
         this.showDateSelect = false;
         this.onChangeContext = true;
       }
-    );
-    this.sub = this.adminInternoService.onChangeContextTitle.subscribe(
-      value => {
-        this.contextMenu = value;
-        this.showDateSelect = false;
-        this.onChangeContext = true;
-      }
-    );
-    this.sub = this.orientadorService.onChangeContextTitle.subscribe(
-      value => {
-        this.contextMenu = value;
-        this.showDateSelect = false;
-        this.onChangeContext = true;
-      }
-    );
-    this.sub = this.turmaService.onChangeContextTitle.subscribe(
-      value => {
-        this.contextMenu = value;
-        this.showDateSelect = false;
-        this.onChangeContext = true;
-      }
-    );
-    this.sub = this.grupoService.onChangeContextTitle.subscribe(
-      value => {
-        this.contextMenu = value;
-        this.showDateSelect = false;
-        this.onChangeContext = true;
-      }
-    );
-    this.sub = this.projetoService.onChangeContextTitle.subscribe(
-      value => {
-        this.contextMenu = value;
-        this.showDateSelect = false;
-        this.onChangeContext = true;
-      }
-    );
-    this.sub = this.estudanteService.onChangeContextTitle.subscribe(
-      value => {
-        this.contextMenu = value;
-        this.showDateSelect = false;
-        this.onChangeContext = true;
-      }
-    );
-    this.sub = this.inscricaoService.onChangeContextTitle.subscribe(
-      value => {
-        this.contextMenu = value;
-        this.showDateSelect = false;
-        this.onChangeContext = true;
-      }
-    );
-    this.sub = this.monografiaService.onChangeContextTitle.subscribe(
-      value => {
-        this.contextMenu = value;
-        this.showDateSelect = false;
-        this.onChangeContext = true;
-      }
-    );
+    ));
 
-    this.sub = this.municipioService.onChangeContextTitle.subscribe(
+    this.sub.push(this.departamentoService.onChangeContextTitle.subscribe(
       value => {
         this.contextMenu = value;
         this.showDateSelect = false;
         this.onChangeContext = true;
       }
-    );
+    ));
 
-    this.sub = this.provinciaService.onChangeContextTitle.subscribe(
+    this.sub.push(this.adminInternoService.onChangeContextTitle.subscribe(
       value => {
         this.contextMenu = value;
         this.showDateSelect = false;
         this.onChangeContext = true;
       }
-    );
+    ));
 
-    this.sub = this.especialidadeService.onChangeContextTitle.subscribe(
+    this.sub.push(this.orientadorService.onChangeContextTitle.subscribe(
       value => {
         this.contextMenu = value;
         this.showDateSelect = false;
         this.onChangeContext = true;
       }
-    );
+    ));
 
-    this.sub = this.localService.onChangeContextTitle.subscribe(
+    this.sub.push(this.turmaService.onChangeContextTitle.subscribe(
       value => {
         this.contextMenu = value;
         this.showDateSelect = false;
         this.onChangeContext = true;
       }
-    );
+    ));
 
-    this.sub = this.areaFormacaoService.onChangeContextTitle.subscribe(
+    this.sub.push(this.grupoService.onChangeContextTitle.subscribe(
       value => {
         this.contextMenu = value;
         this.showDateSelect = false;
         this.onChangeContext = true;
       }
-    );
+    ));
 
-    this.sub = this.publicService.onChangeContextTitle.subscribe(
+    this.sub.push(this.projetoService.onChangeContextTitle.subscribe(
       value => {
         this.contextMenu = value;
         this.showDateSelect = false;
         this.onChangeContext = true;
       }
-    );
+    ));
 
-    this.sub = this.institutoService.onChangeContextTitle.subscribe(
+    this.sub.push(this.estudanteService.onChangeContextTitle.subscribe(
       value => {
         this.contextMenu = value;
         this.showDateSelect = false;
         this.onChangeContext = true;
       }
-    );
+    ));
 
-    this.sub = this.publicService.enableReadMode.subscribe(
+    this.sub.push(this.inscricaoService.onChangeContextTitle.subscribe(
+      value => {
+        this.contextMenu = value;
+        this.showDateSelect = false;
+        this.onChangeContext = true;
+      }
+    ));
+
+    this.sub.push(this.monografiaService.onChangeContextTitle.subscribe(
+      value => {
+        this.contextMenu = value;
+        this.showDateSelect = false;
+        this.onChangeContext = true;
+      }
+    ));
+
+    this.sub.push(this.municipioService.onChangeContextTitle.subscribe(
+      value => {
+        this.contextMenu = value;
+        this.showDateSelect = false;
+        this.onChangeContext = true;
+      }
+    ));
+
+    this.sub.push(this.provinciaService.onChangeContextTitle.subscribe(
+      value => {
+        this.contextMenu = value;
+        this.showDateSelect = false;
+        this.onChangeContext = true;
+      }
+    ));
+
+    this.sub.push(this.especialidadeService.onChangeContextTitle.subscribe(
+      value => {
+        this.contextMenu = value;
+        this.showDateSelect = false;
+        this.onChangeContext = true;
+      }
+    ));
+
+    this.sub.push(this.localService.onChangeContextTitle.subscribe(
+      value => {
+        this.contextMenu = value;
+        this.showDateSelect = false;
+        this.onChangeContext = true;
+      }
+    ));
+
+    this.sub.push(this.areaFormacaoService.onChangeContextTitle.subscribe(
+      value => {
+        this.contextMenu = value;
+        this.showDateSelect = false;
+        this.onChangeContext = true;
+      }
+    ));
+
+    this.sub.push(this.publicService.onChangeContextTitle.subscribe(
+      value => {
+        this.contextMenu = value;
+        this.showDateSelect = false;
+        this.onChangeContext = true;
+      }
+    ));
+
+    this.sub.push(this.institutoService.onChangeContextTitle.subscribe(
+      value => {
+        this.contextMenu = value;
+        this.showDateSelect = false;
+        this.onChangeContext = true;
+      }
+    ));
+
+    this.sub.push(this.publicService.enableReadMode.subscribe(
       value => {
         this.enableReadMode = value;
-      });
+      }));
 
 
     this.formGroup01 = this.formBuilder.group({
@@ -296,10 +315,10 @@ export class AppComponent implements OnInit, AfterContentChecked, OnDestroy {
 
     this.homeService.onDataChanged.emit(this.formGroup01.controls.ano.value);
 
-    this.sub = this.formGroup01.statusChanges
+    this.sub.push(this.formGroup01.statusChanges
       .subscribe(
         () => this.homeService.onDataChanged.emit(this.formGroup01.controls.ano.value)
-      );
+      ));
 
     this.publicService.emitSelectedSchool.subscribe((resp: Instituto) => {
 
@@ -356,7 +375,7 @@ export class AppComponent implements OnInit, AfterContentChecked, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.sub.unsubscribe();
+    this.sub.forEach((e) => e.unsubscribe());
   }
 
 }
