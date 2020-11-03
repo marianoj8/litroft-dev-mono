@@ -28,9 +28,8 @@ export class ProfessorService {
     return this.http.get<Professor>(`${this.url}/interno/professor/${id}?institutoId=${this.entityId}`);
   }
 
-  list(): Observable<Professor[]> {
-    this.entityId = localStorage.getItem('entityId');
-    return this.http.get<Professor[]>(`${this.url}/interno/professor/l?institutoId=${this.entityId}`);
+  list(institutoId: number): Observable<Professor[]> {
+    return this.http.get<Professor[]>(`${this.url}/interno/professor/l?institutoId=${institutoId}`);
   }
 
   filterByNomeSexoEspecialidade(q: CustomFilter): Observable<Professor[]> {
