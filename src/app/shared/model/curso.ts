@@ -9,6 +9,7 @@ export class Curso implements CustomAbstractEntity {
   lastModifiedAt: string;
   totalModified: number;
   nome: string;
+  totalTurma: number;
   duracao: number;
   departamento: Departamento;
   adminInterno: AdminInterno;
