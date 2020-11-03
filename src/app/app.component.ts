@@ -31,6 +31,7 @@ import { ProvinciaService } from './provincia/modules/provincia.service';
 import { MunicipioService } from './municipio/modules/municipio.service';
 import { InscricaoService } from './inscricao/modules/inscricao.service';
 import { DiciplinaService } from './diciplinas/modules/diciplina.service';
+import { CoordenadorService } from './coordenador/modules/coordenador.service';
 
 @Component({
   selector: 'app-root',
@@ -95,6 +96,7 @@ export class AppComponent implements OnInit, AfterContentChecked, OnDestroy {
     private localService: LocalService,
     private diciplinaService: DiciplinaService,
     private publicService: PublicService,
+    private coordenadorService: CoordenadorService,
     public institutoService: InstitutoService,
     public inscricaoService: InscricaoService,
     private formBuilder: FormBuilder,
@@ -135,6 +137,14 @@ export class AppComponent implements OnInit, AfterContentChecked, OnDestroy {
       });
 
     this.sub = this.cursoService.onChangeContextTitle.subscribe(
+      value => {
+        this.contextMenu = value;
+        this.showDateSelect = false;
+        this.onChangeContext = true;
+      }
+    );
+
+    this.sub = this.coordenadorService.onChangeContextTitle.subscribe(
       value => {
         this.contextMenu = value;
         this.showDateSelect = false;
