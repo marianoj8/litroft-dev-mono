@@ -32,6 +32,7 @@ import {EventEmitter} from 'events';
 import {MatriculaService} from '../modules/matricula.service';
 import {Periodo} from 'src/app/shared/model/periodo';
 import {PeriodoService} from 'src/app/periodos/modules/periodos.service';
+import { AnoLetivo } from 'src/app/shared/model/support/AnoLetivo';
 
 @Component({
   selector: 'app-matricula-form',
@@ -510,6 +511,7 @@ export class MatriculaFormComponent implements OnInit {
     this.estudante.fone = this.formGroup03.controls.fone.value;
     this.estudante.email = this.formGroup03.controls.email.value;
     this.estudante.endereco = this.formGroup04.controls.endereco.value;
+    this.estudante.anoLetivo = new AnoLetivo(1);
     if (this.nivelEnsino === 0) {}
     if (this.nivelEnsino === 1) {}
     if (this.nivelEnsino === 2) {
