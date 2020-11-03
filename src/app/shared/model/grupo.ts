@@ -2,6 +2,7 @@ import { AdminInterno } from './adminInterno';
 import { Curso } from './curso';
 import { CustomAbstractEntity } from './customEntity';
 import { Orientador } from './orientador';
+import { AnoLetivo } from './support/AnoLetivo';
 import { Turma } from './turma';
 
 export class Grupo implements CustomAbstractEntity {
@@ -13,7 +14,7 @@ export class Grupo implements CustomAbstractEntity {
   descricao: string;
   posicao: string;
   turma: Turma;
-  anoLetivo: string;
+  anoLetivo: AnoLetivo;
   monoViewsCount: number;
   orientador: Orientador;
   curso: Curso;

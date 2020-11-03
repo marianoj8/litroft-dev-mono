@@ -8,6 +8,7 @@ import { CustomAbstractEntity } from './customEntity';
 import { Turma } from './turma';
 import { Provincia } from './provincia';
 import { Municipio } from './municipio';
+import { AnoLetivo } from './support/AnoLetivo';
 
 export class Estudante implements CustomAbstractEntity {
   id: number;
@@ -30,7 +31,7 @@ export class Estudante implements CustomAbstractEntity {
   ensinoNivel: EnsinoNivel;
   classe: Classe;
   periodo: Periodo;
-  anoLetivo: string;
+  anoLetivo: AnoLetivo;
   adminInterno: AdminInterno;
   instituto: Instituto;
   numeroSerie: string;

@@ -1,4 +1,4 @@
-import { Periodo } from 'src/app/shared/model/periodo';
+import { AnoLetivo } from './support/AnoLetivo';
 import { Instituto } from './instituto';
 import { Professor } from './professor';
 import { CustomAbstractEntity } from 'src/app/shared/model/customEntity';
@@ -19,7 +19,7 @@ export class MiniPauta implements CustomAbstractEntity {
   turma: Turma;
   classe: Classe;
   diciplina: Diciplina;
-  anoLetivo: string;
+  anoLetivo: AnoLetivo;
   professor: Professor;
   instituto: Instituto;
   p1: number;

@@ -1,3 +1,4 @@
+import { AnoLetivo } from './support/AnoLetivo';
 import { CustomAbstractEntity } from 'src/app/shared/model/customEntity';
 import { AdminInterno } from './adminInterno';
 import { Classe } from './classe';
@@ -14,7 +15,7 @@ export class Coordenador implements CustomAbstractEntity {
   professor: Professor;
   curso: Curso;
   classe: Classe;
-  anoletivo: string;
+  anoLetivo: AnoLetivo;
   adminInterno: AdminInterno;
 
   constructor(id?: number) {
