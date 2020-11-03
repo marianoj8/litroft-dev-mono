@@ -17,13 +17,13 @@ export class CoordenadorComponent implements OnInit, OnDestroy {
   private sub: Subscription;
 
   constructor(
-    private especialidadeService: CoordenadorService,
+    private coordenadorService: CoordenadorService,
     private location: Location) {
-    this.especialidadeService.onChangeContextTitle.emit('Coordenacaos');
+    this.coordenadorService.onChangeContextTitle.emit('Coordenador');
   }
 
   ngOnInit() {
-    this.sub = this.especialidadeService.onChangeContext.subscribe(
+    this.sub = this.coordenadorService.onChangeContext.subscribe(
       context => this.onChangeContext = context);
 
 
@@ -34,17 +34,17 @@ export class CoordenadorComponent implements OnInit, OnDestroy {
     if (event.key === 'Enter') {
       this.findFromServer(value);
     }
-    this.especialidadeService.findValueParam.emit(value.trim());
+    this.coordenadorService.findValueParam.emit(value.trim());
   }
 
   findFromServer(value: string) {
     this.filtro.nome = value.trim();
-    this.especialidadeService.findValueParamFromServer.emit(this.filtro);
+    this.coordenadorService.findValueParamFromServer.emit(this.filtro);
   }
 
   showAll() {
     this.filtro.nome = '';
-    this.especialidadeService.findValueParams.emit(this.filtro);
+    this.coordenadorService.findValueParams.emit(this.filtro);
   }
 
   cleanSearchField() {
