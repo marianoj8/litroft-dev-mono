@@ -39,6 +39,7 @@ export class CursoListComponent implements OnInit {
   displaydColumns: string[] = [
     'nome',
     'duracao',
+    'turmas',
     'departamento',
     'detalhe',
     'edit',
