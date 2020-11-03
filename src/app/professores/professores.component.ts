@@ -20,13 +20,13 @@ export class ProfessoresComponent implements OnInit, OnDestroy {
   constructor(
     public professorService: ProfessorService,
     private location: Location) {
-    this.professorService.onChangeContextTitle.emit('Professores');
+      this.professorService.onChangeContextTitle.emit('Professor');
+    }
 
-  }
+    ngOnInit() {
+      this.sub = this.professorService.onChangeContext.subscribe(
+        context => this.onChangeContext = context);
 
-  ngOnInit() {
-    this.sub = this.professorService.onChangeContext.subscribe(
-      context => this.onChangeContext = context);
 
     // this.especialidades$ = this.especialidadeService.list()
     //   .pipe(
