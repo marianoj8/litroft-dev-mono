@@ -6,7 +6,7 @@
       <mat-select matInput formControlName="ano" placeholder="Ano letivo">
         <ng-container *ngFor="let year of years">
           <mat-option style="padding-left: 20px;" [value]="year">
-            {{ year }}
+            {{ year.ano }}
           </mat-option>
         </ng-container>
       </mat-select>
