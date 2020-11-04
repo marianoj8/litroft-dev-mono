@@ -1,3 +1,4 @@
+import { AnoLetivo } from './../../shared/model/support/AnoLetivo';
 import { ConfigTable } from './../../shared/model/configtable';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { NotificationService } from 'src/app/shared/services/notification/notification.service';
@@ -15,6 +16,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { CustomFilter } from 'src/app/shared/model/support/custom-filter';
 import { MatDailogParamEstudante } from 'src/app/shared/model/support/mat-dialog-param-estudante';
 import { ConfigService } from 'src/app/shared/config/modules/config.service';
+import { AnoLetivoService } from 'src/app/ano-letivo/modules/ano-letivo.service';
 
 @Component({
   selector: 'app-confirm-dialog',
@@ -25,7 +27,7 @@ export class ConfirmDialogComponent implements OnInit {
 
   private filter: CustomFilter = new CustomFilter();
   turmas: Turma[];
-  years = [];
+  years: AnoLetivo[];
   currentYear = 2020;
   totalAluno: number;
   private estudante: Estudante;
@@ -40,6 +42,7 @@ export class ConfirmDialogComponent implements OnInit {
     public data: MatDailogParamEstudante,
     private dialogService: MatDialog,
     private turmaService: TurmaService,
+    private anoLetivoService: AnoLetivoService,
     private estudanteService: EstudanteService,
     private matriculaService: MatriculaService,
     private configService: ConfigService,
@@ -50,9 +53,8 @@ export class ConfirmDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.init();
-    for (let i = 2008; i <= new Date().getFullYear(); i++) {
-      this.years.push(i);
-    }
+
+    this.anoLetivoService.list('').subscribe((e) => this.years = e);
 
     this.formanoLetivo = this.formBuilder.group({
       ano: [new Date().getFullYear()],

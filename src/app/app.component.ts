@@ -1,3 +1,4 @@
+import { AnoLetivo } from './shared/model/support/AnoLetivo';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, OnDestroy, OnInit, AfterContentChecked, AfterViewChecked, AfterViewInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
@@ -33,6 +34,7 @@ import { InscricaoService } from './inscricao/modules/inscricao.service';
 import { DiciplinaService } from './diciplinas/modules/diciplina.service';
 import { CoordenadorService } from './coordenador/modules/coordenador.service';
 import { ProfessorService } from './professores/modules/professor.service';
+import { AnoLetivoService } from './ano-letivo/modules/ano-letivo.service';
 
 @Component({
   selector: 'app-root',
@@ -51,7 +53,7 @@ export class AppComponent implements OnInit, AfterContentChecked, OnDestroy {
   showDateSelect = false;
   formGroup01: FormGroup;
   enableReadMode: boolean;
-  years = [];
+  years: AnoLetivo[];
   public institutos: Instituto[];
   btnMonografiaText = 'Monografias Internas';
   private sub: Subscription[];
@@ -97,6 +99,7 @@ export class AppComponent implements OnInit, AfterContentChecked, OnDestroy {
     private localService: LocalService,
     private diciplinaService: DiciplinaService,
     private publicService: PublicService,
+    private anoLetivoService: AnoLetivoService,
     private coordenadorService: CoordenadorService,
     private professorService: ProfessorService,
     public institutoService: InstitutoService,
@@ -111,9 +114,8 @@ export class AppComponent implements OnInit, AfterContentChecked, OnDestroy {
   ngOnInit(): void {
 
     this.institutos = [];
-    for (let i = 2008; i <= new Date().getFullYear(); i++) {
-      this.years.push(i);
-    }
+
+    this.anoLetivoService.list('').subscribe((e) => this.years = e);
 
     this.institutoService.list().subscribe(resp => this.institutos = resp);
 
