@@ -1,8 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
+import { AnoLetivoComponent } from './../ano-letivo.component';
+
 @NgModule({
-  declarations: [AnoLetivoModule],
+  declarations: [AnoLetivoComponent],
   imports: [CommonModule],
   exports: []
 })
