@@ -63,6 +63,11 @@ const routes: Routes = [
     loadChildren: () => import('src/app/coordenador/modules/coordenador.module').then(m => m.CoordenadorModule)
   },
   {
+    path: 'anoletivo',
+    canActivate: [AuthGuard],
+    loadChildren: () => import('src/app/ano-letivo/modules/ano-letivo.module').then(m => m.AnoLetivoModule)
+  },
+  {
     path: 'departamentos',
     canActivate: [AuthGuard],
     loadChildren: () => import('src/app/departamentos/modules/departamento.module').then(m => m.DepartamentoModule)
