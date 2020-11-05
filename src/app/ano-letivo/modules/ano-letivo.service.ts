@@ -22,25 +22,11 @@ export class AnoLetivoService {
   constructor(private http: HttpClient) { }
 
   getById(id: number): Observable<AnoLetivo> {
-    return this.http.get<AnoLetivo>(`${this.url}/interno/anoletivo/${id}`);
+    return this.http.get<AnoLetivo>(`${this.url}/anoletivo/${id}`);
   }
 
-  list(institutoId: number): Observable<AnoLetivo[]> {
-    return this.http.get<AnoLetivo[]>(`${this.url}/interno/anoletivo/l?institutoId=${institutoId}`);
-  }
-
-  publicList(institutoId: number): Observable<AnoLetivo[]> {
-    return this.http.get<AnoLetivo[]>(`${this.url}/anoletivo/public/instituto/${institutoId}`);
-  }
-
-  filterByNomeDuracao(q: CustomFilter, instituoId: number): Observable<AnoLetivo[]> {
-    return this.http.get<AnoLetivo[]>(`${this.url}/interno/anoletivo/l?nome=${!!q.nome ? q.nome : ''}&duracao=${!!q.duracao ? q.duracao : 1}`)
-      ;
-  }
-
-  filterByDuracao(duracao: number): Observable<AnoLetivo[]> {
-    return this.http
-      .get<AnoLetivo[]>(`${this.url}/interno/anoletivo/l?duracao=${!!duracao ? duracao : 1}`);
+  list(ano: string): Observable<AnoLetivo[]> {
+    return this.http.get<AnoLetivo[]>(`${this.url}/anoletivo?ano=${!!ano ? ano : ''}`);
   }
 
   save(t: AnoLetivo): Observable<AnoLetivo> {
