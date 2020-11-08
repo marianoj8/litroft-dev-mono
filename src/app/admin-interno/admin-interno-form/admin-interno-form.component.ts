@@ -70,7 +70,6 @@ export class AdminInternoFormComponent implements OnInit {
 
     this.institutos$ = this.institutoSerice.list()
       .pipe(catchError(err => {
-        // console.log(err);
         this.dialogService.open(ErrorLoadingComponent);
         this.institutoError$.next(true);
         return of([]);
