@@ -1,28 +1,46 @@
 <div [hidden]="onChangeContext">
-  <mat-card color="primary">
+  <mat-card color="primary" style="padding-bottom: 26px; padding-left: 14%;">
     <div class="space-arround">
-      <mat-form-field class="search">
-        <input
-          #key
-          matInput
-          type="text"
-          (keyup)="find($event, key.value)"
-          autocomplete="false"
-          placeholder="Procurar Coordenador por nome..."
-        />
-        <span matSuffix *ngIf="!(key.value.length != 0)"
-          ><mat-icon class="mat-1" color="primary">search</mat-icon>
-        </span>
+      <form [formGroup]="formGroupSearch">
 
-        <span matSuffix *ngIf="key.value.length != 0">
-          <button
-            mat-icon-button
-            (click)="key.value = null; cleanSearchField()"
-          >
-            <mat-icon color="primary">close</mat-icon>
-          </button>
-        </span>
-      </mat-form-field>
+        <mat-form-field style="width: 12%; padding-right: 10px;">
+          <mat-select matInput autocomplete="'false'" formControlName="anoLetivo" placeholder="Ano letivo">
+            <mat-option *ngFor="let year of years" [value]="year.id">
+              {{ year.ano }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field style="width: 20%; padding-right: 10px;">
+          <mat-select matInput autocomplete="'false'" formControlName="curso" placeholder="Curso">
+            <mat-option *ngFor="let curso of cursos" [value]="curso.id">
+              {{ curso?.nome }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field style="width: 12%; margin-bottom: 10px; padding-right: 10px;">
+          <mat-select matInput autocomplete="'false'" formControlName="classe" placeholder="Classe">
+            <mat-option *ngFor="let classe of classes" [value]="classe.id">
+              {{ classe?.descricao }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="search" style="width: 40%;">
+          <input #key matInput formControlName="estudanteNome" type="text"
+            autocomplete="false" placeholder="Procurar estudante por nome..." />
+          <span matSuffix *ngIf="!(key.value.length != 0)">
+            <mat-icon class="mat-1" color="primary">search</mat-icon>
+          </span>
+
+          <span matSuffix *ngIf="key.value.length != 0">
+            <button mat-icon-button (click)="key.value = null; cleanSearchField()">
+              <mat-icon color="primary">close</mat-icon>
+            </button>
+          </span>
+        </mat-form-field>
+      </form>
     </div>
   </mat-card>
 </div>
