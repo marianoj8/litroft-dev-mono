@@ -112,19 +112,29 @@
       </div>
     </div>
     <!-- <mat-divider></mat-divider> -->
-    <div class="profile-container" *ngIf="authService.loggedIn()">
+    <div class="profile-container" *ngIf="authService.loggedIn()" style="height: 100px;">
       <mat-toolbar>
         <mat-toolbar-row>
 
           <p>
             <mat-divider></mat-divider>
-            {{ acessType }}
+            {{ entityName }}
           </p>
 
         </mat-toolbar-row>
         <mat-toolbar-row>
-          <h5>
-            {{nome | profileName}}
+          <p><mat-divider>
+          </mat-divider></p>
+          <h5 style="padding-bottom: 18px;">
+            {{ acessType }}
+           </h5>
+          <p><mat-divider>
+          </mat-divider></p>
+        </mat-toolbar-row>
+        <mat-divider></mat-divider>
+        <mat-toolbar-row>
+          <h5 style="margin-top: -25px;">
+           {{nome | profileName}}
           </h5>
         </mat-toolbar-row>
       </mat-toolbar>
