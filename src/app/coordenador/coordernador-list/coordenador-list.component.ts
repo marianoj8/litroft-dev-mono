@@ -58,8 +58,8 @@ export class CoordenadorListComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.service.onChangeContext.emit(false);
 
-    this.filtro.anoLetivo = '2020';
-    this.filtro.classeId = 1;
+    this.filtro.anoLetivo = '2020-2021';
+    this.filtro.classeId = 11;
     this.filtro.cursoId = 1;
 
 
