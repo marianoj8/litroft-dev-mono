@@ -13,28 +13,28 @@
     <ng-container matColumnDef="coordenador">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Nome</th>
       <td mat-cell *matCellDef="let coordenador" (mouseenter)="showPerfil()">
-        {{ coordenador?.nome +' '+ coordenador?.sobreNome }}
+        {{ coordenador?.professor?.nome +' '+ coordenador?.professor?.sobreNome }}
       </td>
     </ng-container>
 
     <ng-container matColumnDef="curso">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Curso</th>
       <td mat-cell *matCellDef="let coordenador">
-        {{ coordenador?.sexo === "M" ? "Masculino" : "Femenino" }}
+        {{ coordenador?.curso?.nome }}
       </td>
     </ng-container>
 
     <ng-container matColumnDef="classe">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Classe</th>
       <td mat-cell *matCellDef="let coordenador">
-        {{ coordenador?.fone }}
+        {{ coordenador?.classe?.descricao }}
       </td>
     </ng-container>
 
     <ng-container matColumnDef="anoletivo">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Ano Letivo</th>
       <td mat-cell *matCellDef="let coordenador">
-        {{ coordenador?.email }}
+        {{ coordenador?.anoLetivo?.ano }}
       </td>
     </ng-container>
 
