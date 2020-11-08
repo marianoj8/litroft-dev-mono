@@ -63,7 +63,7 @@ export class AuthService {
   }
 
   private doLogIn(to: string) {
-    if (to === 'Administrador') {
+    if (to === 'Master') {
       this.router.navigate(['/home']);
     } else {
       this.router.navigate(['']);
