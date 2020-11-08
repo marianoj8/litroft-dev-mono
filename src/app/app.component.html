@@ -418,7 +418,7 @@
             <mat-form-field class="mat-form-field-infix">
               <mat-select matInput formControlName="ano" class="mat-form-field-infix">
                 <ng-container *ngFor="let year of years">
-                  <mat-option [value]="year">
+                  <mat-option [value]="year.id">
                     {{ year.ano }}
                   </mat-option>
                 </ng-container>
