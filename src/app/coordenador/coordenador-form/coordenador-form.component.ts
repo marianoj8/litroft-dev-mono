@@ -1,3 +1,4 @@
+import { AnoLetivo } from 'src/app/shared/model/support/AnoLetivo';
 import { Professor } from './../../shared/model/professor';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
@@ -22,6 +23,8 @@ import { NotificationService } from 'src/app/shared/services/notification/notifi
 import { MyErrorStateMatch } from 'src/app/shared/validators/field-validator';
 import { CoordenadorService } from '../modules/coordenador.service';
 import { ProfessorService } from 'src/app/professores/modules/professor.service';
+import { AnoLetivoService } from 'src/app/ano-letivo/modules/ano-letivo.service';
+import { AdminInterno } from 'src/app/shared/model/adminInterno';
 
 @Component({
   selector: 'app-coordenador-form',
@@ -35,6 +38,7 @@ export class CoordenadorFormComponent implements OnInit {
   professores$: Observable<Professor[]>;
   cursos$: Observable<Curso[]>;
   classes$: Observable<Classe[]>;
+  anoLetivos$: Observable<AnoLetivo[]>;
   coordenadorError$ = new Subject<boolean>();
   cursoError$ = new Subject<boolean>();
   private institutoId = Number.parseInt(localStorage.getItem('entityId'), 10);
@@ -55,6 +59,7 @@ export class CoordenadorFormComponent implements OnInit {
     private professorSerice: ProfessorService,
     private cursoSerice: CursoService,
     private classeSerice: ClasseService,
+    private anoLetivoSerice: AnoLetivoService,
     private notificationService: NotificationService,
     private dialog: MatDialog,
     private location: Location,
@@ -68,6 +73,7 @@ export class CoordenadorFormComponent implements OnInit {
 
     this.professores$ = this.professorSerice.list(this.institutoId);
     this.classes$ = this.classeSerice.listClasseByNivelId(this.nivelId);
+    this.anoLetivos$ = this.anoLetivoSerice.list('');
 
     this.cursos$ = this.cursoSerice.list(this.institutoId)
       .pipe(catchError(err => {
@@ -94,7 +100,7 @@ export class CoordenadorFormComponent implements OnInit {
 
           this.formGroup02.patchValue({
             classe: this.coordenador.classe,
-            anoletivo: this.coordenador.anoLetivo
+            anoLetivo: this.coordenador.anoLetivo
           });
         });
 
@@ -109,7 +115,7 @@ export class CoordenadorFormComponent implements OnInit {
 
     this.formGroup02 = this.formBuilder.group({
       classe: [null, Validators.required],
-      anoletivo: [null, Validators.required]
+      anoLetivo: [null, Validators.required]
     });
   }
 
@@ -123,10 +129,10 @@ export class CoordenadorFormComponent implements OnInit {
 
   private save(stepper: MatVerticalStepper, state): void {
 
-    this.coordenador.professor = this.formGroup01.controls.professor.value;
-    this.coordenador.curso = this.formGroup01.controls.curso.value;
-    this.coordenador.classe = this.formGroup02.controls.classe.value;
-    this.coordenador.anoLetivo = this.formGroup02.controls.anoletivo.value;
+    this.coordenador.professor = new Professor(this.formGroup01.controls.professor.value);
+    this.coordenador.curso = new Curso(this.formGroup01.controls.curso.value);
+    this.coordenador.classe = new Classe(this.formGroup02.controls.classe.value);
+    this.coordenador.anoLetivo = new AnoLetivo(this.formGroup02.controls.anoLetivo.value);
 
     this.coordenadorService.save(this.coordenador)
       .subscribe(

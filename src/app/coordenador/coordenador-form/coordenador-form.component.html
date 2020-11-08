@@ -56,11 +56,11 @@
         </mat-form-field>
 
         <mat-form-field class="field field-padding">
-          <mat-select matInput formControlName="classe" placeholder="Classe">
-            <mat-option *ngFor="let classe of classes$ | async" [value]="classe.id"> {{classe.descricao}} </mat-option>
+          <mat-select matInput formControlName="anoLetivo" placeholder="Ano Letivo">
+            <mat-option *ngFor="let anoLetivo of anoLetivos$ | async" [value]="anoLetivo.id"> {{anoLetivo.ano}} </mat-option>
           </mat-select>
 
-          <mat-error *ngIf="formGroup02.controls['classe'].hasError('required')">
+          <mat-error *ngIf="formGroup02.controls['anoLetivo'].hasError('required')">
             Classe é <strong>obrigatorio</strong>
           </mat-error>
 
