@@ -64,8 +64,6 @@ export class AppComponent implements OnInit, AfterContentChecked, OnDestroy {
   showOrHideMenuByNivel = 'No Nivel';
   selectedInstLogo = '';
 
-
-
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => {
@@ -308,11 +306,7 @@ export class AppComponent implements OnInit, AfterContentChecked, OnDestroy {
 
 
     this.formGroup01 = this.formBuilder.group({
-      ano: [new Date().getFullYear()]
-    });
-
-    this.formGroup01.patchValue({
-      ano: new Date().getFullYear()
+      ano: [13]
     });
 
     this.homeService.onDataChanged.emit(this.formGroup01.controls.ano.value);
