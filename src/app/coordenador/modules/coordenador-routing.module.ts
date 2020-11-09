@@ -20,7 +20,7 @@ const routes: Routes = [
         component: CoordenadorFormComponent
       },
       {
-        path: 'edit/:id',
+        path: 'edit/:id/instituto/:institutoId',
         canActivate: [AuthGuard],
         component: CoordenadorFormComponent
       },
