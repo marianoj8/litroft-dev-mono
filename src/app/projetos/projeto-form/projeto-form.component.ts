@@ -67,7 +67,7 @@ export class ProjetoFormComponent implements OnInit {
 
 
     this.grupoService.list().subscribe(resp => this.grupos = resp);
-    this.turmas$ = this.turmaService.list();
+    this.turmas$ = this.turmaService.filterByNome();
 
     this.formGroup01.controls.turma.valueChanges
       .subscribe(
