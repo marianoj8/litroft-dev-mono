@@ -59,9 +59,6 @@ export class CoordenadorListComponent implements OnInit, OnDestroy {
     this.service.onChangeContext.emit(false);
 
     this.filtro.anoLetivo = '2020-2021';
-    this.filtro.classeId = 11;
-    this.filtro.cursoId = 1;
-
 
     this.sub = this.service.findValueParams
       .subscribe(next => this.onRefrash(next));
@@ -90,7 +87,7 @@ export class CoordenadorListComponent implements OnInit, OnDestroy {
   // }
 
   onRefrash(data?: CustomFilter) {
-    this.sub = this.service.list(data, this.institutoId)
+    this.sub = this.service.listAll(data, this.institutoId)
       .pipe(
         catchError(err => {
 
