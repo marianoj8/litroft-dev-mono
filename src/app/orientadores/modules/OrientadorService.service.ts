@@ -28,7 +28,7 @@ export class OrientadorService {
   }
 
   list(): Observable<Orientador[]> {
-    return this.http.get<Orientador[]>(`${this.url}/orientador/l`);
+    return this.http.get<Orientador[]>(`${this.url}/interno/orientador/l`);
   }
 
   filterByNomeSexoEspecialidade(q: CustomFilter): Observable<Orientador[]> {
