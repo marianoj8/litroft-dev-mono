@@ -94,13 +94,13 @@ export class CoordenadorFormComponent implements OnInit {
           this.coordenador = data;
 
           this.formGroup01.patchValue({
-            professor: this.coordenador.professor,
-            curso: this.coordenador.curso
+            professor: this.coordenador.professor.id,
+            curso: this.coordenador.curso.id
           });
 
           this.formGroup02.patchValue({
-            classe: this.coordenador.classe,
-            anoLetivo: this.coordenador.anoLetivo
+            classe: this.coordenador.classe.id,
+            anoLetivo: this.coordenador.anoLetivo.id
           });
         });
 
