@@ -32,12 +32,9 @@ export class CoordenadorService {
     return this.http.get<Coordenador[]>(`${this.url}/interno/coordenador/l/instituto/${institutoId}?nome=${!!q.nome ? q.nome : ''}&cursoId=${!!q.cursoId ? q.cursoId : 1}&classeId=${!!q.classeId ? q.classeId : 1}&anoletivo=${!!q.anoLetivo ? q.anoLetivo : ''}`);
   }
 
-  // filterByNomeSexoEspecialidade(filter: CustomFilter): Observable<Coordenador[]> {
-  //   return this.http.get<Coordenador[]>('');
-  // }
-  // filterBySexoAndEspecialidade(filter: CustomFilter): Observable<Coordenador[]> {
-  //   return this.http.get<Coordenador[]>('');
-  // }
+  listAll(q: CustomFilter, institutoId: number): Observable<Coordenador[]> {
+    return this.http.get<Coordenador[]>(`${this.url}/interno/coordenador/all/instituto/${institutoId}?nome=${!!q.nome ? q.nome : ''}&cursoNome=${!!q.curso ? q.curso : ''}&classeDescricao=${!!q.descricao ? q.descricao : ''}&anoletivo=${!!q.anoLetivo ? q.anoLetivo : ''}`);
+  }
 
   save(t: Coordenador): Observable<Coordenador> {
     if (t.id) {
