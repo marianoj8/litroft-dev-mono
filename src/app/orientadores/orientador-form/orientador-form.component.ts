@@ -10,9 +10,14 @@ import { Observable, of, Subject } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { EspecialidadeService } from 'src/app/especialidades/modules/especialidade.service';
 import { MonografiaService } from 'src/app/monografias/modules/monografia.service';
+import { MunicipioService } from 'src/app/municipio/modules/municipio.service';
+import { ProvinciaService } from 'src/app/provincia/modules/provincia.service';
 import { ErrorLoadingComponent } from 'src/app/shared/error-loading/error-loading.component';
 import { Especialidade } from 'src/app/shared/model/especialidade';
+import { Municipio } from 'src/app/shared/model/municipio';
 import { Orientador } from 'src/app/shared/model/orientador';
+import { Provincia } from 'src/app/shared/model/provincia';
+import { CustomFilter } from 'src/app/shared/model/support/custom-filter';
 import { NotificationService } from 'src/app/shared/services/notification/notification.service';
 import { MyErrorStateMatch } from 'src/app/shared/validators/field-validator';
 
@@ -30,8 +35,13 @@ export class OrientadorFormComponent implements OnInit {
   formGroup04: FormGroup;
   formGroup05: FormGroup;
   especialidades$: Observable<Especialidade[]>;
+  provincias$: Observable<Provincia[]>;
+  municipios$: Observable<Municipio[]>;
   orientadorError$ = new Subject<boolean>();
   especialidadeError$ = new Subject<boolean>();
+  municipioError$ = new Subject<boolean>();
+  provinciaError$ = new Subject<boolean>();
+  filter = new CustomFilter();
 
   matcher = new MyErrorStateMatch();
   showAndHideView: EventEmitter = new EventEmitter();
@@ -44,6 +54,8 @@ export class OrientadorFormComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
     private orientadorService: OrientadorService,
+    private provinciaService: ProvinciaService,
+    private municipioService: MunicipioService,
     private especialidadeSerice: EspecialidadeService,
     private notificationService: NotificationService,
     private dialog: MatDialog,
@@ -55,6 +67,24 @@ export class OrientadorFormComponent implements OnInit {
   ngOnInit() {
     this.orientadorService.onChangeContext.emit(true);
     this.initForms();
+
+    this.provincias$ = this.provinciaService.list()
+      .pipe(catchError(err => {
+        this.provinciaError$.next(true);
+        return of(null);
+      }));
+
+    this.formGroup04.controls.provincia.valueChanges
+      .subscribe(value => {
+        this.filter.nome = '';
+        this.filter.provinciaId = value;
+        this.municipios$ = this.municipioService.filterByNomeAndProvincia(this.filter)
+          .pipe(catchError(err => {
+            this.municipioError$.next(true);
+            return of(null);
+          }));
+      });
+
     this.especialidades$ = this.especialidadeSerice.list()
       .pipe(catchError(err => {
         // console.log(err);
@@ -80,16 +110,18 @@ export class OrientadorFormComponent implements OnInit {
 
           this.formGroup02.patchValue({
             sexo: this.orientador.sexo,
-            dataNascimento: this.orientador.dataNascimento
+            dataNascimento: this.orientador.dataNascimento,
+            bi: this.orientador.bi
           });
 
           this.formGroup03.patchValue({
-            bi: this.orientador.bi,
-            fone: this.orientador.fone
+            fone: this.orientador.fone,
+            email: this.orientador.email
           });
 
           this.formGroup04.patchValue({
-            email: this.orientador.email,
+            provincia: this.orientador.provincia.id,
+            municipio: this.orientador.municipio.id,
             endereco: this.orientador.endereco
           });
 
@@ -119,16 +151,18 @@ export class OrientadorFormComponent implements OnInit {
       dataNascimento: ['', [
         Validators.required,
         Validators.minLength(10),
-        Validators.maxLength(10)]]
+        Validators.maxLength(10)]],
+      bi: [null, Validators.required],
     });
 
     this.formGroup03 = this.formBuilder.group({
-      bi: [null, Validators.required],
-      fone: [null, [Validators.required]]
+      fone: [null, [Validators.required]],
+      email: [null, [Validators.required, Validators.email]],
     });
 
     this.formGroup04 = this.formBuilder.group({
-      email: [null, [Validators.required, Validators.email]],
+      provincia: [null, Validators.required],
+      municipio: [null, Validators.required],
       endereco: [null]
     });
 
@@ -151,11 +185,16 @@ export class OrientadorFormComponent implements OnInit {
 
     this.orientador.nome = this.formGroup01.controls.nome.value;
     this.orientador.sobreNome = this.formGroup01.controls.sobrenome.value;
+
     this.orientador.sexo = this.formGroup02.controls.sexo.value;
     this.orientador.dataNascimento = this.resolveDateFormat();
-    this.orientador.bi = this.formGroup03.controls.bi.value;
+    this.orientador.bi = this.formGroup02.controls.bi.value;
+
     this.orientador.fone = this.formGroup03.controls.fone.value;
-    this.orientador.email = this.formGroup04.controls.email.value;
+    this.orientador.email = this.formGroup03.controls.email.value;
+
+    this.orientador.provincia = new Provincia(this.formGroup04.controls.provincia.value);
+    this.orientador.municipio = new Municipio(this.formGroup04.controls.municipio.value);
     this.orientador.endereco = this.formGroup04.controls.endereco.value;
 
     this.especialidade.id = this.formGroup05.controls.especialidade.value as number;
