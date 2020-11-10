@@ -94,10 +94,10 @@
           >
             <ng-container *ngFor="let projeto of projetos$ | async">
               <mat-option [value]="projeto.id">
-                ({{ projeto.grupo.posicao }})
-                {{ projeto.tema }}
-                [ {{ projeto.grupo.turma.sigla }} ]
-                {{ projeto.grupo.anoLetivo }}
+                ({{ projeto?.grupo?.posicao }})
+                {{ projeto?.tema }}
+                [ {{ projeto?.grupo?.turma?.sigla }} ]
+                {{ projeto?.grupo?.anoLetivo?.ano }}
               </mat-option>
             </ng-container>
           </mat-select>
