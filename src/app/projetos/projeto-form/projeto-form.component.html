@@ -57,9 +57,9 @@
           <mat-select matInput formControlName="grupo" required placeholder="Grupo">
             <ng-container *ngFor="let grupo of grupos$ | async">
               <mat-option [value]="grupo.id">
-                {{ grupo.posicao }}
-                {{grupo.descricao}}
-                [{{grupo.anoLetivo}}]
+                {{ grupo?.posicao }}
+                {{grupo?.descricao}}
+                [{{grupo?.anoLetivo?.ano}}]
               </mat-option>
             </ng-container>
           </mat-select>
