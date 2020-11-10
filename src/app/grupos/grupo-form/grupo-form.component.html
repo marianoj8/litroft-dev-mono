@@ -35,14 +35,14 @@
           </mat-error>
         </mat-form-field>
         <mat-form-field class="field-min-2 field-padding">
-          <mat-select matInput formControlName="ano" required placeholder="Ano lectivo">
-            <ng-container *ngFor="let ano of anos">
-              <mat-option [value]="ano">
-                {{ ano }}
+          <mat-select matInput formControlName="anoLetivo" required placeholder="Ano lectivo">
+            <ng-container *ngFor="let year of years">
+              <mat-option [value]="year.id">
+                {{ year.ano }}
               </mat-option>
             </ng-container>
           </mat-select>
-          <mat-error *ngIf="formGroup01.controls['ano'].hasError('required')">
+          <mat-error *ngIf="formGroup01.controls['anoLetivo'].hasError('required')">
             Ano Lectivo é <strong>obrigatorio</strong>
           </mat-error>
         </mat-form-field>
@@ -159,15 +159,15 @@
       </table>
 
       <ng-template #loading>
-        <div *ngIf="error$ | async as error; else showError">
+        <ng-template *ngIf="error$ | async as error; else showError">
           <mat-progress-bar mode="indeterminate" color="warn">
           </mat-progress-bar>
-        </div>
-        <div #showError>
+        </ng-template>
+        <ng-template #showError>
           <span>
             Erro ao carregar estudantes. Tente novamente mais tarde.
           </span>
-        </div>
+        </ng-template>
       </ng-template>
     </div>
 

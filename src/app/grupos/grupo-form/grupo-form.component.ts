@@ -1,3 +1,4 @@
+import { AnoLetivo } from './../../shared/model/support/AnoLetivo';
 import { Location } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
@@ -29,6 +30,7 @@ import { TurmaService } from 'src/app/turmas/modules/turma.service';
 import { GrupoService } from '../modules/grupo.service';
 import { SelectElementComponent } from './../select-element/select-element.component';
 import { ForbiddenErrorDialogComponent } from 'src/app/shared/forbidden-error-dialog/forbidden-error-dialog.component';
+import { AnoLetivoService } from 'src/app/ano-letivo/modules/ano-letivo.service';
 
 
 @Component({
@@ -54,7 +56,7 @@ export class GrupoFormComponent implements OnInit {
   estudantesList: Estudante[] = [];
   elementosList: Elemento[] = [];
   cursos$: Observable<Curso[]>;
-  anos: number[];
+  years: AnoLetivo[];
   orientadores$: Observable<Orientador[]>;
   position: string[];
   turmas$: Observable<Turma[]>;
@@ -84,6 +86,7 @@ export class GrupoFormComponent implements OnInit {
     private grupoService: GrupoService,
     private elementoService: ElementoService,
     private cursoService: CursoService,
+    private anoLetivoLetivoService: AnoLetivoService,
     private orientadorService: OrientadorService,
     private estudanteService: EstudanteService,
     private turmaService: TurmaService,
@@ -97,10 +100,8 @@ export class GrupoFormComponent implements OnInit {
   }
 
   creatYears() {
-    this.anos = [];
-    for (let year = 2010; year <= new Date().getFullYear(); year++) {
-      this.anos.push(year);
-    }
+    this.years = [];
+    this.anoLetivoLetivoService.list('').subscribe((e) => this.years = e);
   }
 
   ngOnInit() {
@@ -158,7 +159,7 @@ export class GrupoFormComponent implements OnInit {
           this.formGroup01.patchValue({
             descricao: data.descricao,
             curso: data.curso.id,
-            ano: data.anoLetivo
+            anoLetivo: data.anoLetivo.id
           });
 
           this.formGroup02.patchValue({
@@ -205,7 +206,7 @@ export class GrupoFormComponent implements OnInit {
         Validators.maxLength(80)]],
       curso: [null, [
         Validators.required]],
-      ano: [new Date().getFullYear(), [Validators.required]]
+      anoLetivo: [13, Validators.required]
     });
 
     this.formGroup02 = this.formBuilder.group({
@@ -240,7 +241,7 @@ export class GrupoFormComponent implements OnInit {
     this.grupo.posicao = this.formGroup02.controls.posicao.value;
     this.grupo.orientador = new Orientador(this.formGroup03.controls.orientador.value);
 
-    this.grupo.anoLetivo = this.formGroup01.controls.ano.value;
+    this.grupo.anoLetivo = new AnoLetivo(this.formGroup01.controls.anoLetivo.value);
 
     this.grupoService.save(this.grupo)
       .pipe(catchError((err: HttpErrorResponse) => {
