@@ -31,6 +31,7 @@ export class ReadModeComponent implements OnInit {
 
 
   ngOnInit() {
+    console.log(environment.API);
     this.publicService.loadFileFromAPI(this.activetedRoute.snapshot.params.id);
     this.publicService.enableReadMode.emit(false);
   }
