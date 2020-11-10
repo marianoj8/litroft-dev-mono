@@ -8,9 +8,9 @@
               <img src="../../../assets/notebook.png" />
               <h4 *ngIf="grupo.descricao.length > 30">{{ grupo.descricao.substring(0, 28) }}...</h4>
               <h4 *ngIf="grupo.descricao.length < 30">{{ grupo.descricao }}</h4>
-              <h4>
+              <!-- <h4>
                 ({{grupo.adminInterno.instituto.sigla}}) | {{ grupo.anoLetivo }}
-              </h4>
+              </h4> -->
               <p *ngIf="grupo?.monoViewsCount < 1000" >
                 <mat-icon id="viewIcon">visibility</mat-icon>{{grupo?.monoViewsCount}} visualizações
               </p>
@@ -24,8 +24,7 @@
               {{ grupo.descricao }}
               <p id="pCurso"><strong>Curso:</strong> {{ grupo.curso.nome }}</p>
               <p><strong>Turma:</strong> {{ grupo.turma.sigla }}</p>
-              <p><strong>Instituto:</strong> {{ grupo.adminInterno.instituto.nome }}
-                ({{grupo.adminInterno.instituto.sigla}})</p>
+              <p><strong>Departamento:</strong> {{ grupo.curso.departamento.nome }}</p>
               <p><strong>Ano lectivo:</strong> {{ grupo.anoLetivo }}</p>
               <a mat-raised-button id="readButton" color="primary" (click)="onReadMode(grupo)">
                 <mat-icon>format_align_justify</mat-icon>
@@ -51,9 +50,9 @@
               <img src="../../../assets/notebook.png" />
               <h4 *ngIf="grupo.descricao.length > 30">{{ grupo.descricao.substring(0, 28) }}...</h4>
               <h4 *ngIf="grupo.descricao.length < 30">{{ grupo.descricao }}</h4>
-              <h4>
+              <!-- <h4>
                 ({{grupo.adminInterno.instituto.sigla}}) | {{ grupo.anoLetivo }}
-              </h4>
+              </h4> -->
               <p *ngIf="grupo?.monoViewsCount < 1000" >
                 <mat-icon id="viewIcon">visibility</mat-icon>{{grupo?.monoViewsCount}} visualizações
               </p>
@@ -67,8 +66,8 @@
               {{ grupo.descricao }}
               <p id="pCurso"><strong>Curso:</strong> {{ grupo.curso.nome }}</p>
               <p><strong>Turma:</strong> {{ grupo.turma.sigla }}</p>
-              <p><strong>Instituto:</strong> {{ grupo.adminInterno.instituto.nome }}
-                ({{grupo.adminInterno.instituto.sigla}})</p>
+              <!-- <p><strong>Departamento:</strong> {{ grupo.adminInterno.instituto.nome }}
+                ({{grupo.adminInterno.instituto.sigla}})</p> -->
               <p><strong>Ano lectivo:</strong> {{ grupo.anoLetivo }}</p>
               <a mat-raised-button id="readButton" color="primary" (click)="onReadMode(grupo)">
                 <mat-icon>format_align_justify</mat-icon>
@@ -95,7 +94,7 @@
               <h4 *ngIf="grupo.descricao.length > 30">{{ grupo.descricao.substring(0, 28) }}...</h4>
               <h4 *ngIf="grupo.descricao.length < 30">{{ grupo.descricao }}</h4>
               <h4>
-                ({{grupo.adminInterno.instituto.sigla}}) | {{ grupo.anoLetivo }}
+                <!-- ({{grupo.adminInterno.instituto.sigla}}) | {{ grupo.anoLetivo }} -->
               </h4>
               <p *ngIf="grupo?.monoViewsCount < 1000" >
                 <mat-icon id="viewIcon">visibility</mat-icon>{{grupo?.monoViewsCount}} visualizações
@@ -110,8 +109,8 @@
               {{ grupo.descricao }}
               <p id="pCurso"><strong>Curso:</strong> {{ grupo.curso.nome }}</p>
               <p><strong>Turma:</strong> {{ grupo.turma.sigla }}</p>
-              <p><strong>Instituto:</strong> {{ grupo.adminInterno.instituto.nome }}
-                ({{grupo.adminInterno.instituto.sigla}})</p>
+              <!-- <p><strong>Departamento:</strong> {{ grupo.adminInterno.instituto.nome }}
+                ({{grupo.adminInterno.instituto.sigla}})</p> -->
               <p><strong>Ano lectivo:</strong> {{ grupo.anoLetivo }}</p>
               <a mat-raised-button id="readButton" color="primary" (click)="onReadMode(grupo)">
                 <mat-icon>format_align_justify</mat-icon>
