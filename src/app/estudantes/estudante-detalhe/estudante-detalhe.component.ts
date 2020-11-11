@@ -18,7 +18,7 @@ import { EstudanteService } from './../modules/estudante.service';
 export class EstudanteDetalheComponent implements OnInit {
 
   estudante$: Observable<Estudante>;
-  private entityId = Number.parseInt(localStorage.getItem('entity'), 10);
+  private entityId = Number.parseInt(localStorage.getItem('entityId'), 10);
   // estudanteError$: Subject<boolean>;
 
   constructor(
