@@ -36,6 +36,7 @@ export class ProfessorListComponent implements OnInit, OnDestroy {
   displaydColumns: string[] = [
     'nome',
     'sexo',
+    'idade',
     'telefone',
     'email',
     'detalhe',
