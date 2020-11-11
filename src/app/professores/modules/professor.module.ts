@@ -1,3 +1,4 @@
+import { CustomPipesModule } from './../../shared/custom-pipes/module/custom-pipes.module';
 import { CommonModule } from '@angular/common';
 import { ProfessoresComponent } from './../professores.component';
 import { NgModule } from '@angular/core';
@@ -21,7 +22,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    ProfessorRoutingModule
+    ProfessorRoutingModule,
+    CustomPipesModule
   ],
   exports: [],
 })
