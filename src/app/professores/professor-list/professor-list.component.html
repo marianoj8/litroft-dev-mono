@@ -13,14 +13,7 @@
     <ng-container matColumnDef="nome">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Nome</th>
       <td mat-cell *matCellDef="let professor">
-        {{ professor?.nome }}
-      </td>
-    </ng-container>
-
-    <ng-container matColumnDef="sobrenome">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Sobrenome</th>
-      <td mat-cell *matCellDef="let professor">
-        {{ professor?.sobreNome }}
+        {{ professor?.nome + ' ' + professor?.sobreNome }}
       </td>
     </ng-container>
 
