@@ -148,7 +148,7 @@ export class CoordenadorListComponent implements OnInit, OnDestroy {
 
     dialogRef.afterClosed().subscribe((result: boolean) => {
       if (result) {
-        // this.deletecoordenador(orientador);
+        // this.deletecoordenador(id);
       }
 
     });
@@ -171,11 +171,11 @@ export class CoordenadorListComponent implements OnInit, OnDestroy {
     });
   }
 
-  deletecoordenador(orientadorId: number) {
-    this.service.deleteById(orientadorId)
+  deletecoordenador(coordenadorId: number) {
+    this.service.deleteById(coordenadorId)
       .subscribe(
         () => {
-          //   this.onRefrash(this.filtro);
+          this.onRefrash(this.filtro);
           this.showDeletedMessage();
         },
         err => this.showErrorMessage()
