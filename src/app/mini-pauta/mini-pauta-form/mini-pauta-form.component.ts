@@ -1,3 +1,4 @@
+import { AnoLetivoService } from 'src/app/ano-letivo/modules/ano-letivo.service';
 import { MiniPautaService } from './../modules/mini-pauta.service';
 import { MiniPauta } from 'src/app/shared/model/miniPauta';
 import { Periodo } from './../../shared/model/periodo';
@@ -32,6 +33,7 @@ import { Classe } from 'src/app/shared/model/classe';
 import { Diciplina } from 'src/app/shared/model/diciplina';
 import { DiciplinaService } from 'src/app/diciplinas/modules/diciplina.service';
 import { Instituto } from 'src/app/shared/model/instituto';
+import { AnoLetivo } from 'src/app/shared/model/support/AnoLetivo';
 
 @Component({
   selector: 'app-mini-pauta-form',
@@ -85,6 +87,7 @@ export class MiniPautaFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private miniPautaService: MiniPautaService,
     private estudanteService: EstudanteService,
+    private anoLetivoService: AnoLetivoService,
     private cursoSerice: CursoService,
     private cursoService: CursoService,
     private classeService: ClasseService,
@@ -108,7 +111,6 @@ export class MiniPautaFormComponent implements OnInit {
     });
     this.turmaService.list(this.entityId).subscribe((value) => this.turmas = value);
     this.miniPauta = new MiniPauta();
-
 
     if (false) {
       this.estudante$ = this.estudanteService.filterBySexoAndCurso(this.filter.curso === undefined ? '' : this.filter.curso, this.filter.sexo === undefined ? '' : this.filter.sexo, this.entityId)
@@ -320,6 +322,7 @@ export class MiniPautaFormComponent implements OnInit {
 
   private save(stepper: MatVerticalStepper, state): void {
 
+    this.miniPauta.anoLetivo = new AnoLetivo(13);
     this.miniPauta.curso = new Curso(this.formGroup01.controls.curso.value);
     this.miniPauta.classe = new Classe(this.formGroup01.controls.classe.value);
     this.miniPauta.turma = new Turma(this.formGroup01.controls.turma.value);
