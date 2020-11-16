@@ -21,7 +21,7 @@ export class AdminInternoGuard implements CanActivateChild {
 
 
   private verify(router: Router): boolean {
-    if (localStorage.getItem('acessType') !== 'Admin') {
+    if (localStorage.getItem('acessType') !== 'Master') {
       router.navigate(['/denaid']);
       return false;
     }
