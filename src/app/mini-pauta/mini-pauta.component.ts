@@ -1,3 +1,4 @@
+import { AnoLetivo } from 'src/app/shared/model/support/AnoLetivo';
 import { debounceTime } from 'rxjs/operators';
 import { Diciplina } from 'src/app/shared/model/diciplina';
 import { FormGroup, FormBuilder } from '@angular/forms';
@@ -14,6 +15,7 @@ import { CursoService } from '../cursos/modules/curso.service';
 import { ClasseService } from '../classe/modules/classe.service';
 import { TurmaService } from '../turmas/modules/turma.service';
 import { DiciplinaService } from '../diciplinas/modules/diciplina.service';
+import { AnoLetivoService } from '../ano-letivo/modules/ano-letivo.service';
 
 @Component({
   selector: 'app-mini-pauta',
@@ -31,10 +33,11 @@ export class MiniPautaComponent implements OnInit, OnDestroy {
   public classes: Classe[];
   public turmas: Turma[];
   public diciplinas: Diciplina[];
-  public years = [];
+  public years: AnoLetivo[];
   private entityId = Number.parseInt(localStorage.getItem('entityId'), 10);
 
   constructor(
+    private anoLetivoService: AnoLetivoService,
     private cursoService: CursoService,
     private classeService: ClasseService,
     private turmaService: TurmaService,
@@ -49,18 +52,16 @@ export class MiniPautaComponent implements OnInit, OnDestroy {
     this.sub = this.miniPautaService.onChangeContext
       .subscribe(context => this.onChangeContext = context);
 
+    this.anoLetivoService.list('').subscribe((e) => this.years = e);
+
     this.formGroupSearch = this.formBuilder.group({
       curso: [],
       classe: [],
       turma: [],
       diciplina: [],
       estudanteNome: [],
-      anoLetivo: [2020]
+      anoLetivo: [13]
     });
-
-    for (let i = 2008; i <= new Date().getFullYear(); i++) {
-      this.years.push(i);
-    }
 
     this.initFiealds();
     this.filter.anoLetivo = this.formGroupSearch.controls.anoLetivo.value;

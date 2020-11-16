@@ -5,8 +5,8 @@
 
         <mat-form-field style="width: 8%; margin-bottom: 10px; padding-right: 10px;">
           <mat-select matInput autocomplete="'false'" formControlName="anoLetivo" placeholder="Ano letivo">
-            <mat-option *ngFor="let year of years" [value]="year">
-              {{ year }}
+            <mat-option *ngFor="let year of years" [value]="year.id">
+              {{ year.ano }}
             </mat-option>
           </mat-select>
         </mat-form-field>
