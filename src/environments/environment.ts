@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  LOGIN: '/apiv1/login',
-  API: '/apiv1/litroft/api/v1/rm'
+  API: 'http://localhost:8080/litroft/api/v1/rm',
+  LOGIN: 'http://localhost:8080/login',
 };
 
 /*
