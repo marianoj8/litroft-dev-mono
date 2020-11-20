@@ -1,7 +1,7 @@
 FROM node:14.15.0-alpine as angular
 WORKDIR /app
 ADD package*.json ./
-# RUN npm install (Quando estiver connectado a uma boa internet)
+# RUN npm install --silent [(Quando estiver connectado a uma boa internet)]
 ADD . .
 CMD npm run build
 
