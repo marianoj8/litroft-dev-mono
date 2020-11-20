@@ -1,15 +1,11 @@
-FROM node:14.15.0-alpine
+FROM node:14.15.0-alpine as angular
 WORKDIR /app
 ADD package*.json ./
-RUN npm install
+# RUN npm install (Quando estiver connectado a uma boa internet)
 ADD . .
-CMD npm run start
+CMD npm run build
 
-# FROM node:14.15.0-alpine
-# WORKDIR /app
-# # COPY package.json /app
-# # COPY package-lock.json /app
-# # RUN npm install
-# COPY . .
-# # SHELL [ "/bin/bash", "-c" ]
-# RUN npm run build
+FROM nginx:1.19.4-alpine
+VOLUME /var/cache/nginx
+COPY --from=angular app/dist/litroft-dev-mono/browser /usr/share/nginx/html
+

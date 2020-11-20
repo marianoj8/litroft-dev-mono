@@ -1,3 +1,7 @@
+# Quando estiver connectado a internet, comente a linha 2
 node_modules
 Dockerfile
+e2e
+.firebase
+.github
 .git
