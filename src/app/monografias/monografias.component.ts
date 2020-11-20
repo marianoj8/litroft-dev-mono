@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MonografiaService } from './modules/monografia.service';
 import { Location } from '@angular/common';
-import { Subject } from 'rxjs/internal/Subject';
 import { Curso } from '../shared/model/curso';
-import { Observable } from 'rxjs/internal/Observable';
 import { CustomFilter } from '../shared/model/support/custom-filter';
+import { Observable, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-monografias',
