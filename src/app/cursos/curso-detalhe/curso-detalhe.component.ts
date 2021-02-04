@@ -25,6 +25,9 @@ export class CursoDetalheComponent implements OnInit {
     private monografiaService: MonografiaService,
     private dialog: MatDialog) {
     this.monografiaService.emitShowAddButton.emit(true);
+
+    console.log(this.activatedRoute.snapshot.params.id);
+    
   }
 
   ngOnInit() {
