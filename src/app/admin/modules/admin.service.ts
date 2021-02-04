@@ -29,6 +29,10 @@ export class AdminService {
     public router: Router) { }
 
 
+  public getById(id: number): Observable<Admin> {
+    return this.http.get<Admin>(`${this.url}/admin/${id}`);
+  }
+
   getUserInfo(): Observable<boolean> {
     return this.http.get<boolean>(`${this.url}/interno/info`)
       .pipe(
@@ -56,12 +60,12 @@ export class AdminService {
   // }
 
 
-  // save(t: Admin): Observable<Admin> {
-  //   if (t.id) {
-  //     return this.http.update('interno/admin', t);
-  //   }
-  //   return this.http.save('interno/admin', t);
-  // }
+  save(t: Admin): Observable<Admin> {
+    if (t.id) {
+      return this.http.put<Admin>(`${this.url}/interno/admins`, t);
+    }
+    return this.http.post<Admin>(`${this.url}/interno/admins`, t);
+  }
 
   // deleteById(id: number): Observable<void> {
   //   return this.http.deleteById('interno/admin', id);
