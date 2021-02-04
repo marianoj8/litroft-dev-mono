@@ -29,7 +29,7 @@ export class ProjetoListComponent implements OnInit {
   projetos: MatTableDataSource<Projeto>;
   projetosList: Projeto[] = [];
   error$ = new Subject<boolean>();
-
+  private perfil = localStorage.getItem('acessType');
 
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
@@ -58,6 +58,9 @@ export class ProjetoListComponent implements OnInit {
   ngOnInit() {
     this.service.onChangeContext.emit(false);
 
+    if (this.perfil === 'Estudante' || this.perfil === 'Orientador') {
+      this.displaydColumns = this.displaydColumns.slice(0, 6);
+    }
     this.sub = this.service.findValueParams
       .subscribe(next => this.onRefrash(next));
 
