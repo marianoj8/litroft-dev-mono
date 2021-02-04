@@ -30,6 +30,7 @@ export class CursoListComponent implements OnInit {
   cursos: MatTableDataSource<Curso>;
   cursosList: Curso[] = [];
   error$ = new Subject<boolean>();
+  public perfil = localStorage.getItem('acessType');
 
 
 
@@ -57,6 +58,10 @@ export class CursoListComponent implements OnInit {
   ngOnInit() {
     this.cursoService.onChangeContext.emit(false);
 
+
+    if (this.perfil === 'Estudante' || this.perfil == 'Orientador'){
+      this.displaydColumns = this.displaydColumns.slice(0,4);
+    }
     this.sub = this.cursoService.findValueParams
       .subscribe(next => this.onRefrash(next));
 
