@@ -68,7 +68,7 @@ export class SignInComponent implements OnInit {
 
 
   onErrorFromToken(err: HttpErrorResponse) {
-    if ((err.error.message === 'Unauthorized') && (err.status === 401)) {
+    if ((err.error.error === 'Unauthorized') && (err.status === 401)) {
       this.showErrorMessage();
     } else {
       console.log(err.status);
