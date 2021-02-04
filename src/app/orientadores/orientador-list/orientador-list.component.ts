@@ -32,7 +32,7 @@ export class OrientadorListComponent implements OnInit, OnDestroy {
   orientadoresList: Orientador[] = [];
   error$ = new Subject<boolean>();
   private sub: Subscription;
-
+  
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   displaydColumns: string[] = [
@@ -57,6 +57,8 @@ export class OrientadorListComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.service.onChangeContext.emit(false);
+
+  
 
     this.sub = this.service.findValueParams
       .subscribe(next => this.onRefrash(next));
