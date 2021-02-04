@@ -31,6 +31,7 @@ export class GrupoListComponent implements OnInit, OnDestroy {
   gruposList: Grupo[] = [];
   error$ = new Subject<boolean>();
   private sub: Subscription;
+  public perfil = localStorage.getItem('acessType');
 
 
 
@@ -61,6 +62,9 @@ export class GrupoListComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.service.onChangeContext.emit(false);
 
+    if (this.perfil === 'Estudante' || this.perfil === 'Orientador') {
+      this.displaydColumns = this.displaydColumns.slice(0, 7);
+    }
     this.sub = this.service.findValueParams
       .subscribe((value: CustomFilter) => this.onRefrash(value));
 
