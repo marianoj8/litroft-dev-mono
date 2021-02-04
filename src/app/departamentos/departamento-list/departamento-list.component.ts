@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { MatDialog} from '@angular/material/dialog';
-import {  MatSort } from '@angular/material/sort';
-import {  MatTableDataSource } from '@angular/material/table';
-import {  PageEvent } from '@angular/material/paginator';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { PageEvent } from '@angular/material/paginator';
 import { ActivatedRoute, Router } from '@angular/router';
 import { of, Subject, Subscription } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -31,6 +31,7 @@ export class DepartamentoListComponent implements OnInit, OnDestroy {
   departamentosList: Departamento[] = [];
   error$ = new Subject<boolean>();
   private sub: Subscription;
+  public perfil = localStorage.getItem('acessType');
 
 
 
@@ -55,6 +56,11 @@ export class DepartamentoListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+
+    if (this.perfil === 'Estudante' || this.perfil === 'Orientador') {
+      this.displaydColumns = this.displaydColumns.slice(0, 3);
+    }
+
     this.service.onChangeContext.emit(false);
 
     this.sub = this.service.findValueParams
