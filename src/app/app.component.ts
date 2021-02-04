@@ -46,7 +46,7 @@ export class AppComponent implements OnInit, AfterContentChecked, OnDestroy {
   btnMonografiaText = 'Monografias Internas';
   private sub: Subscription;
   customFilter = new CustomFilter();
-  acessType = '';
+  public acessType = '';
   nome = '';
   showOrHideMenu = false;
   selectedInstLogo = '';
@@ -294,7 +294,7 @@ export class AppComponent implements OnInit, AfterContentChecked, OnDestroy {
   }
 
   ngAfterContentChecked(): void {
-    this.acessType = localStorage.getItem('entity');
+    this.acessType = localStorage.getItem('acessType');
     this.nome = localStorage.getItem('nome') + ' ' + localStorage.getItem('sobrenome');
     if (this.acessType !== 'Administrador') {
       this.selectedInstLogo = `${environment.API}/mono/downloadLogo/${localStorage.getItem('entityLogoUri')}`;
