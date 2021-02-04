@@ -20,6 +20,13 @@ const routes: Routes = [
     loadChildren: () => import('src/app/home/modules/home.module').then((m) => m.HomeModule)
   },
   {
+    path:'users',
+    canActivate: [AuthGuard],
+    canLoad: [AuthGuard],
+    loadChildren: ()=> import('src/app/users/modules/user.module').then((m)=> m.UserModule)
+    
+  },
+  {
     path: 'monografias',
     canActivate: [AuthGuard],
     canLoad: [AuthGuard],
@@ -87,6 +94,10 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     canLoad: [AuthGuard],
     loadChildren: () => import('src/app/admin/modules/admin.module').then((m) => m.AdminModule),
+  },
+  {
+    path:'sobre',
+    loadChildren:()=> import('src/app/sobre/modules/sobre.module').then((m)=> m.SobreModule),
   },
   {
     path: 'denaid',

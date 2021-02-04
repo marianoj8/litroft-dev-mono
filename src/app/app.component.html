@@ -25,10 +25,13 @@
         <mat-icon left>home</mat-icon>
         Home
       </a>
-      <a routerLinkActive="active" [routerLink]="['estudantes']" mat-button *ngIf="showOrHideMenu">
-        <mat-icon left>person_pin</mat-icon>
-        Estudantes
-      </a>
+      <ng-container *ngIf="acessType !== 'Estudante'">
+        <a routerLinkActive="active" [routerLink]="['estudantes']" mat-button *ngIf="showOrHideMenu">
+          <mat-icon left>person_pin</mat-icon>
+          Estudantes
+        </a>
+      </ng-container>
+      
       <a routerLinkActive="active" [routerLink]="['departamentos']" mat-button *ngIf="!showOrHideMenu">
         <mat-icon left>school</mat-icon>
         Departamentos
@@ -124,13 +127,17 @@
             <mat-icon color="primary">home</mat-icon>
             Home
           </a>
+          <a mat-list-item routerLinkActive="active" [routerLink]="['users']">
+            <mat-icon color="primary">person_pin</mat-icon>
+            Usuario
+          </a>
           <a mat-list-item routerLinkActive="active" [routerLink]="['directores']" *ngIf="!showOrHideMenu">
             <mat-icon color="primary">group</mat-icon>
             Directores
           </a>
           <mat-divider></mat-divider>
           <mat-expansion-panel>
-            <mat-expansion-panel-header >
+            <mat-expansion-panel-header>
               <mat-panel-title>
                 <mat-icon color="primary">person_pin</mat-icon>
               </mat-panel-title>
@@ -138,10 +145,12 @@
                 Estudantes
               </mat-panel-description>
             </mat-expansion-panel-header>
-            <a mat-list-item routerLinkActive="active" [routerLink]="['estudantes']">
-              <mat-icon color="primary">person_pin</mat-icon>
-              Estudantes
-            </a>
+            <ng-container *ngIf="acessType !== 'Estudante'">
+              <a mat-list-item routerLinkActive="active" [routerLink]="['estudantes']">
+                <mat-icon color="primary">person_pin</mat-icon>
+                Estudantes
+              </a>
+            </ng-container>
             <a mat-list-item routerLinkActive="active" [routerLink]="['grupos']">
               <mat-icon color="primary">group</mat-icon>
               Grupos
@@ -157,7 +166,7 @@
           </mat-expansion-panel>
           <!-- <mat-divider></mat-divider> -->
           <mat-expansion-panel>
-            <mat-expansion-panel-header *ngIf="!showOrHideMenu">
+            <mat-expansion-panel-header *ngIf="showOrHideMenu">
               <mat-panel-title>
                 <mat-icon color="primary">recent_actors</mat-icon>
               </mat-panel-title>
@@ -175,7 +184,7 @@
             </a>
           </mat-expansion-panel>
           <!-- <mat-divider></mat-divider> -->
-          <mat-expansion-panel *ngIf="!showOrHideMenu" [expanded]="true">
+          <!-- <mat-expansion-panel *ngIf="!showOrHideMenu" [expanded]="true">
             <mat-expansion-panel-header>
               <mat-panel-title>
                 <mat-icon color="primary">school</mat-icon>
@@ -196,7 +205,7 @@
               <mat-icon color="primary">group_work</mat-icon>
               Turmas
             </a>
-          </mat-expansion-panel>
+          </mat-expansion-panel> -->
           <mat-expansion-panel *ngIf="showOrHideMenu">
             <mat-expansion-panel-header>
               <mat-panel-title>
@@ -209,6 +218,14 @@
             <a mat-list-item routerLinkActive="active" [routerLink]="['departamentos']">
               <mat-icon color="primary">domain</mat-icon>
               Departamentos
+            </a>
+            <a mat-list-item routerLinkActive="active" [routerLink]="['cursos']">
+              <mat-icon color="primary">school</mat-icon>
+              Cursos
+            </a>
+            <a mat-list-item routerLinkActive="active" [routerLink]="['turmas']">
+              <mat-icon color="primary">group_work</mat-icon>
+              Turmas
             </a>
           </mat-expansion-panel>
           <!-- <mat-divider></mat-divider> -->
@@ -238,8 +255,7 @@
       <div *ngIf="!authService.loggedIn()">
         <div>
           <mat-form-field class="field-max">
-            <input #search matInput width="100px" type="text" [(ngModel)]="customFilter.nome"
-              placeholder="Procurar" />
+            <input #search matInput width="100px" type="text" [(ngModel)]="customFilter.nome" placeholder="Procurar" />
             <span matSuffix>
               <mat-icon color="primary">search</mat-icon>
             </span>
