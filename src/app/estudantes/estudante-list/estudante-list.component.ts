@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { MatDialog} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { PageEvent } from '@angular/material/paginator';
@@ -32,6 +32,7 @@ export class EstudanteListComponent implements OnInit, OnDestroy {
   estudantesList: Estudante[] = [];
   error$ = new Subject<boolean>();
   private sub: Subscription;
+  public perfil = localStorage.getItem('acessType');
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
@@ -58,6 +59,10 @@ export class EstudanteListComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.service.onChangeContext.emit(false);
+
+    if (this.perfil === 'Estudante' || this.perfil === 'Orientador') {
+      this.displaydColumns = this.displaydColumns.slice(0, 6);
+    }
 
     this.sub = this.service.findValueParams
       .subscribe(data => this.onRefrash(data));

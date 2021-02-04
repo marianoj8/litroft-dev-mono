@@ -69,6 +69,7 @@ export class EstudanteService {
   }
 
   deleteById(id: number): Observable<void> {
+   
     return this.http.delete<void>(`${this.url}/interno/estudante/${id}`);
   }
 
