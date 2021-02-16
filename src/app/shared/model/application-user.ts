@@ -17,8 +17,6 @@ export class ApplicationUser implements CustomAbstractEntity {
     orientador: Orientador;
     enabled: boolean;
 
-
-
     constructor(id?: number) {
         this.id = id ? id : null;
     }
