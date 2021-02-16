@@ -45,6 +45,12 @@ const routes: Routes = [
     loadChildren: () => import('src/app/projetos/modules/projeto.module').then((m) => m.ProjetoModule)
   },
   {
+    path: 'vitrine',
+    canActivate: [AuthGuard],
+    canLoad: [AuthGuard],
+    loadChildren: () => import('src/app/vitrine/modules/vitrine.module').then((m) => m.VitrineModule)
+  },
+  {
     path: 'departamentos',
     canActivate: [AuthGuard],
     loadChildren: () => import('src/app/departamentos/modules/departamento.module').then((m) => m.DepartamentoModule)
