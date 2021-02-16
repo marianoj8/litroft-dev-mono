@@ -47,6 +47,7 @@ import { CustomPipesModule } from './shared/custom-pipes/module/custom-pipes.mod
     LoadingUploadComponent,
     CustomErrorPageComponent,
     AcessDenaidComponent,
+    
   ],
   imports: [
     BrowserModule,
