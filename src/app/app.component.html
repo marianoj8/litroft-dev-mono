@@ -48,6 +48,10 @@
         <mat-icon right>widgets</mat-icon>
         Projectos
       </a>
+      <a routerLinkActive="active" [routerLink]="['vitrine']" mat-button *ngIf="showOrHideMenu">
+        <mat-icon right>widgets</mat-icon>
+        Vitrine
+      </a>
       <a style="position: relative; left: 30%;" routerLinkActive="active" (click)="switchBetweenPages()" mat-button
         *ngIf="showOrHideMenu">
         <mat-icon right>collections_bookmark</mat-icon>
