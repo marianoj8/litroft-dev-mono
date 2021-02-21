@@ -9,7 +9,7 @@
               <h4 *ngIf="grupo.descricao.length > 30">{{ grupo.descricao.substring(0, 28) }}...</h4>
               <h4 *ngIf="grupo.descricao.length < 30">{{ grupo.descricao }}</h4>
               <h4>
-                ({{grupo.adminInterno.instituto.sigla}}) | {{ grupo.anoLetivo }}
+                <!-- ({{grupo.adminInterno.instituto.sigla}}) | {{ grupo.anoLetivo }} -->
               </h4>
               <p *ngIf="grupo?.monoViewsCount < 1000" >
                 <mat-icon id="viewIcon">visibility</mat-icon>{{grupo?.monoViewsCount}} visualizações
@@ -22,11 +22,11 @@
           <div class="face face2">
             <div class="content">
               {{ grupo.descricao }}
-              <p id="pCurso"><strong>Curso:</strong> {{ grupo.curso.nome }}</p>
+              <!-- <p id="pCurso"><strong>Curso:</strong> {{ grupo.curso.nome }}</p>
               <p><strong>Turma:</strong> {{ grupo.turma.sigla }}</p>
               <p><strong>Instituto:</strong> {{ grupo.adminInterno.instituto.nome }}
                 ({{grupo.adminInterno.instituto.sigla}})</p>
-              <p><strong>Ano lectivo:</strong> {{ grupo.anoLetivo }}</p>
+              <p><strong>Ano lectivo:</strong> {{ grupo.anoLetivo }}</p> -->
               <a mat-raised-button id="readButton" color="primary" (click)="onReadMode(grupo)">
                 <mat-icon>format_align_justify</mat-icon>
                 Ler monografia
