@@ -1,5 +1,5 @@
 <div class="container mat-elevation-z8 table hide-on-med-and-down">
-  <button class="btn-large" mat-raised-button color="primary" (click)="add()" *ngIf="!((perfil !== 'Estudante') || (perfil !== 'Orientador'))">
+  <button class="btn-large" mat-raised-button color="primary" (click)="add()" *ngIf="(perfil === 'Admin')">
     <mat-icon>add</mat-icon>
     Cadastrar Novo Projeto
   </button>
