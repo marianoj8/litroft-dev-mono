@@ -110,6 +110,8 @@ export class MonoFormComponent implements OnInit, OnDestroy {
     this.monografia.departamento = this.projeto.grupo.curso.departamento;
     this.monografia.file = this.selectedFile;
 
+    console.log(this.monografia);
+    
 
     if (this.selectedFile == null) {
       this.notificationService
