@@ -44,7 +44,7 @@ import { AnoLetivoService } from './ano-letivo/modules/ano-letivo.service';
 export class AppComponent implements OnInit, AfterContentChecked, OnDestroy {
 
 
-  title = 'Litroft Mono';
+  title = 'Grupo Pitruca Mono';
   contextMenu = '***';
   mostrarMenu = false;
   isPortable = false;
