@@ -41,10 +41,10 @@
           <mat-icon>view_quilt</mat-icon>
           Pauta
         </a>
-        <a routerLinkActive="active" mat-button>
+        <!-- <a routerLinkActive="active" mat-button>
           <mat-icon>view_quilt</mat-icon>
           Certificados
-        </a>
+        </a> -->
         <a routerLinkActive="active" mat-button *ngIf="showOrHideMenu">
           <mat-icon>view_quilt</mat-icon>
           Vitrine
@@ -250,19 +250,12 @@
                 Escolas
               </mat-panel-description>
             </mat-expansion-panel-header>
-            
+
             <a mat-list-item routerLinkActive="active" [routerLink]="['/institutos/private/ciclo2/list']">
               <mat-icon color="primary">school</mat-icon>
               Universidade
             </a>
-            <a mat-list-item routerLinkActive="active" [routerLink]="['/institutos/private/list']">
-              <mat-icon color="primary">school</mat-icon>
-              Creshe
-            </a>
-            <a mat-list-item routerLinkActive="active" [routerLink]="['/institutos/private/ciclo1/list']">
-              <mat-icon color="primary">school</mat-icon>
-              Ensino do I ciclo
-            </a>
+
             <a mat-list-item routerLinkActive="active" [routerLink]="['/institutos/private/ciclo2/list']">
               <mat-icon color="primary">school</mat-icon>
               Ensino do II ciclo
